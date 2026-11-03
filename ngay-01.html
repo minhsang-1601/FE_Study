@@ -1,0 +1,1619 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 1 (12/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>Sổ tay FE: Hệ cơ số và biểu diễn số (基数と数値表現)</h1>
+<p class="meta">Ngày 1 · Thứ Hai 12/10 · 科目A: cơ số, bù 2, dịch bit, sai số, xác suất và thống kê · 科目B: làm quen đề và cách trace</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">1. Các hệ cơ số ｜ 基数<span class="rd">(きすう)</span></a></li><li><a href="#muc-2">2. Đổi hệ cơ số ｜ 基数変換<span class="rd">(きすうへんかん)</span></a></li><li><a href="#muc-3">3. Số âm: bù ｜ 負の数<span class="rd">(ふのかず)</span>と補数<span class="rd">(ほすう)</span></a></li><li><a href="#muc-4">4. Phép dịch bit ｜ シフト演算<span class="rd">(えんざん)</span></a></li><li><a href="#muc-5">5. Dấu phẩy động và sai số ｜ 浮動小数点数<span class="rd">(ふどうしょうすうてんすう)</span>と誤差<span class="rd">(ごさ)</span></a></li><li><a href="#muc-6">6. Xác suất và thống kê ｜ 確率<span class="rd">(かくりつ)</span>と統計<span class="rd">(とうけい)</span></a></li><li><a href="#muc-7">科目B: Làm quen đề 科目B và cách trace ｜ 科目<span class="rd">(かもく)</span>Bの概要<span class="rd">(がいよう)</span>とトレース</a></li><li><a href="#muc-8">7. Bảng từ vựng ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">1. Các hệ cơ số ｜ 基数<span class="rd">(きすう)</span></h2>
+<p>Mỗi hệ cơ số khác nhau ở số ký hiệu dùng và trọng số của từng vị trí.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hệ cơ số là số loại ký hiệu dùng để biểu diễn số.</td>
+<td>基数<span class="rd">(きすう)</span>とは、数<span class="rd">(かず)</span>を表<span class="rd">(あらわ)</span>すのに使<span class="rd">(つか)</span>う記号<span class="rd">(きごう)</span>の種類<span class="rd">(しゅるい)</span>の数<span class="rd">(かず)</span>である。</td>
+</tr>
+<tr>
+<td>Nhị phân: dùng 0 và 1. Trọng số: …8, 4, 2, 1 . 0.5, 0.25, 0.125</td>
+<td>2進数<span class="rd">(しんすう)</span>：0と1を使<span class="rd">(つか)</span>う。重<span class="rd">(おも)</span>み：…8, 4, 2, 1 . 0.5, 0.25, 0.125</td>
+</tr>
+<tr>
+<td>Bát phân: dùng 0–7. Trọng số: …64, 8, 1</td>
+<td>8進数<span class="rd">(しんすう)</span>：0〜7を使<span class="rd">(つか)</span>う。重<span class="rd">(おも)</span>み：…64, 8, 1</td>
+</tr>
+<tr>
+<td>Thập phân: dùng 0–9. Trọng số: …100, 10, 1</td>
+<td>10進数<span class="rd">(しんすう)</span>：0〜9を使<span class="rd">(つか)</span>う。重<span class="rd">(おも)</span>み：…100, 10, 1</td>
+</tr>
+<tr>
+<td>Thập lục phân: dùng 0–9 và A–F. Trọng số: …256, 16, 1</td>
+<td>16進数<span class="rd">(しんすう)</span>：0〜9とA〜Fを使<span class="rd">(つか)</span>う。重<span class="rd">(おも)</span>み：…256, 16, 1</td>
+</tr>
+<tr>
+<td>Trong hệ 16: A=10, B=11, C=12, D=13, E=14, F=15</td>
+<td>16進数<span class="rd">(しんすう)</span>では A=10, B=11, C=12, D=13, E=14, F=15</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<p>Bài tập trong sổ tay được soạn theo các dạng câu hỏi hay ra ở các kỳ thi FE trước; đề gốc theo từng kỳ có trên fe-siken.com.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu 1.1</strong> Số thập lục phân 0.C biểu diễn ở hệ thập phân là số nào?</td>
+<td><strong>問<span class="rd">(とい)</span>1.1</strong> 16進数<span class="rd">(しんすう)</span>の 0.C を10進数<span class="rd">(しんすう)</span>で表<span class="rd">(あらわ)</span>したものはどれか。</td>
+</tr>
+<tr>
+<td>ア 0.12　イ 0.75　ウ 0.8　エ 0.875</td>
+<td>ア 0.12　イ 0.75　ウ 0.8　エ 0.875</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (0.75)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（0.75）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: vị trí đầu tiên sau dấu chấm của hệ 16 có trọng số 1/16. C = 12, nên 12 × 1/16 = 0.75.</td>
+<td>解説<span class="rd">(かいせつ)</span>：16進数<span class="rd">(しんすう)</span>の小数第<span class="rd">(しょうすうだい)</span>1位<span class="rd">(い)</span>の重<span class="rd">(おも)</span>みは 1/16。C = 12 なので、12 × 1/16 = 0.75。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu 1.2</strong> Số bát phân 55 biểu diễn ở hệ thập lục phân là số nào?</td>
+<td><strong>問<span class="rd">(とい)</span>1.2</strong> 8進数<span class="rd">(しんすう)</span>の 55 を16進数<span class="rd">(しんすう)</span>で表<span class="rd">(あらわ)</span>したものはどれか。</td>
+</tr>
+<tr>
+<td>ア 2B　イ 2D　ウ 37　エ 2F</td>
+<td>ア 2B　イ 2D　ウ 37　エ 2F</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (2D)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（2D）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đổi qua nhị phân. Mỗi chữ số hệ 8 thành 3 bit: 5 → 101, 5 → 101, được 101101. Gom lại 4 bit: 0010 1101 = 2D. Kiểm tra: 5×8 + 5 = 45 = 2×16 + 13.</td>
+<td>解説<span class="rd">(かいせつ)</span>：2進数<span class="rd">(しんすう)</span>を経由<span class="rd">(けいゆ)</span>する。8進数<span class="rd">(しんすう)</span>の各桁<span class="rd">(かくけた)</span>を3ビットに：5 → 101、5 → 101 で 101101。4ビットずつ区切<span class="rd">(くぎ)</span>ると 0010 1101 = 2D。検算<span class="rd">(けんざん)</span>：5×8 + 5 = 45 = 2×16 + 13。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-2">2. Đổi hệ cơ số ｜ 基数変換<span class="rd">(きすうへんかん)</span></h2>
+<p>Sang thập phân thì nhân trọng số rồi cộng; từ thập phân thì chia 2 (phần nguyên) hoặc nhân 2 (phần thập phân).</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sang thập phân:</strong> nhân mỗi chữ số với trọng số của nó, rồi cộng tất cả lại.</td>
+<td><strong>10進数<span class="rd">(しんすう)</span>への変換<span class="rd">(へんかん)</span>：</strong>各桁<span class="rd">(かくけた)</span>の数字<span class="rd">(すうじ)</span>に重<span class="rd">(おも)</span>みを掛<span class="rd">(か)</span>けて、合計<span class="rd">(ごうけい)</span>する。</td>
+</tr>
+<tr>
+<td>Ví dụ: 1011.01₍₂₎ = 8 + 2 + 1 + 0.25 = 11.25</td>
+<td>例<span class="rd">(れい)</span>：1011.01₍₂₎ = 8 + 2 + 1 + 0.25 = 11.25</td>
+</tr>
+<tr>
+<td>Ví dụ: 2F₍₁₆₎ = 2×16 + 15 = 47；17₍₈₎ = 1×8 + 7 = 15</td>
+<td>例<span class="rd">(れい)</span>：2F₍₁₆₎ = 2×16 + 15 = 47；17₍₈₎ = 1×8 + 7 = 15</td>
+</tr>
+<tr>
+<td><strong>Phần nguyên sang nhị phân:</strong> chia 2 liên tục, đọc số dư từ dưới lên.</td>
+<td><strong>整数部<span class="rd">(せいすうぶ)</span>の変換<span class="rd">(へんかん)</span>：</strong>2で割<span class="rd">(わ)</span>り続<span class="rd">(つづ)</span>け、余<span class="rd">(あま)</span>りを下<span class="rd">(した)</span>から上<span class="rd">(うえ)</span>へ読<span class="rd">(よ)</span>む。</td>
+</tr>
+<tr>
+<td>Ví dụ: 13 → dư 1, 0, 1, 1 → 1101</td>
+<td>例<span class="rd">(れい)</span>：13 → 余<span class="rd">(あま)</span>り 1, 0, 1, 1 → 1101</td>
+</tr>
+<tr>
+<td><strong>Phần thập phân sang nhị phân:</strong> nhân 2 liên tục, lấy phần nguyên từ trên xuống.</td>
+<td><strong>小数部<span class="rd">(しょうすうぶ)</span>の変換<span class="rd">(へんかん)</span>：</strong>2を掛<span class="rd">(か)</span>け続<span class="rd">(つづ)</span>け、整数部分<span class="rd">(せいすうぶぶん)</span>を上<span class="rd">(うえ)</span>から下<span class="rd">(した)</span>へ並<span class="rd">(なら)</span>べる。</td>
+</tr>
+<tr>
+<td>Ví dụ: 0.375 → 0.75 (0) → 1.5 (1) → 1.0 (1) → 0.011</td>
+<td>例<span class="rd">(れい)</span>：0.375 → 0.75 (0) → 1.5 (1) → 1.0 (1) → 0.011</td>
+</tr>
+<tr>
+<td>Nếu nhân mãi không hết (0.1, 0.2…) thì là số vô hạn tuần hoàn, máy tính lưu sẽ có sai số.</td>
+<td>掛<span class="rd">(か)</span>け続<span class="rd">(つづ)</span>けても終<span class="rd">(お)</span>わらない場合<span class="rd">(ばあい)</span>（0.1、0.2など）は循環小数<span class="rd">(じゅんかんしょうすう)</span>となり、誤差<span class="rd">(ごさ)</span>が生<span class="rd">(しょう)</span>じる。</td>
+</tr>
+<tr>
+<td><strong>Nhị phân ↔ thập lục phân:</strong> gom 4 bit một nhóm. 1010 0011 = A3</td>
+<td><strong>2進数<span class="rd">(しんすう)</span>⇔16進数<span class="rd">(しんすう)</span>：</strong>4ビットずつ区切<span class="rd">(くぎ)</span>る。1010 0011 = A3</td>
+</tr>
+<tr>
+<td><strong>Nhị phân ↔ bát phân:</strong> gom 3 bit một nhóm. 001 111 = 17</td>
+<td><strong>2進数<span class="rd">(しんすう)</span>⇔8進数<span class="rd">(しんすう)</span>：</strong>3ビットずつ区切<span class="rd">(くぎ)</span>る。001 111 = 17</td>
+</tr>
+<tr>
+<td>Gom từ dấu chấm ra hai phía, thiếu bit thì thêm 0.</td>
+<td>小数点<span class="rd">(しょうすうてん)</span>を基準<span class="rd">(きじゅん)</span>に左右<span class="rd">(さゆう)</span>へ区切<span class="rd">(くぎ)</span>り、足<span class="rd">(た)</span>りない桁<span class="rd">(けた)</span>は0で補<span class="rd">(おぎな)</span>う。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu 2.1</strong> Số thập phân 0.625 biểu diễn ở hệ nhị phân là số nào?</td>
+<td><strong>問<span class="rd">(とい)</span>2.1</strong> 10進数<span class="rd">(しんすう)</span>の 0.625 を2進数<span class="rd">(しんすう)</span>で表<span class="rd">(あらわ)</span>したものはどれか。</td>
+</tr>
+<tr>
+<td>ア 0.011　イ 0.101　ウ 0.110　エ 0.111</td>
+<td>ア 0.011　イ 0.101　ウ 0.110　エ 0.111</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (0.101)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（0.101）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: nhân 2 liên tục. 0.625×2 = 1.25 → 1; 0.25×2 = 0.5 → 0; 0.5×2 = 1.0 → 1. Đọc từ trên xuống: 0.101.</td>
+<td>解説<span class="rd">(かいせつ)</span>：2を掛<span class="rd">(か)</span>け続<span class="rd">(つづ)</span>ける。0.625×2 = 1.25 → 1；0.25×2 = 0.5 → 0；0.5×2 = 1.0 → 1。上<span class="rd">(うえ)</span>から並<span class="rd">(なら)</span>べて 0.101。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu 2.2</strong> Trong các số thập phân sau, số nào biểu diễn được chính xác bằng số nhị phân hữu hạn chữ số?</td>
+<td><strong>問<span class="rd">(とい)</span>2.2</strong> 次<span class="rd">(つぎ)</span>の10進小数<span class="rd">(しんしょうすう)</span>のうち、2進数<span class="rd">(しんすう)</span>で有限桁<span class="rd">(ゆうげんけた)</span>で正確<span class="rd">(せいかく)</span>に表<span class="rd">(あらわ)</span>せるものはどれか。</td>
+</tr>
+<tr>
+<td>ア 0.1　イ 0.2　ウ 0.375　エ 0.4</td>
+<td>ア 0.1　イ 0.2　ウ 0.375　エ 0.4</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (0.375)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（0.375）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: số biểu diễn được phải là tổng các số 0.5, 0.25, 0.125… Ta có 0.375 = 0.25 + 0.125 = 0.011₍₂₎. Các số 0.1, 0.2, 0.4 khi nhân 2 liên tục không bao giờ về 0.</td>
+<td>解説<span class="rd">(かいせつ)</span>：表<span class="rd">(あらわ)</span>せるのは 0.5、0.25、0.125…の和<span class="rd">(わ)</span>になる数<span class="rd">(かず)</span>。 0.375 = 0.25 + 0.125 = 0.011₍₂₎。0.1、0.2、0.4 は2を掛<span class="rd">(か)</span>け続<span class="rd">(つづ)</span>けても0にならない。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu 2.3</strong> Tính 1101.1₍₂₎ + A.8₍₁₆₎ và biểu diễn kết quả ở hệ thập phân.</td>
+<td><strong>問<span class="rd">(とい)</span>2.3</strong> 1101.1₍₂₎ + A.8₍₁₆₎ の結果<span class="rd">(けっか)</span>を10進数<span class="rd">(しんすう)</span>で表<span class="rd">(あらわ)</span>したものはどれか。</td>
+</tr>
+<tr>
+<td>ア 22　イ 23　ウ 24　エ 25</td>
+<td>ア 22　イ 23　ウ 24　エ 25</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (24)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（24）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đổi từng số sang thập phân rồi cộng. 1101.1₍₂₎ = 8 + 4 + 1 + 0.5 = 13.5. A.8₍₁₆₎ = 10 + 8/16 = 10.5. Tổng = 24.</td>
+<td>解説<span class="rd">(かいせつ)</span>：それぞれ10進数<span class="rd">(しんすう)</span>に変換<span class="rd">(へんかん)</span>して足<span class="rd">(た)</span>す。1101.1₍₂₎ = 8 + 4 + 1 + 0.5 = 13.5。A.8₍₁₆₎ = 10 + 8/16 = 10.5。合計<span class="rd">(ごうけい)</span> = 24。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ (phần 1 và 2) ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Mỗi câu ghi kỳ thi và số câu; bấm link để xem nguyên văn đề và các lựa chọn trên fe-siken.com. Phần dưới chỉ tóm tắt nội dung.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/05_haru/a1.html" target="_blank" rel="noopener">令和5年度 科目A 問1</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đổi số thập lục phân 0.C sang thập phân (cùng dạng Câu 1.1).</td>
+<td>内容<span class="rd">(ないよう)</span>：16進小数<span class="rd">(しんしょうすう)</span> 0.C を10進数<span class="rd">(しんすう)</span>に変換<span class="rd">(へんかん)</span>する（問<span class="rd">(とい)</span>1.1と同<span class="rd">(おな)</span>じ形式<span class="rd">(けいしき)</span>）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (0.75)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（0.75）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 0.C = 0.1100₍₂₎ = 0.5 + 0.25 = 0.75.</td>
+<td>解説<span class="rd">(かいせつ)</span>：0.C = 0.1100₍₂₎ = 0.5 + 0.25 = 0.75。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/30_aki/q1.html" target="_blank" rel="noopener">平成30年秋期 午前 問1</a></strong> (2018); ra lại ở <a href="https://www.fe-siken.com/kakomon/02_menjo/q1.html" target="_blank" rel="noopener">令和2年度 問1</a></td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>1</strong>（令和<span class="rd">(れいわ)</span>2年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>1でも出題<span class="rd">(しゅっだい)</span>）</td>
+</tr>
+<tr>
+<td>Nội dung: biểu diễn số thập lục phân 0.248 dưới dạng phân số thập phân.</td>
+<td>内容<span class="rd">(ないよう)</span>：16進小数<span class="rd">(しんしょうすう)</span> 0.248 を10進<span class="rd">(しん)</span>の分数<span class="rd">(ぶんすう)</span>で表<span class="rd">(あらわ)</span>す。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (73/512)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（73/512）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: trọng số sau dấu chấm là 1/16, 1/256, 1/4096. 2/16 + 4/256 + 8/4096 = (512 + 64 + 8)/4096 = 584/4096 = 73/512.</td>
+<td>解説<span class="rd">(かいせつ)</span>：小数部<span class="rd">(しょうすうぶ)</span>の重<span class="rd">(おも)</span>みは 1/16、1/256、1/4096。2/16 + 4/256 + 8/4096 = (512 + 64 + 8)/4096 = 584/4096 = 73/512。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/19_haru/q1.html" target="_blank" rel="noopener">平成19年春期 午前 問1</a></strong> (2007)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>19年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: biểu diễn số thập lục phân 3A.5C dưới dạng phân số thập phân.</td>
+<td>内容<span class="rd">(ないよう)</span>：16進数<span class="rd">(しんすう)</span> 3A.5C を10進<span class="rd">(しん)</span>の分数<span class="rd">(ぶんすう)</span>で表<span class="rd">(あらわ)</span>す。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (3735/64)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（3735/64）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: phần nguyên 3×16 + 10 = 58. Phần lẻ 5/16 + 12/256 = 92/256 = 23/64. 58 = 3712/64, cộng lại được 3735/64.</td>
+<td>解説<span class="rd">(かいせつ)</span>：整数部<span class="rd">(せいすうぶ)</span> 3×16 + 10 = 58。小数部<span class="rd">(しょうすうぶ)</span> 5/16 + 12/256 = 92/256 = 23/64。58 = 3712/64 なので、合計<span class="rd">(ごうけい)</span>は 3735/64。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/27_aki/q1.html" target="_blank" rel="noopener">平成27年秋期 午前 問1</a></strong> (2015); ra lại ở <a href="https://www.fe-siken.com/kakomon/31_haru/q1.html" target="_blank" rel="noopener">平成31年春期 午前 問1</a></td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>27年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>1</strong>（平成<span class="rd">(へいせい)</span>31年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 問<span class="rd">(とい)</span>1でも出題<span class="rd">(しゅっだい)</span>）</td>
+</tr>
+<tr>
+<td>Nội dung: biểu diễn kết quả 7 ÷ 32 ở hệ nhị phân.</td>
+<td>内容<span class="rd">(ないよう)</span>：10進数<span class="rd">(しんすう)</span>の 7 ÷ 32 の結果<span class="rd">(けっか)</span>を2進数<span class="rd">(しんすう)</span>で表<span class="rd">(あらわ)</span>す。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: 0.00111</strong> (ウ trong đề 平成31年春期)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：0.00111</strong>（平成<span class="rd">(へいせい)</span>31年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span>ではウ）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 7 = 111₍₂₎; chia 32 = 2⁵ nghĩa là dịch phải 5 bit → 0.00111. Hoặc 7/32 = 1/8 + 1/16 + 1/32.</td>
+<td>解説<span class="rd">(かいせつ)</span>：7 = 111₍₂₎。32 = 2⁵ で割<span class="rd">(わ)</span>るのは右<span class="rd">(みぎ)</span>へ5ビットシフトすること → 0.00111。または 7/32 = 1/8 + 1/16 + 1/32。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/15_haru/q1.html" target="_blank" rel="noopener">平成15年春期 午前 問1</a></strong> (2003)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>15年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đổi số thập phân 0.6875 sang nhị phân.</td>
+<td>内容<span class="rd">(ないよう)</span>：10進数<span class="rd">(しんすう)</span> 0.6875 を2進数<span class="rd">(しんすう)</span>で表<span class="rd">(あらわ)</span>す。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (0.1011)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（0.1011）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 0.6875 = 0.5 + 0.125 + 0.0625, tức các vị trí 1, 3, 4 là 1 → 0.1011.</td>
+<td>解説<span class="rd">(かいせつ)</span>：0.6875 = 0.5 + 0.125 + 0.0625。小数第<span class="rd">(しょうすうだい)</span>1・3・4位<span class="rd">(い)</span>が1 → 0.1011。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/20_aki/q2.html" target="_blank" rel="noopener">平成20年秋期 午前 問2</a></strong> (2008)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chọn nhận xét đúng về việc đổi số thập phân hữu hạn giữa hệ 2, 8 và 10.</td>
+<td>内容<span class="rd">(ないよう)</span>：2進数<span class="rd">(しんすう)</span>・8進数<span class="rd">(しんすう)</span>・10進数<span class="rd">(しんすう)</span>の有限小数<span class="rd">(ゆうげんしょうすう)</span>の変換<span class="rd">(へんかん)</span>について、正<span class="rd">(ただ)</span>しい記述<span class="rd">(きじゅつ)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (số nhị phân hữu hạn luôn đổi được thành số thập phân hữu hạn)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（有限<span class="rd">(ゆうげん)</span>の2進小数<span class="rd">(しんしょうすう)</span>は必<span class="rd">(かなら)</span>ず有限<span class="rd">(ゆうげん)</span>の10進小数<span class="rd">(しんしょうすう)</span>になる）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 1/2ⁿ = 5ⁿ/10ⁿ nên luôn hữu hạn. 8 = 2³ nên hệ 8 ↔ hệ 2 luôn hữu hạn. Ngược lại, 0.1 hệ 10 thành số vô hạn ở hệ 2 và hệ 8.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1/2ⁿ = 5ⁿ/10ⁿ なので必<span class="rd">(かなら)</span>ず有限<span class="rd">(ゆうげん)</span>。8 = 2³ なので8進<span class="rd">(しん)</span>⇔2進<span class="rd">(しん)</span>も常<span class="rd">(つね)</span>に有限<span class="rd">(ゆうげん)</span>。逆<span class="rd">(ぎゃく)</span>に10進<span class="rd">(しん)</span>の0.1は2進<span class="rd">(しん)</span>・8進<span class="rd">(しん)</span>では無限小数<span class="rd">(むげんしょうすう)</span>になる。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">3. Số âm: bù ｜ 負の数<span class="rd">(ふのかず)</span>と補数<span class="rd">(ほすう)</span></h2>
+<p>Máy tính biểu diễn số âm bằng bù 2: đảo bit rồi cộng 1.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bù 1:</strong> đảo tất cả các bit (0 thành 1, 1 thành 0).</td>
+<td><strong>1の補数<span class="rd">(ほすう)</span>：</strong>全<span class="rd">(すべ)</span>てのビットを反転<span class="rd">(はんてん)</span>する。</td>
+</tr>
+<tr>
+<td><strong>Bù 2:</strong> đảo tất cả các bit, rồi cộng 1.</td>
+<td><strong>2の補数<span class="rd">(ほすう)</span>：</strong>ビットを反転<span class="rd">(はんてん)</span>して、1を加<span class="rd">(くわ)</span>える。</td>
+</tr>
+<tr>
+<td>Ví dụ: +12 = 00001100 → đảo 11110011 → cộng 1 → 11110100 = −12</td>
+<td>例<span class="rd">(れい)</span>：+12 = 00001100 → 反転<span class="rd">(はんてん)</span> 11110011 → +1 → 11110100 = −12</td>
+</tr>
+<tr>
+<td>Ví dụ: +5 = 00000101 → 11111011 = −5</td>
+<td>例<span class="rd">(れい)</span>：+5 = 00000101 → 11111011 = −5</td>
+</tr>
+<tr>
+<td><strong>Mẹo nhanh:</strong> từ phải sang trái, giữ nguyên đến hết bit 1 đầu tiên, rồi đảo phần còn lại.</td>
+<td><strong>簡単<span class="rd">(かんたん)</span>な方法<span class="rd">(ほうほう)</span>：</strong>右<span class="rd">(みぎ)</span>から最初<span class="rd">(さいしょ)</span>の1まではそのまま、それより左<span class="rd">(ひだり)</span>を反転<span class="rd">(はんてん)</span>する。</td>
+</tr>
+<tr>
+<td><strong>Bit dấu:</strong> bit trái nhất. 0 là dương, 1 là âm.</td>
+<td><strong>符号<span class="rd">(ふごう)</span>ビット：</strong>最上位<span class="rd">(さいじょうい)</span>ビット。0は正<span class="rd">(せい)</span>、1は負<span class="rd">(ふ)</span>。</td>
+</tr>
+<tr>
+<td><strong>Phạm vi n bit, không dấu:</strong> 0 \~ 2ⁿ − 1 (8 bit: 0 \~ 255)</td>
+<td><strong>nビットの表現範囲<span class="rd">(ひょうげんはんい)</span>・符号<span class="rd">(ふごう)</span>なし：</strong>0 〜 2ⁿ − 1（8ビット：0 〜 255）</td>
+</tr>
+<tr>
+<td><strong>Phạm vi n bit, bù 2:</strong> −2ⁿ⁻¹ \~ 2ⁿ⁻¹ − 1 (8 bit: −128 \~ 127)</td>
+<td><strong>nビットの表現範囲<span class="rd">(ひょうげんはんい)</span>・2の補数<span class="rd">(ほすう)</span>：</strong>−2ⁿ⁻¹ 〜 2ⁿ⁻¹ − 1（8ビット：−128 〜 127）</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu 3.1</strong> Số nhị phân 8 bit 10110101 biểu diễn theo bù 2. Giá trị thập phân của nó là bao nhiêu?</td>
+<td><strong>問<span class="rd">(とい)</span>3.1</strong> 8ビットの2の補数<span class="rd">(ほすう)</span>で表<span class="rd">(あらわ)</span>された 10110101 を10進数<span class="rd">(しんすう)</span>で表<span class="rd">(あらわ)</span>したものはどれか。</td>
+</tr>
+<tr>
+<td>ア −75　イ −74　ウ −53　エ 181</td>
+<td>ア −75　イ −74　ウ −53　エ 181</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (−75)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（−75）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: bit đầu là 1 nên là số âm. Lấy bù 2 để tìm giá trị tuyệt đối: đảo bit → 01001010, cộng 1 → 01001011 = 64 + 8 + 2 + 1 = 75. Vậy kết quả là −75. (181 là bẫy: đó là giá trị nếu đọc như số không dấu.)</td>
+<td>解説<span class="rd">(かいせつ)</span>：最上位<span class="rd">(さいじょうい)</span>ビットが1なので負<span class="rd">(ふ)</span>の数<span class="rd">(かず)</span>。2の補数<span class="rd">(ほすう)</span>をとって絶対値<span class="rd">(ぜったいち)</span>を求<span class="rd">(もと)</span>める：反転<span class="rd">(はんてん)</span> → 01001010、+1 → 01001011 = 64 + 8 + 2 + 1 = 75。よって −75。（181は符号<span class="rd">(ふごう)</span>なしとして読<span class="rd">(よ)</span>んだ場合<span class="rd">(ばあい)</span>の値<span class="rd">(あたい)</span>。）</td>
+</tr>
+<tr class="q">
+<td><strong>Câu 3.2</strong> Phạm vi số nguyên biểu diễn được bằng n bit theo bù 2 là gì?</td>
+<td><strong>問<span class="rd">(とい)</span>3.2</strong> nビットの2の補数<span class="rd">(ほすう)</span>で表現<span class="rd">(ひょうげん)</span>できる整数<span class="rd">(せいすう)</span>の範囲<span class="rd">(はんい)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア −2ⁿ \~ 2ⁿ　イ −2ⁿ⁻¹ \~ 2ⁿ⁻¹　ウ −2ⁿ⁻¹ \~ 2ⁿ⁻¹ − 1　エ −(2ⁿ⁻¹ − 1) \~ 2ⁿ⁻¹ − 1</td>
+<td>ア −2ⁿ 〜 2ⁿ　イ −2ⁿ⁻¹ 〜 2ⁿ⁻¹　ウ −2ⁿ⁻¹ 〜 2ⁿ⁻¹ − 1　エ −(2ⁿ⁻¹ − 1) 〜 2ⁿ⁻¹ − 1</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thử với n = 8: bù 2 biểu diễn từ −128 đến 127, khớp với ウ. Phía âm nhiều hơn phía dương 1 số vì số 0 nằm ở phía dương. エ là phạm vi của bù 1 (có cả +0 và −0).</td>
+<td>解説<span class="rd">(かいせつ)</span>：n = 8 で確かめると2の補数<span class="rd">(ほすう)</span>は −128 〜 127 で、ウと一致<span class="rd">(いっち)</span>する。0が正<span class="rd">(せい)</span>の側<span class="rd">(がわ)</span>に含<span class="rd">(ふく)</span>まれるため、負<span class="rd">(ふ)</span>の側<span class="rd">(がわ)</span>が1つ多<span class="rd">(おお)</span>い。エは1の補数<span class="rd">(ほすう)</span>の範囲<span class="rd">(はんい)</span>（+0と−0がある）。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/sample/a1.html" target="_blank" rel="noopener">サンプル問題 科目A 問1</a></strong> (đề mẫu cho hình thức thi mới từ 2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: biểu thức nào cho ra −n (theo bù 2) của số dương 8 bit n?</td>
+<td>内容<span class="rd">(ないよう)</span>：8ビットの正<span class="rd">(せい)</span>の数<span class="rd">(かず)</span> n に対<span class="rd">(たい)</span>して、−n（2の補数<span class="rd">(ほすう)</span>）を求<span class="rd">(もと)</span>める式<span class="rd">(しき)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (n XOR 11111111) + 00000001</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（n XOR 11111111）+ 00000001</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: XOR với 11111111 là đảo hết bit, rồi cộng 1 = đúng định nghĩa bù 2.</td>
+<td>解説<span class="rd">(かいせつ)</span>：11111111 とのXORで全ビット反転<span class="rd">(はんてん)</span>し、1を加<span class="rd">(くわ)</span>える。2の補数<span class="rd">(ほすう)</span>の定義<span class="rd">(ていぎ)</span>そのもの。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/20_aki/q3.html" target="_blank" rel="noopener">平成20年秋期 午前 問3</a></strong> (2008); ra lại ở <a href="https://www.fe-siken.com/kakomon/13_aki/q5.html" target="_blank" rel="noopener">平成13年秋期 問5</a></td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>3</strong>（平成<span class="rd">(へいせい)</span>13年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 問<span class="rd">(とい)</span>5でも出題<span class="rd">(しゅっだい)</span>）</td>
+</tr>
+<tr>
+<td>Nội dung: số âm 8 bit 10101110 (bù 2), tìm giá trị tuyệt đối.</td>
+<td>内容<span class="rd">(ないよう)</span>：2の補数<span class="rd">(ほすう)</span>で表<span class="rd">(あらわ)</span>された8ビットの負<span class="rd">(ふ)</span>の数<span class="rd">(かず)</span> 10101110 の絶対値<span class="rd">(ぜったいち)</span>を求<span class="rd">(もと)</span>める。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (01010010)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（01010010）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đảo bit → 01010001, cộng 1 → 01010010 (= 82). Lấy bù 2 hai lần thì về số ban đầu, nên cách này dùng được cả hai chiều.</td>
+<td>解説<span class="rd">(かいせつ)</span>：反転<span class="rd">(はんてん)</span> → 01010001、+1 → 01010010（= 82）。2の補数<span class="rd">(ほすう)</span>を2回<span class="rd">(かい)</span>とると元<span class="rd">(もと)</span>に戻<span class="rd">(もど)</span>るので、どちら向<span class="rd">(む)</span>きにも使<span class="rd">(つか)</span>える。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/20_haru/q3.html" target="_blank" rel="noopener">平成20年春期 午前 問3</a></strong> (2008)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: dãy n bit toàn số 1 (111…11) theo bù 2 biểu diễn giá trị nào?</td>
+<td>内容<span class="rd">(ないよう)</span>：全<span class="rd">(すべ)</span>てのビットが1のnビットの値<span class="rd">(あたい)</span>は、2の補数<span class="rd">(ほすう)</span>で何<span class="rd">(なに)</span>を表<span class="rd">(あらわ)</span>すか。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (−1)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（−1）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đảo bit → 000…00, cộng 1 → 000…01 = 1, nên giá trị là −1 với mọi độ dài n.</td>
+<td>解説<span class="rd">(かいせつ)</span>：反転<span class="rd">(はんてん)</span> → 000…00、+1 → 000…01 = 1。よってnに関係<span class="rd">(かんけい)</span>なく −1。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/19_haru/q3.html" target="_blank" rel="noopener">平成19年春期 午前 問3</a></strong> (2007)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>19年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: số 16 bit có dấu (bù 2, viết dạng hex) nào khi nhân 4 thì bị tràn?</td>
+<td>内容<span class="rd">(ないよう)</span>：16ビットの符号<span class="rd">(ふごう)</span>付<span class="rd">(つ)</span>き整数<span class="rd">(せいすう)</span>（16進<span class="rd">(しん)</span>表記<span class="rd">(ひょうき)</span>）のうち、4倍<span class="rd">(ばい)</span>するとあふれるものを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (DFFF)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（DFFF）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: phạm vi 16 bit là −32768 \~ 32767. DFFF = −8193, ×4 = −32772 → tràn. 1FFF × 4 = 32764, E000 × 4 = −32768 (vừa đủ), FFFF = −1 → −4: đều không tràn.</td>
+<td>解説<span class="rd">(かいせつ)</span>：16ビットの範囲<span class="rd">(はんい)</span>は −32768 〜 32767。DFFF = −8193、×4 = −32772 であふれる。1FFF×4 = 32764、E000×4 = −32768（ちょうど範囲内<span class="rd">(はんいない)</span>）、FFFF = −1 → −4 はあふれない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/30_haru/q1.html" target="_blank" rel="noopener">平成30年春期 午前 問1</a></strong> (2018)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: một số nguyên (số âm dùng bù 2) có 2 bit thấp nhất là 11. Khi chia cho 4 (thương cắt theo trị tuyệt đối), nhận xét nào về số dư là đúng?</td>
+<td>内容<span class="rd">(ないよう)</span>：負<span class="rd">(ふ)</span>の数<span class="rd">(かず)</span>を2の補数<span class="rd">(ほすう)</span>で表<span class="rd">(あらわ)</span>す整数<span class="rd">(せいすう)</span>の下位<span class="rd">(かい)</span>2ビットが11のとき、4で割<span class="rd">(わ)</span>った余<span class="rd">(あま)</span>りについて正<span class="rd">(ただ)</span>しい記述<span class="rd">(きじゅつ)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (nếu là số dương thì dư 3)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（正<span class="rd">(せい)</span>の数<span class="rd">(かず)</span>なら余<span class="rd">(あま)</span>りは3）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: số dương: chia 4 = dịch phải 2 bit, 2 bit bị đẩy ra chính là số dư → 11 = 3. Số âm: thử −5 (…1011): −5 ÷ 4 = −1 dư −1, nên các lựa chọn "dư −3" hay "dư 3" khi âm đều sai.</td>
+<td>解説<span class="rd">(かいせつ)</span>：正<span class="rd">(せい)</span>の数<span class="rd">(かず)</span>は4で割<span class="rd">(わ)</span>る＝右<span class="rd">(みぎ)</span>2ビットシフトで、あふれた2ビットが余<span class="rd">(あま)</span>り → 11 = 3。負<span class="rd">(ふ)</span>の数<span class="rd">(かず)</span>は −5（…1011）で試<span class="rd">(ため)</span>すと −5 ÷ 4 = −1 余<span class="rd">(あま)</span>り −1 なので、他<span class="rd">(ほか)</span>の選択肢<span class="rd">(せんたくし)</span>は誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">4. Phép dịch bit ｜ シフト演算<span class="rd">(えんざん)</span></h2>
+<p>Dịch trái n bit là nhân 2ⁿ, dịch phải n bit là chia 2ⁿ.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dịch logic:</strong> dịch các bit và điền 0 vào chỗ trống.</td>
+<td><strong>論理<span class="rd">(ろんり)</span>シフト：</strong>ビットをずらし、空<span class="rd">(あ)</span>いたビットに0を入<span class="rd">(い)</span>れる。</td>
+</tr>
+<tr>
+<td>Dịch trái n bit = nhân 2ⁿ.</td>
+<td>左<span class="rd">(ひだり)</span>へnビットシフト ＝ 2ⁿ倍<span class="rd">(ばい)</span>。</td>
+</tr>
+<tr>
+<td>Dịch phải n bit = chia 2ⁿ (số không dấu).</td>
+<td>右<span class="rd">(みぎ)</span>へnビットシフト ＝ 2ⁿで割<span class="rd">(わ)</span>る（符号<span class="rd">(ふごう)</span>なし）。</td>
+</tr>
+<tr>
+<td><strong>Dịch số học:</strong> khi dịch phải, giữ nguyên bit dấu để số âm vẫn là số âm.</td>
+<td><strong>算術<span class="rd">(さんじゅつ)</span>シフト：</strong>右<span class="rd">(みぎ)</span>シフトのとき、符号<span class="rd">(ふごう)</span>ビットを保持<span class="rd">(ほじ)</span>する。</td>
+</tr>
+<tr>
+<td>Ví dụ: 00000101 (5) dịch trái 2 bit → 00010100 (20)</td>
+<td>例<span class="rd">(れい)</span>：00000101（5）を左<span class="rd">(ひだり)</span>へ2ビットシフト → 00010100（20）</td>
+</tr>
+<tr>
+<td><strong>Dạng đề hay gặp:</strong> nhân x với 10 = (x dịch trái 3 bit) + (x dịch trái 1 bit), vì 8x + 2x = 10x.</td>
+<td><strong>よく出<span class="rd">(で)</span>る問題<span class="rd">(もんだい)</span>：</strong>xを10倍<span class="rd">(ばい)</span>するには、xを左<span class="rd">(ひだり)</span>へ3ビットシフトした値<span class="rd">(あたい)</span>と、1ビットシフトした値<span class="rd">(あたい)</span>を足<span class="rd">(た)</span>す（8x＋2x＝10x）。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu 4.1</strong> Dịch số nguyên dương x sang trái 2 bit, cộng thêm x, rồi dịch kết quả sang trái 1 bit. Kết quả gấp bao nhiêu lần x? (Giả sử không tràn.)</td>
+<td><strong>問<span class="rd">(とい)</span>4.1</strong> 正<span class="rd">(せい)</span>の整数<span class="rd">(せいすう)</span> x を左<span class="rd">(ひだり)</span>へ2ビットシフトし、x を加<span class="rd">(くわ)</span>え、さらに左<span class="rd">(ひだり)</span>へ1ビットシフトした。結果<span class="rd">(けっか)</span>は x の何倍<span class="rd">(なんばい)</span>か。（あふれは起<span class="rd">(お)</span>きないものとする。）</td>
+</tr>
+<tr>
+<td>ア 6　イ 8　ウ 10　エ 12</td>
+<td>ア 6　イ 8　ウ 10　エ 12</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (10)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（10）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: dịch trái 2 bit → 4x. Cộng x → 5x. Dịch trái 1 bit → 5x × 2 = 10x. Đây là dạng đề rất hay lặp lại.</td>
+<td>解説<span class="rd">(かいせつ)</span>：左<span class="rd">(ひだり)</span>2ビットシフト → 4x。xを加<span class="rd">(くわ)</span>える → 5x。左<span class="rd">(ひだり)</span>1ビットシフト → 5x × 2 = 10x。よく出<span class="rd">(で)</span>る形式<span class="rd">(けいしき)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu 4.2</strong> Dịch số học sang phải 2 bit số 8 bit bù 2 là 11110000. Kết quả là gì?</td>
+<td><strong>問<span class="rd">(とい)</span>4.2</strong> 2の補数<span class="rd">(ほすう)</span>で表<span class="rd">(あらわ)</span>された8ビットの 11110000 を右<span class="rd">(みぎ)</span>へ2ビット算術<span class="rd">(さんじゅつ)</span>シフトした結果<span class="rd">(けっか)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 00111100　イ 11111100　ウ 11000000　エ 00111111</td>
+<td>ア 00111100　イ 11111100　ウ 11000000　エ 00111111</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (11111100)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（11111100）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: dịch số học giữ bit dấu, nên các chỗ trống bên trái được điền 1. 11110000 (−16) → 11111100 (−4), đúng bằng −16 ÷ 4. ア là kết quả nếu dịch logic.</td>
+<td>解説<span class="rd">(かいせつ)</span>：算術<span class="rd">(さんじゅつ)</span>シフトは符号<span class="rd">(ふごう)</span>ビットを保持<span class="rd">(ほじ)</span>するので、左<span class="rd">(ひだり)</span>の空<span class="rd">(あ)</span>きに1が入<span class="rd">(はい)</span>る。11110000（−16）→ 11111100（−4）で、−16 ÷ 4 と一致<span class="rd">(いっち)</span>。アは論理<span class="rd">(ろんり)</span>シフトの結果<span class="rd">(けっか)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/29_aki/q1.html" target="_blank" rel="noopener">平成29年秋期 午前 問1</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chọn chuỗi thao tác dịch bit và cộng để nhân số nguyên dương x với 10 (cùng dạng Câu 4.1).</td>
+<td>内容<span class="rd">(ないよう)</span>：正<span class="rd">(せい)</span>の整数<span class="rd">(せいすう)</span> x を10倍<span class="rd">(ばい)</span>するシフトと加算<span class="rd">(かさん)</span>の手順<span class="rd">(てじゅん)</span>を選<span class="rd">(えら)</span>ぶ（問<span class="rd">(とい)</span>4.1と同<span class="rd">(おな)</span>じ形式<span class="rd">(けいしき)</span>）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (dịch trái 2 bit, cộng x, rồi dịch trái 1 bit)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（左<span class="rd">(ひだり)</span>2ビットシフト → xを加算<span class="rd">(かさん)</span> → 左<span class="rd">(ひだり)</span>1ビットシフト）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 4x + x = 5x, ×2 = 10x. Các lựa chọn khác cho 20x, 12x, 18x.</td>
+<td>解説<span class="rd">(かいせつ)</span>：4x + x = 5x、×2 = 10x。他<span class="rd">(ほか)</span>の選択肢<span class="rd">(せんたくし)</span>は 20x、12x、18x になる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/18_aki/q2.html" target="_blank" rel="noopener">平成18年秋期 午前 問2</a></strong> (2006)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>18年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: dịch x sang trái 2 bit rồi cộng x. Kết quả gấp mấy lần x?</td>
+<td>内容<span class="rd">(ないよう)</span>：x を左<span class="rd">(ひだり)</span>へ2ビットシフトして x を加<span class="rd">(くわ)</span>えると、x の何倍<span class="rd">(なんばい)</span>か。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (5)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（5）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: dịch trái 2 bit = ×4 → 4x + x = 5x.</td>
+<td>解説<span class="rd">(かいせつ)</span>：左<span class="rd">(ひだり)</span>2ビットシフト = 4倍<span class="rd">(ばい)</span> → 4x + x = 5x。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/25_aki/q2.html" target="_blank" rel="noopener">平成25年秋期 午前 問2</a></strong> (2013)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>25年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: giá trị hex ABCD trong thanh ghi, dịch phải logic 2 bit, kết quả là gì?</td>
+<td>内容<span class="rd">(ないよう)</span>：16進数<span class="rd">(しんすう)</span> ABCD を右<span class="rd">(みぎ)</span>へ2ビット論理<span class="rd">(ろんり)</span>シフトした結果<span class="rd">(けっか)</span>を求<span class="rd">(もと)</span>める。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (2AF3)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（2AF3）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 1010 1011 1100 1101 → dịch phải 2, điền 0 bên trái → 0010 1010 1111 0011 = 2AF3. (EAF3 là bẫy: kết quả nếu dịch số học.)</td>
+<td>解説<span class="rd">(かいせつ)</span>：1010 1011 1100 1101 を右<span class="rd">(みぎ)</span>へ2つずらし、左<span class="rd">(ひだり)</span>に0を入<span class="rd">(い)</span>れる → 0010 1010 1111 0011 = 2AF3。（EAF3は算術<span class="rd">(さんじゅつ)</span>シフトの場合<span class="rd">(ばあい)</span>の結果<span class="rd">(けっか)</span>。）</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/24_aki/q1.html" target="_blank" rel="noopener">平成24年秋期 午前 問1</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: dịch phải số học 2 bit số 8 bit 11010000 (bù 2), rồi lấy 00010100 trừ đi kết quả đó.</td>
+<td>内容<span class="rd">(ないよう)</span>：8ビットの 11010000（2の補数<span class="rd">(ほすう)</span>）を右<span class="rd">(みぎ)</span>へ2ビット算術<span class="rd">(さんじゅつ)</span>シフトし、その値<span class="rd">(あたい)</span>を 00010100 から引<span class="rd">(ひ)</span>く。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (00100000)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（00100000）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: dịch số học giữ bit dấu → 11110100 = −12. 00010100 = 20. 20 − (−12) = 32 = 00100000.</td>
+<td>解説<span class="rd">(かいせつ)</span>：符号<span class="rd">(ふごう)</span>ビットを保持<span class="rd">(ほじ)</span>して 11110100 = −12。00010100 = 20。20 − (−12) = 32 = 00100000。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/03_menjo/q2.html" target="_blank" rel="noopener">令和3年度 問2</a></strong> (2021)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>3年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: số x 16 bit (0 \~ 65535), đổi chỗ 8 bit cao và 8 bit thấp. Biểu thức nào cho giá trị mới? (÷ là chia lấy nguyên, % là chia lấy dư)</td>
+<td>内容<span class="rd">(ないよう)</span>：16ビットの x（0〜65535）の上位<span class="rd">(じょうい)</span>8ビットと下位<span class="rd">(かい)</span>8ビットを入<span class="rd">(い)</span>れ替<span class="rd">(か)</span>えた値<span class="rd">(あたい)</span>を表<span class="rd">(あらわ)</span>す式<span class="rd">(しき)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (x ÷ 256) + (x % 256) × 256</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（x ÷ 256）+（x % 256）× 256</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 8 bit cao cũ xuống dưới = dịch phải 8 bit = x ÷ 256. 8 bit thấp cũ = x % 256, đưa lên trên = dịch trái 8 bit = ×256. Cộng hai phần.</td>
+<td>解説<span class="rd">(かいせつ)</span>：上位<span class="rd">(じょうい)</span>8ビットを下<span class="rd">(した)</span>へ＝右<span class="rd">(みぎ)</span>8ビットシフト＝x ÷ 256。下位<span class="rd">(かい)</span>8ビットは x % 256、上<span class="rd">(うえ)</span>へ移<span class="rd">(うつ)</span>す＝左<span class="rd">(ひだり)</span>8ビットシフト＝×256。両方<span class="rd">(りょうほう)</span>を足<span class="rd">(た)</span>す。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-5">5. Dấu phẩy động và sai số ｜ 浮動小数点数<span class="rd">(ふどうしょうすうてんすう)</span>と誤差<span class="rd">(ごさ)</span></h2>
+<p>Số thực được lưu dạng dấu × định trị × 2^mũ, nên luôn có thể phát sinh 5 loại sai số.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dạng dấu phẩy động:</strong> (−1)^dấu × phần định trị × 2^số mũ</td>
+<td><strong>浮動小数点数<span class="rd">(ふどうしょうすうてんすう)</span>：</strong>(−1)^符号<span class="rd">(ふごう)</span> × 仮数<span class="rd">(かすう)</span> × 2^指数<span class="rd">(しすう)</span></td>
+</tr>
+<tr>
+<td>IEEE 754, 32 bit: 1 bit dấu, 8 bit số mũ (bias 127), 23 bit định trị.</td>
+<td>IEEE 754 単精度<span class="rd">(たんせいど)</span>：符号部<span class="rd">(ふごうぶ)</span>1ビット、指数部<span class="rd">(しすうぶ)</span>8ビット（バイアス127）、仮数部<span class="rd">(かすうぶ)</span>23ビット。</td>
+</tr>
+<tr>
+<td><strong>Chuẩn hóa:</strong> đưa phần định trị về dạng 1.xxx để giữ tối đa chữ số có nghĩa.</td>
+<td><strong>正規化<span class="rd">(せいきか)</span>：</strong>仮数<span class="rd">(かすう)</span>を1.xxxの形<span class="rd">(かたち)</span>にし、有効桁数<span class="rd">(ゆうこうけたすう)</span>を最大<span class="rd">(さいだい)</span>にする。</td>
+</tr>
+<tr>
+<td><strong>Sai số làm tròn:</strong> sinh ra khi làm tròn hoặc cắt bỏ phần chữ số thừa (ví dụ lưu 0.1).</td>
+<td><strong>丸<span class="rd">(まる)</span>め誤差<span class="rd">(ごさ)</span>：</strong>指定<span class="rd">(してい)</span>の桁<span class="rd">(けた)</span>で四捨五入<span class="rd">(ししゃごにゅう)</span>や切<span class="rd">(き)</span>り捨<span class="rd">(す)</span>てを行<span class="rd">(おこな)</span>うことで生<span class="rd">(しょう)</span>じる誤差<span class="rd">(ごさ)</span>。</td>
+</tr>
+<tr>
+<td><strong>Sai số tràn:</strong> kết quả vượt ra ngoài phạm vi biểu diễn (overflow / underflow).</td>
+<td><strong>桁<span class="rd">(けた)</span>あふれ誤差<span class="rd">(ごさ)</span>：</strong>計算結果<span class="rd">(けいさんけっか)</span>が表現<span class="rd">(ひょうげん)</span>できる範囲<span class="rd">(はんい)</span>を超<span class="rd">(こ)</span>えることで生<span class="rd">(しょう)</span>じる。</td>
+</tr>
+<tr>
+<td><strong>Mất thông tin:</strong> cộng/trừ số rất lớn với số rất nhỏ, số nhỏ bị bỏ qua.</td>
+<td><strong>情報落<span class="rd">(じょうほうお)</span>ち：</strong>絶対値<span class="rd">(ぜったいち)</span>の大<span class="rd">(おお)</span>きな数<span class="rd">(かず)</span>と小<span class="rd">(ちい)</span>さな数<span class="rd">(かず)</span>の加減算<span class="rd">(かげんざん)</span>で、小<span class="rd">(ちい)</span>さな数<span class="rd">(かず)</span>が無視<span class="rd">(むし)</span>される。</td>
+</tr>
+<tr>
+<td><strong>Mất chữ số có nghĩa:</strong> trừ hai số gần bằng nhau, số chữ số có nghĩa giảm mạnh.</td>
+<td><strong>桁落<span class="rd">(けたお)</span>ち：</strong>絶対値<span class="rd">(ぜったいち)</span>がほぼ等<span class="rd">(ひと)</span>しい数<span class="rd">(かず)</span>同士<span class="rd">(どうし)</span>の減算<span class="rd">(げんざん)</span>で、有効桁数<span class="rd">(ゆうこうけたすう)</span>が減<span class="rd">(へ)</span>る。</td>
+</tr>
+<tr>
+<td><strong>Sai số cắt ngắt:</strong> dừng một phép tính vô hạn giữa chừng.</td>
+<td><strong>打切<span class="rd">(うちき)</span>り誤差<span class="rd">(ごさ)</span>：</strong>無限<span class="rd">(むげん)</span>に続<span class="rd">(つづ)</span>く計算<span class="rd">(けいさん)</span>を途中<span class="rd">(とちゅう)</span>で打<span class="rd">(う)</span>ち切<span class="rd">(き)</span>ることで生<span class="rd">(しょう)</span>じる。</td>
+</tr>
+<tr>
+<td><strong>Mẹo phân biệt:</strong> mất thông tin = "lớn + nhỏ"; mất chữ số có nghĩa = "gần bằng − gần bằng".</td>
+<td><strong>覚<span class="rd">(おぼ)</span>え方<span class="rd">(かた)</span>：</strong>情報落<span class="rd">(じょうほうお)</span>ち＝「大<span class="rd">(だい)</span>＋小<span class="rd">(しょう)</span>」、桁落<span class="rd">(けたお)</span>ち＝「ほぼ同<span class="rd">(おな)</span>じ値<span class="rd">(あたい)</span>の引<span class="rd">(ひ)</span>き算<span class="rd">(ざん)</span>」。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu 5.1</strong> Khi trừ hai số có giá trị tuyệt đối gần bằng nhau, số chữ số có nghĩa giảm đi. Sai số này gọi là gì?</td>
+<td><strong>問<span class="rd">(とい)</span>5.1</strong> 絶対値<span class="rd">(ぜったいち)</span>がほぼ等<span class="rd">(ひと)</span>しい2つの数値<span class="rd">(すうち)</span>の減算<span class="rd">(げんざん)</span>で、有効桁数<span class="rd">(ゆうこうけたすう)</span>が減少<span class="rd">(げんしょう)</span>する誤差<span class="rd">(ごさ)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 打切り誤差　イ 情報落ち　ウ 桁落ち　エ 丸め誤差</td>
+<td>ア 打切<span class="rd">(うちき)</span>り誤差<span class="rd">(ごさ)</span>　イ 情報落<span class="rd">(じょうほうお)</span>ち　ウ 桁落<span class="rd">(けたお)</span>ち　エ 丸<span class="rd">(まる)</span>め誤差<span class="rd">(ごさ)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (桁落ち)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（桁落<span class="rd">(けたお)</span>ち）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: từ khóa là "gần bằng nhau" và "trừ". Ví dụ 1.2345 − 1.2344 = 0.0001: từ 5 chữ số có nghĩa chỉ còn 1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：キーワードは「ほぼ等<span class="rd">(ひと)</span>しい」と「減算<span class="rd">(げんざん)</span>」。例<span class="rd">(れい)</span>：1.2345 − 1.2344 = 0.0001 で、有効桁数<span class="rd">(ゆうこうけたすう)</span>が5桁<span class="rd">(けた)</span>から1桁<span class="rd">(けた)</span>に減<span class="rd">(へ)</span>る。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu 5.2</strong> Khi cộng một số có giá trị tuyệt đối rất lớn với một số rất nhỏ trong dấu phẩy động, số nhỏ không được phản ánh vào kết quả. Sai số này gọi là gì?</td>
+<td><strong>問<span class="rd">(とい)</span>5.2</strong> 浮動小数点数<span class="rd">(ふどうしょうすうてんすう)</span>で、絶対値<span class="rd">(ぜったいち)</span>の非常<span class="rd">(ひじょう)</span>に大<span class="rd">(おお)</span>きな数<span class="rd">(かず)</span>と小<span class="rd">(ちい)</span>さな数<span class="rd">(かず)</span>を加算<span class="rd">(かさん)</span>したとき、小<span class="rd">(ちい)</span>さな数<span class="rd">(かず)</span>が結果<span class="rd">(けっか)</span>に反映<span class="rd">(はんえい)</span>されない誤差<span class="rd">(ごさ)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 打切り誤差　イ 情報落ち　ウ 桁落ち　エ 桁あふれ誤差</td>
+<td>ア 打切<span class="rd">(うちき)</span>り誤差<span class="rd">(ごさ)</span>　イ 情報落<span class="rd">(じょうほうお)</span>ち　ウ 桁落<span class="rd">(けたお)</span>ち　エ 桁<span class="rd">(けた)</span>あふれ誤差<span class="rd">(ごさ)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (情報落ち)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（情報落<span class="rd">(じょうほうお)</span>ち）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: từ khóa là "lớn + nhỏ". Ví dụ nếu chỉ giữ được 4 chữ số: 1000 + 0.1 = 1000.1 nhưng lưu lại thành 1000, phần 0.1 bị mất. Mẹo tránh: cộng các số nhỏ với nhau trước.</td>
+<td>解説<span class="rd">(かいせつ)</span>：キーワードは「大<span class="rd">(だい)</span>＋小<span class="rd">(しょう)</span>」。例<span class="rd">(れい)</span>：4桁<span class="rd">(けた)</span>しか保持<span class="rd">(ほじ)</span>できない場合<span class="rd">(ばあい)</span>、1000 + 0.1 = 1000.1 が 1000 となり、0.1 が失<span class="rd">(うしな)</span>われる。対策<span class="rd">(たいさく)</span>：小<span class="rd">(ちい)</span>さな数<span class="rd">(かず)</span>同士<span class="rd">(どうし)</span>を先<span class="rd">(さき)</span>に加算<span class="rd">(かさん)</span>する。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/27_haru/q2.html" target="_blank" rel="noopener">平成27年春期 午前 問2</a></strong> (2015); ra lại ở <a href="https://www.fe-siken.com/kakomon/22_aki/q2.html" target="_blank" rel="noopener">平成22年秋期 問2</a></td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>27年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>2</strong>（平成<span class="rd">(へいせい)</span>22年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 問<span class="rd">(とい)</span>2でも出題<span class="rd">(しゅっだい)</span>）</td>
+</tr>
+<tr>
+<td>Nội dung: chọn mô tả đúng về 桁落ち.</td>
+<td>内容<span class="rd">(ないよう)</span>：桁落<span class="rd">(けたお)</span>ちの説明<span class="rd">(せつめい)</span>として適切<span class="rd">(てきせつ)</span>なものを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (trừ hai số gần bằng nhau, số chữ số có nghĩa giảm mạnh)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（ほぼ等<span class="rd">(ひと)</span>しい数<span class="rd">(かず)</span>の減算<span class="rd">(げんざん)</span>で有効桁数<span class="rd">(ゆうこうけたすう)</span>が大きく減<span class="rd">(へ)</span>る）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: các lựa chọn còn lại là bẫy từ các loại sai số khác: vượt giá trị lớn nhất = tràn; làm tròn chữ số nhỏ = 丸め誤差; chữ số thấp của một số không ảnh hưởng kết quả = 情報落ち.</td>
+<td>解説<span class="rd">(かいせつ)</span>：他<span class="rd">(ほか)</span>の選択肢<span class="rd">(せんたくし)</span>は別<span class="rd">(べつ)</span>の誤差<span class="rd">(ごさ)</span>。最大値<span class="rd">(さいだいち)</span>を超<span class="rd">(こ)</span>える＝あふれ、桁<span class="rd">(けた)</span>の丸<span class="rd">(まる)</span>め＝丸<span class="rd">(まる)</span>め誤差<span class="rd">(ごさ)</span>、一方<span class="rd">(いっぽう)</span>の下位桁<span class="rd">(かいけた)</span>が結果<span class="rd">(けっか)</span>に反映<span class="rd">(はんえい)</span>されない＝情報落<span class="rd">(じょうほうお)</span>ち。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/20_aki/q4.html" target="_blank" rel="noopener">平成20年秋期 午前 問4</a></strong> (2008)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>4</strong></td>
+</tr>
+<tr>
+<td>Nội dung: cộng/trừ số có trị tuyệt đối rất lớn với số rất nhỏ, chữ số của số nhỏ bị mất. Gọi là gì?</td>
+<td>内容<span class="rd">(ないよう)</span>：絶対値<span class="rd">(ぜったいち)</span>の大<span class="rd">(おお)</span>きな数<span class="rd">(かず)</span>と小<span class="rd">(ちい)</span>さな数<span class="rd">(かず)</span>の加減算<span class="rd">(かげんざん)</span>で、小<span class="rd">(ちい)</span>さな数<span class="rd">(かず)</span>の桁<span class="rd">(けた)</span>が失<span class="rd">(うしな)</span>われる現象<span class="rd">(げんしょう)</span>の名前<span class="rd">(なまえ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (情報落ち)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（情報落<span class="rd">(じょうほうお)</span>ち）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: từ khóa "lớn + nhỏ". Khi cộng, hai số phải đưa về cùng số mũ; số nhỏ bị dịch quá xa nên rơi ra ngoài phần định trị.</td>
+<td>解説<span class="rd">(かいせつ)</span>：キーワードは「大<span class="rd">(だい)</span>＋小<span class="rd">(しょう)</span>」。加算<span class="rd">(かさん)</span>前<span class="rd">(まえ)</span>に指数<span class="rd">(しすう)</span>をそろえるため、小<span class="rd">(ちい)</span>さな数<span class="rd">(かず)</span>の仮数<span class="rd">(かすう)</span>が右<span class="rd">(みぎ)</span>にずれてあふれ、失<span class="rd">(うしな)</span>われる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/20_haru/q5.html" target="_blank" rel="noopener">平成20年春期 午前 問5</a></strong> (2008)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: máy có phần định trị 23 bit. Phép tính nào gây 情報落ち?</td>
+<td>内容<span class="rd">(ないよう)</span>：仮数部<span class="rd">(かすうぶ)</span>が23ビットのコンピュータで、情報落<span class="rd">(じょうほうお)</span>ちが発生<span class="rd">(はっせい)</span>する計算式<span class="rd">(けいさんしき)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (1.01)₂ × 2¹⁸ + (1.01)₂ × 2⁻⁵</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（1.01）₂ × 2¹⁸ +（1.01）₂ × 2⁻⁵</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chỉ cần so độ lệch số mũ. ウ lệch 18 − (−5) = 23 → số nhỏ bị đẩy ra hết 23 bit. Các lựa chọn khác chỉ lệch 0 hoặc 1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：指数<span class="rd">(しすう)</span>の差<span class="rd">(さ)</span>を見<span class="rd">(み)</span>る。ウは 18 − (−5) = 23 で、小<span class="rd">(ちい)</span>さい方<span class="rd">(ほう)</span>が23ビットを超<span class="rd">(こ)</span>えて失<span class="rd">(うしな)</span>われる。他<span class="rd">(ほか)</span>は差<span class="rd">(さ)</span>が0か1。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/18_aki/q6.html" target="_blank" rel="noopener">平成18年秋期 午前 問6</a></strong> (2006)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>18年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>6</strong></td>
+</tr>
+<tr>
+<td>Nội dung: phép toán dấu phẩy động nào dễ gây 桁落ち?</td>
+<td>内容<span class="rd">(ないよう)</span>：桁落<span class="rd">(けたお)</span>ちが発生<span class="rd">(はっせい)</span>する浮動小数点<span class="rd">(ふどうしょうすうてん)</span>演算<span class="rd">(えんざん)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (trừ hai số cùng dấu, trị tuyệt đối gần bằng nhau)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（絶対値<span class="rd">(ぜったいち)</span>がほぼ等<span class="rd">(ひと)</span>しく同符号<span class="rd">(どうふごう)</span>の数<span class="rd">(かず)</span>の減算<span class="rd">(げんざん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cộng hai số cùng dấu thì giá trị lớn lên, không triệt tiêu. Lựa chọn "lớn + nhỏ" là 情報落ち, không phải 桁落ち.</td>
+<td>解説<span class="rd">(かいせつ)</span>：同符号<span class="rd">(どうふごう)</span>の加算<span class="rd">(かさん)</span>は値<span class="rd">(あたい)</span>が大<span class="rd">(おお)</span>きくなるだけ。「大<span class="rd">(だい)</span>＋小<span class="rd">(しょう)</span>」は情報落<span class="rd">(じょうほうお)</span>ちであって桁落<span class="rd">(けたお)</span>ちではない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/14_aki/q4.html" target="_blank" rel="noopener">平成14年秋期 午前 問4</a></strong> (2002)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>14年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>4</strong></td>
+</tr>
+<tr>
+<td>Nội dung: khi cộng nhiều số, cộng từ số có trị tuyệt đối nhỏ trước là để giảm loại sai số nào?</td>
+<td>内容<span class="rd">(ないよう)</span>：多数<span class="rd">(たすう)</span>の数値<span class="rd">(すうち)</span>を加算<span class="rd">(かさん)</span>するとき、絶対値<span class="rd">(ぜったいち)</span>の小<span class="rd">(ちい)</span>さい順<span class="rd">(じゅん)</span>に計算<span class="rd">(けいさん)</span>すると減<span class="rd">(へ)</span>らせる誤差<span class="rd">(ごさ)</span>はどれか。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: 情報落ち</strong> (xem ký hiệu ア〜エ ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：情報落<span class="rd">(じょうほうお)</span>ち</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cộng các số nhỏ với nhau trước để tổng của chúng đủ lớn, khi gặp số lớn sẽ không bị mất.</td>
+<td>解説<span class="rd">(かいせつ)</span>：小<span class="rd">(ちい)</span>さい数<span class="rd">(かず)</span>同士<span class="rd">(どうし)</span>を先<span class="rd">(さき)</span>に足<span class="rd">(た)</span>して大<span class="rd">(おお)</span>きくしておけば、大<span class="rd">(おお)</span>きな数<span class="rd">(かず)</span>と加算<span class="rd">(かさん)</span>しても失<span class="rd">(うしな)</span>われにくい。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-6">6. Xác suất và thống kê ｜ 確率<span class="rd">(かくりつ)</span>と統計<span class="rd">(とうけい)</span></h2>
+<p>Cùng nằm trong 基礎理論 Tuần 1: đếm số cách, tính xác suất, và đọc các chỉ số thống kê cơ bản.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hoán vị:</strong> chọn r từ n và CÓ xếp thứ tự. nPr = n! / (n − r)!</td>
+<td><strong>順列<span class="rd">(じゅんれつ)</span>：</strong>n個<span class="rd">(こ)</span>からr個<span class="rd">(こ)</span>を選<span class="rd">(えら)</span>んで並<span class="rd">(なら)</span>べる。nPr = n! / (n − r)!</td>
+</tr>
+<tr>
+<td>Ví dụ: 5P2 = 5 × 4 = 20</td>
+<td>例<span class="rd">(れい)</span>：5P2 = 5 × 4 = 20</td>
+</tr>
+<tr>
+<td><strong>Tổ hợp:</strong> chọn r từ n, KHÔNG quan tâm thứ tự. nCr = n! / (r! × (n − r)!)</td>
+<td><strong>組合<span class="rd">(くみあ)</span>せ：</strong>n個<span class="rd">(こ)</span>からr個<span class="rd">(こ)</span>を選<span class="rd">(えら)</span>ぶ（順番<span class="rd">(じゅんばん)</span>は問<span class="rd">(と)</span>わない）。nCr = n! / (r! × (n − r)!)</td>
+</tr>
+<tr>
+<td>Ví dụ: 5C2 = (5 × 4) / (2 × 1) = 10</td>
+<td>例<span class="rd">(れい)</span>：5C2 = (5 × 4) / (2 × 1) = 10</td>
+</tr>
+<tr>
+<td><strong>Xác suất:</strong> số trường hợp thuận lợi ÷ tổng số trường hợp (có khả năng như nhau).</td>
+<td><strong>確率<span class="rd">(かくりつ)</span>：</strong>起<span class="rd">(お)</span>こる場合<span class="rd">(ばあい)</span>の数<span class="rd">(かず)</span> ÷ 全<span class="rd">(すべ)</span>ての場合<span class="rd">(ばあい)</span>の数<span class="rd">(かず)</span>。</td>
+</tr>
+<tr>
+<td><strong>Độc lập, cùng xảy ra (A và B):</strong> nhân. P(A) × P(B)</td>
+<td><strong>独立事象<span class="rd">(どくりつじしょう)</span>が同時<span class="rd">(どうじ)</span>に起<span class="rd">(お)</span>こる：</strong>掛<span class="rd">(か)</span>ける。P(A) × P(B)</td>
+</tr>
+<tr>
+<td><strong>Loại trừ nhau (A hoặc B):</strong> cộng. P(A) + P(B)</td>
+<td><strong>排反事象<span class="rd">(はいはんじしょう)</span>（AまたはB）：</strong>足<span class="rd">(た)</span>す。P(A) + P(B)</td>
+</tr>
+<tr>
+<td><strong>Biến cố đối:</strong> P(không A) = 1 − P(A). Câu hỏi "ít nhất 1 lần" → tính 1 − P(không lần nào).</td>
+<td><strong>余事象<span class="rd">(よじしょう)</span>：</strong>P(Aでない) = 1 − P(A)。「少<span class="rd">(すく)</span>なくとも1回<span class="rd">(かい)</span>」は 1 − P(1回<span class="rd">(かい)</span>も起<span class="rd">(お)</span>こらない)。</td>
+</tr>
+<tr>
+<td><strong>Giá trị kỳ vọng:</strong> tổng (giá trị × xác suất). Xúc xắc: (1+2+…+6) × 1/6 = 3.5</td>
+<td><strong>期待値<span class="rd">(きたいち)</span>：</strong>（値<span class="rd">(あたい)</span> × 確率<span class="rd">(かくりつ)</span>）の合計<span class="rd">(ごうけい)</span>。サイコロ：(1+2+…+6) × 1/6 = 3.5</td>
+</tr>
+<tr>
+<td><strong>Trung bình / Trung vị / Mốt:</strong> tổng ÷ số lượng / giá trị ở giữa khi xếp tăng dần / giá trị xuất hiện nhiều nhất.</td>
+<td><strong>平均値<span class="rd">(へいきんち)</span> / 中央値<span class="rd">(ちゅうおうち)</span> / 最頻値<span class="rd">(さいひんち)</span>：</strong>合計<span class="rd">(ごうけい)</span> ÷ 個数<span class="rd">(こすう)</span> / 小<span class="rd">(ちい)</span>さい順<span class="rd">(じゅん)</span>に並<span class="rd">(なら)</span>べた真<span class="rd">(ま)</span>ん中<span class="rd">(なか)</span>の値<span class="rd">(あたい)</span> / 最<span class="rd">(もっと)</span>も多<span class="rd">(おお)</span>く現<span class="rd">(あらわ)</span>れる値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr>
+<td>Số lượng chẵn thì trung vị = trung bình của 2 số ở giữa.</td>
+<td>個数<span class="rd">(こすう)</span>が偶数<span class="rd">(ぐうすう)</span>のとき、中央値<span class="rd">(ちゅうおうち)</span>は真<span class="rd">(ま)</span>ん中<span class="rd">(なか)</span>2つの平均<span class="rd">(へいきん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Phương sai:</strong> trung bình của (x − trung bình)². <strong>Độ lệch chuẩn</strong> = √ phương sai.</td>
+<td><strong>分散<span class="rd">(ぶんさん)</span>：</strong>（x − 平均<span class="rd">(へいきん)</span>）² の平均<span class="rd">(へいきん)</span>。<strong>標準偏差<span class="rd">(ひょうじゅんへんさ)</span></strong> = √分散<span class="rd">(ぶんさん)</span>。</td>
+</tr>
+<tr>
+<td>Ví dụ: 2, 4, 6 → trung bình 4, phương sai (4 + 0 + 4) / 3 = 8/3</td>
+<td>例<span class="rd">(れい)</span>：2, 4, 6 → 平均<span class="rd">(へいきん)</span> 4、分散<span class="rd">(ぶんさん)</span> (4 + 0 + 4) / 3 = 8/3</td>
+</tr>
+<tr>
+<td><strong>Phân phối chuẩn:</strong> ±1σ ≈ 68%, ±2σ ≈ 95%, ±3σ ≈ 99.7% dữ liệu.</td>
+<td><strong>正規分布<span class="rd">(せいきぶんぷ)</span>：</strong>±1σ ≈ 68%、±2σ ≈ 95%、±3σ ≈ 99.7%。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu 6.1</strong> Có bao nhiêu cách chọn 2 người đại diện từ 5 người?</td>
+<td><strong>問<span class="rd">(とい)</span>6.1</strong> 5人<span class="rd">(にん)</span>の中<span class="rd">(なか)</span>から2人<span class="rd">(ふたり)</span>の代表<span class="rd">(だいひょう)</span>を選<span class="rd">(えら)</span>ぶ方法<span class="rd">(ほうほう)</span>は何通<span class="rd">(なんとお)</span>りか。</td>
+</tr>
+<tr>
+<td>ア 10　イ 20　ウ 25　エ 60</td>
+<td>ア 10　イ 20　ウ 25　エ 60</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (10)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（10）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: hai đại diện ngang nhau nên không tính thứ tự → tổ hợp. 5C2 = (5 × 4) / 2 = 10. (20 là bẫy: đó là hoán vị 5P2.)</td>
+<td>解説<span class="rd">(かいせつ)</span>：代表<span class="rd">(だいひょう)</span>2人<span class="rd">(ふたり)</span>に区別<span class="rd">(くべつ)</span>はないので組合<span class="rd">(くみあ)</span>せ。5C2 = (5 × 4) / 2 = 10。（20は順列<span class="rd">(じゅんれつ)</span> 5P2 の値<span class="rd">(あたい)</span>。）</td>
+</tr>
+<tr class="q">
+<td><strong>Câu 6.2</strong> Tung 2 con xúc xắc. Xác suất tổng hai mặt bằng 7 là bao nhiêu?</td>
+<td><strong>問<span class="rd">(とい)</span>6.2</strong> サイコロを2個<span class="rd">(こ)</span>振<span class="rd">(ふ)</span>る。出<span class="rd">(で)</span>た目<span class="rd">(め)</span>の合計<span class="rd">(ごうけい)</span>が7になる確率<span class="rd">(かくりつ)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 1/12　イ 1/9　ウ 1/6　エ 1/4</td>
+<td>ア 1/12　イ 1/9　ウ 1/6　エ 1/4</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (1/6)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（1/6）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tổng có 6 × 6 = 36 trường hợp. Tổng bằng 7: (1,6) (2,5) (3,4) (4,3) (5,2) (6,1) = 6 trường hợp. 6/36 = 1/6.</td>
+<td>解説<span class="rd">(かいせつ)</span>：全体<span class="rd">(ぜんたい)</span>は 6 × 6 = 36通<span class="rd">(とお)</span>り。合計<span class="rd">(ごうけい)</span>7は (1,6) (2,5) (3,4) (4,3) (5,2) (6,1) の6通<span class="rd">(とお)</span>り。6/36 = 1/6。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu 6.3</strong> Máy A có xác suất hoạt động 0.9, máy B là 0.8, độc lập với nhau. Hệ thống chỉ chạy khi CẢ HAI máy cùng hoạt động. Xác suất hệ thống chạy là bao nhiêu?</td>
+<td><strong>問<span class="rd">(とい)</span>6.3</strong> 稼働<span class="rd">(かどう)</span>する確率<span class="rd">(かくりつ)</span>が0.9の装置<span class="rd">(そうち)</span>Aと0.8の装置<span class="rd">(そうち)</span>Bがある（独立<span class="rd">(どくりつ)</span>）。両方<span class="rd">(りょうほう)</span>が稼働<span class="rd">(かどう)</span>したときだけ動<span class="rd">(うご)</span>くシステムが稼働<span class="rd">(かどう)</span>する確率<span class="rd">(かくりつ)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 0.02　イ 0.70　ウ 0.72　エ 0.98</td>
+<td>ア 0.02　イ 0.70　ウ 0.72　エ 0.98</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (0.72)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（0.72）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: độc lập và cùng xảy ra → nhân. 0.9 × 0.8 = 0.72. (0.98 là khi chỉ cần 1 trong 2 máy chạy: 1 − 0.1 × 0.2.) Dạng này sẽ gặp lại ở phần 稼働率 nối tiếp / song song.</td>
+<td>解説<span class="rd">(かいせつ)</span>：独立<span class="rd">(どくりつ)</span>で同時<span class="rd">(どうじ)</span>に起<span class="rd">(お)</span>こるので掛<span class="rd">(か)</span>ける。0.9 × 0.8 = 0.72。（0.98はどちらか1台<span class="rd">(だい)</span>でよい場合<span class="rd">(ばあい)</span>：1 − 0.1 × 0.2。）直列<span class="rd">(ちょくれつ)</span>・並列<span class="rd">(へいれつ)</span>の稼働率<span class="rd">(かどうりつ)</span>でも出<span class="rd">(で)</span>る。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu 6.4</strong> Dữ liệu: 2, 4, 4, 5, 10. Trung bình và trung vị lần lượt là?</td>
+<td><strong>問<span class="rd">(とい)</span>6.4</strong> データ 2, 4, 4, 5, 10 の平均値<span class="rd">(へいきんち)</span>と中央値<span class="rd">(ちゅうおうち)</span>の組合<span class="rd">(くみあ)</span>せはどれか。</td>
+</tr>
+<tr>
+<td>ア 4 và 4　イ 4 và 5　ウ 5 và 4　エ 5 và 5</td>
+<td>ア 4と4　イ 4と5　ウ 5と4　エ 5と5</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (trung bình 5, trung vị 4)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（平均値<span class="rd">(へいきんち)</span>5、中央値<span class="rd">(ちゅうおうち)</span>4）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: trung bình = 25 / 5 = 5. Dữ liệu đã xếp tăng dần, số ở giữa (thứ 3) là 4. Mốt cũng là 4. Số 10 kéo trung bình lên nhưng không ảnh hưởng trung vị.</td>
+<td>解説<span class="rd">(かいせつ)</span>：平均値<span class="rd">(へいきんち)</span> = 25 / 5 = 5。並<span class="rd">(なら)</span>べた真<span class="rd">(ま)</span>ん中<span class="rd">(なか)</span>（3番目<span class="rd">(ばんめ)</span>）は4。最頻値<span class="rd">(さいひんち)</span>も4。10は平均<span class="rd">(へいきん)</span>を引<span class="rd">(ひ)</span>き上<span class="rd">(あ)</span>げるが、中央値<span class="rd">(ちゅうおうち)</span>には影響<span class="rd">(えいきょう)</span>しない。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/20_aki/q8.html" target="_blank" rel="noopener">平成20年秋期 午前 問8</a></strong> (2008)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 5 lá thăm có 2 lá trúng. Rút cùng lúc 2 lá, xác suất cả hai đều trúng là bao nhiêu?</td>
+<td>内容<span class="rd">(ないよう)</span>：5本<span class="rd">(ほん)</span>のくじに当<span class="rd">(あ)</span>たりが2本<span class="rd">(ほん)</span>。同時<span class="rd">(どうじ)</span>に2本<span class="rd">(ほん)</span>引<span class="rd">(ひ)</span>いて両方<span class="rd">(りょうほう)</span>当<span class="rd">(あ)</span>たる確率<span class="rd">(かくりつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (1/10)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（1/10）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tổng số cách chọn 2 từ 5 = 5C2 = 10. Chỉ có 1 cách chọn đúng 2 lá trúng. 1/10.</td>
+<td>解説<span class="rd">(かいせつ)</span>：5本<span class="rd">(ほん)</span>から2本<span class="rd">(ほん)</span>を選<span class="rd">(えら)</span>ぶのは 5C2 = 10通<span class="rd">(とお)</span>り。当<span class="rd">(あ)</span>たり2本<span class="rd">(ほん)</span>を選<span class="rd">(えら)</span>ぶのは1通<span class="rd">(とお)</span>り。よって 1/10。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/17_haru/q6.html" target="_blank" rel="noopener">平成17年春期 午前 問6</a></strong> (2005)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>17年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>6</strong></td>
+</tr>
+<tr>
+<td>Nội dung: tung đồng xu 4 lần, xác suất ra mặt ngửa đúng 2 lần.</td>
+<td>内容<span class="rd">(ないよう)</span>：コインを4回<span class="rd">(かい)</span>投<span class="rd">(な)</span>げて、表<span class="rd">(おもて)</span>がちょうど2回<span class="rd">(かい)</span>出<span class="rd">(で)</span>る確率<span class="rd">(かくりつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (0.375)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（0.375）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tổng 2⁴ = 16 trường hợp. Chọn 2 lần ngửa trong 4: 4C2 = 6. 6/16 = 0.375.</td>
+<td>解説<span class="rd">(かいせつ)</span>：全体<span class="rd">(ぜんたい)</span>は 2⁴ = 16通<span class="rd">(とお)</span>り。4回<span class="rd">(かい)</span>中<span class="rd">(ちゅう)</span>2回<span class="rd">(かい)</span>が表<span class="rd">(おもて)</span>は 4C2 = 6通<span class="rd">(とお)</span>り。6/16 = 0.375。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/01_aki/q6.html" target="_blank" rel="noopener">令和元年秋期 午前 問6</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>6</strong></td>
+</tr>
+<tr>
+<td>Nội dung: A và B là số ngẫu nhiên từ 0 đến 9 (đều nhau). C = A − B. Xác suất C = 0 là bao nhiêu?</td>
+<td>内容<span class="rd">(ないよう)</span>：AとBに0〜9の乱数<span class="rd">(らんすう)</span>を入<span class="rd">(い)</span>れ、C = A − B とする。Cが0になる確率<span class="rd">(かくりつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (1/10)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（1/10）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: có 10 × 10 = 100 cặp (A, B). C = 0 khi A = B: 10 cặp. 10/100 = 1/10.</td>
+<td>解説<span class="rd">(かいせつ)</span>：(A, B) の組<span class="rd">(くみ)</span>は 10 × 10 = 100通<span class="rd">(とお)</span>り。A = B のときだけ C = 0 で 10通<span class="rd">(とお)</span>り。10/100 = 1/10。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/27_haru/q3.html" target="_blank" rel="noopener">平成27年春期 午前 問3</a></strong> (2015)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>27年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: f(x) là số nguyên lớn nhất không vượt quá x. x chọn ngẫu nhiên (đều nhau) trong −0.9, −0.8, …, 0.9. Tính giá trị kỳ vọng của f(x + 0.5).</td>
+<td>内容<span class="rd">(ないよう)</span>：f(x)はx以下<span class="rd">(いか)</span>の最大<span class="rd">(さいだい)</span>の整数<span class="rd">(せいすう)</span>。xを −0.9〜0.9（小数第<span class="rd">(しょうすうだい)</span>1位<span class="rd">(い)</span>まで）から等確率<span class="rd">(とうかくりつ)</span>で選<span class="rd">(えら)</span>ぶとき、f(x + 0.5) の期待値<span class="rd">(きたいち)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (1/19)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（1/19）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: có 19 giá trị x. x + 0.5 chạy từ −0.4 đến 1.4: f = −1 có 4 giá trị, f = 0 có 10, f = 1 có 5. Kỳ vọng = (−4 + 0 + 5)/19 = 1/19.</td>
+<td>解説<span class="rd">(かいせつ)</span>：xは19通<span class="rd">(とお)</span>り。x + 0.5 は −0.4〜1.4。f = −1 が4通<span class="rd">(とお)</span>り、f = 0 が10通<span class="rd">(とお)</span>り、f = 1 が5通<span class="rd">(とお)</span>り。期待値<span class="rd">(きたいち)</span> = (−4 + 0 + 5)/19 = 1/19。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/05_menjo/q3.html" target="_blank" rel="noopener">令和5年度 問3</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: nhận xét nào về độ lệch chuẩn là đúng (khi cộng hằng số hoặc nhân đôi toàn bộ dữ liệu)?</td>
+<td>内容<span class="rd">(ないよう)</span>：全<span class="rd">(すべ)</span>てのデータに定数<span class="rd">(ていすう)</span>を加<span class="rd">(くわ)</span>えたり2倍<span class="rd">(ばい)</span>したりしたときの標準偏差<span class="rd">(ひょうじゅんへんさ)</span>について、正<span class="rd">(ただ)</span>しい記述<span class="rd">(きじゅつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (nhân đôi dữ liệu thì độ lệch chuẩn cũng gấp đôi)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（データを2倍<span class="rd">(ばい)</span>すると標準偏差<span class="rd">(ひょうじゅんへんさ)</span>も2倍<span class="rd">(ばい)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cộng hằng số chỉ dịch cả dữ liệu lẫn trung bình, độ phân tán không đổi → độ lệch chuẩn giữ nguyên. Nhân đôi thì mọi khoảng cách đến trung bình gấp đôi → độ lệch chuẩn gấp đôi.</td>
+<td>解説<span class="rd">(かいせつ)</span>：定数<span class="rd">(ていすう)</span>を加<span class="rd">(くわ)</span>えると平均<span class="rd">(へいきん)</span>も同<span class="rd">(おな)</span>じだけずれるのでばらつきは変<span class="rd">(か)</span>わらない。2倍<span class="rd">(ばい)</span>すると平均<span class="rd">(へいきん)</span>からの差<span class="rd">(さ)</span>も全<span class="rd">(すべ)</span>て2倍<span class="rd">(ばい)</span>になり、標準偏差<span class="rd">(ひょうじゅんへんさ)</span>も2倍<span class="rd">(ばい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/19_haru/q8.html" target="_blank" rel="noopener">平成19年春期 午前 問8</a></strong> (2007)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>19年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trọng lượng sản phẩm theo phân phối chuẩn, trung bình 5.2 kg, độ lệch chuẩn 0.1 kg. Dưới 5.0 kg bị loại. Tỉ lệ bị loại khoảng bao nhiêu %? (Đề có kèm bảng phân phối chuẩn.)</td>
+<td>内容<span class="rd">(ないよう)</span>：製品<span class="rd">(せいひん)</span>の重量<span class="rd">(じゅうりょう)</span>が平均<span class="rd">(へいきん)</span>5.2kg、標準偏差<span class="rd">(ひょうじゅんへんさ)</span>0.1kgの正規分布<span class="rd">(せいきぶんぷ)</span>に従<span class="rd">(したが)</span>う。5.0kg未満<span class="rd">(みまん)</span>は不合格<span class="rd">(ふごうかく)</span>。不合格<span class="rd">(ふごうかく)</span>の割合<span class="rd">(わりあい)</span>は約<span class="rd">(やく)</span>何<span class="rd">(なん)</span>%か。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (2.3%)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（2.3%）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 5.0 cách trung bình (5.2 − 5.0)/0.1 = 2σ. Bên ngoài ±2σ là khoảng 5%, một phía dưới là khoảng 2.3%.</td>
+<td>解説<span class="rd">(かいせつ)</span>：(5.2 − 5.0)/0.1 = 2 で、平均<span class="rd">(へいきん)</span>から2σ下<span class="rd">(した)</span>。±2σの外側<span class="rd">(そとがわ)</span>は約<span class="rd">(やく)</span>5%、下側<span class="rd">(したがわ)</span>だけなら約<span class="rd">(やく)</span>2.3%。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-7">科目B: Làm quen đề 科目B và cách trace ｜ 科目<span class="rd">(かもく)</span>Bの概要<span class="rd">(がいよう)</span>とトレース</h2>
+<p>Hôm nay chưa cần học thuật toán; mục tiêu là hiểu đề 科目B ra như thế nào và tập trace mã giả bằng bảng biến.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cấu trúc:</strong> 20 câu trong 100 phút, khoảng 16 câu thuật toán và 4 câu bảo mật thông tin. Trung bình 5 phút mỗi câu.</td>
+<td><strong>構成<span class="rd">(こうせい)</span>：</strong>100分<span class="rd">(ぷん)</span>で20問<span class="rd">(もん)</span>。アルゴリズムとプログラミングが約<span class="rd">(やく)</span>16問<span class="rd">(もん)</span>、情報<span class="rd">(じょうほう)</span>セキュリティが約<span class="rd">(やく)</span>4問<span class="rd">(もん)</span>。1問<span class="rd">(もん)</span>あたり約<span class="rd">(やく)</span>5分<span class="rd">(ふん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Ba dạng câu hay gặp:</strong> (1) cho kết quả khi chạy chương trình, (2) điền vào chỗ trống, (3) tìm chỗ sai hoặc cách sửa.</td>
+<td><strong>よく出<span class="rd">(で)</span>る3つの形式<span class="rd">(けいしき)</span>：</strong>(1) 実行結果<span class="rd">(じっこうけっか)</span>を答<span class="rd">(こた)</span>える、(2) 空欄<span class="rd">(くうらん)</span>を埋<span class="rd">(う)</span>める、(3) 誤<span class="rd">(あやま)</span>りや修正<span class="rd">(しゅうせい)</span>方法<span class="rd">(ほうほう)</span>を答<span class="rd">(こた)</span>える。</td>
+</tr>
+<tr>
+<td><strong>Mã giả:</strong> đề luôn dùng 擬似言語 của IPA, có bảng quy ước cách viết đi kèm. Bạn không cần học thuộc, nhưng phải đọc quen để không mất thời gian.</td>
+<td><strong>擬似言語<span class="rd">(ぎじげんご)</span>：</strong>IPAの擬似言語<span class="rd">(ぎじげんご)</span>で書<span class="rd">(か)</span>かれ、記述形式<span class="rd">(きじゅつけいしき)</span>の説明<span class="rd">(せつめい)</span>が付<span class="rd">(つ)</span>く。暗記<span class="rd">(あんき)</span>は不要<span class="rd">(ふよう)</span>だが、読<span class="rd">(よ)</span>み慣<span class="rd">(な)</span>れておく。</td>
+</tr>
+<tr>
+<td><strong>Bẫy lớn nhất:</strong> mảng đánh số từ 1, không phải 0.</td>
+<td><strong>最大<span class="rd">(さいだい)</span>の注意点<span class="rd">(ちゅういてん)</span>：</strong>配列<span class="rd">(はいれつ)</span>の要素番号<span class="rd">(ようそばんごう)</span>は0ではなく1から始<span class="rd">(はじ)</span>まる。</td>
+</tr>
+<tr>
+<td><strong>Cách trace:</strong> kẻ bảng, mỗi biến một cột, mỗi lần lặp một dòng. Ghi giá trị sau mỗi lệnh gán, không tính nhẩm.</td>
+<td><strong>トレース：</strong>変数<span class="rd">(へんすう)</span>ごとに列<span class="rd">(れつ)</span>を作<span class="rd">(つく)</span>り、繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>し1回<span class="rd">(かい)</span>を1行<span class="rd">(ぎょう)</span>に書<span class="rd">(か)</span>く。代入<span class="rd">(だいにゅう)</span>のたびに値<span class="rd">(あたい)</span>を記録<span class="rd">(きろく)</span>し、暗算<span class="rd">(あんざん)</span>しない。</td>
+</tr>
+<tr>
+<td><strong>Thứ tự đọc đề:</strong> đọc phần mô tả và chú thích trước, đoán chương trình làm gì, rồi mới đọc code.</td>
+<td><strong>読<span class="rd">(よ)</span>む順番<span class="rd">(じゅんばん)</span>：</strong>先<span class="rd">(さき)</span>に問題文<span class="rd">(もんだいぶん)</span>と注釈<span class="rd">(ちゅうしゃく)</span>を読<span class="rd">(よ)</span>み、処理<span class="rd">(しょり)</span>の目的<span class="rd">(もくてき)</span>をつかんでからプログラムを読<span class="rd">(よ)</span>む。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu điền chỗ trống:</strong> thử từng lựa chọn với dữ liệu nhỏ (2–3 phần tử) để loại nhanh.</td>
+<td><strong>空欄問題<span class="rd">(くうらんもんだい)</span>：</strong>小<span class="rd">(ちい)</span>さなデータ（要素<span class="rd">(ようそ)</span>2〜3個<span class="rd">(こ)</span>）で選択肢<span class="rd">(せんたくし)</span>を試<span class="rd">(ため)</span>して絞<span class="rd">(しぼ)</span>り込<span class="rd">(こ)</span>む。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu bảo mật:</strong> là tình huống công ty thực tế; đọc kỹ ai làm gì, rủi ro nằm ở đâu, rồi chọn biện pháp phù hợp nhất với tình huống đó.</td>
+<td><strong>セキュリティ問題<span class="rd">(もんだい)</span>：</strong>企業<span class="rd">(きぎょう)</span>の事例<span class="rd">(じれい)</span>形式<span class="rd">(けいしき)</span>。誰<span class="rd">(だれ)</span>が何<span class="rd">(なに)</span>をしたか、どこにリスクがあるかを読<span class="rd">(よ)</span>み取<span class="rd">(と)</span>り、状況<span class="rd">(じょうきょう)</span>に最<span class="rd">(もっと)</span>も合<span class="rd">(あ)</span>う対策<span class="rd">(たいさく)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<p><strong>Câu B1 ｜ 問<span class="rd">(とい)</span>B1</strong></p>
+<pre><code>整数型: x ← 0
+整数型: i
+for (i を 1 から 5 まで 1 ずつ増やす)
+  if (i が偶数)
+    x ← x + i
+  else
+    x ← x − 1
+  endif
+endfor
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu B1</strong> Sau khi chạy chương trình, giá trị của x là bao nhiêu? (Đây là câu cuối của quiz khởi động.)</td>
+<td><strong>問<span class="rd">(とい)</span>B1</strong> プログラムを実行<span class="rd">(じっこう)</span>した後<span class="rd">(あと)</span>の x の値<span class="rd">(あたい)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 3　イ 4　ウ 6　エ 9</td>
+<td>ア 3　イ 4　ウ 6　エ 9</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (3)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（3）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: bảng trace: i=1 (lẻ) x=−1; i=2 (chẵn) x=1; i=3 (lẻ) x=0; i=4 (chẵn) x=4; i=5 (lẻ) x=3.</td>
+<td>解説<span class="rd">(かいせつ)</span>：トレース表<span class="rd">(ひょう)</span>：i=1（奇数<span class="rd">(きすう)</span>）x=−1；i=2（偶数<span class="rd">(ぐうすう)</span>）x=1；i=3 x=0；i=4 x=4；i=5 x=3。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B2 ｜ 問<span class="rd">(とい)</span>B2</strong></p>
+<pre><code>整数型: n ← 13
+整数型: c ← 0
+while (n &gt; 0)
+  c ← c + (n mod 2)
+  n ← n ÷ 2
+endwhile
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu B2</strong> Sau khi chạy, giá trị của c là bao nhiêu? Chương trình này đang đếm cái gì?</td>
+<td><strong>問<span class="rd">(とい)</span>B2</strong> 実行後<span class="rd">(じっこうご)</span>の c の値<span class="rd">(あたい)</span>はどれか。このプログラムは何<span class="rd">(なに)</span>を数<span class="rd">(かぞ)</span>えているか。</td>
+</tr>
+<tr>
+<td>ア 2　イ 3　ウ 4　エ 13</td>
+<td>ア 2　イ 3　ウ 4　エ 13</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (3)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（3）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: n=13: c=1, n=6 → n=6: c=1, n=3 → n=3: c=2, n=1 → n=1: c=3, n=0 → dừng. Chương trình đếm số bit 1 khi viết n ở hệ nhị phân: 13 = 1101 có 3 bit 1. Đây chính là phép "chia 2 lấy dư" của bài đổi cơ số hôm nay.</td>
+<td>解説<span class="rd">(かいせつ)</span>：n=13：c=1、n=6 → n=6：c=1、n=3 → n=3：c=2、n=1 → n=1：c=3、n=0 で終了<span class="rd">(しゅうりょう)</span>。nを2進数<span class="rd">(しんすう)</span>で表<span class="rd">(あらわ)</span>したときの1の個数<span class="rd">(こすう)</span>を数<span class="rd">(かぞ)</span>えている（13 = 1101 で3個<span class="rd">(こ)</span>）。今日<span class="rd">(きょう)</span>の基数変換<span class="rd">(きすうへんかん)</span>の「2で割<span class="rd">(わ)</span>って余<span class="rd">(あま)</span>りを取<span class="rd">(と)</span>る」と同<span class="rd">(おな)</span>じ。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Đề 科目B dạng mới bắt đầu từ năm 2023. Nguồn đề tốt nhất là đề mẫu サンプル問題 và đề công khai 公開問題 của IPA. Bấm link để xem nguyên văn chương trình.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/sample/b1.html" target="_blank" rel="noopener">サンプル問題 科目B 問1</a></strong> (đề mẫu dạng mới, 2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: ba biến x, y, z có giá trị ban đầu 1, 2, 3; chương trình gán lần lượt giá trị giữa các biến rồi in ra y và z.</td>
+<td>内容<span class="rd">(ないよう)</span>：x、y、z の初期値<span class="rd">(しょきち)</span>は 1、2、3。変数<span class="rd">(へんすう)</span>の間<span class="rd">(あいだ)</span>で順<span class="rd">(じゅん)</span>に代入<span class="rd">(だいにゅう)</span>し、y と z を出力<span class="rd">(しゅつりょく)</span>する。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: カ</strong> (3,2)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：カ</strong>（3,2）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: x ← y cho x = 2; y ← z cho y = 3; z ← x cho z = 2. In ra y, z = 3,2. Bẫy: nghĩ rằng đây là "hoán đổi" nên đoán sai; phải trace từng lệnh.</td>
+<td>解説<span class="rd">(かいせつ)</span>：x ← y で x = 2、y ← z で y = 3、z ← x で z = 2。y、z を出力<span class="rd">(しゅつりょく)</span>して 3,2。「入<span class="rd">(い)</span>れ替<span class="rd">(か)</span>え」と思<span class="rd">(おも)</span>い込<span class="rd">(こ)</span>まず、1行<span class="rd">(ぎょう)</span>ずつトレースする。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/sample/b2.html" target="_blank" rel="noopener">サンプル問題 科目B 問2</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm fizzBuzz phân loại số theo chia hết cho 3, cho 5, cho cả hai hay không chia hết. Chọn bộ điều kiện đúng cho các chỗ trống a, b, c.</td>
+<td>内容<span class="rd">(ないよう)</span>：関数<span class="rd">(かんすう)</span> fizzBuzz は、3で割<span class="rd">(わ)</span>り切<span class="rd">(き)</span>れるか、5か、両方<span class="rd">(りょうほう)</span>か、どちらでもないかで分類<span class="rd">(ぶんるい)</span>する。空欄<span class="rd">(くうらん)</span> a、b、c の正<span class="rd">(ただ)</span>しい組合<span class="rd">(くみあ)</span>せを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (xem các lựa chọn ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: số chia hết cho cả 3 và 5 cũng thỏa "chia hết cho 3", nên điều kiện "cả hai" phải kiểm tra <strong>đầu tiên</strong> (a). Sau đó b, c là 3 và 5 (thứ tự nào cũng được).</td>
+<td>解説<span class="rd">(かいせつ)</span>：3と5の両方<span class="rd">(りょうほう)</span>で割<span class="rd">(わ)</span>り切<span class="rd">(き)</span>れる数<span class="rd">(かず)</span>は「3で割<span class="rd">(わ)</span>り切<span class="rd">(き)</span>れる」条件<span class="rd">(じょうけん)</span>にも当<span class="rd">(あ)</span>てはまるので、最初<span class="rd">(さいしょ)</span>の a で「両方<span class="rd">(りょうほう)</span>」を判定<span class="rd">(はんてい)</span>する。b、c は3と5（順番<span class="rd">(じゅんばん)</span>は問<span class="rd">(と)</span>わない）。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/sample/b3.html" target="_blank" rel="noopener">サンプル問題 科目B 問3</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm makeNewArray tạo mảng mới, mỗi phần tử là tổng cộng dồn của mảng vào. Gọi với {3,2,1,6,5,4}, hỏi phần tử số 5 của mảng kết quả.</td>
+<td>内容<span class="rd">(ないよう)</span>：関数<span class="rd">(かんすう)</span> makeNewArray は入力<span class="rd">(にゅうりょく)</span>配列<span class="rd">(はいれつ)</span>の累積和<span class="rd">(るいせきわ)</span>を新<span class="rd">(あたら)</span>しい配列<span class="rd">(はいれつ)</span>にする。{3,2,1,6,5,4} のとき、戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>の要素番号<span class="rd">(ようそばんごう)</span>5の値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: カ (17)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：カ（17）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: kết quả lần lượt 3, 5, 6, 12, 17, 21. Phần tử số 5 (đếm từ 1) là 17 = 3+2+1+6+5. Bẫy: đếm từ 0 sẽ ra 21.</td>
+<td>解説<span class="rd">(かいせつ)</span>：3、5、6、12、17、21 となる。要素番号<span class="rd">(ようそばんごう)</span>5（1から数<span class="rd">(かぞ)</span>える）は 17 = 3+2+1+6+5。0から数<span class="rd">(かぞ)</span>えると21を選<span class="rd">(えら)</span>んでしまう。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/sample/b5.html" target="_blank" rel="noopener">サンプル問題 科目B 問5</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm calc nhận hai số thực dương x, y và dùng hàm pow(a, b) (a mũ b) để tính √(x² + y²). Chọn biểu thức điền vào chỗ trống.</td>
+<td>内容<span class="rd">(ないよう)</span>：関数<span class="rd">(かんすう)</span> calc は正<span class="rd">(せい)</span>の実数<span class="rd">(じっすう)</span> x、y から、pow(a, b)（aのb乗<span class="rd">(じょう)</span>）を使<span class="rd">(つか)</span>って √(x² + y²) を求<span class="rd">(もと)</span>める。空欄<span class="rd">(くうらん)</span>に入<span class="rd">(い)</span>れる式<span class="rd">(しき)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: オ</strong> pow(pow(x, 2) + pow(y, 2), 0.5)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：オ</strong> pow(pow(x, 2) + pow(y, 2), 0.5)</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: căn bậc hai = mũ 0.5. Tính x² + y² trước bằng pow(x, 2) + pow(y, 2), rồi đưa cả tổng vào pow(…, 0.5).</td>
+<td>解説<span class="rd">(かいせつ)</span>：平方根<span class="rd">(へいほうこん)</span>は0.5乗<span class="rd">(じょう)</span>。先<span class="rd">(さき)</span>に pow(x, 2) + pow(y, 2) を求<span class="rd">(もと)</span>め、その和<span class="rd">(わ)</span>全体<span class="rd">(ぜんたい)</span>を pow(…, 0.5) に渡<span class="rd">(わた)</span>す。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/05_haru/b1.html" target="_blank" rel="noopener">令和5年度 科目B 問1</a></strong> (2023, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm trả về danh sách các số nguyên tố từ 2 đến maxNum, thử chia mỗi số cho các số từ 2 đến căn bậc hai của nó. Chọn bộ điền đúng cho chỗ trống a (giới hạn vòng lặp) và b (điều kiện chia hết).</td>
+<td>内容<span class="rd">(ないよう)</span>：2以上<span class="rd">(いじょう)</span>maxNum以下<span class="rd">(いか)</span>の素数<span class="rd">(そすう)</span>を、平方根<span class="rd">(へいほうこん)</span>までの数<span class="rd">(かず)</span>で割<span class="rd">(わ)</span>って調<span class="rd">(しら)</span>べ、リストで返<span class="rd">(かえ)</span>す関数<span class="rd">(かんすう)</span>。空欄<span class="rd">(くうらん)</span> a（繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>しの上限<span class="rd">(じょうげん)</span>）と b（割<span class="rd">(わ)</span>り切<span class="rd">(き)</span>れる条件<span class="rd">(じょうけん)</span>）の組合<span class="rd">(くみあ)</span>せを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (xem các lựa chọn ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: a = maxNum (không phải maxNum + 1, vì sẽ thừa một số). b = "i chia j dư 0": khi chia hết thì i không phải số nguyên tố, nên cờ divideFlag chuyển thành false.</td>
+<td>解説<span class="rd">(かいせつ)</span>：a は maxNum（maxNum + 1 だと1つ多<span class="rd">(おお)</span>い）。b は「i ÷ j の余<span class="rd">(あま)</span>りが0」。割<span class="rd">(わ)</span>り切<span class="rd">(き)</span>れれば素数<span class="rd">(そすう)</span>ではないので divideFlag を偽<span class="rd">(ぎ)</span>にする。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/05_haru/b2.html" target="_blank" rel="noopener">令和5年度 科目B 問2</a></strong> (2023, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: ba thủ tục proc1, proc2, proc3 gọi lẫn nhau và in ra ký tự. Khi gọi proc2, thứ tự ký tự in ra là gì?</td>
+<td>内容<span class="rd">(ないよう)</span>：手続<span class="rd">(てつづ)</span>き proc1、proc2、proc3 が互<span class="rd">(たが)</span>いに呼<span class="rd">(よ)</span>び出<span class="rd">(だ)</span>し合<span class="rd">(あ)</span>い文字<span class="rd">(もじ)</span>を出力<span class="rd">(しゅつりょく)</span>する。proc2 を呼<span class="rd">(よ)</span>んだときの出力順<span class="rd">(しゅつりょくじゅん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ク</strong> ("C","B","A","C")</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ク</strong>（"C","B","A","C"）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: proc2 gọi proc3 → in C; quay về proc2 in B rồi gọi proc1; proc1 in A rồi gọi proc3 → in C. Mẹo: khi có gọi thủ tục, ghi một "ngăn xếp" ai đang gọi ai để không lạc.</td>
+<td>解説<span class="rd">(かいせつ)</span>：proc2 が proc3 を呼<span class="rd">(よ)</span>ぶ → C。proc2 に戻<span class="rd">(もど)</span>り B、proc1 を呼<span class="rd">(よ)</span>ぶ。proc1 が A を出力<span class="rd">(しゅつりょく)</span>し proc3 を呼<span class="rd">(よ)</span>ぶ → C。コツ：呼<span class="rd">(よ)</span>び出<span class="rd">(だ)</span>しの順<span class="rd">(じゅん)</span>をメモして迷<span class="rd">(まよ)</span>わないようにする。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Từ vựng 科目B ｜ 科目<span class="rd">(かもく)</span>Bの用語<span class="rd">(ようご)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thuật toán và lập trình</td>
+<td>アルゴリズムとプログラミング</td>
+</tr>
+<tr>
+<td>Bảo mật thông tin</td>
+<td>情報<span class="rd">(じょうほう)</span>セキュリティ</td>
+</tr>
+<tr>
+<td>Kết quả chạy</td>
+<td>実行結果<span class="rd">(じっこうけっか)</span></td>
+</tr>
+<tr>
+<td>Chỗ trống / Đáp án lựa chọn</td>
+<td>空欄<span class="rd">(くうらん)</span> / 解答群<span class="rd">(かいとうぐん)</span></td>
+</tr>
+<tr>
+<td>Đầu ra / Giá trị ban đầu</td>
+<td>出力<span class="rd">(しゅつりょく)</span> / 初期値<span class="rd">(しょきち)</span></td>
+</tr>
+<tr>
+<td>Số chẵn / Số lẻ</td>
+<td>偶数<span class="rd">(ぐうすう)</span> / 奇数<span class="rd">(きすう)</span></td>
+</tr>
+<tr>
+<td>Số nguyên tố / Căn bậc hai</td>
+<td>素数<span class="rd">(そすう)</span> / 平方根<span class="rd">(へいほうこん)</span></td>
+</tr>
+<tr>
+<td>Tổng cộng dồn</td>
+<td>累積和<span class="rd">(るいせきわ)</span></td>
+</tr>
+<tr>
+<td>Gọi (thủ tục, hàm)</td>
+<td>呼<span class="rd">(よ)</span>び出<span class="rd">(だ)</span>す</td>
+</tr>
+<tr>
+<td>Chia hết</td>
+<td>割<span class="rd">(わ)</span>り切<span class="rd">(き)</span>れる</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-8">7. Bảng từ vựng ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<p>Các thuật ngữ cần nhớ trong phần này.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hệ cơ số</td>
+<td>基数<span class="rd">(きすう)</span></td>
+</tr>
+<tr>
+<td>Đổi hệ cơ số</td>
+<td>基数変換<span class="rd">(きすうへんかん)</span></td>
+</tr>
+<tr>
+<td>Nhị phân / Bát phân / Thập phân / Thập lục phân</td>
+<td>2進数<span class="rd">(しんすう)</span> / 8進数<span class="rd">(しんすう)</span> / 10進数<span class="rd">(しんすう)</span> / 16進数<span class="rd">(しんすう)</span></td>
+</tr>
+<tr>
+<td>Trọng số</td>
+<td>重<span class="rd">(おも)</span>み</td>
+</tr>
+<tr>
+<td>Chữ số, hàng</td>
+<td>桁<span class="rd">(けた)</span></td>
+</tr>
+<tr>
+<td>Phần nguyên / Phần thập phân</td>
+<td>整数部<span class="rd">(せいすうぶ)</span> / 小数部<span class="rd">(しょうすうぶ)</span></td>
+</tr>
+<tr>
+<td>Dấu chấm thập phân</td>
+<td>小数点<span class="rd">(しょうすうてん)</span></td>
+</tr>
+<tr>
+<td>Số thập phân vô hạn tuần hoàn</td>
+<td>循環小数<span class="rd">(じゅんかんしょうすう)</span></td>
+</tr>
+<tr>
+<td>Số dư</td>
+<td>余<span class="rd">(あま)</span>り</td>
+</tr>
+<tr>
+<td>Bù / Bù 1 / Bù 2</td>
+<td>補数<span class="rd">(ほすう)</span> / 1の補数<span class="rd">(ほすう)</span> / 2の補数<span class="rd">(ほすう)</span></td>
+</tr>
+<tr>
+<td>Đảo bit</td>
+<td>反転<span class="rd">(はんてん)</span></td>
+</tr>
+<tr>
+<td>Bit dấu</td>
+<td>符号<span class="rd">(ふごう)</span>ビット</td>
+</tr>
+<tr>
+<td>Bit cao nhất / Bit thấp nhất</td>
+<td>最上位<span class="rd">(さいじょうい)</span>ビット / 最下位<span class="rd">(さいかい)</span>ビット</td>
+</tr>
+<tr>
+<td>Số dương / Số âm</td>
+<td>正<span class="rd">(せい)</span>の数<span class="rd">(かず)</span> / 負<span class="rd">(ふ)</span>の数<span class="rd">(かず)</span></td>
+</tr>
+<tr>
+<td>Phạm vi biểu diễn</td>
+<td>表現範囲<span class="rd">(ひょうげんはんい)</span></td>
+</tr>
+<tr>
+<td>Phép dịch bit / Dịch logic / Dịch số học</td>
+<td>シフト演算<span class="rd">(えんざん)</span> / 論理<span class="rd">(ろんり)</span>シフト / 算術<span class="rd">(さんじゅつ)</span>シフト</td>
+</tr>
+<tr>
+<td>Số dấu phẩy tĩnh / Số dấu phẩy động</td>
+<td>固定小数点数<span class="rd">(こていしょうすうてんすう)</span> / 浮動小数点数<span class="rd">(ふどうしょうすうてんすう)</span></td>
+</tr>
+<tr>
+<td>Phần định trị / Số mũ</td>
+<td>仮数<span class="rd">(かすう)</span> / 指数<span class="rd">(しすう)</span></td>
+</tr>
+<tr>
+<td>Chuẩn hóa</td>
+<td>正規化<span class="rd">(せいきか)</span></td>
+</tr>
+<tr>
+<td>Số chữ số có nghĩa</td>
+<td>有効桁数<span class="rd">(ゆうこうけたすう)</span></td>
+</tr>
+<tr>
+<td>Sai số</td>
+<td>誤差<span class="rd">(ごさ)</span></td>
+</tr>
+<tr>
+<td>Sai số làm tròn / Sai số tràn / Sai số cắt ngắt</td>
+<td>丸<span class="rd">(まる)</span>め誤差<span class="rd">(ごさ)</span> / 桁<span class="rd">(けた)</span>あふれ誤差<span class="rd">(ごさ)</span> / 打切<span class="rd">(うちき)</span>り誤差<span class="rd">(ごさ)</span></td>
+</tr>
+<tr>
+<td>Mất thông tin / Mất chữ số có nghĩa</td>
+<td>情報落<span class="rd">(じょうほうお)</span>ち / 桁落<span class="rd">(けたお)</span>ち</td>
+</tr>
+<tr>
+<td>Giá trị tuyệt đối</td>
+<td>絶対値<span class="rd">(ぜったいち)</span></td>
+</tr>
+<tr>
+<td>Xác suất / Thống kê</td>
+<td>確率<span class="rd">(かくりつ)</span> / 統計<span class="rd">(とうけい)</span></td>
+</tr>
+<tr>
+<td>Hoán vị / Tổ hợp</td>
+<td>順列<span class="rd">(じゅんれつ)</span> / 組合<span class="rd">(くみあ)</span>せ</td>
+</tr>
+<tr>
+<td>Biến cố độc lập / Biến cố loại trừ / Biến cố đối</td>
+<td>独立事象<span class="rd">(どくりつじしょう)</span> / 排反事象<span class="rd">(はいはんじしょう)</span> / 余事象<span class="rd">(よじしょう)</span></td>
+</tr>
+<tr>
+<td>Giá trị kỳ vọng</td>
+<td>期待値<span class="rd">(きたいち)</span></td>
+</tr>
+<tr>
+<td>Trung bình / Trung vị / Mốt</td>
+<td>平均値<span class="rd">(へいきんち)</span> / 中央値<span class="rd">(ちゅうおうち)</span> / 最頻値<span class="rd">(さいひんち)</span></td>
+</tr>
+<tr>
+<td>Phương sai / Độ lệch chuẩn</td>
+<td>分散<span class="rd">(ぶんさん)</span> / 標準偏差<span class="rd">(ひょうじゅんへんさ)</span></td>
+</tr>
+<tr>
+<td>Phân phối chuẩn</td>
+<td>正規分布<span class="rd">(せいきぶんぷ)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,454 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 33 (13/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 33 (13/11): Ôn nhanh bảo mật, mạng, cơ sở dữ liệu</h1>
+<p class="meta">Ngày 33 · Thứ Sáu 13/11 · 科目A: câu ngắn bảo mật, mạng, CSDL · 科目B: tình huống bảo mật</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Câu ngắn bảo mật, mạng, CSDL ｜ セキュリティ・ネットワーク・データベース</a></li><li><a href="#muc-3">科目B: Câu tình huống bảo mật ngắn ｜ セキュリティの短<span class="rd">(みじか)</span>い問題<span class="rd">(もんだい)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Còn 3 ngày. Hôm nay làm câu ngắn, kiểu "thuật ngữ nào đúng với mô tả", ở 3 mảng chiếm nhiều điểm nhất của テクノロジ. Mục tiêu: mỗi câu dưới 1 phút.</p>
+<ul class="check">
+<li>Đọc bảng "một dòng một khái niệm" (15 phút)</li>
+<li>9 câu đề cũ 科目A, bấm giờ 10 phút (30 phút)</li>
+<li>科目B: 1 câu tình huống bảo mật + 2 câu tự luyện (40 phút)</li>
+<li>Đọc lại tờ công thức (ngày 31) và từ vựng (20 phút)</li>
+<li>Ngủ trước 23 giờ</li>
+</ul>
+<h2 id="muc-2">科目A: Câu ngắn bảo mật, mạng, CSDL ｜ セキュリティ・ネットワーク・データベース</h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ARP:</strong> IP → MAC. RARP: MAC → IP. DNS: tên miền ↔ IP. DHCP: tự cấp IP. NAT: IP riêng ↔ IP toàn cầu.</td>
+<td><strong>ARP：</strong>IP → MAC。RARP：MAC → IP。DNS：ドメイン名<span class="rd">(めい)</span> ↔ IP。DHCP：IP自動割当<span class="rd">(じどうわりあて)</span>。NAT：プライベート ↔ グローバル。</td>
+</tr>
+<tr>
+<td><strong>Cổng hay gặp:</strong> HTTP 80, HTTPS 443, SMTP 25 (gửi mail; submission 587), POP3 110, IMAP 143, FTP 20 (dữ liệu) và 21 (điều khiển), DNS 53.</td>
+<td><strong>ポート番号<span class="rd">(ばんごう)</span>：</strong>HTTP 80、HTTPS 443、SMTP 25（587）、POP3 110、IMAP 143、FTP 20・21、DNS 53。</td>
+</tr>
+<tr>
+<td><strong>Cơ quan chứng thực (CA):</strong> phát hành chứng chỉ số chứng nhận khóa công khai là của đúng người; phát hành danh sách thu hồi (CRL).</td>
+<td><strong>認証局<span class="rd">(にんしょうきょく)</span>（CA）：</strong>公開鍵<span class="rd">(こうかいかぎ)</span>のディジタル証明書<span class="rd">(しょうめいしょ)</span>を発行<span class="rd">(はっこう)</span>、失効<span class="rd">(しっこう)</span>リスト（CRL）も発行<span class="rd">(はっこう)</span>。</td>
+</tr>
+<tr>
+<td><strong>IDS / IPS / WAF / SIEM:</strong> IDS phát hiện và báo; IPS phát hiện và chặn; WAF bảo vệ ứng dụng web; SIEM gom và phân tích log nhiều thiết bị.</td>
+<td><strong>IDS・IPS・WAF・SIEM：</strong>IDSは検知<span class="rd">(けんち)</span>・通知<span class="rd">(つうち)</span>、IPSは検知<span class="rd">(けんち)</span>・遮断<span class="rd">(しゃだん)</span>、WAFはWebアプリ保護<span class="rd">(ほご)</span>、SIEMはログの統合分析<span class="rd">(とうごうぶんせき)</span>。</td>
+</tr>
+<tr>
+<td><strong>Hàm hash:</strong> cùng đầu vào → cùng giá trị; dùng để phát hiện sửa đổi, không xác định được người tạo, không sửa được dữ liệu.</td>
+<td><strong>ハッシュ関数<span class="rd">(かんすう)</span>：</strong>改<span class="rd">(かい)</span>ざんの有無<span class="rd">(うむ)</span>を検出<span class="rd">(けんしゅつ)</span>。作成者<span class="rd">(さくせいしゃ)</span>の確認<span class="rd">(かくにん)</span>や修復<span class="rd">(しゅうふく)</span>はできない。</td>
+</tr>
+<tr>
+<td><strong>Index và view:</strong> index tăng tốc tìm kiếm; view là bảng ảo đặt tên (bảng dẫn xuất), không giữ dữ liệu thật, có thể tạo view từ view.</td>
+<td><strong>インデックス・ビュー：</strong>インデックスは検索<span class="rd">(けんさく)</span>の高速化<span class="rd">(こうそくか)</span>。ビューは名前<span class="rd">(なまえ)</span>を付<span class="rd">(つ)</span>けた導出表<span class="rd">(どうしゅつひょう)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Bấm giờ 10 phút cho 9 câu.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/04_menjo/q30.html" target="_blank" rel="noopener">令和4年度 問30</a></strong> (2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>4年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>30</strong></td>
+</tr>
+<tr>
+<td>Nội dung: ARP là gì? ア lấy MAC từ IP　イ lấy tên máy từ IP　ウ lấy IP từ MAC　エ lấy IP từ tên máy</td>
+<td>内容<span class="rd">(ないよう)</span>：ARPの説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: イ DNS tra ngược, ウ RARP, エ DNS tra xuôi.</td>
+<td>解説<span class="rd">(かいせつ)</span>：イはDNS逆引<span class="rd">(ぎゃくび)</span>き、ウはRARP、エはDNS正引<span class="rd">(せいび)</span>き。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/26_aki/q33.html" target="_blank" rel="noopener">平成26年秋期 午前 問33</a></strong> (2014)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>33</strong></td>
+</tr>
+<tr>
+<td>Nội dung: giao thức nào có cổng riêng cho truyền dữ liệu và cho điều khiển? ア FTP　イ POP3　ウ SMTP　エ SNMP</td>
+<td>内容<span class="rd">(ないよう)</span>：データ転送用<span class="rd">(てんそうよう)</span>と制御用<span class="rd">(せいぎょよう)</span>に別<span class="rd">(べつ)</span>のポートを使<span class="rd">(つか)</span>うプロトコル。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (FTP)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（FTP）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: FTP dùng 20 (dữ liệu) và 21 (điều khiển).</td>
+<td>解説<span class="rd">(かいせつ)</span>：20/TCPと21/TCP。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/01_aki/q34.html" target="_blank" rel="noopener">令和元年秋期 午前 問34</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>34</strong></td>
+</tr>
+<tr>
+<td>Nội dung: client A truy cập web server C (cổng 80) qua proxy B (cổng 8080). Gói TCP nào luôn có cổng đích 8080? ア A→B yêu cầu và C→B trả lời　イ chỉ A→B yêu cầu　ウ chỉ B→A trả lời　エ B→C yêu cầu và C→B trả lời</td>
+<td>内容<span class="rd">(ないよう)</span>：宛先<span class="rd">(あてさき)</span>ポート番号<span class="rd">(ばんごう)</span>が常<span class="rd">(つね)</span>に8080になるパケット。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: B→C đích 80; các gói trả lời có đích là cổng nguồn tùy ý của bên gửi yêu cầu.</td>
+<td>解説<span class="rd">(かいせつ)</span>：応答<span class="rd">(おうとう)</span>の宛先<span class="rd">(あてさき)</span>は要求元<span class="rd">(ようきゅうもと)</span>の任意<span class="rd">(にんい)</span>のポート。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/29_aki/q33.html" target="_blank" rel="noopener">平成29年秋期 午前 問33</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>33</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chức năng NAT của router là gì? ア cache truy cập để tăng tốc　イ kiểm tra gói để phát hiện tấn công　ウ chỉ cho gói tới máy nhất định đi qua　エ chuyển đổi qua lại IP riêng và IP toàn cầu</td>
+<td>内容<span class="rd">(ないよう)</span>：NAT機能<span class="rd">(きのう)</span>の説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア proxy, イ IDS, ウ lọc gói của tường lửa.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはプロキシ、イはIDS、ウはパケットフィルタリング。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/28_haru/q39.html" target="_blank" rel="noopener">平成28年春期 午前 問39</a></strong> (2016)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>28年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>39</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong thương mại điện tử dùng mã hóa khóa công khai, CA làm gì? ア quản lý khóa bí mật chung　イ phát hành chứng chỉ số cho khóa công khai của các bên　ウ quản lý chữ ký số　エ quản lý mật khẩu</td>
+<td>内容<span class="rd">(ないよう)</span>：認証局<span class="rd">(にんしょうきょく)</span>の役割<span class="rd">(やくわり)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: CA là bên thứ ba chứng nhận khóa công khai là chính chủ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：公開鍵<span class="rd">(こうかいかぎ)</span>の正当性<span class="rd">(せいとうせい)</span>を証明<span class="rd">(しょうめい)</span>する証明書<span class="rd">(しょうめいしょ)</span>を発行<span class="rd">(はっこう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/03_menjo/q42.html" target="_blank" rel="noopener">令和3年度 問42</a></strong> (2021)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 令和<span class="rd">(れいわ)</span>3年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>42</strong></td>
+</tr>
+<tr>
+<td>Nội dung: IPS là gì? ア phần cứng mã hóa/giải mã nhanh giảm tải web server　イ thiết bị phát hiện và chặn truyền thông trái phép　ウ công cụ tấn công giả để tìm lỗ hổng　エ xác thực sinh trắc học khi vào phòng</td>
+<td>内容<span class="rd">(ないよう)</span>：IPSの説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア SSL accelerator, ウ penetration test, エ sinh trắc học.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはSSLアクセラレータ、ウはペネトレーションテスト。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/01_aki/q40.html" target="_blank" rel="noopener">令和元年秋期 午前 問40</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>40</strong></td>
+</tr>
+<tr>
+<td>Nội dung: bên cung cấp gửi file A và giá trị B = SHA-256(A) (B đã xác nhận qua điện thoại, không bị sửa). Người dùng làm được gì? ア tạo chữ ký từ B để biết người tạo A　イ kiểm chữ ký từ B để biết bên cung cấp có phải người tạo không　ウ so SHA-256 của A nhận được với B để biết A có bị sửa không　エ nếu bị sửa thì tìm và sửa lại phần bị sửa</td>
+<td>内容<span class="rd">(ないよう)</span>：ファイルAとSHA-256の値<span class="rd">(あたい)</span>Bで実現<span class="rd">(じつげん)</span>できること。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: hash chỉ cho biết có bị sửa hay không. Chữ ký cần mã hóa khóa công khai; hash không sửa được dữ liệu.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ハッシュ値<span class="rd">(ち)</span>の比較<span class="rd">(ひかく)</span>で改<span class="rd">(かい)</span>ざんの有無<span class="rd">(うむ)</span>だけが分<span class="rd">(わ)</span>かる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 8 — <a href="https://www.fe-siken.com/kakomon/24_aki/q27.html" target="_blank" rel="noopener">平成24年秋期 午前 問27</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>8 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>27</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mục đích đặt index cho cột? ア khớp khóa ngoại với khóa chính bảng khác　イ truy cập vị trí lưu hiệu quả, tăng tốc tìm kiếm　ウ tiết kiệm dung lượng đĩa khi chia bảng　エ đảm bảo cột không trùng giá trị</td>
+<td>内容<span class="rd">(ないよう)</span>：インデックスを設定<span class="rd">(せってい)</span>する目的<span class="rd">(もくてき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア là ràng buộc khóa ngoại, エ là ràng buộc UNIQUE.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アは外部<span class="rd">(がいぶ)</span>キー制約<span class="rd">(せいやく)</span>、エは一意性制約<span class="rd">(いちいせいせいやく)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 9 — <a href="https://www.fe-siken.com/kakomon/sample/a21.html" target="_blank" rel="noopener">サンプル問題 科目A 問21</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>9 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>21</strong></td>
+</tr>
+<tr>
+<td>Nội dung: nhận định đúng về view? ア view là bảng dẫn xuất được đặt tên　イ không thể tạo view từ view　ウ định nghĩa view trước, bảng gốc sau　エ mỗi bảng gốc chỉ có 1 view</td>
+<td>内容<span class="rd">(ないよう)</span>：ビューに関<span class="rd">(かん)</span>する記述<span class="rd">(きじゅつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: view có thể tạo từ view; bảng gốc phải có trước; một bảng có thể có nhiều view.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ビューからビューも定義<span class="rd">(ていぎ)</span>可能<span class="rd">(かのう)</span>、基底表<span class="rd">(きていひょう)</span>が先<span class="rd">(さき)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Câu tình huống bảo mật ngắn ｜ セキュリティの短<span class="rd">(みじか)</span>い問題<span class="rd">(もんだい)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu hỏi "rủi ro nào tăng hoặc mới phát sinh":</strong> chỉ chọn rủi ro do thay đổi gây ra. Rủi ro đã có từ trước (ví dụ email lừa đảo) thì không tính là "tăng".</td>
+<td><strong>「増加<span class="rd">(ぞうか)</span>・新<span class="rd">(あら)</span>たに生<span class="rd">(しょう)</span>じるリスク」：</strong>変更<span class="rd">(へんこう)</span>によって生<span class="rd">(しょう)</span>じるものだけ。以前<span class="rd">(いぜん)</span>からあるリスクは含<span class="rd">(ふく)</span>めない。</td>
+</tr>
+<tr>
+<td><strong>Đọc kỹ phạm vi:</strong> ai được phép (chỉ nhóm nào), thiết bị nào (PC công ty hay PC cá nhân). Lựa chọn nói về nhóm khác là bẫy.</td>
+<td><strong>範囲<span class="rd">(はんい)</span>の確認<span class="rd">(かくにん)</span>：</strong>対象者<span class="rd">(たいしょうしゃ)</span>と機器<span class="rd">(きき)</span>を確認<span class="rd">(かくにん)</span>。対象外<span class="rd">(たいしょうがい)</span>の人<span class="rd">(ひと)</span>の話<span class="rd">(はなし)</span>は罠<span class="rd">(わな)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu B1</strong> Công ty cho phép nhân viên mang file khách hàng về nhà bằng USB để làm thêm. Biện pháp nào giảm rủi ro lộ thông tin khi mất USB hiệu quả nhất?</td>
+<td><strong>問<span class="rd">(とい)</span>B1</strong> 顧客<span class="rd">(こきゃく)</span>ファイルをUSBメモリで自宅<span class="rd">(じたく)</span>に持<span class="rd">(も)</span>ち帰<span class="rd">(かえ)</span>ることを許可<span class="rd">(きょか)</span>した。紛失時<span class="rd">(ふんしつじ)</span>の情報漏<span class="rd">(じょうほうろう)</span>えいリスクを最<span class="rd">(もっと)</span>も下<span class="rd">(さ)</span>げる対策<span class="rd">(たいさく)</span>は。</td>
+</tr>
+<tr>
+<td>ア sao lưu file hằng ngày　イ dùng USB có mã hóa và mật khẩu　ウ cài phần mềm diệt virus trên PC ở nhà　エ ghi log mỗi lần sao chép</td>
+<td>ア 毎日<span class="rd">(まいにち)</span>バックアップ　イ 暗号化<span class="rd">(あんごうか)</span>機能付<span class="rd">(きのうつ)</span>きUSBを使<span class="rd">(つか)</span>う　ウ 自宅<span class="rd">(じたく)</span>PCにウイルス対策<span class="rd">(たいさく)</span>　エ コピーのログを取<span class="rd">(と)</span>る</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: rủi ro là "mất USB rồi người khác đọc được". Mã hóa làm người nhặt được không đọc được. Sao lưu giúp khôi phục, log chỉ ghi lại, virus không liên quan việc mất USB.</td>
+<td>解説<span class="rd">(かいせつ)</span>：紛失<span class="rd">(ふんしつ)</span>しても読<span class="rd">(よ)</span>めないようにする暗号化<span class="rd">(あんごうか)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu B2</strong> Công ty chuyển máy chủ file nội bộ lên dịch vụ lưu trữ cloud, ai có link chia sẻ cũng mở được file. Rủi ro mới nào cần xử lý trước tiên?</td>
+<td><strong>問<span class="rd">(とい)</span>B2</strong> 社内<span class="rd">(しゃない)</span>ファイルサーバをクラウドストレージに移行<span class="rd">(いこう)</span>し、共有<span class="rd">(きょうゆう)</span>リンクを知<span class="rd">(し)</span>っていれば誰<span class="rd">(だれ)</span>でも開<span class="rd">(ひら)</span>ける設定<span class="rd">(せってい)</span>にした。新<span class="rd">(あら)</span>たに対処<span class="rd">(たいしょ)</span>すべきリスクは。</td>
+</tr>
+<tr>
+<td>ア ổ cứng máy chủ nội bộ bị hỏng　イ link chia sẻ bị gửi nhầm ra ngoài, người ngoài xem được file　ウ nhân viên quên mật khẩu PC　エ mất điện văn phòng</td>
+<td>ア 社内<span class="rd">(しゃない)</span>サーバのディスク故障<span class="rd">(こしょう)</span>　イ 共有<span class="rd">(きょうゆう)</span>リンクが外部<span class="rd">(がいぶ)</span>に渡<span class="rd">(わた)</span>り第三者<span class="rd">(だいさんしゃ)</span>が閲覧<span class="rd">(えつらん)</span>　ウ PCのパスワード忘<span class="rd">(わす)</span>れ　エ 停電<span class="rd">(ていでん)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thay đổi là "ai có link cũng mở được", nên rủi ro mới là lộ qua link. Biện pháp: chỉ chia sẻ cho tài khoản được chỉ định, đặt thời hạn link. ア không còn liên quan sau khi bỏ máy chủ nội bộ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：変更点<span class="rd">(へんこうてん)</span>から生<span class="rd">(しょう)</span>じるリスク。共有範囲<span class="rd">(きょうゆうはんい)</span>の限定<span class="rd">(げんてい)</span>や有効期限<span class="rd">(ゆうこうきげん)</span>で対策<span class="rd">(たいさく)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/sample/b18.html" target="_blank" rel="noopener">サンプル問題 科目B 問18</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>18</strong></td>
+</tr>
+<tr>
+<td>Nội dung: công ty IT 1.000 người, khoảng 810 nhân viên phát triển làm tại khách hàng, không được cấp PC công ty. Hiện chỉ PC công ty mới được nối VPN. Công ty định cho nhóm này dùng PC cá nhân (BYOD) và nối VPN. Chọn 2 rủi ro tăng hoặc mới: (1) VPN tăng tải, giảm tính khả dụng; (2) mất PC công ty; (3) bấm link lừa đảo làm PC cá nhân nhiễm mã độc; (4) nhân viên tổng vụ nối VPN bằng PC cá nhân; (5) PC cá nhân nhiễm mã độc nối VPN làm mã độc lan vào mạng nội bộ.</td>
+<td>内容<span class="rd">(ないよう)</span>：客先常駐<span class="rd">(きゃくさきじょうちゅう)</span>の開発部員<span class="rd">(かいはつぶいん)</span>に個人所有<span class="rd">(こじんしょゆう)</span>PCからのVPN接続<span class="rd">(せつぞく)</span>を許可<span class="rd">(きょか)</span>した場合<span class="rd">(ばあい)</span>に増加<span class="rd">(ぞうか)</span>・新<span class="rd">(あら)</span>たに生<span class="rd">(しょう)</span>じるリスク2つ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> ((1) và (5))</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（(一)と(五)）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: (1) tới 810 người nối VPN thêm nên tải tăng; (5) PC cá nhân lần đầu vào mạng nội bộ. (2) sai vì nhóm này không có PC công ty; (3) có từ trước; (4) chỉ nhóm làm tại khách hàng được phép, và có xác thực VPN.</td>
+<td>解説<span class="rd">(かいせつ)</span>：(二)はA社<span class="rd">(しゃ)</span>PCを貸与<span class="rd">(たいよ)</span>していない、(三)は導入前後<span class="rd">(どうにゅうぜんご)</span>で変<span class="rd">(か)</span>わらない、(四)は対象外<span class="rd">(たいしょうがい)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tra xuôi / tra ngược (DNS)</td>
+<td>正引<span class="rd">(せいび)</span>き / 逆引<span class="rd">(ぎゃくび)</span>き</td>
+</tr>
+<tr>
+<td>Cổng thông dụng / cổng đích / cổng nguồn</td>
+<td>ウェルノウンポート / 宛先<span class="rd">(あてさき)</span>ポート / 送信元<span class="rd">(そうしんもと)</span>ポート</td>
+</tr>
+<tr>
+<td>Máy chủ trung gian (proxy)</td>
+<td>プロキシサーバ</td>
+</tr>
+<tr>
+<td>Cơ quan chứng thực / chứng chỉ số / danh sách thu hồi</td>
+<td>認証局<span class="rd">(にんしょうきょく)</span> / ディジタル証明書<span class="rd">(しょうめいしょ)</span> / 証明書失効<span class="rd">(しょうめいしょしっこう)</span>リスト</td>
+</tr>
+<tr>
+<td>Phát hiện xâm nhập / ngăn chặn xâm nhập</td>
+<td>侵入検知<span class="rd">(しんにゅうけんち)</span>（IDS） / 侵入防御<span class="rd">(しんにゅうぼうぎょ)</span>（IPS）</td>
+</tr>
+<tr>
+<td>Chỉ mục / bảng ảo / bảng gốc</td>
+<td>インデックス / ビュー / 基底表<span class="rd">(きていひょう)</span></td>
+</tr>
+<tr>
+<td>Dùng thiết bị cá nhân / làm tại khách hàng</td>
+<td>BYOD / 客先常駐<span class="rd">(きゃくさきじょうちゅう)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

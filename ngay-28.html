@@ -1,0 +1,309 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 28 (08/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 28 (08/11): Thi thử 科目B</h1>
+<p class="meta">Ngày 28 · Chủ Nhật 08/11 · Thi thử 科目B</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Nghỉ ｜ 休<span class="rd">(やす)</span>み</a></li><li><a href="#muc-3">科目B: Thi thử ｜ 模擬試験<span class="rd">(もぎしけん)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Chủ Nhật: thi thử 科目B. Nhịp độ thi thật: 100 phút cho 20 câu, tức 5 phút/câu. Làm trên giấy nháp, trace bằng bảng.</p>
+<ul class="check">
+<li>Phần 1: 5 câu đề công khai/đề mẫu bên dưới, bấm giờ 25 phút (25 phút)</li>
+<li>Chấm Phần 1, xem lại lời giải (15 phút)</li>
+<li>Phần 2: 6 câu đề công khai 科目B 令和8年度 trên fe-siken.com, bấm giờ 30 phút (30 phút)</li>
+<li>Chấm Phần 2 (20 phút)</li>
+<li>(Nếu còn sức) Phần 3: 20 câu 科目B ngẫu nhiên trên 過去問道場, 100 phút</li>
+</ul>
+<p>Mục tiêu tuần 4: 科目B đúng từ 60% trở lên (Phần 1: 3/5; Phần 2: 4/6).</p>
+<h2 id="muc-2">科目A: Nghỉ ｜ 休<span class="rd">(やす)</span>み</h2>
+<p>Hôm nay không học 科目A. Nếu hôm qua chưa làm Phần 3 (60 câu ngẫu nhiên), có thể làm tối nay thay cho Phần 3 của 科目B.</p>
+<h2 id="muc-3">科目B: Thi thử ｜ 模擬試験<span class="rd">(もぎしけん)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Thứ tự làm bài:</strong> 16 câu thuật toán trước, 4 câu bảo mật sau (hoặc ngược lại nếu bạn làm bảo mật nhanh). Không để một câu ngốn quá 8 phút.</td>
+<td><strong>解<span class="rd">(と)</span>く順番<span class="rd">(じゅんばん)</span>：</strong>アルゴリズム16問<span class="rd">(もん)</span>、セキュリティ4問<span class="rd">(もん)</span>。1問<span class="rd">(もん)</span>に8分<span class="rd">(ふん)</span>以上<span class="rd">(いじょう)</span>かけない。</td>
+</tr>
+<tr>
+<td><strong>Trace có hệ thống:</strong> kẻ bảng cột là biến (i, j, count…), mỗi dòng là một lần lặp. Không trace trong đầu.</td>
+<td><strong>トレース表<span class="rd">(ひょう)</span>：</strong>列<span class="rd">(れつ)</span>に変数<span class="rd">(へんすう)</span>、行<span class="rd">(ぎょう)</span>に繰返<span class="rd">(くりかえ)</span>し。頭<span class="rd">(あたま)</span>の中<span class="rd">(なか)</span>だけで追<span class="rd">(お)</span>わない。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu "hàm A trả về cùng giá trị với hàm B":</strong> hiểu hàm A làm gì (ví dụ đếm bội số của 4), rồi kiểm tra hàm B bằng ví dụ nhỏ.</td>
+<td><strong>「同<span class="rd">(おな)</span>じ値<span class="rd">(あたい)</span>を返<span class="rd">(かえ)</span>す」問題<span class="rd">(もんだい)</span>：</strong>一方<span class="rd">(いっぽう)</span>の関数<span class="rd">(かんすう)</span>の意味<span class="rd">(いみ)</span>を理解<span class="rd">(りかい)</span>し、小<span class="rd">(ちい)</span>さな例<span class="rd">(れい)</span>で他方<span class="rd">(たほう)</span>を確認<span class="rd">(かくにん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Phần 1: 5 câu ｜ 第<span class="rd">(だい)</span>1部<span class="rd">(ぶ)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/07_haru/b1.html" target="_blank" rel="noopener">令和7年度 科目B 問1</a></strong> (2025, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: function1 đếm số bội của 4 trong đoạn n tới m (m lớn hơn n ít nhất 10). function2 có 2 vòng for: vòng [a] dịch tempN tới bội của 4 đầu tiên ≥ n, vòng [b] đếm. Chọn a, b để hai hàm trả về cùng giá trị.</td>
+<td>内容<span class="rd">(ないよう)</span>：nからmまでの4の倍数<span class="rd">(ばいすう)</span>の個数<span class="rd">(こすう)</span>を返<span class="rd">(かえ)</span>すfunction1と同<span class="rd">(おな)</span>じ値<span class="rd">(あたい)</span>を返<span class="rd">(かえ)</span>すfunction2の空欄<span class="rd">(くうらん)</span>a・b。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: カ</strong> (a: i từ 1 tới 3; b: j bắt đầu từ tempN, tăng 4, không vượt m)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：カ</strong>（a：iを1から3まで、b：jをtempNから4ずつm以下<span class="rd">(いか)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: n mod 4 có thể là 1, nên cần tối đa 3 bước để tới bội của 4 (5 → 6 → 7 → 8). Sau đó nhảy 4 mỗi lần. n = 5, m = 16: 8, 12, 16 → 3.</td>
+<td>解説<span class="rd">(かいせつ)</span>：最大<span class="rd">(さいだい)</span>3回<span class="rd">(かい)</span>で4の倍数<span class="rd">(ばいすう)</span>に到達<span class="rd">(とうたつ)</span>。その後<span class="rd">(ご)</span>4ずつ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/07_haru/b4.html" target="_blank" rel="noopener">令和7年度 科目B 問4</a></strong> (2025, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>4</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm search tìm mọi vị trí bắt đầu của dãy key trong data, so từng ký tự và dừng ở chỗ khác đầu tiên. Gọi search({"a","b","a","b","c","a","b","c"}, {"a","b","c"}): điều kiện ở dòng β đúng bao nhiêu lần?</td>
+<td>内容<span class="rd">(ないよう)</span>：配列<span class="rd">(はいれつ)</span>dataからkeyの出現位置<span class="rd">(しゅつげんいち)</span>を探<span class="rd">(さが)</span>す関数<span class="rd">(かんすう)</span>search。β行<span class="rd">(ぎょう)</span>の条件<span class="rd">(じょうけん)</span>が真<span class="rd">(しん)</span>になる回数<span class="rd">(かいすう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ク (8 lần)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ク（8回<span class="rd">(かい)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: i chạy 1 tới 6. i = 1: đúng 2 lần (a, b) rồi sai; i = 3: đúng 3; i = 6: đúng 3; i = 2, 4, 5 sai ngay. Tổng 8. Trả về {3, 6}.</td>
+<td>解説<span class="rd">(かいせつ)</span>：2 + 3 + 3 = 8。結果<span class="rd">(けっか)</span>は{3, 6}。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/07_haru/b5.html" target="_blank" rel="noopener">令和7年度 科目B 問5</a></strong> (2025, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: bảng khảo sát 2×2 data = {{82, 6}, {58, 8}} (tiêm/không tiêm × mắc/không mắc bệnh X). Hàm f trả về "tần số lý thuyết" nếu hai yếu tố độc lập: ô (r, c) = tổng hàng r × tổng cột c ÷ tổng tất cả. Tìm a (hàng 1, cột 1) và b (hàng 2, cột 2).</td>
+<td>内容<span class="rd">(ないよう)</span>：表<span class="rd">(ひょう)</span>のデータから理論度数<span class="rd">(りろんどすう)</span>を求<span class="rd">(もと)</span>める関数<span class="rd">(かんすう)</span>f。空欄<span class="rd">(くうらん)</span>aとbの値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: オ</strong> (a = 80, b = 6)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：オ</strong>（a = 80、b = 6）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tổng 154. a = 88 × 140 ÷ 154 = 80. b = 66 × 14 ÷ 154 = 6.</td>
+<td>解説<span class="rd">(かいせつ)</span>：a = 88 × 140 ÷ 154 = 80、b = 66 × 14 ÷ 154 = 6。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/sample/b10.html" target="_blank" rel="noopener">サンプル問題 科目B 問10</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>10</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thủ tục delNode(pos) xóa phần tử ở vị trí pos của danh sách liên kết đơn (listHead trỏ đầu). pos = 1 thì listHead ← listHead.next; còn lại đưa prev tới phần tử ngay trước vị trí pos rồi prev.next ← [chỗ trống].</td>
+<td>内容<span class="rd">(ないよう)</span>：単方向<span class="rd">(たんほうこう)</span>リストのpos番目<span class="rd">(ばんめ)</span>を削除<span class="rd">(さくじょ)</span>する手続<span class="rd">(てつづ)</span>きdelNodeの空欄<span class="rd">(くうらん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: カ</strong> (prev.next.next)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：カ</strong>（prev.next.next）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: phần tử cần xóa là prev.next; nối prev thẳng tới phần tử sau nó. A→B→C→D, pos = 3: prev = B, B.next ← D, còn A→B→D.</td>
+<td>解説<span class="rd">(かいせつ)</span>：削除対象<span class="rd">(さくじょたいしょう)</span>の次<span class="rd">(つぎ)</span>へつなぎ替<span class="rd">(か)</span>える。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/sample/b6.html" target="_blank" rel="noopener">サンプル問題 科目B 問6</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>6</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm rev đảo ngược thứ tự bit của 1 byte (rev(01001011) = 11010010), dùng ∧, ∨, dịch logic &lt;&lt; và &gt;&gt;. Vòng lặp chạy 8 lần; chọn 2 lệnh trong thân vòng lặp.</td>
+<td>内容<span class="rd">(ないよう)</span>：8ビットのビット順<span class="rd">(じゅん)</span>を逆<span class="rd">(ぎゃく)</span>にする関数<span class="rd">(かんすう)</span>rev。ループ内<span class="rd">(ない)</span>の処理<span class="rd">(しょり)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (r ← (r &lt;&lt; 1) ∨ (rbyte ∧ 00000001); rbyte ← rbyte &gt;&gt; 1)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（r ← (r &lt;&lt; 1) ∨ (rbyte ∧ 00000001)、rbyte ← rbyte &gt;&gt; 1）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mỗi vòng lấy bit thấp nhất của rbyte (AND 00000001), đẩy r sang trái 1 rồi OR bit đó vào, sau đó dịch rbyte sang phải. Các lựa chọn xoay vòng (rotate) 8 lần thì trở về giá trị cũ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：最下位<span class="rd">(さいかい)</span>ビットを取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>してrに左<span class="rd">(ひだり)</span>から積<span class="rd">(つ)</span>む。回転<span class="rd">(かいてん)</span>を8回<span class="rd">(かい)</span>すると元<span class="rd">(もと)</span>に戻<span class="rd">(もど)</span>る。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Phần 2 và 3: đề trên fe-siken.com ｜ 公開問題<span class="rd">(こうかいもんだい)</span>と過去問道場<span class="rd">(かこもんどうじょう)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phần 2 — <a href="https://www.fe-siken.com/kakomon/08_haru/" target="_blank" rel="noopener">Đề công khai 科目B 令和8年度 (6 câu)</a>:</strong> kéo xuống phần 科目B, làm 問1 → 問6 trong 30 phút (5 câu thuật toán + 1 câu bảo mật về quản lý log dịch vụ cloud). Chấm bằng lời giải ở từng trang.</td>
+<td><strong>第<span class="rd">(だい)</span>2部<span class="rd">(ぶ)</span>：</strong>令和<span class="rd">(れいわ)</span>8年度<span class="rd">(ねんど)</span>科目<span class="rd">(かもく)</span>B公開問題<span class="rd">(こうかいもんだい)</span>6問<span class="rd">(もん)</span>を30分<span class="rd">(ぷん)</span>で。</td>
+</tr>
+<tr>
+<td><strong>Phần 3 — <a href="https://www.fe-siken.com/fekakomon_b.php" target="_blank" rel="noopener">過去問道場 科目B</a> (tùy chọn):</strong> 20 câu ngẫu nhiên trong 100 phút, giống đề thật.</td>
+<td><strong>第<span class="rd">(だい)</span>3部<span class="rd">(ぶ)</span>（任意<span class="rd">(にんい)</span>）：</strong>科目<span class="rd">(かもく)</span>Bの過去問道場<span class="rd">(かこもんどうじょう)</span>で20問<span class="rd">(もん)</span>・100分<span class="rd">(ぷん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Ghi chép:</strong> ghi dạng câu sai (trace vòng lặp, đệ quy, danh sách, bit, bảo mật) để ôn ngày 29.</td>
+<td><strong>記録<span class="rd">(きろく)</span>：</strong>間違<span class="rd">(まちが)</span>えた型<span class="rd">(かた)</span>（ループ・再帰<span class="rd">(さいき)</span>・リスト・ビット・セキュリティ）をメモ。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bội số / phần dư</td>
+<td>倍数<span class="rd">(ばいすう)</span> / 余<span class="rd">(あま)</span>り（mod）</td>
+</tr>
+<tr>
+<td>Vị trí xuất hiện / so khớp</td>
+<td>出現位置<span class="rd">(しゅつげんいち)</span> / 照合<span class="rd">(しょうごう)</span></td>
+</tr>
+<tr>
+<td>Tần số lý thuyết / độc lập</td>
+<td>理論度数<span class="rd">(りろんどすう)</span> / 独立<span class="rd">(どくりつ)</span></td>
+</tr>
+<tr>
+<td>Xóa phần tử / nối lại tham chiếu</td>
+<td>要素<span class="rd">(ようそ)</span>の削除<span class="rd">(さくじょ)</span> / 参照<span class="rd">(さんしょう)</span>の付<span class="rd">(つ)</span>け替<span class="rd">(か)</span>え</td>
+</tr>
+<tr>
+<td>Bit thấp nhất / dịch trái / dịch phải</td>
+<td>最下位<span class="rd">(さいかい)</span>ビット / 左<span class="rd">(ひだり)</span>シフト / 右<span class="rd">(みぎ)</span>シフト</td>
+</tr>
+<tr>
+<td>Thi thử / tự chấm</td>
+<td>模擬試験<span class="rd">(もぎしけん)</span> / 自己採点<span class="rd">(じこさいてん)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

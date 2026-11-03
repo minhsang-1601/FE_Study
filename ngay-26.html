@@ -1,0 +1,408 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 26 (06/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 26 (06/11): Ôn mạng, bảo mật và câu bảo mật 科目B</h1>
+<p class="meta">Ngày 26 · Thứ Sáu 06/11 · 科目A: mạng, bảo mật · 科目B: câu bảo mật</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Mạng và bảo mật ｜ ネットワークとセキュリティ</a></li><li><a href="#muc-3">科目B: Câu bảo mật ｜ 情報<span class="rd">(じょうほう)</span>セキュリティ</a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Mạng và bảo mật chiếm nhiều câu ở 科目A, còn bảo mật chiếm khoảng 4/20 câu 科目B. Hôm nay gom cả hai, đây là phần đáng đầu tư nhất trước ngày thi.</p>
+<ul class="check">
+<li>Đọc bảng tóm tắt mạng và bảo mật (15 phút)</li>
+<li>1 bài tự luyện + 5 câu đề cũ 科目A (35 phút)</li>
+<li>科目B: 3 câu tình huống bảo mật, 6 phút/câu (50 phút)</li>
+<li>Xem lại câu sai (20 phút)</li>
+</ul>
+<h2 id="muc-2">科目A: Mạng và bảo mật ｜ ネットワークとセキュリティ</h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Số host trong subnet:</strong> /n thì phần host có 32 − n bit; số host dùng được = 2^(32 − n) − 2 (bỏ địa chỉ mạng và địa chỉ broadcast).</td>
+<td><strong>ホスト数<span class="rd">(すう)</span>：</strong>/nならホスト部<span class="rd">(ぶ)</span>は32 − nビット。使<span class="rd">(つか)</span>えるホスト数<span class="rd">(すう)</span> = 2^(32 − n) − 2（ネットワークアドレスとブロードキャストアドレスを除<span class="rd">(のぞ)</span>く）。</td>
+</tr>
+<tr>
+<td><strong>Chữ ký số:</strong> ký bằng khóa bí mật của người gửi, kiểm tra bằng khóa công khai của người gửi. Đảm bảo không bị sửa và xác nhận người gửi.</td>
+<td><strong>ディジタル署名<span class="rd">(しょめい)</span>：</strong>送信者<span class="rd">(そうしんしゃ)</span>の秘密鍵<span class="rd">(ひみつかぎ)</span>で署名<span class="rd">(しょめい)</span>、送信者<span class="rd">(そうしんしゃ)</span>の公開鍵<span class="rd">(こうかいかぎ)</span>で検証<span class="rd">(けんしょう)</span>。改<span class="rd">(かい)</span>ざん検知<span class="rd">(けんち)</span>と送信者<span class="rd">(そうしんしゃ)</span>の確認<span class="rd">(かくにん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Mã hóa khóa công khai:</strong> mã hóa bằng khóa công khai của người nhận, giải bằng khóa bí mật của người nhận (ngược với chữ ký số).</td>
+<td><strong>公開鍵暗号<span class="rd">(こうかいかぎあんごう)</span>：</strong>受信者<span class="rd">(じゅしんしゃ)</span>の公開鍵<span class="rd">(こうかいかぎ)</span>で暗号化<span class="rd">(あんごうか)</span>、受信者<span class="rd">(じゅしんしゃ)</span>の秘密鍵<span class="rd">(ひみつかぎ)</span>で復号<span class="rd">(ふくごう)</span>。署名<span class="rd">(しょめい)</span>と逆<span class="rd">(ぎゃく)</span>。</td>
+</tr>
+<tr>
+<td><strong>DMZ:</strong> máy chủ công khai ra internet (Web, mail, DNS công khai) đặt ở DMZ; máy chủ CSDL chứa dữ liệu quan trọng đặt ở mạng nội bộ, chỉ máy chủ Web truy cập.</td>
+<td><strong>DMZ：</strong>公開<span class="rd">(こうかい)</span>サーバ（Web・メール・公開DNS）はDMZ、重要<span class="rd">(じゅうよう)</span>データのDBサーバは内部<span class="rd">(ないぶ)</span>セグメント。</td>
+</tr>
+<tr>
+<td><strong>WAF:</strong> tường lửa cho ứng dụng web, kiểm tra cả nội dung HTTP để chặn SQL injection, XSS. Phải đặt ở chỗ dữ liệu đã giải mã (sau SSL accelerator) và trước máy chủ web.</td>
+<td><strong>WAF：</strong>HTTPの中身<span class="rd">(なかみ)</span>まで検査<span class="rd">(けんさ)</span>してSQLインジェクションやXSSを防<span class="rd">(ふせ)</span>ぐ。復号後<span class="rd">(ふくごうご)</span>、Webサーバの前<span class="rd">(まえ)</span>に設置<span class="rd">(せっち)</span>。</td>
+</tr>
+<tr>
+<td><strong>Ghép đúng tên tấn công:</strong> SQL injection (chèn câu SQL vào ô nhập), XSS (chèn script vào trang), CSRF (lừa người dùng đã đăng nhập gửi yêu cầu), DNS cache poisoning (đầu độc bộ nhớ đệm DNS), password list attack (dùng ID/mật khẩu bị lộ từ trang khác).</td>
+<td><strong>攻撃名<span class="rd">(こうげきめい)</span>：</strong>SQLインジェクション、クロスサイトスクリプティング、CSRF、DNSキャッシュポイズニング、パスワードリスト攻撃<span class="rd">(こうげき)</span>（他<span class="rd">(た)</span>サイトの漏<span class="rd">(も)</span>れたID・パスワードを使<span class="rd">(つか)</span>う）。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> A muốn gửi file mã hóa cho B bằng mã hóa khóa công khai, và kèm chữ ký số của A. Khóa nào dùng để mã hóa, khóa nào để ký?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> AがBへファイルを公開鍵暗号<span class="rd">(こうかいかぎあんごう)</span>で暗号化<span class="rd">(あんごうか)</span>し、Aのディジタル署名<span class="rd">(しょめい)</span>を付<span class="rd">(つ)</span>ける。暗号化<span class="rd">(あんごうか)</span>と署名<span class="rd">(しょめい)</span>に使<span class="rd">(つか)</span>う鍵<span class="rd">(かぎ)</span>は。</td>
+</tr>
+<tr>
+<td>ア mã hóa: khóa công khai B; ký: khóa bí mật A　イ mã hóa: khóa bí mật A; ký: khóa công khai B　ウ mã hóa: khóa công khai A; ký: khóa bí mật B　エ mã hóa: khóa bí mật B; ký: khóa công khai A</td>
+<td>ア 暗号化<span class="rd">(あんごうか)</span>：Bの公開鍵<span class="rd">(こうかいかぎ)</span>、署名<span class="rd">(しょめい)</span>：Aの秘密鍵<span class="rd">(ひみつかぎ)</span>　イ Aの秘密鍵<span class="rd">(ひみつかぎ)</span>、Bの公開鍵<span class="rd">(こうかいかぎ)</span>　ウ Aの公開鍵<span class="rd">(こうかいかぎ)</span>、Bの秘密鍵<span class="rd">(ひみつかぎ)</span>　エ Bの秘密鍵<span class="rd">(ひみつかぎ)</span>、Aの公開鍵<span class="rd">(こうかいかぎ)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chỉ B có khóa bí mật B để giải mã, nên mã hóa bằng khóa công khai B. Chỉ A có khóa bí mật A nên chữ ký bằng nó chứng minh người gửi là A.</td>
+<td>解説<span class="rd">(かいせつ)</span>：復号<span class="rd">(ふくごう)</span>できるのはBの秘密鍵<span class="rd">(ひみつかぎ)</span>だけ。署名<span class="rd">(しょめい)</span>はA本人<span class="rd">(ほんにん)</span>しか持<span class="rd">(も)</span>たないAの秘密鍵<span class="rd">(ひみつかぎ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/26_haru/q35.html" target="_blank" rel="noopener">平成26年春期 午前 問35</a></strong> (2014)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>35</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mạng IPv4 192.168.30.32/28 nối được tối đa bao nhiêu host? ア 14　イ 16　ウ 28　エ 30</td>
+<td>内容<span class="rd">(ないよう)</span>：192.168.30.32/28に接続<span class="rd">(せつぞく)</span>できるホストの最大数<span class="rd">(さいだいすう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (14)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（14）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: phần host 32 − 28 = 4 bit, 2⁴ = 16, bỏ địa chỉ mạng và broadcast: 14.</td>
+<td>解説<span class="rd">(かいせつ)</span>：2⁴ − 2 = 14。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/22_aki/q39.html" target="_blank" rel="noopener">平成22年秋期 午前 問39</a></strong> (2010)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>22年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>39</strong></td>
+</tr>
+<tr>
+<td>Nội dung: tổ hợp khóa nào đúng cho chữ ký số (khóa tạo chữ ký và khóa kiểm tra)? Xem các lựa chọn ở link.</td>
+<td>内容<span class="rd">(ないよう)</span>：ディジタル署名<span class="rd">(しょめい)</span>に用<span class="rd">(もち)</span>いる鍵<span class="rd">(かぎ)</span>の組合<span class="rd">(くみあ)</span>せ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (tạo: khóa bí mật của người gửi; kiểm tra: khóa công khai của người gửi)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（作成<span class="rd">(さくせい)</span>：送信者<span class="rd">(そうしんしゃ)</span>の秘密鍵<span class="rd">(ひみつかぎ)</span>、検証<span class="rd">(けんしょう)</span>：送信者<span class="rd">(そうしんしゃ)</span>の公開鍵<span class="rd">(こうかいかぎ)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đây là điểm dễ nhầm với mã hóa thông thường, nơi dùng khóa của người nhận.</td>
+<td>解説<span class="rd">(かいせつ)</span>：暗号化<span class="rd">(あんごうか)</span>通信<span class="rd">(つうしん)</span>では受信者<span class="rd">(じゅしんしゃ)</span>の鍵<span class="rd">(かぎ)</span>を使<span class="rd">(つか)</span>うので混同<span class="rd">(こんどう)</span>に注意<span class="rd">(ちゅうい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/01_aki/q42.html" target="_blank" rel="noopener">令和元年秋期 午前 問42</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>42</strong></td>
+</tr>
+<tr>
+<td>Nội dung: tường lửa chia mạng thành vùng ngoài, DMZ, vùng trong. Công khai dịch vụ web gồm máy chủ Web và máy chủ CSDL chứa dữ liệu quan trọng. Đặt thế nào? ア cả hai ở DMZ　イ cả hai ở vùng trong　ウ Web ở DMZ, CSDL ở vùng trong　エ Web ở vùng ngoài, CSDL ở DMZ</td>
+<td>内容<span class="rd">(ないよう)</span>：WebサーバとDBサーバの設置場所<span class="rd">(せっちばしょ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: Web phải nhận truy cập từ ngoài nên ở DMZ; CSDL chỉ được Web gọi nên để ở vùng trong, an toàn nhất.</td>
+<td>解説<span class="rd">(かいせつ)</span>：外部<span class="rd">(がいぶ)</span>から直接<span class="rd">(ちょくせつ)</span>アクセスされないDBは内部<span class="rd">(ないぶ)</span>に置<span class="rd">(お)</span>く。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/02_menjo/q44.html" target="_blank" rel="noopener">令和2年度 問44</a></strong> (2020)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 令和<span class="rd">(れいわ)</span>2年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>44</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mô tả nào là WAF? ア phát hiện và chặn tấn công vào ứng dụng web　イ giám sát trong PC tấn công sửa nội dung trình duyệt　ウ giám sát đăng nhập trái phép vào OS máy chủ　エ giám sát file nhiễm mã độc</td>
+<td>内容<span class="rd">(ないよう)</span>：WAFの説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ウ là IDS dạng host, エ là phần mềm diệt virus.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ウはホスト型<span class="rd">(がた)</span>IDS、エはウイルス対策<span class="rd">(たいさく)</span>ソフト。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/05_haru/a10.html" target="_blank" rel="noopener">令和5年度 科目A 問10</a></strong> (2023, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>10</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong hình mạng có SSL accelerator trước máy chủ web, chọn vị trí a–d để đặt WAF (WAF không có chức năng mã hóa/giải mã). Xem hình ở link.</td>
+<td>内容<span class="rd">(ないよう)</span>：図<span class="rd">(ず)</span>の中<span class="rd">(なか)</span>でWAFの設置場所<span class="rd">(せっちばしょ)</span>として適切<span class="rd">(てきせつ)</span>な箇所<span class="rd">(かしょ)</span>（WAFは暗号化<span class="rd">(あんごうか)</span>・復号<span class="rd">(ふくごう)</span>機能<span class="rd">(きのう)</span>なし）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (vị trí c)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（c）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: a, b nằm trên đường HTTPS (đã mã hóa) nên WAF không đọc được nội dung; d nằm sau ứng dụng nên chặn muộn. Còn c: sau SSL accelerator, trước máy chủ web.</td>
+<td>解説<span class="rd">(かいせつ)</span>：a・bは暗号化<span class="rd">(あんごうか)</span>されたまま、dはアプリの後段<span class="rd">(こうだん)</span>。復号後<span class="rd">(ふくごうご)</span>のcが正解<span class="rd">(せいかい)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Câu bảo mật ｜ 情報<span class="rd">(じょうほう)</span>セキュリティ</h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phân tách nhiệm vụ:</strong> người sửa và người duyệt phải khác nhau. Nếu một người vừa sửa vừa duyệt thì kiểm soát nội bộ không hoạt động.</td>
+<td><strong>職務分離<span class="rd">(しょくむぶんり)</span>：</strong>作業者<span class="rd">(さぎょうしゃ)</span>と承認者<span class="rd">(しょうにんしゃ)</span>を分<span class="rd">(わ)</span>ける。同<span class="rd">(おな)</span>じ人<span class="rd">(ひと)</span>が両方<span class="rd">(りょうほう)</span>できると内部統制<span class="rd">(ないぶとうせい)</span>が働<span class="rd">(はたら)</span>かない。</td>
+</tr>
+<tr>
+<td><strong>Quyền tối thiểu:</strong> chỉ cấp quyền cần cho công việc: người chỉ xem kết quả thì chỉ cấp quyền xem.</td>
+<td><strong>最小権限<span class="rd">(さいしょうけんげん)</span>：</strong>業務<span class="rd">(ぎょうむ)</span>に必要<span class="rd">(ひつよう)</span>な権限<span class="rd">(けんげん)</span>だけ。閲覧<span class="rd">(えつらん)</span>だけの人<span class="rd">(ひと)</span>には閲覧権限<span class="rd">(えつらんけんげん)</span>のみ。</td>
+</tr>
+<tr>
+<td><strong>Sao lưu:</strong> RPO (điểm khôi phục mục tiêu) = chấp nhận mất dữ liệu bao lâu; RTO (thời gian khôi phục mục tiêu) = bao lâu thì phải chạy lại. Khôi phục từ sao lưu tăng dần: bản đầy đủ + mọi bản tăng dần sau đó.</td>
+<td><strong>バックアップ：</strong>RPO（目標復旧時点<span class="rd">(もくひょうふっきゅうじてん)</span>）、RTO（目標復旧時間<span class="rd">(もくひょうふっきゅうじかん)</span>）。増分<span class="rd">(ぞうぶん)</span>バックアップからの復旧<span class="rd">(ふっきゅう)</span>はフル + その後<span class="rd">(ご)</span>のすべての増分<span class="rd">(ぞうぶん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/sample/b20.html" target="_blank" rel="noopener">サンプル問題 科目B 問20</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>20</strong></td>
+</tr>
+<tr>
+<td>Nội dung: công ty A có 6 người vận hành tường lửa, cả 6 đều có đủ quyền sửa rule, xem log và duyệt; người sửa tự xem và tự duyệt thay đổi của mình. Kiểm toán nội bộ chỉ ra vấn đề. Biện pháp nào tốt nhất để ngăn sửa rule sai?</td>
+<td>内容<span class="rd">(ないよう)</span>：FWの運用担当者<span class="rd">(うんようたんとうしゃ)</span>6名<span class="rd">(めい)</span>全員<span class="rd">(ぜんいん)</span>が全権限<span class="rd">(ぜんけんげん)</span>を持<span class="rd">(も)</span>ち、編集者<span class="rd">(へんしゅうしゃ)</span>が自分<span class="rd">(じぶん)</span>で承認<span class="rd">(しょうにん)</span>している。誤<span class="rd">(あやま)</span>った変更<span class="rd">(へんこう)</span>を防<span class="rd">(ふせ)</span>ぐ改善策<span class="rd">(かいぜんさく)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: カ</strong> (chia người sửa rule và người xem log + duyệt, cấp quyền tối thiểu cho mỗi bên)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：カ</strong>（ルール編集者<span class="rd">(へんしゅうしゃ)</span>と、ログ確認<span class="rd">(かくにん)</span>・承認者<span class="rd">(しょうにんしゃ)</span>を分<span class="rd">(わ)</span>け、最小限<span class="rd">(さいしょうげん)</span>の権限<span class="rd">(けんげん)</span>を付与<span class="rd">(ふよ)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: vấn đề là phân tách nhiệm vụ. Đa yếu tố, EDR, tách đường đăng nhập đều không ngăn được một người vừa sửa vừa duyệt; giảm còn 1 người còn tệ hơn.</td>
+<td>解説<span class="rd">(かいせつ)</span>：職務分離<span class="rd">(しょくむぶんり)</span>の問題<span class="rd">(もんだい)</span>。認証強化<span class="rd">(にんしょうきょうか)</span>やEDRでは解決<span class="rd">(かいけつ)</span>しない。1名<span class="rd">(めい)</span>に限定<span class="rd">(げんてい)</span>は逆効果<span class="rd">(ぎゃくこうか)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/sample/b19.html" target="_blank" rel="noopener">サンプル問題 科目B 問19</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>19</strong></td>
+</tr>
+<tr>
+<td>Nội dung: công ty A ủy thác việc nhập đơn hàng cho công ty B. Nhân viên B nhập dữ liệu; trưởng nhóm B xem kết quả nhập và báo A nếu sai. Hệ thống yêu cầu tách người nhập và người duyệt; khi B nhập thì A duyệt. Cấp quyền gì cho người của B (bảng ở link)?</td>
+<td>内容<span class="rd">(ないよう)</span>：受注入力<span class="rd">(じゅちゅうにゅうりょく)</span>をB社<span class="rd">(しゃ)</span>に委託<span class="rd">(いたく)</span>。B社<span class="rd">(しゃ)</span>担当者<span class="rd">(たんとうしゃ)</span>が入力<span class="rd">(にゅうりょく)</span>、B社<span class="rd">(しゃ)</span>責任者<span class="rd">(せきにんしゃ)</span>は閲覧<span class="rd">(えつらん)</span>して差戻<span class="rd">(さしもど)</span>しを依頼<span class="rd">(いらい)</span>。表<span class="rd">(ひょう)</span>1の権限<span class="rd">(けんげん)</span>の組合<span class="rd">(くみあ)</span>せ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (nhân viên B: nhập + xem; trưởng nhóm B: chỉ xem)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（B社<span class="rd">(しゃ)</span>担当者<span class="rd">(たんとうしゃ)</span>：入力<span class="rd">(にゅうりょく)</span>と閲覧<span class="rd">(えつらん)</span>、B社<span class="rd">(しゃ)</span>責任者<span class="rd">(せきにんしゃ)</span>：閲覧<span class="rd">(えつらん)</span>のみ）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: quyền duyệt thuộc trưởng phòng bán hàng của A. Trưởng nhóm B chỉ cần xem để báo lỗi nên theo quyền tối thiểu chỉ cấp quyền xem.</td>
+<td>解説<span class="rd">(かいせつ)</span>：承認<span class="rd">(しょうにん)</span>はA社<span class="rd">(しゃ)</span>。B社<span class="rd">(しゃ)</span>責任者<span class="rd">(せきにんしゃ)</span>は閲覧<span class="rd">(えつらん)</span>だけで足<span class="rd">(た)</span>りる（最小権限<span class="rd">(さいしょうけんげん)</span>）。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/07_haru/b6.html" target="_blank" rel="noopener">令和7年度 科目B 問6</a></strong> (2025, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>6</strong></td>
+</tr>
+<tr>
+<td>Nội dung: file server sao lưu băng từ: đầy đủ lúc 2 giờ sáng thứ Bảy, tăng dần lúc 2 giờ sáng thứ Ba và thứ Năm. Khôi phục từ bản đầy đủ mất trung bình 4 giờ, mỗi bản tăng dần 0.25 giờ. Điền a1–a3 trong bảng trả lời kiểm toán nội bộ (gồm thời gian khôi phục nếu sự cố trưa thứ Năm, và ai phê duyệt kế hoạch liên tục ICT).</td>
+<td>内容<span class="rd">(ないよう)</span>：土曜<span class="rd">(どよう)</span>にフル、火曜<span class="rd">(かよう)</span>・木曜<span class="rd">(もくよう)</span>に増分<span class="rd">(ぞうぶん)</span>バックアップ。フルからの復旧<span class="rd">(ふっきゅう)</span>4時間<span class="rd">(じかん)</span>、増分<span class="rd">(ぞうぶん)</span>1回<span class="rd">(かい)</span>0.25時間<span class="rd">(じかん)</span>。表<span class="rd">(ひょう)</span>2のa1〜a3。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ク</strong> (a1: trưa thứ Ba; a2: 4.50 giờ; a3: CISO)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ク</strong>（a1：火曜日<span class="rd">(かようび)</span>の正午<span class="rd">(しょうご)</span>、a2：4.50、a3：CISO）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: sự cố trưa thứ Năm cần bản đầy đủ thứ Bảy + tăng dần thứ Ba + tăng dần thứ Năm: 4 + 0.25 + 0.25 = 4.5 giờ. Kế hoạch liên tục ICT cần lãnh đạo phê duyệt, trong các lựa chọn chỉ CISO là cấp lãnh đạo. a1 xem lời giải đầy đủ ở link.</td>
+<td>解説<span class="rd">(かいせつ)</span>：フル + 増分<span class="rd">(ぞうぶん)</span>2回<span class="rd">(かい)</span>で4.5時間<span class="rd">(じかん)</span>。ICT継続計画<span class="rd">(けいぞくけいかく)</span>は経営陣<span class="rd">(けいえいじん)</span>の承認<span class="rd">(しょうにん)</span>が必要<span class="rd">(ひつよう)</span>でCISO。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Địa chỉ mạng / địa chỉ broadcast / độ dài tiền tố</td>
+<td>ネットワークアドレス / ブロードキャストアドレス / プレフィックス長<span class="rd">(ちょう)</span></td>
+</tr>
+<tr>
+<td>Khóa bí mật / khóa công khai / chữ ký số</td>
+<td>秘密鍵<span class="rd">(ひみつかぎ)</span> / 公開鍵<span class="rd">(こうかいかぎ)</span> / ディジタル署名<span class="rd">(しょめい)</span></td>
+</tr>
+<tr>
+<td>Mã hóa / giải mã / kiểm tra</td>
+<td>暗号化<span class="rd">(あんごうか)</span> / 復号<span class="rd">(ふくごう)</span> / 検証<span class="rd">(けんしょう)</span></td>
+</tr>
+<tr>
+<td>Vùng phi quân sự / mạng nội bộ</td>
+<td>DMZ（非武装<span class="rd">(ひぶそう)</span>セグメント） / 内部<span class="rd">(ないぶ)</span>セグメント</td>
+</tr>
+<tr>
+<td>Phân tách nhiệm vụ / quyền tối thiểu / phê duyệt</td>
+<td>職務分離<span class="rd">(しょくむぶんり)</span> / 最小権限<span class="rd">(さいしょうけんげん)</span> / 承認<span class="rd">(しょうにん)</span></td>
+</tr>
+<tr>
+<td>Sao lưu đầy đủ / tăng dần</td>
+<td>フルバックアップ / 増分<span class="rd">(ぞうぶん)</span>バックアップ</td>
+</tr>
+<tr>
+<td>Điểm khôi phục mục tiêu / thời gian khôi phục mục tiêu</td>
+<td>目標復旧時点<span class="rd">(もくひょうふっきゅうじてん)</span>（RPO） / 目標復旧時間<span class="rd">(もくひょうふっきゅうじかん)</span>（RTO）</td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

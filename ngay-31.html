@@ -1,0 +1,450 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 31 (11/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 31 (11/11): Ôn công thức tính toán</h1>
+<p class="meta">Ngày 31 · Thứ Tư 11/11 · 科目A: ôn công thức tính toán · 科目B: ôn câu sai</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Bảng công thức ｜ 公式<span class="rd">(こうしき)</span>のまとめ</a></li><li><a href="#muc-3">科目B: Ôn câu sai ｜ 間違<span class="rd">(まちが)</span>えた問題<span class="rd">(もんだい)</span>の復習<span class="rd">(ふくしゅう)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Câu tính toán là điểm "chắc ăn" nếu thuộc công thức. Hôm nay ôn 5 nhóm: khả dụng, hòa vốn, EVM, hiệu năng CPU, thời gian truyền. Chép bảng công thức ra một tờ giấy và đọc lại mỗi sáng tới ngày thi.</p>
+<ul class="check">
+<li>Chép bảng công thức ra giấy (15 phút)</li>
+<li>5 bài tự luyện, mỗi nhóm 1 bài (20 phút)</li>
+<li>8 câu đề cũ, bấm giờ 15 phút (30 phút)</li>
+<li>科目B: làm lại các câu sai của ngày 29–30 (45 phút)</li>
+<li>Đọc lại tờ công thức trước khi ngủ (10 phút)</li>
+</ul>
+<h2 id="muc-2">科目A: Bảng công thức ｜ 公式<span class="rd">(こうしき)</span>のまとめ</h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Khả dụng:</strong> A = MTBF ÷ (MTBF + MTTR). Nối tiếp: A₁ × A₂. Song song (1 trong 2 chạy là được): 1 − (1 − A₁)(1 − A₂).</td>
+<td><strong>稼働率<span class="rd">(かどうりつ)</span>：</strong>MTBF ÷（MTBF + MTTR）。直列<span class="rd">(ちょくれつ)</span>A₁ × A₂、並列<span class="rd">(へいれつ)</span>1 −（1 − A₁）(1 − A₂)。</td>
+</tr>
+<tr>
+<td><strong>Hòa vốn:</strong> tỉ lệ biến đổi = chi phí biến đổi ÷ doanh thu. Doanh thu hòa vốn = chi phí cố định ÷ (1 − tỉ lệ biến đổi). Doanh thu cho lợi nhuận mục tiêu = (cố định + lợi nhuận) ÷ (1 − tỉ lệ biến đổi).</td>
+<td><strong>損益分岐点<span class="rd">(そんえきぶんきてん)</span>：</strong>変動費率<span class="rd">(へんどうひりつ)</span> = 変動費<span class="rd">(へんどうひ)</span> ÷ 売上高<span class="rd">(うりあげだか)</span>。固定費<span class="rd">(こていひ)</span> ÷（1 − 変動費率<span class="rd">(へんどうひりつ)</span>）。目標利益<span class="rd">(もくひょうりえき)</span>なら（固定費<span class="rd">(こていひ)</span> + 目標利益<span class="rd">(もくひょうりえき)</span>）÷（1 − 変動費率<span class="rd">(へんどうひりつ)</span>）。</td>
+</tr>
+<tr>
+<td><strong>EVM:</strong> SV = EV − PV (âm: chậm tiến độ). CV = EV − AC (âm: vượt chi phí). SPI = EV ÷ PV, CPI = EV ÷ AC (&lt; 1 là xấu).</td>
+<td><strong>EVM：</strong>SV = EV − PV（負<span class="rd">(ふ)</span>は遅延<span class="rd">(ちえん)</span>）、CV = EV − AC（負<span class="rd">(ふ)</span>は超過<span class="rd">(ちょうか)</span>）。SPI = EV ÷ PV、CPI = EV ÷ AC（1未満<span class="rd">(みまん)</span>は悪<span class="rd">(わる)</span>い）。</td>
+</tr>
+<tr>
+<td><strong>CPU:</strong> chu kỳ xung = 1 ÷ tần số (100 MHz → 10 ns). Thời gian 1 lệnh = chu kỳ × CPI. Số lệnh/giây = tần số ÷ CPI. MIPS = số lệnh/giây ÷ 10⁶.</td>
+<td><strong>CPU：</strong>クロック周期<span class="rd">(しゅうき)</span> = 1 ÷ 周波数<span class="rd">(しゅうはすう)</span>。1命令<span class="rd">(めいれい)</span> = 周期<span class="rd">(しゅうき)</span> × CPI。1秒<span class="rd">(びょう)</span>の命令数<span class="rd">(めいれいすう)</span> = 周波数<span class="rd">(しゅうはすう)</span> ÷ CPI。</td>
+</tr>
+<tr>
+<td><strong>Thời gian truyền:</strong> = dữ liệu (bit) ÷ (tốc độ × hiệu suất). Byte × 8 = bit. Tỉ lệ sử dụng đường truyền = lượng truyền thực ÷ tốc độ đường truyền.</td>
+<td><strong>伝送時間<span class="rd">(でんそうじかん)</span>：</strong>データ量<span class="rd">(りょう)</span>（ビット）÷（回線速度<span class="rd">(かいせんそくど)</span> × 伝送効率<span class="rd">(でんそうこうりつ)</span>）。回線利用率<span class="rd">(かいせんりようりつ)</span> = 実際<span class="rd">(じっさい)</span>の転送量<span class="rd">(てんそうりょう)</span> ÷ 回線速度<span class="rd">(かいせんそくど)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Hai thiết bị khả dụng 0.9 và 0.8 nối song song. Khả dụng toàn hệ thống?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> 稼働率<span class="rd">(かどうりつ)</span>0.9と0.8の装置<span class="rd">(そうち)</span>を並列<span class="rd">(へいれつ)</span>に接続<span class="rd">(せつぞく)</span>。全体<span class="rd">(ぜんたい)</span>は。</td>
+</tr>
+<tr>
+<td>ア 0.72　イ 0.85　ウ 0.98　エ 1.7</td>
+<td>ア 0.72　イ 0.85　ウ 0.98　エ 1.7</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (0.98)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（0.98）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 1 − 0.1 × 0.2 = 0.98. ア là công thức nối tiếp.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1 − 0.1 × 0.2 = 0.98。アは直列<span class="rd">(ちょくれつ)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Chi phí cố định 400, tỉ lệ biến đổi 0.6. Doanh thu hòa vốn?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> 固定費<span class="rd">(こていひ)</span>400、変動費率<span class="rd">(へんどうひりつ)</span>0.6。損益分岐点売上高<span class="rd">(そんえきぶんきてんうりあげだか)</span>は。</td>
+</tr>
+<tr>
+<td>ア 240　イ 640　ウ 667　エ 1.000</td>
+<td>ア 240　イ 640　ウ 667　エ 1,000</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (1.000)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（1,000）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 400 ÷ 0.4 = 1.000. ウ là chia nhầm cho 0.6.</td>
+<td>解説<span class="rd">(かいせつ)</span>：400 ÷ 0.4 = 1,000。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A3</strong> PV = 100, EV = 80, AC = 90. Nhận định đúng?</td>
+<td><strong>問<span class="rd">(とい)</span>A3</strong> PV = 100、EV = 80、AC = 90。正<span class="rd">(ただ)</span>しい記述<span class="rd">(きじゅつ)</span>は。</td>
+</tr>
+<tr>
+<td>ア chậm tiến độ, vượt chi phí　イ chậm tiến độ, tiết kiệm chi phí　ウ vượt tiến độ, vượt chi phí　エ vượt tiến độ, tiết kiệm chi phí</td>
+<td>ア 遅延<span class="rd">(ちえん)</span>・超過<span class="rd">(ちょうか)</span>　イ 遅延<span class="rd">(ちえん)</span>・節約<span class="rd">(せつやく)</span>　ウ 前倒<span class="rd">(まえだお)</span>し・超過<span class="rd">(ちょうか)</span>　エ 前倒<span class="rd">(まえだお)</span>し・節約<span class="rd">(せつやく)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: SV = 80 − 100 = −20 (chậm); CV = 80 − 90 = −10 (vượt chi phí).</td>
+<td>解説<span class="rd">(かいせつ)</span>：SV = −20、CV = −10。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A4</strong> CPU 2 GHz, CPI trung bình 4. Mỗi giây thực hiện bao nhiêu lệnh?</td>
+<td><strong>問<span class="rd">(とい)</span>A4</strong> 2GHz、平均<span class="rd">(へいきん)</span>CPI 4のCPUの1秒間<span class="rd">(びょうかん)</span>の命令数<span class="rd">(めいれいすう)</span>は。</td>
+</tr>
+<tr>
+<td>ア 5 × 10⁸　イ 8 × 10⁸　ウ 2 × 10⁹　エ 8 × 10⁹</td>
+<td>ア 5 × 10⁸　イ 8 × 10⁸　ウ 2 × 10⁹　エ 8 × 10⁹</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 2 × 10⁹ ÷ 4 = 5 × 10⁸ lệnh/giây (= 500 MIPS). エ là nhân thay vì chia.</td>
+<td>解説<span class="rd">(かいせつ)</span>：2 × 10⁹ ÷ 4 = 5 × 10⁸（500MIPS）。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A5</strong> Gửi 50 MB qua đường 100 Mbit/s, hiệu suất 80%. Mất bao nhiêu giây?</td>
+<td><strong>問<span class="rd">(とい)</span>A5</strong> 50Mバイトを100Mビット/秒<span class="rd">(びょう)</span>、伝送効率<span class="rd">(でんそうこうりつ)</span>80%で送<span class="rd">(おく)</span>る時間<span class="rd">(じかん)</span>は。</td>
+</tr>
+<tr>
+<td>ア 0.5　イ 4　ウ 5　エ 6.25</td>
+<td>ア 0.5　イ 4　ウ 5　エ 6.25</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (5)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（5秒<span class="rd">(びょう)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 50 × 8 = 400 Mbit; 100 × 0.8 = 80 Mbit/s; 400 ÷ 80 = 5. イ là quên hiệu suất.</td>
+<td>解説<span class="rd">(かいせつ)</span>：400 ÷ 80 = 5秒<span class="rd">(びょう)</span>。イは効率<span class="rd">(こうりつ)</span>を忘<span class="rd">(わす)</span>れた値<span class="rd">(あたい)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/29_aki/q15.html" target="_blank" rel="noopener">平成29年秋期 午前 問15</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>15</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 2 thiết bị giống nhau, MTBF 45 giờ, MTTR 5 giờ, nối tiếp. Khả dụng hệ thống? ア 0.81　イ 0.90　ウ 0.95　エ 0.99</td>
+<td>内容<span class="rd">(ないよう)</span>：MTBF 45時間<span class="rd">(じかん)</span>・MTTR 5時間<span class="rd">(じかん)</span>の装置<span class="rd">(そうち)</span>2台<span class="rd">(だい)</span>を直列<span class="rd">(ちょくれつ)</span>。稼働率<span class="rd">(かどうりつ)</span>は。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (0.81)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（0.81）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 45 ÷ 50 = 0.9; nối tiếp 0.9² = 0.81.</td>
+<td>解説<span class="rd">(かいせつ)</span>：0.9 × 0.9 = 0.81。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/29_haru/q14.html" target="_blank" rel="noopener">平成29年春期 午前 問14</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>14</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hai cụm, mỗi cụm 2 thiết bị (khả dụng R) song song; 2 cụm nối tiếp. Biểu thức khả dụng toàn hệ thống? ア (1 − (1 − R²))²　イ 1 − (1 − R²)²　ウ (1 − (1 − R)²)²　エ 1 − (1 − R)⁴</td>
+<td>内容<span class="rd">(ないよう)</span>：稼働率<span class="rd">(かどうりつ)</span>Rの装置<span class="rd">(そうち)</span>2台<span class="rd">(だい)</span>の並列<span class="rd">(へいれつ)</span>を2組<span class="rd">(くみ)</span>直列<span class="rd">(ちょくれつ)</span>にした全体<span class="rd">(ぜんたい)</span>の式<span class="rd">(しき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mỗi cụm song song: 1 − (1 − R)². Hai cụm nối tiếp: bình phương.</td>
+<td>解説<span class="rd">(かいせつ)</span>：並列部<span class="rd">(へいれつぶ)</span>1 − (1 − R)²を2乗<span class="rd">(じょう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/01_aki/q78.html" target="_blank" rel="noopener">令和元年秋期 午前 問78</a></strong> (2019; câu giống hệt <a href="https://www.fe-siken.com/kakomon/23_aki/q77.html" target="_blank" rel="noopener">平成23年秋期 午前 問77</a> đã gặp ở ngày 18)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>78</strong></td>
+</tr>
+<tr>
+<td>Nội dung: doanh thu 100, chi phí biến đổi 60, cố định 30 (triệu yên). Giữ nguyên tỉ lệ, cần doanh thu bao nhiêu để lời 18? ア 108　イ 120　ウ 156　エ 180</td>
+<td>内容<span class="rd">(ないよう)</span>：目標利益<span class="rd">(もくひょうりえき)</span>18百万円<span class="rd">(ひゃくまんえん)</span>に必要<span class="rd">(ひつよう)</span>な売上高<span class="rd">(うりあげだか)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (120)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（120）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: (30 + 18) ÷ 0.4 = 120. Câu ra lại y nguyên: đề FE hay lặp, nên ôn đề cũ rất có lợi.</td>
+<td>解説<span class="rd">(かいせつ)</span>：48 ÷ 0.4 = 120。同<span class="rd">(おな)</span>じ問題<span class="rd">(もんだい)</span>が再出題<span class="rd">(さいしゅつだい)</span>されている。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/02_menjo/q51.html" target="_blank" rel="noopener">令和2年度 問51</a></strong> (2020)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 令和<span class="rd">(れいわ)</span>2年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>51</strong></td>
+</tr>
+<tr>
+<td>Nội dung: dự án dùng EVM, tại một thời điểm EV − PV âm. Nghĩa là gì? ア hiệu quả tiến độ tốt hơn kế hoạch　イ dự án sẽ hoàn thành muộn hơn kế hoạch　ウ tiến độ đang chậm hơn kế hoạch　エ tiến độ nhanh hơn kế hoạch</td>
+<td>内容<span class="rd">(ないよう)</span>：EV − PVが負<span class="rd">(ふ)</span>のときの状況<span class="rd">(じょうきょう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: SV âm = hiện đang chậm. イ sai vì chỉ số này không đủ để kết luận ngày hoàn thành.</td>
+<td>解説<span class="rd">(かいせつ)</span>：現時点<span class="rd">(げんじてん)</span>で遅<span class="rd">(おく)</span>れている。完了日<span class="rd">(かんりょうび)</span>までは判断<span class="rd">(はんだん)</span>できない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/04_menjo/q12.html" target="_blank" rel="noopener">令和4年度 問12</a></strong> (2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>4年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>12</strong></td>
+</tr>
+<tr>
+<td>Nội dung: máy A (chu kỳ xung 1 ns, CPI 4.0) và máy B (chu kỳ 4 ns, CPI 0.5) cùng tập lệnh, chạy cùng chương trình. Thời gian của A gấp mấy lần B? ア 1/32　イ 1/2　ウ 2　エ 8</td>
+<td>内容<span class="rd">(ないよう)</span>：クロック周期<span class="rd">(しゅうき)</span>とCPIが異<span class="rd">(こと)</span>なるA・Bの処理時間<span class="rd">(しょりじかん)</span>の比<span class="rd">(ひ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (2)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（2）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: A: 1 × 4 = 4 ns/lệnh; B: 4 × 0.5 = 2 ns/lệnh. 4 ÷ 2 = 2.</td>
+<td>解説<span class="rd">(かいせつ)</span>：4ナノ秒<span class="rd">(びょう)</span> ÷ 2ナノ秒<span class="rd">(びょう)</span> = 2倍<span class="rd">(ばい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/05_menjo/q8.html" target="_blank" rel="noopener">令和5年度 問8</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chương trình chạy lần lượt các lệnh a → c → b → a → c → d, CPI mỗi lệnh cho trong bảng (tổng 30 xung). CPU 100 MHz. Thời gian chạy (ns)? ア 30　イ 40　ウ 200　エ 300</td>
+<td>内容<span class="rd">(ないよう)</span>：命令列<span class="rd">(めいれいれつ)</span>の実行時間<span class="rd">(じっこうじかん)</span>（100MHz）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (300)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（300）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tổng CPI = 6 + 4 + 2 + 6 + 4 + 8 = 30 xung; 1 xung = 10 ns; 30 × 10 = 300 ns.</td>
+<td>解説<span class="rd">(かいせつ)</span>：30クロック × 10ナノ秒<span class="rd">(びょう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/26_aki/q9.html" target="_blank" rel="noopener">平成26年秋期 午前 問9</a></strong> (2014)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>9</strong></td>
+</tr>
+<tr>
+<td>Nội dung: CPU 1 GHz, mỗi lệnh trung bình 0.8 xung. Mỗi giây thực hiện trung bình bao nhiêu vạn lệnh? ア 125　イ 250　ウ 80.000　エ 125.000</td>
+<td>内容<span class="rd">(ないよう)</span>：1GHz、平均<span class="rd">(へいきん)</span>0.8クロックで1秒間<span class="rd">(びょうかん)</span>の命令数<span class="rd">(めいれいすう)</span>（万<span class="rd">(まん)</span>）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (125.000 vạn)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（125,000万<span class="rd">(まん)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 10⁹ ÷ 0.8 = 1.25 × 10⁹ = 125.000 × 10⁴. Chú ý đơn vị "vạn" (万 = 10⁴).</td>
+<td>解説<span class="rd">(かいせつ)</span>：1.25 × 10⁹ = 125,000万<span class="rd">(まん)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 8 — <a href="https://www.fe-siken.com/kakomon/07_haru/a7.html" target="_blank" rel="noopener">令和7年度 科目A 問7</a></strong> (2025, đã gặp ở ngày 27, làm lại để nhớ công thức)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>8 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>7</strong></td>
+</tr>
+<tr>
+<td>Nội dung: tải 1 GB (cộng 20% thông tin điều khiển) qua đường 40 Mbit/s mất 5 phút. Tỉ lệ sử dụng đường truyền? ア 10　イ 53　ウ 67　エ 80</td>
+<td>内容<span class="rd">(ないよう)</span>：回線利用率<span class="rd">(かいせんりようりつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (80%)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（80%）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 1.2 GB ÷ 300 = 4 MB/s; 40 Mbit/s = 5 MB/s; 4 ÷ 5 = 0.8.</td>
+<td>解説<span class="rd">(かいせつ)</span>：4 ÷ 5 = 0.8。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Ôn câu sai ｜ 間違<span class="rd">(まちが)</span>えた問題<span class="rd">(もんだい)</span>の復習<span class="rd">(ふくしゅう)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hôm nay không có câu mới.</strong> Mở lại bài ngày 29 và 30, làm lại mọi câu 科目B đã sai mà không xem lời giải. Câu nào làm lại vẫn sai thì ghi vào tờ công thức, mục "bẫy của tôi".</td>
+<td><strong>今日<span class="rd">(きょう)</span>は新<span class="rd">(あたら)</span>しい問題<span class="rd">(もんだい)</span>なし。</strong>29・30日目<span class="rd">(にちめ)</span>の科目<span class="rd">(かもく)</span>Bで間違<span class="rd">(まちが)</span>えた問題<span class="rd">(もんだい)</span>を解<span class="rd">(と)</span>き直<span class="rd">(なお)</span>し、まだ間違<span class="rd">(まちが)</span>える点<span class="rd">(てん)</span>をメモする。</td>
+</tr>
+<tr>
+<td><strong>5 bẫy hay gặp nhất:</strong> chỉ số bắt đầu từ 1; điều kiện ≧ hay &gt;; and hay or; giá trị biến trước hay sau khi tăng; thứ tự lệnh trong thân vòng lặp.</td>
+<td><strong>よくある罠<span class="rd">(わな)</span>：</strong>添字<span class="rd">(そえじ)</span>は1から、≧と&gt;、andとor、増加<span class="rd">(ぞうか)</span>の前後<span class="rd">(ぜんご)</span>、ループ内<span class="rd">(ない)</span>の順序<span class="rd">(じゅんじょ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thời gian trung bình giữa hai lần hỏng / thời gian sửa trung bình</td>
+<td>平均故障間隔<span class="rd">(へいきんこしょうかんかく)</span>（MTBF） / 平均修復時間<span class="rd">(へいきんしゅうふくじかん)</span>（MTTR）</td>
+</tr>
+<tr>
+<td>Chênh lệch tiến độ / chênh lệch chi phí</td>
+<td>スケジュール差異<span class="rd">(さい)</span>（SV） / コスト差異<span class="rd">(さい)</span>（CV）</td>
+</tr>
+<tr>
+<td>Chu kỳ xung nhịp / tần số xung nhịp</td>
+<td>クロック周期<span class="rd">(しゅうき)</span> / クロック周波数<span class="rd">(しゅうはすう)</span></td>
+</tr>
+<tr>
+<td>Số xung trung bình mỗi lệnh</td>
+<td>CPI</td>
+</tr>
+<tr>
+<td>Tỉ lệ sử dụng đường truyền / hiệu suất truyền</td>
+<td>回線利用率<span class="rd">(かいせんりようりつ)</span> / 伝送効率<span class="rd">(でんそうこうりつ)</span></td>
+</tr>
+<tr>
+<td>Doanh thu cần thiết / lợi nhuận mục tiêu</td>
+<td>必要売上高<span class="rd">(ひつよううりあげだか)</span> / 目標利益<span class="rd">(もくひょうりえき)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

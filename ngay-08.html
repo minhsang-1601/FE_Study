@@ -1,0 +1,917 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>FE Ngày 8 (19/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 8 (19/10): Mạng cơ bản và xử lý chuỗi</h1>
+<p class="meta">Ngày 8 · T2 19/10 · 科目A: Mạng cơ bản · 科目B: Xử lý chuỗi</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Mạng cơ bản ｜ ネットワーク基礎<span class="rd">(きそ)</span></a></li><li><a href="#muc-3">科目B: Xử lý chuỗi ｜ 文字列処理<span class="rd">(もじれつしょり)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Tổng khoảng 2 tiếng: 1 tiếng 科目A, 1 tiếng 科目B.</p>
+<ul class="check">
+<li>Đọc lý thuyết OSI, TCP/IP, TCP và UDP (15 phút)</li>
+<li>Học thuộc bảng giao thức và số cổng, tự che cột số để kiểm tra (10 phút)</li>
+<li>Làm 4 câu bài tập 科目A, tự giải trước rồi mới xem đáp án (15 phút)</li>
+<li>Làm 8 câu đề cũ phần ネットワーク bên dưới (20 phút)</li>
+<li>Đọc lý thuyết xử lý chuỗi trong mã giả (15 phút)</li>
+<li>Trace 3 bài 科目B trên giấy, kẻ bảng biến i, j, cnt (25 phút)</li>
+<li>Đọc 6 câu đề cũ 科目B, mở link xem chương trình gốc (20 phút)</li>
+<li>Ôn bảng từ vựng cuối bài</li>
+</ul>
+<h2 id="muc-2">科目A: Mạng cơ bản ｜ ネットワーク基礎<span class="rd">(きそ)</span></h2>
+<p>Câu mạng trong 科目A thường hỏi 3 thứ: thiết bị nào chạy ở tầng nào, giao thức nào dùng TCP hay UDP, và số cổng của giao thức phổ biến. Thêm một dạng tính toán: thời gian truyền.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mô hình OSI 7 tầng (từ dưới lên):</strong> 1 vật lý, 2 liên kết dữ liệu, 3 mạng, 4 giao vận, 5 phiên, 6 trình diễn, 7 ứng dụng. Mẹo nhớ tiếng Nhật: 「物<span class="rd">(ぶつ)</span>デネトセプア」.</td>
+<td><strong>OSI基本参照<span class="rd">(きほんさんしょう)</span>モデル（下<span class="rd">(した)</span>から）：</strong>第<span class="rd">(だい)</span>1層<span class="rd">(そう)</span> 物理層<span class="rd">(ぶつりそう)</span>、第<span class="rd">(だい)</span>2層<span class="rd">(そう)</span> データリンク層<span class="rd">(そう)</span>、第<span class="rd">(だい)</span>3層<span class="rd">(そう)</span> ネットワーク層<span class="rd">(そう)</span>、第<span class="rd">(だい)</span>4層<span class="rd">(そう)</span> トランスポート層<span class="rd">(そう)</span>、第<span class="rd">(だい)</span>5層<span class="rd">(そう)</span> セション層<span class="rd">(そう)</span>、第<span class="rd">(だい)</span>6層<span class="rd">(そう)</span> プレゼンテーション層<span class="rd">(そう)</span>、第<span class="rd">(だい)</span>7層<span class="rd">(そう)</span> アプリケーション層<span class="rd">(そう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Vai trò từng tầng:</strong> tầng 2 truyền giữa các nút kề nhau (dùng địa chỉ MAC); tầng 3 chọn đường và chuyển tiếp giữa hai đầu cuối (dùng địa chỉ IP); tầng 4 đảm bảo chất lượng truyền giữa hai ứng dụng (dùng số cổng).</td>
+<td><strong>各層<span class="rd">(かくそう)</span>の役割<span class="rd">(やくわり)</span>：</strong>第<span class="rd">(だい)</span>2層<span class="rd">(そう)</span>は隣接<span class="rd">(りんせつ)</span>ノード間<span class="rd">(かん)</span>の伝送<span class="rd">(でんそう)</span>（MACアドレス）；第<span class="rd">(だい)</span>3層<span class="rd">(そう)</span>はエンドシステム間<span class="rd">(かん)</span>の経路制御<span class="rd">(けいろせいぎょ)</span>と中継<span class="rd">(ちゅうけい)</span>（IPアドレス）；第<span class="rd">(だい)</span>4層<span class="rd">(そう)</span>はアプリケーション間<span class="rd">(かん)</span>の通信品質<span class="rd">(つうしんひんしつ)</span>を保証<span class="rd">(ほしょう)</span>する（ポート番号<span class="rd">(ばんごう)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Thiết bị mạng:</strong> リピータ (tầng 1, khuếch đại tín hiệu); ブリッジ và L2スイッチ (tầng 2, chuyển theo MAC); ルータ (tầng 3, chuyển theo IP); ゲートウェイ (tầng 4 trở lên, chuyển đổi giao thức khác nhau).</td>
+<td><strong>ネットワーク接続機器<span class="rd">(せつぞくきき)</span>：</strong>リピータ（第<span class="rd">(だい)</span>1層<span class="rd">(そう)</span>、信号<span class="rd">(しんごう)</span>を増幅<span class="rd">(ぞうふく)</span>）；ブリッジ・L2スイッチ（第<span class="rd">(だい)</span>2層<span class="rd">(そう)</span>、MACアドレスで中継<span class="rd">(ちゅうけい)</span>）；ルータ（第<span class="rd">(だい)</span>3層<span class="rd">(そう)</span>、IPアドレスで中継<span class="rd">(ちゅうけい)</span>）；ゲートウェイ（第<span class="rd">(だい)</span>4層<span class="rd">(そう)</span>以上<span class="rd">(いじょう)</span>、プロトコル変換<span class="rd">(へんかん)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Mô hình TCP/IP 4 tầng:</strong> ứng dụng (HTTP, SMTP, DNS…), giao vận (TCP, UDP), Internet (IP, ICMP), liên kết (Ethernet). ARP nằm giữa tầng Internet và tầng liên kết.</td>
+<td><strong>TCP/IP階層<span class="rd">(かいそう)</span>モデル：</strong>アプリケーション層<span class="rd">(そう)</span>（HTTP、SMTP、DNS…）、トランスポート層<span class="rd">(そう)</span>（TCP、UDP）、インターネット層<span class="rd">(そう)</span>（IP、ICMP）、リンク層<span class="rd">(そう)</span>（イーサネット）。</td>
+</tr>
+<tr>
+<td><strong>TCP:</strong> hướng kết nối, tin cậy: bắt tay 3 bước (SYN → SYN+ACK → ACK), đánh số thứ tự, gửi lại khi mất gói, điều khiển luồng.</td>
+<td><strong>TCP：</strong>コネクション型<span class="rd">(がた)</span>で信頼性<span class="rd">(しんらいせい)</span>が高<span class="rd">(たか)</span>い。3ウェイハンドシェイク（SYN → SYN+ACK → ACK）、シーケンス番号<span class="rd">(ばんごう)</span>、再送制御<span class="rd">(さいそうせいぎょ)</span>、フロー制御<span class="rd">(せいぎょ)</span>。</td>
+</tr>
+<tr>
+<td><strong>UDP:</strong> không kết nối, không gửi lại, header nhỏ, nhanh. Dùng khi cần thời gian thực hơn độ tin cậy: thoại, video, DNS (truy vấn thường), DHCP, NTP, SNMP.</td>
+<td><strong>UDP：</strong>コネクションレス型<span class="rd">(がた)</span>で再送<span class="rd">(さいそう)</span>なし、ヘッダが小<span class="rd">(ちい)</span>さく高速<span class="rd">(こうそく)</span>。信頼性<span class="rd">(しんらいせい)</span>よりリアルタイム性<span class="rd">(せい)</span>を重視<span class="rd">(じゅうし)</span>する音声<span class="rd">(おんせい)</span>・動画<span class="rd">(どうが)</span>、DNS、DHCP、NTP、SNMPで使<span class="rd">(つか)</span>う。</td>
+</tr>
+<tr>
+<td><strong>Địa chỉ:</strong> IP xác định máy tính; số cổng xác định ứng dụng trên máy đó; MAC (48 bit) xác định card mạng. ARP: tìm MAC từ IP.</td>
+<td><strong>アドレス：</strong>IPアドレスはコンピュータを、ポート番号<span class="rd">(ばんごう)</span>はアプリケーションを、MACアドレス（48ビット）はネットワークインタフェースを識別<span class="rd">(しきべつ)</span>する。ARPはIPアドレスからMACアドレスを求<span class="rd">(もと)</span>める。</td>
+</tr>
+<tr>
+<td><strong>Thư điện tử:</strong> SMTP để gửi (và chuyển giữa các máy chủ); POP3 để tải thư về máy (thường xóa trên server); IMAP4 để đọc và quản lý thư ngay trên server.</td>
+<td><strong>電子<span class="rd">(でんし)</span>メール：</strong>SMTPは送信<span class="rd">(そうしん)</span>・転送<span class="rd">(てんそう)</span>；POP3はメールを端末<span class="rd">(たんまつ)</span>に受信<span class="rd">(じゅしん)</span>；IMAP4はサーバ上<span class="rd">(じょう)</span>でメールを管理<span class="rd">(かんり)</span>する。</td>
+</tr>
+<tr>
+<td><strong>Công thức thời gian truyền:</strong> thời gian = lượng dữ liệu (bit) ÷ (tốc độ đường truyền × hiệu suất truyền). Nhớ đổi byte sang bit (× 8).</td>
+<td><strong>伝送時間<span class="rd">(でんそうじかん)</span>：</strong>伝送時間<span class="rd">(でんそうじかん)</span>＝データ量<span class="rd">(りょう)</span>（ビット）÷（回線速度<span class="rd">(かいせんそくど)</span>×伝送効率<span class="rd">(でんそうこうりつ)</span>）。バイトはビットに直<span class="rd">(なお)</span>す（×8）。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Bảng số cổng hay thi ｜ ウェルノウンポート番号<span class="rd">(ばんごう)</span></strong></p>
+<div class="tbl"><table class="plain">
+<thead>
+<tr>
+<th>Giao thức</th>
+<th>Cổng</th>
+<th>TCP/UDP</th>
+<th>Dùng để</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FTP</td>
+<td>20 (dữ liệu), 21 (điều khiển)</td>
+<td>TCP</td>
+<td>truyền file</td>
+</tr>
+<tr>
+<td>SSH</td>
+<td>22</td>
+<td>TCP</td>
+<td>đăng nhập từ xa có mã hóa</td>
+</tr>
+<tr>
+<td>TELNET</td>
+<td>23</td>
+<td>TCP</td>
+<td>đăng nhập từ xa</td>
+</tr>
+<tr>
+<td>SMTP</td>
+<td>25 (587 submission)</td>
+<td>TCP</td>
+<td>gửi thư</td>
+</tr>
+<tr>
+<td>DNS</td>
+<td>53</td>
+<td>UDP (TCP khi zone transfer)</td>
+<td>phân giải tên miền</td>
+</tr>
+<tr>
+<td>DHCP</td>
+<td>67 / 68</td>
+<td>UDP</td>
+<td>cấp phát IP tự động</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>80</td>
+<td>TCP</td>
+<td>web</td>
+</tr>
+<tr>
+<td>POP3</td>
+<td>110</td>
+<td>TCP</td>
+<td>nhận thư</td>
+</tr>
+<tr>
+<td>NTP</td>
+<td>123</td>
+<td>UDP</td>
+<td>đồng bộ giờ</td>
+</tr>
+<tr>
+<td>IMAP4</td>
+<td>143</td>
+<td>TCP</td>
+<td>quản lý thư trên server</td>
+</tr>
+<tr>
+<td>SNMP</td>
+<td>161 / 162</td>
+<td>UDP</td>
+<td>quản lý thiết bị mạng</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>443</td>
+<td>TCP</td>
+<td>web có mã hóa</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Thiết bị nào chuyển tiếp gói tin dựa trên địa chỉ IP, hoạt động ở tầng 3 của mô hình OSI?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> OSI基本参照<span class="rd">(きほんさんしょう)</span>モデルの第<span class="rd">(だい)</span>3層<span class="rd">(そう)</span>で動作<span class="rd">(どうさ)</span>し、IPアドレスを基<span class="rd">(もと)</span>にパケットを中継<span class="rd">(ちゅうけい)</span>する機器<span class="rd">(きき)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア リピータ　イ ブリッジ　ウ ルータ　エ ゲートウェイ</td>
+<td>ア リピータ　イ ブリッジ　ウ ルータ　エ ゲートウェイ</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (ルータ)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（ルータ）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tầng 3 = tầng mạng = địa chỉ IP = router. Bẫy: ア ở tầng 1 (chỉ khuếch đại tín hiệu, không đọc địa chỉ); イ ở tầng 2 (đọc MAC, không đọc IP); エ ở tầng 4 trở lên, dùng khi giao thức hai bên khác nhau.</td>
+<td>解説<span class="rd">(かいせつ)</span>：第<span class="rd">(だい)</span>3層<span class="rd">(そう)</span>＝ネットワーク層<span class="rd">(そう)</span>＝IPアドレス＝ルータ。アは第<span class="rd">(だい)</span>1層<span class="rd">(そう)</span>で信号<span class="rd">(しんごう)</span>の増幅<span class="rd">(ぞうふく)</span>だけ、イは第<span class="rd">(だい)</span>2層<span class="rd">(そう)</span>でMACアドレスを使<span class="rd">(つか)</span>う、エは第<span class="rd">(だい)</span>4層<span class="rd">(そう)</span>以上<span class="rd">(いじょう)</span>でプロトコル変換<span class="rd">(へんかん)</span>を行<span class="rd">(おこな)</span>う。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Muốn đọc thư từ nhiều thiết bị (PC, điện thoại) và giữ trạng thái đã đọc, thư mục trên máy chủ. Giao thức nhận thư nào phù hợp nhất?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> 複数<span class="rd">(ふくすう)</span>の端末<span class="rd">(たんまつ)</span>からメールを読<span class="rd">(よ)</span>み、既読<span class="rd">(きどく)</span>状態<span class="rd">(じょうたい)</span>やフォルダをサーバ上<span class="rd">(じょう)</span>で管理<span class="rd">(かんり)</span>したい。最<span class="rd">(もっと)</span>も適切<span class="rd">(てきせつ)</span>な受信<span class="rd">(じゅしん)</span>プロトコルはどれか。</td>
+</tr>
+<tr>
+<td>ア SMTP　イ POP3　ウ IMAP4　エ MIME</td>
+<td>ア SMTP　イ POP3　ウ IMAP4　エ MIME</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (IMAP4)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（IMAP4）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: IMAP4 quản lý thư ngay trên server nên mọi thiết bị thấy cùng một trạng thái. Bẫy: ア là giao thức gửi, không phải nhận; イ tải thư về một máy, khó đồng bộ nhiều máy; エ là chuẩn định dạng để gửi tệp đính kèm, tiếng Nhật…, không phải giao thức nhận.</td>
+<td>解説<span class="rd">(かいせつ)</span>：IMAP4はサーバ上<span class="rd">(じょう)</span>でメールを管理<span class="rd">(かんり)</span>するので、どの端末<span class="rd">(たんまつ)</span>でも同<span class="rd">(おな)</span>じ状態<span class="rd">(じょうたい)</span>が見<span class="rd">(み)</span>える。アは送信用<span class="rd">(そうしんよう)</span>、イは端末<span class="rd">(たんまつ)</span>にダウンロードする方式<span class="rd">(ほうしき)</span>、エは添付<span class="rd">(てんぷ)</span>ファイルなどを扱<span class="rd">(あつか)</span>う形式<span class="rd">(けいしき)</span>の規格<span class="rd">(きかく)</span>で受信<span class="rd">(じゅしん)</span>プロトコルではない。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A3</strong> Truyền tệp 1.5 Mバイト qua đường truyền 100 Mビット/秒, hiệu suất truyền 60%. Thời gian truyền là bao nhiêu giây? (1 Mバイト = 10⁶ バイト)</td>
+<td><strong>問<span class="rd">(とい)</span>A3</strong> 1.5 Mバイトのファイルを、回線速度<span class="rd">(かいせんそくど)</span>100 Mビット/秒<span class="rd">(びょう)</span>、伝送効率<span class="rd">(でんそうこうりつ)</span>60%の回線<span class="rd">(かいせん)</span>で送<span class="rd">(おく)</span>る。伝送時間<span class="rd">(でんそうじかん)</span>は何秒<span class="rd">(なんびょう)</span>か。（1 Mバイト＝10⁶バイト）</td>
+</tr>
+<tr>
+<td>ア 0.12　イ 0.2　ウ 1.2　エ 2.0</td>
+<td>ア 0.12　イ 0.2　ウ 1.2　エ 2.0</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (0.2 giây)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（0.2秒<span class="rd">(びょう)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: dữ liệu = 1.5 × 10⁶ × 8 = 12 × 10⁶ bit. Tốc độ thực = 100 × 10⁶ × 0.6 = 60 × 10⁶ bit/giây. Thời gian = 12 ÷ 60 = 0.2 giây. Bẫy: ア là quên hiệu suất (12 ÷ 100); ウ và エ là nhầm hàng thập phân khi đổi đơn vị.</td>
+<td>解説<span class="rd">(かいせつ)</span>：データ量<span class="rd">(りょう)</span>＝1.5×10⁶×8＝12×10⁶ビット。実効速度<span class="rd">(じっこうそくど)</span>＝100×10⁶×0.6＝60×10⁶ビット/秒<span class="rd">(びょう)</span>。12÷60＝0.2秒<span class="rd">(びょう)</span>。アは伝送効率<span class="rd">(でんそうこうりつ)</span>を忘<span class="rd">(わす)</span>れた値<span class="rd">(あたい)</span>（12÷100）、ウ・エは単位換算<span class="rd">(たんいかんさん)</span>の桁<span class="rd">(けた)</span>の誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A4</strong> Giao thức nào dùng để tìm địa chỉ MAC từ địa chỉ IP trong cùng mạng LAN?</td>
+<td><strong>問<span class="rd">(とい)</span>A4</strong> 同<span class="rd">(おな)</span>じLAN内<span class="rd">(ない)</span>で、IPアドレスからMACアドレスを求<span class="rd">(もと)</span>めるプロトコルはどれか。</td>
+</tr>
+<tr>
+<td>ア ARP　イ DHCP　ウ DNS　エ NTP</td>
+<td>ア ARP　イ DHCP　ウ DNS　エ NTP</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (ARP)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（ARP）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ARP gửi broadcast hỏi "ai có IP này?" và nhận về MAC. Bẫy: イ cấp IP cho máy; ウ đổi tên miền sang IP (không phải IP sang MAC); エ đồng bộ đồng hồ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ARPはブロードキャストで「このIPアドレスを持<span class="rd">(も)</span>つのは誰<span class="rd">(だれ)</span>か」と問<span class="rd">(と)</span>い合<span class="rd">(あ)</span>わせ、MACアドレスを得<span class="rd">(え)</span>る。イはIPアドレスの割当<span class="rd">(わりあ)</span>て、ウはドメイン名<span class="rd">(めい)</span>からIPアドレスへの変換<span class="rd">(へんかん)</span>、エは時刻同期<span class="rd">(じこくどうき)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Mỗi câu ghi kỳ thi và số câu; bấm link để xem nguyên văn đề trên fe-siken.com.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/24_aki/q34.html" target="_blank" rel="noopener">平成24年秋期 午前 問34</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>34</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong mô hình OSI, tầng nào đảm nhận chuyển tiếp dữ liệu và chọn đường giữa hai hệ thống đầu cuối?</td>
+<td>内容<span class="rd">(ないよう)</span>：OSI基本参照<span class="rd">(きほんさんしょう)</span>モデルで、エンドシステム間<span class="rd">(かん)</span>のデータ伝送<span class="rd">(でんそう)</span>の中継<span class="rd">(ちゅうけい)</span>と経路制御<span class="rd">(けいろせいぎょ)</span>を行<span class="rd">(おこな)</span>う層<span class="rd">(そう)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (ネットワーク層)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（ネットワーク層<span class="rd">(そう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: "chọn đường" (ルーティング) là từ khóa của tầng 3. Tầng phiên quản lý phiên hội thoại, tầng liên kết lo nút kề nhau, tầng giao vận lo chất lượng truyền giữa hai đầu.</td>
+<td>解説<span class="rd">(かいせつ)</span>：「経路制御<span class="rd">(けいろせいぎょ)</span>」はネットワーク層<span class="rd">(そう)</span>のキーワード。セション層<span class="rd">(そう)</span>は会話<span class="rd">(かいわ)</span>の管理<span class="rd">(かんり)</span>、データリンク層<span class="rd">(そう)</span>は隣接<span class="rd">(りんせつ)</span>ノード間<span class="rd">(かん)</span>、トランスポート層<span class="rd">(そう)</span>は通信品質<span class="rd">(つうしんひんしつ)</span>の保証<span class="rd">(ほしょう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/29_haru/q31.html" target="_blank" rel="noopener">平成29年春期 午前 問31</a></strong> (2017); cùng đề còn ra ở 平成16年春期 問66 và 平成31年春期 問31</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>31</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thiết bị nào hoạt động từ tầng giao vận trở lên và chuyển đổi giao thức giữa các hệ LAN khác nhau?</td>
+<td>内容<span class="rd">(ないよう)</span>：トランスポート層<span class="rd">(そう)</span>以上<span class="rd">(いじょう)</span>で、異<span class="rd">(こと)</span>なるLANシステム間<span class="rd">(かん)</span>のプロトコル変換<span class="rd">(へんかん)</span>を行<span class="rd">(おこな)</span>う機器<span class="rd">(きき)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ゲートウェイ</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ゲートウェイ</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: "chuyển đổi giao thức" là từ khóa của gateway. Bridge ở tầng 2 (MAC), repeater ở tầng 1 (khuếch đại), router ở tầng 3 (IP).</td>
+<td>解説<span class="rd">(かいせつ)</span>：「プロトコル変換<span class="rd">(へんかん)</span>」はゲートウェイ。ブリッジは第<span class="rd">(だい)</span>2層<span class="rd">(そう)</span>、リピータは第<span class="rd">(だい)</span>1層<span class="rd">(そう)</span>、ルータは第<span class="rd">(だい)</span>3層<span class="rd">(そう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/23_aki/q38.html" target="_blank" rel="noopener">平成23年秋期 午前 問38</a></strong> (2011)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>23年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>38</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong mô hình phân tầng TCP/IP, TCP thuộc tầng nào?</td>
+<td>内容<span class="rd">(ないよう)</span>：TCP/IP階層<span class="rd">(かいそう)</span>モデルで、TCPが属<span class="rd">(ぞく)</span>する層<span class="rd">(そう)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (トランスポート層)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（トランスポート層<span class="rd">(そう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: TCP và UDP đều ở tầng giao vận. IP ở tầng Internet, HTTP ở tầng ứng dụng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：TCPとUDPはトランスポート層<span class="rd">(そう)</span>。IPはインターネット層<span class="rd">(そう)</span>、HTTPはアプリケーション層<span class="rd">(そう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/23_toku/q36.html" target="_blank" rel="noopener">平成23年特別 午前 問36</a></strong> (2011)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>23年<span class="rd">(ねん)</span>特別<span class="rd">(とくべつ)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>36</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong xử lý TCP và UDP, thông tin nào được dùng để xác định ứng dụng của bên kia?</td>
+<td>内容<span class="rd">(ないよう)</span>：TCPおよびUDPで、通信相手<span class="rd">(つうしんあいて)</span>のアプリケーションを識別<span class="rd">(しきべつ)</span>するために使<span class="rd">(つか)</span>うものを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (ポート番号)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（ポート番号<span class="rd">(ばんごう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: IP chỉ xác định máy; trên một máy có nhiều ứng dụng nên cần số cổng. MAC dùng ở tầng 2, số thứ tự (sequence) dùng để sắp xếp gói, số giao thức (protocol number) cho biết gói IP chứa TCP hay UDP.</td>
+<td>解説<span class="rd">(かいせつ)</span>：IPアドレスはコンピュータを識別<span class="rd">(しきべつ)</span>するだけ。アプリケーションの識別<span class="rd">(しきべつ)</span>にはポート番号<span class="rd">(ばんごう)</span>を使<span class="rd">(つか)</span>う。MACアドレスは第<span class="rd">(だい)</span>2層<span class="rd">(そう)</span>、シーケンス番号<span class="rd">(ばんごう)</span>は順序制御<span class="rd">(じゅんじょせいぎょ)</span>、プロトコル番号<span class="rd">(ばんごう)</span>はIPの上位<span class="rd">(じょうい)</span>プロトコルの識別<span class="rd">(しきべつ)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/26_aki/q33.html" target="_blank" rel="noopener">平成26年秋期 午前 問33</a></strong> (2014)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>33</strong></td>
+</tr>
+<tr>
+<td>Nội dung: giao thức nào dùng hai số cổng well-known khác nhau cho truyền dữ liệu và cho điều khiển?</td>
+<td>内容<span class="rd">(ないよう)</span>：データ転送用<span class="rd">(てんそうよう)</span>と制御用<span class="rd">(せいぎょよう)</span>に異<span class="rd">(こと)</span>なるウェルノウンポート番号<span class="rd">(ばんごう)</span>が割<span class="rd">(わ)</span>り当<span class="rd">(あ)</span>てられているプロトコルを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: FTP</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：FTP</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: FTP dùng 21 để gửi lệnh và 20 để truyền dữ liệu. POP3 chỉ dùng 110, SMTP 25, SNMP 161/162 (UDP) nhưng 162 là cho thông báo trap, không phải tách dữ liệu và điều khiển.</td>
+<td>解説<span class="rd">(かいせつ)</span>：FTPは制御<span class="rd">(せいぎょ)</span>に21番<span class="rd">(ばん)</span>、データ転送<span class="rd">(てんそう)</span>に20番<span class="rd">(ばん)</span>を使<span class="rd">(つか)</span>う。POP3は110番<span class="rd">(ばん)</span>、SMTPは25番<span class="rd">(ばん)</span>。SNMPの162番<span class="rd">(ばん)</span>はトラップ通知用<span class="rd">(つうちよう)</span>で、データと制御<span class="rd">(せいぎょ)</span>の分離<span class="rd">(ぶんり)</span>ではない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/25_haru/q36.html" target="_blank" rel="noopener">平成25年春期 午前 問36</a></strong> (2013)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>25年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>36</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong FTP, NTP, POP3, TELNET, giao thức nào dùng UDP?</td>
+<td>内容<span class="rd">(ないよう)</span>：FTP、NTP、POP3、TELNETのうち、UDPを使用<span class="rd">(しよう)</span>しているものを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: NTP</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：NTP</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: NTP dùng UDP cổng 123 vì gói đồng bộ giờ nhỏ, cần nhanh. FTP (20/21), POP3 (110), TELNET (23) đều dùng TCP.</td>
+<td>解説<span class="rd">(かいせつ)</span>：NTPはUDPの123番<span class="rd">(ばん)</span>。FTP（20・21番<span class="rd">(ばん)</span>）、POP3（110番<span class="rd">(ばん)</span>）、TELNET（23番<span class="rd">(ばん)</span>）はTCP。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/29_aki/q34.html" target="_blank" rel="noopener">平成29年秋期 午前 問34</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>34</strong></td>
+</tr>
+<tr>
+<td>Nội dung: giao thức tầng giao vận nào được dùng khi cần tính thời gian thực hơn độ tin cậy?</td>
+<td>内容<span class="rd">(ないよう)</span>：信頼性<span class="rd">(しんらいせい)</span>よりもリアルタイム性<span class="rd">(せい)</span>が重視<span class="rd">(じゅうし)</span>される場合<span class="rd">(ばあい)</span>に使<span class="rd">(つか)</span>うトランスポート層<span class="rd">(そう)</span>のプロトコルを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (UDP)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（UDP）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: UDP bỏ bắt tay, gửi lại, điều khiển tắc nghẽn nên nhanh. Bẫy: HTTP ở tầng ứng dụng, IP ở tầng mạng, TCP cùng tầng nhưng ưu tiên độ tin cậy.</td>
+<td>解説<span class="rd">(かいせつ)</span>：UDPはコネクション確立<span class="rd">(かくりつ)</span>・再送<span class="rd">(さいそう)</span>・輻輳制御<span class="rd">(ふくそうせいぎょ)</span>がないので速<span class="rd">(はや)</span>い。HTTPはアプリケーション層<span class="rd">(そう)</span>、IPはネットワーク層<span class="rd">(そう)</span>、TCPは同<span class="rd">(おな)</span>じ層<span class="rd">(そう)</span>だが信頼性重視<span class="rd">(しんらいせいじゅうし)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 8 — <a href="https://www.fe-siken.com/kakomon/28_aki/q45.html" target="_blank" rel="noopener">平成28年秋期 午前 問45</a></strong> (2016)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>8 — 平成<span class="rd">(へいせい)</span>28年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>45</strong></td>
+</tr>
+<tr>
+<td>Nội dung: vì sao mã độc trong PC hay dùng cổng đích TCP 80 khi liên lạc với máy chủ C&amp;C trên Internet?</td>
+<td>内容<span class="rd">(ないよう)</span>：PCに侵入<span class="rd">(しんにゅう)</span>したマルウェアがインターネット上<span class="rd">(じょう)</span>のC&amp;Cサーバと通信<span class="rd">(つうしん)</span>するとき、宛先<span class="rd">(あてさき)</span>にTCPポート80番<span class="rd">(ばん)</span>がよく使<span class="rd">(つか)</span>われる理由<span class="rd">(りゆう)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (cổng 80 dùng cho duyệt web nên firewall thường cho qua)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（Web閲覧<span class="rd">(えつらん)</span>に使<span class="rd">(つか)</span>われ、ファイアウォールで許可<span class="rd">(きょか)</span>されている可能性<span class="rd">(かのうせい)</span>が高<span class="rd">(たか)</span>い）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 80 là HTTP, gần như mọi công ty đều mở cho nhân viên lướt web, nên lưu lượng mã độc lẫn vào được. Các lựa chọn sai gán nhầm cổng 80 cho DNS (thật ra 53) hoặc HTTPS (thật ra 443). Câu này thuộc phần bảo mật nhưng kiến thức là số cổng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：80番<span class="rd">(ばん)</span>はHTTPで、多<span class="rd">(おお)</span>くの組織<span class="rd">(そしき)</span>が許可<span class="rd">(きょか)</span>しているため通信<span class="rd">(つうしん)</span>が紛<span class="rd">(まぎ)</span>れやすい。誤答<span class="rd">(ごとう)</span>はDNS（実際<span class="rd">(じっさい)</span>は53番<span class="rd">(ばん)</span>）やHTTPS（実際<span class="rd">(じっさい)</span>は443番<span class="rd">(ばん)</span>）と結<span class="rd">(むす)</span>び付<span class="rd">(つ)</span>けている。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Xử lý chuỗi ｜ 文字列処理<span class="rd">(もじれつしょり)</span></h2>
+<p>Chuỗi trong mã giả FE cũng <strong>đánh số từ 1</strong>: ký tự đầu là "1文字目". Hầu hết câu chuỗi là một vòng for chạy qua từng ký tự, cộng với một biến đếm hoặc một biến kết quả.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kiểu dữ liệu:</strong> 文字型 là một ký tự, 文字列型 là chuỗi ký tự. Hằng ký tự và hằng chuỗi viết trong ngoặc kép: "a", "abc". Chuỗi rỗng là "".</td>
+<td><strong>データ型<span class="rd">(がた)</span>：</strong>文字型<span class="rd">(もじがた)</span>は1文字<span class="rd">(もじ)</span>、文字列型<span class="rd">(もじれつがた)</span>は文字<span class="rd">(もじ)</span>の並<span class="rd">(なら)</span>び。定数<span class="rd">(ていすう)</span>は "a"、"abc" のように書<span class="rd">(か)</span>く。空文字列<span class="rd">(くうもじれつ)</span>は ""。</td>
+</tr>
+<tr>
+<td><strong>Lấy ký tự:</strong> đề thường viết "s の i文字目の文字" hoặc dùng mảng ký tự s[i]. Độ dài: "s の文字数" (hoặc hàm length được định nghĩa trong đề).</td>
+<td><strong>文字<span class="rd">(もじ)</span>の取得<span class="rd">(しゅとく)</span>：</strong>「s の i文字目<span class="rd">(もじめ)</span>の文字<span class="rd">(もじ)</span>」や文字型<span class="rd">(もじがた)</span>の配列<span class="rd">(はいれつ)</span> s[i] で表<span class="rd">(あらわ)</span>す。長<span class="rd">(なが)</span>さは「s の文字数<span class="rd">(もじすう)</span>」や問題文<span class="rd">(もんだいぶん)</span>で定義<span class="rd">(ていぎ)</span>された関数<span class="rd">(かんすう)</span>を使<span class="rd">(つか)</span>う。</td>
+</tr>
+<tr>
+<td><strong>Đọc kỹ phần định nghĩa:</strong> các hàm như nối chuỗi, đổi số sang chuỗi, int("1") không có sẵn trong ngữ pháp IPA mà được định nghĩa ngay trong đề. Luôn đọc phần mô tả hàm trước khi đọc code.</td>
+<td><strong>定義<span class="rd">(ていぎ)</span>を読<span class="rd">(よ)</span>む：</strong>文字列<span class="rd">(もじれつ)</span>の連結<span class="rd">(れんけつ)</span>、整数<span class="rd">(せいすう)</span>から文字列<span class="rd">(もじれつ)</span>への変換<span class="rd">(へんかん)</span>、int("1") などは問題文<span class="rd">(もんだいぶん)</span>の中<span class="rd">(なか)</span>で定義<span class="rd">(ていぎ)</span>される。プログラムの前<span class="rd">(まえ)</span>に関数<span class="rd">(かんすう)</span>の説明<span class="rd">(せつめい)</span>を必<span class="rd">(かなら)</span>ず読<span class="rd">(よ)</span>む。</td>
+</tr>
+<tr>
+<td><strong>Mẫu 1 — đếm:</strong> chạy i từ 1 đến số ký tự, nếu ký tự thỏa điều kiện thì cnt tăng 1.</td>
+<td><strong>パターン1 計数<span class="rd">(けいすう)</span>：</strong>i を1から文字数<span class="rd">(もじすう)</span>まで回<span class="rd">(まわ)</span>し、条件<span class="rd">(じょうけん)</span>を満<span class="rd">(み)</span>たす文字<span class="rd">(もじ)</span>なら cnt を1増<span class="rd">(ふ)</span>やす。</td>
+</tr>
+<tr>
+<td><strong>Mẫu 2 — đối xứng:</strong> so sánh ký tự i với ký tự n − i + 1 (giống đảo mảng ở Ngày 2).</td>
+<td><strong>パターン2 対称<span class="rd">(たいしょう)</span>：</strong>i文字目<span class="rd">(もじめ)</span>と (n − i + 1)文字目<span class="rd">(もじめ)</span>を比<span class="rd">(くら)</span>べる（2日目<span class="rd">(ふつかめ)</span>の配列<span class="rd">(はいれつ)</span>の逆順<span class="rd">(ぎゃくじゅん)</span>と同<span class="rd">(おな)</span>じ）。</td>
+</tr>
+<tr>
+<td><strong>Mẫu 3 — tìm chuỗi con:</strong> vị trí bắt đầu i chạy từ 1 đến n − m + 1 (n: độ dài văn bản, m: độ dài mẫu). Vượt quá n − m + 1 là truy cập ngoài chuỗi.</td>
+<td><strong>パターン3 部分文字列<span class="rd">(ぶぶんもじれつ)</span>の探索<span class="rd">(たんさく)</span>：</strong>開始位置<span class="rd">(かいしいち)</span> i は1から n − m + 1 まで（n：テキストの長<span class="rd">(なが)</span>さ、m：パターンの長<span class="rd">(なが)</span>さ）。それを超<span class="rd">(こ)</span>えると範囲外<span class="rd">(はんいがい)</span>アクセスになる。</td>
+</tr>
+<tr>
+<td><strong>Mẫu 4 — đổi chuỗi số sang giá trị:</strong> đọc từ trái sang phải, result ← result × cơ số + chữ số. Với nhị phân: "10010" → 0, 1, 2, 4, 9, 18.</td>
+<td><strong>パターン4 数字列<span class="rd">(すうじれつ)</span>の変換<span class="rd">(へんかん)</span>：</strong>左<span class="rd">(ひだり)</span>から読<span class="rd">(よ)</span>み、result ← result × 基数<span class="rd">(きすう)</span> + 各桁<span class="rd">(かくけた)</span>の値<span class="rd">(あたい)</span>。2進<span class="rd">(しん)</span>の "10010" は 0、1、2、4、9、18。</td>
+</tr>
+<tr>
+<td><strong>and / or rút gọn:</strong> trong ngữ pháp IPA, nếu vế trái của and đã sai thì vế phải không được tính. Vì thế đặt điều kiện kiểm tra chỉ số (j ≦ m) ở bên trái để tránh truy cập ngoài chuỗi.</td>
+<td><strong>短絡評価<span class="rd">(たんらくひょうか)</span>：</strong>and の左側<span class="rd">(ひだりがわ)</span>が偽<span class="rd">(ぎ)</span>なら右側<span class="rd">(みぎがわ)</span>は評価<span class="rd">(ひょうか)</span>しない。添字<span class="rd">(そえじ)</span>の範囲<span class="rd">(はんい)</span>チェック（j ≦ m）を左<span class="rd">(ひだり)</span>に置<span class="rd">(お)</span>くことで範囲外<span class="rd">(はんいがい)</span>アクセスを防<span class="rd">(ふせ)</span>ぐ。</td>
+</tr>
+<tr>
+<td><strong>Cách trace chuỗi:</strong> viết chuỗi thành hàng ô có đánh số 1, 2, 3… ở trên, rồi mới trace. Sai lầm hay gặp nhất là lệch 1 vị trí.</td>
+<td><strong>トレースのコツ：</strong>文字列<span class="rd">(もじれつ)</span>をマス目<span class="rd">(め)</span>に書<span class="rd">(か)</span>き、上<span class="rd">(うえ)</span>に1、2、3…と番号<span class="rd">(ばんごう)</span>を振<span class="rd">(ふ)</span>ってからトレースする。1つずれる誤<span class="rd">(あやま)</span>りが最<span class="rd">(もっと)</span>も多<span class="rd">(おお)</span>い。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<p><strong>Câu B1 ｜ 問<span class="rd">(とい)</span>B1</strong></p>
+<pre><code>○整数型: find(文字列型: t, 文字列型: p)
+  整数型: n ← t の文字数
+  整数型: m ← p の文字数
+  整数型: i, j
+  for (i を 1 から ［ 空欄 ］ まで 1 ずつ増やす)
+    j ← 1
+    while ((j ≦ m) and (t の (i + j − 1)文字目の文字 = p の j文字目の文字))
+      j ← j + 1
+    endwhile
+    if (j &gt; m)
+      return i
+    endif
+  endfor
+  return −1
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hàm find trả về vị trí đầu tiên mà chuỗi p xuất hiện trong t, nếu không có thì trả về −1 (1 ≦ m ≦ n). Điền gì vào chỗ trống để kết quả đúng và không truy cập ngoài chuỗi?</td>
+<td>関数<span class="rd">(かんすう)</span> find は、t の中<span class="rd">(なか)</span>で p が最初<span class="rd">(さいしょ)</span>に現<span class="rd">(あらわ)</span>れる位置<span class="rd">(いち)</span>を返<span class="rd">(かえ)</span>し、なければ −1 を返<span class="rd">(かえ)</span>す（1 ≦ m ≦ n）。正<span class="rd">(ただ)</span>しく動作<span class="rd">(どうさ)</span>し、範囲外<span class="rd">(はんいがい)</span>を参照<span class="rd">(さんしょう)</span>しない空欄<span class="rd">(くうらん)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア n　イ n − m　ウ n − m + 1　エ m</td>
+<td>ア n　イ n − m　ウ n − m + 1　エ m</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (n − m + 1)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（n − m + 1）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thử t = "xxab" (n = 4), p = "ab" (m = 2). p nằm ở vị trí 3 = 4 − 2 + 1, nên vị trí bắt đầu cuối cùng phải là n − m + 1. Bẫy: イ chỉ đến 2, bỏ sót đáp án ở cuối chuỗi và trả về −1; ア cho i chạy đến 4, khi so sánh ký tự thứ 2 của p sẽ đọc ký tự thứ 5 của t (ngoài chuỗi); エ chỉ đúng khi tình cờ m = n − m + 1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：t = "xxab"（n = 4）、p = "ab"（m = 2）で確<span class="rd">(たし)</span>かめる。p は3文字目<span class="rd">(もじめ)</span>から現<span class="rd">(あらわ)</span>れ、3 = 4 − 2 + 1。イは2までしか調<span class="rd">(しら)</span>べず末尾<span class="rd">(まつび)</span>の一致<span class="rd">(いっち)</span>を見逃<span class="rd">(みのが)</span>す。アは i = 4 のとき t の5文字目<span class="rd">(もじめ)</span>を参照<span class="rd">(さんしょう)</span>して範囲外<span class="rd">(はんいがい)</span>。エは偶然<span class="rd">(ぐうぜん)</span>一致<span class="rd">(いっち)</span>する場合<span class="rd">(ばあい)</span>しか正<span class="rd">(ただ)</span>しくない。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu B1-2</strong> Với chỗ trống đúng, find("abcabd", "abd") trả về giá trị nào?</td>
+<td><strong>問<span class="rd">(とい)</span>B1-2</strong> 正<span class="rd">(ただ)</span>しい空欄<span class="rd">(くうらん)</span>のとき、find("abcabd", "abd") の戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア −1　イ 1　ウ 4　エ 6</td>
+<td>ア −1　イ 1　ウ 4　エ 6</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (4)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（4）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: n = 6, m = 3, i chạy 1 đến 4. i = 1: a = a, b = b, c ≠ d → j = 3, không khớp. i = 2: b ≠ a. i = 3: c ≠ a. i = 4: a, b, d đều khớp → j = 4 &gt; 3 → trả về 4. Bẫy: イ là thấy "ab" khớp ở đầu rồi dừng sớm; エ là vị trí ký tự cuối của chỗ khớp, không phải vị trí bắt đầu.</td>
+<td>解説<span class="rd">(かいせつ)</span>：n = 6、m = 3、i は1〜4。i = 1：a、b は一致<span class="rd">(いっち)</span>、c ≠ d で j = 3。i = 2：b ≠ a。i = 3：c ≠ a。i = 4：a、b、d が一致<span class="rd">(いっち)</span>し j = 4 &gt; 3 → 4を返<span class="rd">(かえ)</span>す。イは先頭<span class="rd">(せんとう)</span>の "ab" だけを見<span class="rd">(み)</span>た誤<span class="rd">(あやま)</span>り、エは一致<span class="rd">(いっち)</span>部分<span class="rd">(ぶぶん)</span>の末尾<span class="rd">(まつび)</span>の位置<span class="rd">(いち)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B2 ｜ 問<span class="rd">(とい)</span>B2</strong></p>
+<pre><code>// toStr は整数を文字列に変換する関数、+ は文字列の連結とする
+○文字列型: rle(文字列型: s)
+  文字列型: r ← &quot;&quot;
+  文字型: c
+  整数型: i ← 1
+  整数型: cnt
+  while (i ≦ s の文字数)
+    c ← s の i文字目の文字
+    cnt ← 0
+    while ((i ≦ s の文字数) and (s の i文字目の文字 = c))
+      cnt ← cnt + 1
+      i ← i + 1
+    endwhile
+    r ← r + c + toStr(cnt)
+  endwhile
+  return r
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hàm rle nén chuỗi bằng cách ghi mỗi ký tự kèm số lần lặp liên tiếp (run-length). rle("AAABCCCC") trả về gì?</td>
+<td>関数<span class="rd">(かんすう)</span> rle は、同<span class="rd">(おな)</span>じ文字<span class="rd">(もじ)</span>が続<span class="rd">(つづ)</span>く回数<span class="rd">(かいすう)</span>を文字<span class="rd">(もじ)</span>の後<span class="rd">(あと)</span>に付<span class="rd">(つ)</span>けて圧縮<span class="rd">(あっしゅく)</span>する（ランレングス圧縮<span class="rd">(あっしゅく)</span>）。rle("AAABCCCC") の戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア "A3B1C4"　イ "A3BC4"　ウ "3A1B4C"　エ "A3B1C3"</td>
+<td>ア "A3B1C4"　イ "A3BC4"　ウ "3A1B4C"　エ "A3B1C3"</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア ("A3B1C4")</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（"A3B1C4"）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: vòng ngoài lần 1: c = A, vòng trong đếm 3 chữ A, i = 4 → r = "A3". Lần 2: c = B, cnt = 1, i = 5 → r = "A3B1". Lần 3: c = C, đếm đến hết chuỗi, cnt = 4, i = 9 → r = "A3B1C4". i = 9 &gt; 8 nên dừng. Bẫy: イ quên rằng cnt = 1 vẫn được ghi; ウ đảo thứ tự c và số; エ lệch 1 khi đếm nhóm cuối.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1回目<span class="rd">(かいめ)</span>：c = A、A を3回<span class="rd">(かい)</span>数<span class="rd">(かぞ)</span>えて i = 4、r = "A3"。2回目<span class="rd">(かいめ)</span>：c = B、cnt = 1、i = 5、r = "A3B1"。3回目<span class="rd">(かいめ)</span>：c = C、最後<span class="rd">(さいご)</span>まで数<span class="rd">(かぞ)</span>えて cnt = 4、i = 9、r = "A3B1C4"。9 &gt; 8 で終了<span class="rd">(しゅうりょう)</span>。イは cnt = 1 も連結<span class="rd">(れんけつ)</span>されることを見落<span class="rd">(みお)</span>とした、ウは連結<span class="rd">(れんけつ)</span>の順序<span class="rd">(じゅんじょ)</span>が逆<span class="rd">(ぎゃく)</span>、エは最後<span class="rd">(さいご)</span>の数<span class="rd">(かず)</span>え間違<span class="rd">(まちが)</span>い。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu B2-2</strong> Nếu đổi điều kiện vòng trong thành chỉ còn (s の i文字目の文字 = c), bỏ phần (i ≦ s の文字数), chuyện gì xảy ra với rle("AAABCCCC")?</td>
+<td><strong>問<span class="rd">(とい)</span>B2-2</strong> 内側<span class="rd">(うちがわ)</span>の while の条件<span class="rd">(じょうけん)</span>を (s の i文字目<span class="rd">(もじめ)</span>の文字<span class="rd">(もじ)</span> = c) だけにすると、rle("AAABCCCC") はどうなるか。</td>
+</tr>
+<tr>
+<td>ア Kết quả vẫn đúng　イ Ra "A3B1C3"　ウ Truy cập ký tự thứ 9 (ngoài chuỗi) khi đếm nhóm C　エ Lặp vô hạn ở nhóm A</td>
+<td>ア 結果<span class="rd">(けっか)</span>は変<span class="rd">(か)</span>わらない　イ "A3B1C3" になる　ウ C を数<span class="rd">(かぞ)</span>えるとき9文字目<span class="rd">(もじめ)</span>（範囲外<span class="rd">(はんいがい)</span>）を参照<span class="rd">(さんしょう)</span>する　エ A の部分<span class="rd">(ぶぶん)</span>で無限<span class="rd">(むげん)</span>ループになる</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ở nhóm cuối, sau khi đếm chữ C thứ 8 thì i = 9, điều kiện lại đọc ký tự thứ 9 nhưng chuỗi chỉ có 8 ký tự. Nhóm A, B không có vấn đề vì luôn gặp ký tự khác trước khi hết chuỗi. Đây chính là lý do kiểm tra chỉ số phải đặt ở vế trái của and.</td>
+<td>解説<span class="rd">(かいせつ)</span>：最後<span class="rd">(さいご)</span>のグループで8文字目<span class="rd">(もじめ)</span>の C を数<span class="rd">(かぞ)</span>えた後<span class="rd">(あと)</span> i = 9 となり、存在<span class="rd">(そんざい)</span>しない9文字目<span class="rd">(もじめ)</span>を参照<span class="rd">(さんしょう)</span>する。A、B のグループは別<span class="rd">(べつ)</span>の文字<span class="rd">(もじ)</span>で止<span class="rd">(と)</span>まるので問題<span class="rd">(もんだい)</span>ない。添字<span class="rd">(そえじ)</span>のチェックを and の左側<span class="rd">(ひだりがわ)</span>に置<span class="rd">(お)</span>く理由<span class="rd">(りゆう)</span>である。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B3 ｜ 問<span class="rd">(とい)</span>B3</strong></p>
+<pre><code>○論理型: isPal(文字列型: s)
+  整数型: n ← s の文字数
+  整数型: i
+  for (i を 1 から n ÷ 2 まで 1 ずつ増やす)
+    if (s の i文字目の文字 ≠ s の (n − i + 1)文字目の文字)
+      return false
+    endif
+  endfor
+  return true
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hàm isPal kiểm tra chuỗi có đối xứng (palindrome) không. ÷ là chia lấy phần nguyên. Với s = "level", vòng for chạy mấy lần và trả về gì?</td>
+<td>関数<span class="rd">(かんすう)</span> isPal は回文<span class="rd">(かいぶん)</span>かどうかを判定<span class="rd">(はんてい)</span>する。÷ は整数<span class="rd">(せいすう)</span>の商<span class="rd">(しょう)</span>とする。s = "level" のとき、for の繰返<span class="rd">(くりかえ)</span>し回数<span class="rd">(かいすう)</span>と戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>の組合<span class="rd">(くみあわ)</span>せはどれか。</td>
+</tr>
+<tr>
+<td>ア 2 lần, true　イ 3 lần, true　ウ 2 lần, false　エ 5 lần, true</td>
+<td>ア 2回<span class="rd">(かい)</span>、true　イ 3回<span class="rd">(かい)</span>、true　ウ 2回<span class="rd">(かい)</span>、false　エ 5回<span class="rd">(かい)</span>、true</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (2 lần, true)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（2回<span class="rd">(かい)</span>、true）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: n = 5, n ÷ 2 = 2 nên i = 1, 2. i = 1: l và ký tự thứ 5 l → bằng. i = 2: e và ký tự thứ 4 e → bằng. Ký tự giữa (v) không cần so. Hết vòng → true. Bẫy: イ quên rằng ÷ bỏ phần lẻ (5 ÷ 2 = 2, không phải 2.5 làm tròn lên); エ nghĩ phải chạy hết chuỗi; ウ nhầm khi so ký tự thứ i với thứ n − i (lệch 1).</td>
+<td>解説<span class="rd">(かいせつ)</span>：n = 5、5 ÷ 2 = 2 なので i = 1、2。i = 1：l と5文字目<span class="rd">(もじめ)</span>の l は等<span class="rd">(ひと)</span>しい。i = 2：e と4文字目<span class="rd">(もじめ)</span>の e は等<span class="rd">(ひと)</span>しい。中央<span class="rd">(ちゅうおう)</span>の v は比較<span class="rd">(ひかく)</span>不要<span class="rd">(ふよう)</span>。よって true。イは商<span class="rd">(しょう)</span>の切捨<span class="rd">(きりす)</span>てを忘<span class="rd">(わす)</span>れた、エは全文字<span class="rd">(ぜんもじ)</span>を回<span class="rd">(まわ)</span>すと考<span class="rd">(かんが)</span>えた、ウは n − i と比<span class="rd">(くら)</span>べる1つずれの誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Trang fe-siken có chương trình đầy đủ; hãy mở link, tự trace trước rồi mới đọc lời giải.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/sample/b12.html" target="_blank" rel="noopener">サンプル問題 科目B 問12</a></strong> (IPA công bố 2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>12</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm simRatio nhận hai mảng ký tự s1, s2. Nếu cùng độ dài thì trả về (số vị trí có ký tự giống nhau) ÷ (độ dài s1), khác độ dài thì trả về −1. Điền điều kiện trong if.</td>
+<td>内容<span class="rd">(ないよう)</span>：関数<span class="rd">(かんすう)</span> simRatio は文字型<span class="rd">(もじがた)</span>の配列<span class="rd">(はいれつ)</span> s1、s2 を受<span class="rd">(う)</span>け取<span class="rd">(と)</span>り、長<span class="rd">(なが)</span>さが同<span class="rd">(おな)</span>じなら「同<span class="rd">(おな)</span>じ位置<span class="rd">(いち)</span>で文字<span class="rd">(もじ)</span>が一致<span class="rd">(いっち)</span>する数<span class="rd">(かず)</span>」÷「s1 の長<span class="rd">(なが)</span>さ」を、違<span class="rd">(ちが)</span>えば −1 を返<span class="rd">(かえ)</span>す。if の条件<span class="rd">(じょうけん)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (s1[i] = s2[i])</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（s1[i] = s2[i]）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cnt tăng khi điều kiện đúng và được dùng làm tử số, nên cnt phải đếm số vị trí trùng → điều kiện "bằng" và so cùng chỉ số i. Bẫy: các lựa chọn có s2[cnt] so sai vị trí, các lựa chọn có ≠ thì đếm số vị trí khác nhau.</td>
+<td>解説<span class="rd">(かいせつ)</span>：cnt は条件<span class="rd">(じょうけん)</span>が真<span class="rd">(しん)</span>のとき増<span class="rd">(ふ)</span>え、戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>の分子<span class="rd">(ぶんし)</span>になるので「同<span class="rd">(おな)</span>じ位置<span class="rd">(いち)</span>で一致<span class="rd">(いっち)</span>した数<span class="rd">(かず)</span>」。同<span class="rd">(おな)</span>じ添字<span class="rd">(そえじ)</span> i で = を使<span class="rd">(つか)</span>う。s2[cnt] は位置<span class="rd">(いち)</span>がずれ、≠ は不一致<span class="rd">(ふいっち)</span>を数<span class="rd">(かぞ)</span>えてしまう。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/sample/b16.html" target="_blank" rel="noopener">サンプル問題 科目B 問16</a></strong> (IPA công bố 2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>16</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đổi một code point Unicode (800 đến FFFF hệ 16) thành 3 byte UTF-8 dạng 1110xxxx 10xxxxxx 10xxxxxx. Vòng lặp xử lý từ byte cuối lên, hai chỗ trống có cùng đáp án.</td>
+<td>内容<span class="rd">(ないよう)</span>：Unicodeの符号位置<span class="rd">(ふごういち)</span>（16進<span class="rd">(しん)</span>で800〜FFFF）をUTF-8の3バイト（1110xxxx 10xxxxxx 10xxxxxx）に変換<span class="rd">(へんかん)</span>する。後<span class="rd">(うし)</span>ろのバイトから処理<span class="rd">(しょり)</span>し、2つの空欄<span class="rd">(くうらん)</span>には同<span class="rd">(おな)</span>じものが入<span class="rd">(はい)</span>る。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ク</strong> (64)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ク</strong>（64）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mỗi byte sau nhận 6 bit thấp; lấy 6 bit thấp = mod 64, rồi bỏ 6 bit đó đi = chia 64 (2⁶). Tự kiểm tra với あ = 3042: 0011 000001 000010 → E3 81 82, đúng mã UTF-8 của あ. Bẫy: 16 hoặc 256 là nghĩ theo 4 bit hoặc 8 bit thay vì 6 bit.</td>
+<td>解説<span class="rd">(かいせつ)</span>：後<span class="rd">(うし)</span>ろのバイトには下位<span class="rd">(かい)</span>6ビットが入<span class="rd">(はい)</span>る。下位<span class="rd">(かい)</span>6ビット＝64で割<span class="rd">(わ)</span>った余<span class="rd">(あま)</span>り、次<span class="rd">(つぎ)</span>へ進<span class="rd">(すす)</span>むには64（2⁶）で割<span class="rd">(わ)</span>る。「あ」（3042）で確認<span class="rd">(かくにん)</span>：0011 000001 000010 → E3 81 82。16や256は4ビット・8ビット単位<span class="rd">(たんい)</span>と勘違<span class="rd">(かんちが)</span>いした値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/sample20220425/b5.html" target="_blank" rel="noopener">科目Bサンプル問題 (2022年4月25日公開) 問5</a></strong> (2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 科目<span class="rd">(かもく)</span>Bサンプル問題<span class="rd">(もんだい)</span>（2022年<span class="rd">(ねん)</span>4月<span class="rd">(がつ)</span>25日<span class="rd">(にち)</span>公開<span class="rd">(こうかい)</span>） 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: với nhóm từ tiếng Anh, tính tỉ lệ ký tự c2 đứng ngay sau ký tự c1. Có sẵn hàm freq (đếm số lần xuất hiện) và freqE (đếm số lần xuất hiện ở cuối từ). Chọn biểu thức tính tỉ lệ.</td>
+<td>内容<span class="rd">(ないよう)</span>：英単語群<span class="rd">(えいたんごぐん)</span>で、文字<span class="rd">(もじ)</span> c1 の直後<span class="rd">(ちょくご)</span>に c2 が出現<span class="rd">(しゅつげん)</span>する割合<span class="rd">(わりあい)</span>を求<span class="rd">(もと)</span>める。出現回数<span class="rd">(しゅつげんかいすう)</span>を返<span class="rd">(かえ)</span>す freq と、単語<span class="rd">(たんご)</span>の末尾<span class="rd">(まつび)</span>での出現回数<span class="rd">(しゅつげんかいすう)</span>を返<span class="rd">(かえ)</span>す freqE を使<span class="rd">(つか)</span>って式<span class="rd">(しき)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (freq(s1+s2) ÷ (freq(s1) − freqE(s1)))</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（freq(s1+s2) ÷ (freq(s1) − freqE(s1))）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tử số = số lần cặp "c1c2" xuất hiện; mẫu số = số lần c1 xuất hiện mà không ở cuối từ (c1 ở cuối từ thì không có ký tự sau). Ví dụ trong đề với n, f: tử 2, mẫu 5 → 0.4. Bẫy: ア, イ lộn ngược tử và mẫu; エ trừ theo c2 thay vì c1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：分子<span class="rd">(ぶんし)</span>は "c1c2" の出現回数<span class="rd">(しゅつげんかいすう)</span>、分母<span class="rd">(ぶんぼ)</span>は末尾<span class="rd">(まつび)</span>以外<span class="rd">(いがい)</span>の c1 の出現回数<span class="rd">(しゅつげんかいすう)</span>。例<span class="rd">(れい)</span>の n と f では 2 ÷ 5 = 0.4。ア・イは分子<span class="rd">(ぶんし)</span>と分母<span class="rd">(ぶんぼ)</span>が逆<span class="rd">(ぎゃく)</span>、エは c2 で引<span class="rd">(ひ)</span>いている。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/06_haru/b2.html" target="_blank" rel="noopener">令和6年度 科目B 問2</a></strong> (2024, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm convDecimal nhận chuỗi chỉ gồm "0" và "1", trả về giá trị nhị phân không dấu (ví dụ "10010" → 18). Có hàm int đổi "0"/"1" thành 0/1. Chọn câu lệnh trong vòng lặp.</td>
+<td>内容<span class="rd">(ないよう)</span>：関数<span class="rd">(かんすう)</span> convDecimal は "0" と "1" だけの文字列<span class="rd">(もじれつ)</span>を符号<span class="rd">(ふごう)</span>なし2進数<span class="rd">(しんすう)</span>として値<span class="rd">(あたい)</span>に変換<span class="rd">(へんかん)</span>する（例<span class="rd">(れい)</span>："10010" → 18）。int 関数<span class="rd">(かんすう)</span>を使<span class="rd">(つか)</span>い、ループ内<span class="rd">(ない)</span>の文<span class="rd">(ぶん)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (result ← result × 2 + int(binary の i文字目の文字))</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（result ← result × 2 + int(binary の i文字目<span class="rd">(もじめ)</span>の文字<span class="rd">(もじ)</span>)）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đọc trái sang phải, mỗi bước nhân 2 rồi cộng chữ số: 0 → 1 → 2 → 4 → 9 → 18. Bẫy: hai lựa chọn chỉ cộng mà không nhân 2 cho ra 2 (đếm số chữ 1); lựa chọn đọc từ phải (length − i + 1) mà vẫn nhân 2 cho ra 9 (là giá trị của chuỗi đảo "01001").</td>
+<td>解説<span class="rd">(かいせつ)</span>：左<span class="rd">(ひだり)</span>から読<span class="rd">(よ)</span>み、毎回<span class="rd">(まいかい)</span>2倍<span class="rd">(ばい)</span>して桁<span class="rd">(けた)</span>を加<span class="rd">(くわ)</span>える：0 → 1 → 2 → 4 → 9 → 18。加算<span class="rd">(かさん)</span>だけの選択肢<span class="rd">(せんたくし)</span>は2（1の個数<span class="rd">(こすう)</span>）、右<span class="rd">(みぎ)</span>から読<span class="rd">(よ)</span>んで2倍<span class="rd">(ばい)</span>する選択肢<span class="rd">(せんたくし)</span>は9（逆順<span class="rd">(ぎゃくじゅん)</span>"01001"の値<span class="rd">(あたい)</span>）。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/25_aki/pm08.html" target="_blank" rel="noopener">平成25年秋期 午後 問8</a></strong> (2013, đề 午後 cũ, phần thuật toán)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>25年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午後<span class="rd">(ごご)</span> 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: nén chuỗi kiểu LZ77. Khi gặp đoạn ≥ 4 ký tự đã xuất hiện trong 26 ký tự trước đó, thay bằng mã 3 ký tự "$" + khoảng cách + độ dài (A–Z biểu diễn 1–26). Có cả hàm giải nén. Đề dài, chỉ cần làm 設問1 (5 chỗ trống a–e).</td>
+<td>内容<span class="rd">(ないよう)</span>：LZ77に似<span class="rd">(に)</span>た文字列圧縮<span class="rd">(もじれつあっしゅく)</span>。直前<span class="rd">(ちょくぜん)</span>26文字<span class="rd">(もじ)</span>以内<span class="rd">(いない)</span>に同<span class="rd">(おな)</span>じ4文字<span class="rd">(もじ)</span>以上<span class="rd">(いじょう)</span>の並<span class="rd">(なら)</span>びがあれば、"$" と距離<span class="rd">(きょり)</span>・長<span class="rd">(なが)</span>さ（A〜Zで1〜26）の3文字<span class="rd">(もじ)</span>に置<span class="rd">(お)</span>き換<span class="rd">(か)</span>える。伸張処理<span class="rd">(しんちょうしょり)</span>もある。設問<span class="rd">(せつもん)</span>1（空欄<span class="rd">(くうらん)</span>a〜e）を解<span class="rd">(と)</span>く。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án 設問1: a ア, b エ, c イ, d エ, e エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>（設問<span class="rd">(せつもん)</span>1）：a ア、b エ、c イ、d エ、e エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: a kiểm tra vị trí lùi lại không ra ngoài đầu chuỗi (Pindex − Distance ≧ 0); c tăng khoảng cách để thử vị trí xa hơn; d nhảy qua đoạn đã nén (Pindex ← Pindex + Maxfitnum). Ý chính giống Câu B1: so sánh hai vị trí trong chuỗi và luôn chặn chỉ số ở biên.</td>
+<td>解説<span class="rd">(かいせつ)</span>：a は先頭<span class="rd">(せんとう)</span>より前<span class="rd">(まえ)</span>を参照<span class="rd">(さんしょう)</span>しない確認<span class="rd">(かくにん)</span>、c は距離<span class="rd">(きょり)</span>を1つ増<span class="rd">(ふ)</span>やして次<span class="rd">(つぎ)</span>の候補<span class="rd">(こうほ)</span>を調<span class="rd">(しら)</span>べる、d は圧縮<span class="rd">(あっしゅく)</span>した長<span class="rd">(なが)</span>さ分<span class="rd">(ぶん)</span>だけ進<span class="rd">(すす)</span>む。問<span class="rd">(とい)</span>B1と同<span class="rd">(おな)</span>じく、2つの位置<span class="rd">(いち)</span>の比較<span class="rd">(ひかく)</span>と添字<span class="rd">(そえじ)</span>の範囲<span class="rd">(はんい)</span>が要点<span class="rd">(ようてん)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/01_aki/pm08.html" target="_blank" rel="noopener">令和元年秋期 午後 問8</a></strong> (2019, đề 午後 cũ, phần thuật toán)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午後<span class="rd">(ごご)</span> 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: tìm chuỗi bằng thuật toán Bitap. Mỗi chữ A–Z có một mặt nạ 16 bit: bit thứ i bằng 1 nếu ký tự thứ i của mẫu là chữ đó. Khi duyệt văn bản, biến trạng thái được dịch trái, OR với 1, rồi AND với mặt nạ của ký tự hiện tại.</td>
+<td>内容<span class="rd">(ないよう)</span>：Bitap法<span class="rd">(ほう)</span>による文字列探索<span class="rd">(もじれつたんさく)</span>。A〜Z の各文字<span class="rd">(かくもじ)</span>に16ビットのマスクを作<span class="rd">(つく)</span>り、パターンの i文字目<span class="rd">(もじめ)</span>がその文字<span class="rd">(もじ)</span>なら第<span class="rd">(だい)</span> i ビットを1にする。テキストを走査<span class="rd">(そうさ)</span>しながら状態<span class="rd">(じょうたい)</span>を左<span class="rd">(ひだり)</span>シフトし、1とORし、文字<span class="rd">(もじ)</span>のマスクとANDする。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án 設問1: a イ, b ア, c ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>（設問<span class="rd">(せつもん)</span>1）：a イ、b ア、c ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: với mẫu "ACABAB", B ở vị trí 4 và 6, nên mặt nạ của B có bit 4 và bit 6 (tính từ bit thấp nhất là bit 1) = 0000000000101000 (= 8 + 32 = 40). Câu này nối kiến thức mặt nạ bit Ngày 2 với xử lý chuỗi, đáng làm thử.</td>
+<td>解説<span class="rd">(かいせつ)</span>：パターン "ACABAB" で B は4文字目<span class="rd">(もじめ)</span>と6文字目<span class="rd">(もじめ)</span>なので、B のマスクは下位<span class="rd">(かい)</span>から第<span class="rd">(だい)</span>4・第<span class="rd">(だい)</span>6ビットが1：0000000000101000（8 + 32 = 40）。2日目<span class="rd">(ふつかめ)</span>のマスク演算<span class="rd">(えんざん)</span>と文字列処理<span class="rd">(もじれつしょり)</span>を組<span class="rd">(く)</span>み合<span class="rd">(あ)</span>わせた問題<span class="rd">(もんだい)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mô hình tham chiếu cơ bản OSI</td>
+<td>OSI基本参照<span class="rd">(きほんさんしょう)</span>モデル</td>
+</tr>
+<tr>
+<td>Tầng vật lý / liên kết dữ liệu / mạng</td>
+<td>物理層<span class="rd">(ぶつりそう)</span> / データリンク層<span class="rd">(そう)</span> / ネットワーク層<span class="rd">(そう)</span></td>
+</tr>
+<tr>
+<td>Tầng giao vận / phiên / trình diễn / ứng dụng</td>
+<td>トランスポート層<span class="rd">(そう)</span> / セション層<span class="rd">(そう)</span> / プレゼンテーション層<span class="rd">(そう)</span> / アプリケーション層<span class="rd">(そう)</span></td>
+</tr>
+<tr>
+<td>Giao thức</td>
+<td>プロトコル</td>
+</tr>
+<tr>
+<td>Định tuyến, chọn đường / Chuyển tiếp</td>
+<td>経路制御<span class="rd">(けいろせいぎょ)</span>（ルーティング） / 中継<span class="rd">(ちゅうけい)</span></td>
+</tr>
+<tr>
+<td>Nút kề nhau</td>
+<td>隣接<span class="rd">(りんせつ)</span>ノード</td>
+</tr>
+<tr>
+<td>Hướng kết nối / Không kết nối</td>
+<td>コネクション型<span class="rd">(がた)</span> / コネクションレス型<span class="rd">(がた)</span></td>
+</tr>
+<tr>
+<td>Gửi lại / Điều khiển luồng / Điều khiển tắc nghẽn</td>
+<td>再送制御<span class="rd">(さいそうせいぎょ)</span> / フロー制御<span class="rd">(せいぎょ)</span> / 輻輳制御<span class="rd">(ふくそうせいぎょ)</span></td>
+</tr>
+<tr>
+<td>Độ tin cậy / Tính thời gian thực</td>
+<td>信頼性<span class="rd">(しんらいせい)</span> / リアルタイム性<span class="rd">(せい)</span></td>
+</tr>
+<tr>
+<td>Số cổng / Cổng well-known</td>
+<td>ポート番号<span class="rd">(ばんごう)</span> / ウェルノウンポート</td>
+</tr>
+<tr>
+<td>Xác định, nhận dạng</td>
+<td>識別<span class="rd">(しきべつ)</span></td>
+</tr>
+<tr>
+<td>Chuyển đổi giao thức</td>
+<td>プロトコル変換<span class="rd">(へんかん)</span></td>
+</tr>
+<tr>
+<td>Khuếch đại tín hiệu</td>
+<td>信号<span class="rd">(しんごう)</span>の増幅<span class="rd">(ぞうふく)</span></td>
+</tr>
+<tr>
+<td>Thời gian truyền / Tốc độ đường truyền / Hiệu suất truyền</td>
+<td>伝送時間<span class="rd">(でんそうじかん)</span> / 回線速度<span class="rd">(かいせんそくど)</span> / 伝送効率<span class="rd">(でんそうこうりつ)</span></td>
+</tr>
+<tr>
+<td>Gửi / Nhận thư</td>
+<td>送信<span class="rd">(そうしん)</span> / 受信<span class="rd">(じゅしん)</span></td>
+</tr>
+<tr>
+<td>Đồng bộ thời gian</td>
+<td>時刻同期<span class="rd">(じこくどうき)</span></td>
+</tr>
+<tr>
+<td>Kiểu ký tự / Kiểu chuỗi / Chuỗi rỗng</td>
+<td>文字型<span class="rd">(もじがた)</span> / 文字列型<span class="rd">(もじれつがた)</span> / 空文字列<span class="rd">(くうもじれつ)</span></td>
+</tr>
+<tr>
+<td>Ký tự thứ i / Số ký tự</td>
+<td>i文字目<span class="rd">(もじめ)</span> / 文字数<span class="rd">(もじすう)</span></td>
+</tr>
+<tr>
+<td>Nối chuỗi</td>
+<td>連結<span class="rd">(れんけつ)</span></td>
+</tr>
+<tr>
+<td>Chuỗi con / Tìm kiếm chuỗi</td>
+<td>部分文字列<span class="rd">(ぶぶんもじれつ)</span> / 文字列探索<span class="rd">(もじれつたんさく)</span></td>
+</tr>
+<tr>
+<td>Khớp / Không khớp</td>
+<td>一致<span class="rd">(いっち)</span> / 不一致<span class="rd">(ふいっち)</span></td>
+</tr>
+<tr>
+<td>Nén / Giải nén</td>
+<td>圧縮<span class="rd">(あっしゅく)</span> / 伸張<span class="rd">(しんちょう)</span></td>
+</tr>
+<tr>
+<td>Palindrome (chuỗi đối xứng)</td>
+<td>回文<span class="rd">(かいぶん)</span></td>
+</tr>
+<tr>
+<td>Tần suất xuất hiện / Tỉ lệ</td>
+<td>出現回数<span class="rd">(しゅつげんかいすう)</span> / 割合<span class="rd">(わりあい)</span></td>
+</tr>
+<tr>
+<td>Đánh giá rút gọn (and/or)</td>
+<td>短絡評価<span class="rd">(たんらくひょうか)</span></td>
+</tr>
+<tr>
+<td>Truy cập ngoài phạm vi</td>
+<td>範囲外<span class="rd">(はんいがい)</span>アクセス</td>
+</tr>
+<tr>
+<td>Cơ số / Chữ số</td>
+<td>基数<span class="rd">(きすう)</span> / 桁<span class="rd">(けた)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

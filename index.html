@@ -1,0 +1,218 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>Lộ trình FE 16/11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column; a "today" panel up top, then five week blocks, each a list of day rows. */
+:root {
+  --bg: #f5f7f9;
+  --surface: #ffffff;
+  --ink: #16202a;
+  --muted: #5a6876;
+  --line: #dce3ea;
+  --accent: #1d5f7a;
+  --accent-soft: #e3eff4;
+  --today: #b4432a;
+  --today-soft: #fbeae5;
+  --done: #8a97a3;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --today: #ef8a6f; --today-soft: #3a231d; --done: #6b7884;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --today: #ef8a6f; --today-soft: #3a231d; --done: #6b7884;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 760px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 56px; display: grid; gap: 28px; }
+header { display: grid; gap: 6px; }
+.eyebrow { font-family: var(--f-jp); font-size: 12px; letter-spacing: .08em; color: var(--muted); }
+h1 { font-size: 28px; line-height: 1.2; margin: 0; font-weight: 700; text-wrap: balance; }
+.lead { margin: 0; color: var(--muted); max-width: 62ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 6px; font-size: 14px; }
+.facts b { font-family: var(--f-mono); font-weight: 500; color: var(--accent); }
+
+.today { background: var(--today-soft); border: 1px solid color-mix(in srgb, var(--today) 35%, transparent); border-radius: 10px; padding: 16px 18px; display: grid; gap: 8px; }
+.today .tag { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--today); }
+.today h2 { margin: 0; font-size: 19px; line-height: 1.3; text-wrap: balance; }
+.today .subj { display: grid; gap: 4px; font-size: 14px; }
+.today .subj span b { display: inline-block; min-width: 4.2em; font-family: var(--f-jp); font-weight: 600; }
+.btn { justify-self: start; display: inline-block; margin-top: 4px; padding: 9px 14px; border-radius: 8px; background: var(--today); color: var(--surface); font-weight: 600; text-decoration: none; }
+.btn:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pending { font-size: 14px; color: var(--muted); }
+
+h2.sec { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 -14px; font-weight: 600; }
+.week { display: grid; gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.week-head { padding: 12px 16px; display: grid; gap: 2px; border-bottom: 1px solid var(--line); }
+.week-head .w { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.week-head strong { font-size: 16px; }
+.week-head .range { font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.week-head .goal { font-size: 13.5px; color: var(--muted); }
+.week-head .goal b { color: var(--ink); font-weight: 600; }
+
+.day { display: grid; grid-template-columns: 3.4rem 1fr; gap: 4px 12px; padding: 11px 16px; border-top: 1px solid var(--line); }
+.week-head + .day { border-top: 0; }
+.day .when { font-family: var(--f-mono); font-size: 13px; line-height: 1.35; color: var(--muted); }
+.day .when .n { display: block; font-size: 12px; }
+.day .body { min-width: 0; display: grid; gap: 2px; font-size: 14px; }
+.day .body .row b { font-family: var(--f-jp); font-weight: 600; font-size: 12.5px; color: var(--accent); margin-right: 6px; }
+.day .link { font-size: 13.5px; margin-top: 2px; }
+.day .link a { color: var(--accent); font-weight: 600; }
+.day .link .wait { color: var(--muted); }
+.day.review { background: var(--accent-soft); }
+.day.is-past .body, .day.is-past .when { color: var(--done); }
+.day.is-past .body .row b { color: var(--done); }
+.day.is-today { background: var(--today-soft); box-shadow: inset 3px 0 0 var(--today); }
+.day.is-today .when { color: var(--today); }
+.day.exam { background: var(--ink); color: var(--bg); }
+.day.exam .when, .day.exam .body .row b { color: var(--bg); }
+
+.note { font-size: 13px; color: var(--muted); margin: 0; }
+.note a { color: var(--accent); }
+@media (max-width: 420px) { h1 { font-size: 24px; } .day { grid-template-columns: 3rem 1fr; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">基本情報技術者試験 · Lộ trình cá nhân</div>
+    <h1>Lộ trình ôn thi FE đến ngày 16/11</h1>
+    <p class="lead">Mục tiêu: đạt từ 600/1000 ở cả 科目A và 科目B. Mỗi ngày khoảng 2 tiếng: 1 tiếng 科目A, 1 tiếng 科目B. Khi luyện đề, nhắm tới đúng 70% trở lên.</p>
+    <div class="facts">
+      <span>Còn <b id="countdown">–</b> ngày đến ngày thi</span>
+      <span>科目A: 60 câu · 90 phút</span>
+      <span>科目B: 20 câu · 100 phút</span>
+    </div>
+  </header>
+
+  <section class="today" id="today" aria-live="polite"></section>
+
+  <h2 class="sec">Lịch 5 tuần</h2>
+  <div id="weeks" style="display:grid;gap:16px"></div>
+
+  <p class="note">Tất cả các trang đều chỉ để xem, không sửa được. Bài của cả 35 ngày đã soạn xong, mỗi ngày có link ở trên. Muốn thay đổi gì, bạn nhắn Claude.</p>
+</div>
+
+<!-- DATA: mỗi ngày một dòng. Trường "link" để trống cho tới khi bài được soạn. -->
+<script id="days" type="application/json">
+[ {"n": 1, "d": "2026-10-12", "a": "Cơ số, bù 2, dịch bit, sai số; xác suất và thống kê", "b": "Làm quen trace mã giả", "link": "ngay-01.html", "title": "FE Ngày 1"},
+ {"n": 2, "d": "2026-10-13", "a": "Phép toán logic, mặt nạ bit", "b": "Cú pháp mã giả, mảng", "link": "ngay-02.html", "title": "FE Ngày 2"},
+ {"n": 3, "d": "2026-10-14", "a": "Cấu trúc dữ liệu (list, stack, queue, cây, hash)", "b": "Duyệt mảng, mảng 2 chiều", "link": "ngay-03.html", "title": "FE Ngày 3"},
+ {"n": 4, "d": "2026-10-15", "a": "CPU, bộ nhớ, cache, ngắt", "b": "Tìm kiếm tuyến tính, nhị phân", "link": "ngay-04.html", "title": "FE Ngày 4"},
+ {"n": 5, "d": "2026-10-16", "a": "Hệ điều hành (tiến trình, lập lịch, bộ nhớ ảo)", "b": "Sắp xếp nổi bọt, chọn", "link": "ngay-05.html", "title": "FE Ngày 5"},
+ {"n": 6, "d": "2026-10-17", "a": "Cấu hình hệ thống, độ tin cậy (稼働率, MTBF, RAID)", "b": "Sắp xếp chèn, quick sort", "link": "ngay-06.html", "title": "FE Ngày 6"},
+ {"n": 7, "d": "2026-10-18", "a": "Ôn tuần 1 + mini test", "b": "Ôn tuần 1", "link": "ngay-07.html", "review": true, "title": "FE Ngày 7"},
+ {"n": 8, "d": "2026-10-19", "a": "Mạng cơ bản (OSI, TCP/IP, giao thức, cổng)", "b": "Xử lý chuỗi", "link": "ngay-08.html", "title": "FE Ngày 8"},
+ {"n": 9, "d": "2026-10-20", "a": "IP, subnet, NAT, DNS, DHCP", "b": "Đệ quy", "link": "ngay-09.html", "title": "FE Ngày 9"},
+ {"n": 10, "d": "2026-10-21", "a": "CSDL (ER, chuẩn hóa, khóa)", "b": "Stack, queue", "link": "ngay-10.html", "title": "FE Ngày 10"},
+ {"n": 11, "d": "2026-10-22", "a": "SQL, giao dịch (khóa, ACID, phục hồi)", "b": "Danh sách liên kết", "link": "ngay-11.html", "title": "FE Ngày 11"},
+ {"n": 12, "d": "2026-10-23", "a": "Bảo mật 1: mã hóa, xác thực, chữ ký số, PKI", "b": "Câu bảo mật 科目B", "link": "ngay-12.html", "title": "FE Ngày 12"},
+ {"n": 13, "d": "2026-10-24", "a": "Bảo mật 2: các kiểu tấn công, phòng chống", "b": "Cây, cây tìm kiếm nhị phân", "link": "ngay-13.html", "title": "FE Ngày 13"},
+ {"n": 14, "d": "2026-10-25", "a": "Ôn tuần 2 + mini test", "b": "Ôn tuần 2", "link": "ngay-14.html", "review": true, "title": "FE Ngày 14"},
+ {"n": 15, "d": "2026-10-26", "a": "Phát triển phần mềm (mô hình, kiểm thử, UML)", "b": "Hash, đồ thị", "link": "ngay-15.html", "title": "FE Ngày 15"},
+ {"n": 16, "d": "2026-10-27", "a": "Quản lý dự án (WBS, sơ đồ mũi tên, EVM)", "b": "Mảng 2 chiều, ma trận", "link": "ngay-16.html", "title": "FE Ngày 16"},
+ {"n": 17, "d": "2026-10-28", "a": "Quản lý dịch vụ, kiểm toán (SLA, ITIL, BCP)", "b": "Câu tổng hợp", "link": "ngay-17.html", "title": "FE Ngày 17"},
+ {"n": 18, "d": "2026-10-29", "a": "Doanh nghiệp, kế toán (hòa vốn, báo cáo tài chính)", "b": "Câu bảo mật", "link": "ngay-18.html", "title": "FE Ngày 18"},
+ {"n": 19, "d": "2026-10-30", "a": "Chiến lược, marketing (SWOT, PPM, BSC)", "b": "Câu tổng hợp", "link": "ngay-19.html", "title": "FE Ngày 19"},
+ {"n": 20, "d": "2026-10-31", "a": "Pháp luật (bản quyền, thông tin cá nhân, phái cử lao động)", "b": "Câu tổng hợp", "link": "ngay-20.html", "title": "FE Ngày 20"},
+ {"n": 21, "d": "2026-11-01", "a": "Ôn tuần 3 + mini test", "b": "Ôn tuần 3", "link": "ngay-21.html", "review": true, "title": "FE Ngày 21"},
+ {"n": 22, "d": "2026-11-02", "a": "Luyện đề テクノロジ (câu tính toán)", "b": "4 câu thuật toán", "link": "ngay-22.html", "title": "FE Ngày 22"},
+ {"n": 23, "d": "2026-11-03", "a": "Luyện đề マネジメント", "b": "4 câu thuật toán", "link": "ngay-23.html", "title": "FE Ngày 23"},
+ {"n": 24, "d": "2026-11-04", "a": "Luyện đề ストラテジ", "b": "4 câu thuật toán", "link": "ngay-24.html", "title": "FE Ngày 24"},
+ {"n": 25, "d": "2026-11-05", "a": "Ôn sai số và công thức", "b": "Thuật toán khó (đệ quy, cây, sắp xếp)", "link": "ngay-25.html", "title": "FE Ngày 25"},
+ {"n": 26, "d": "2026-11-06", "a": "Mạng, bảo mật", "b": "Câu bảo mật", "link": "ngay-26.html", "title": "FE Ngày 26"},
+ {"n": 27, "d": "2026-11-07", "a": "Thi thử A (90 phút)", "b": "—", "link": "ngay-27.html", "review": true, "title": "FE Ngày 27"},
+ {"n": 28, "d": "2026-11-08", "a": "—", "b": "Thi thử B (100 phút)", "link": "ngay-28.html", "review": true, "title": "FE Ngày 28"},
+ {"n": 29, "d": "2026-11-09", "a": "Ôn chủ đề hay sai + 12 câu", "b": "Ôn câu sai", "link": "ngay-29.html", "title": "FE Ngày 29"},
+ {"n": 30, "d": "2026-11-10", "a": "Thi thử A+B", "b": "Thi thử A+B", "link": "ngay-30.html", "review": true, "title": "FE Ngày 30"},
+ {"n": 31, "d": "2026-11-11", "a": "Ôn công thức (稼働率, hòa vốn, EVM, CPU, thời gian truyền)", "b": "Ôn câu sai", "link": "ngay-31.html", "title": "FE Ngày 31"},
+ {"n": 32, "d": "2026-11-12", "a": "Thi thử A+B", "b": "Thi thử A+B", "link": "ngay-32.html", "review": true, "title": "FE Ngày 32"},
+ {"n": 33, "d": "2026-11-13", "a": "Ôn bảo mật, mạng, CSDL", "b": "Câu ngắn", "link": "ngay-33.html", "title": "FE Ngày 33"},
+ {"n": 34, "d": "2026-11-14", "a": "Tổng ôn: bảng công thức + từ vựng", "b": "Tổng ôn", "link": "ngay-34.html", "title": "FE Ngày 34"},
+ {"n": 35, "d": "2026-11-15", "a": "Nghỉ nhẹ, checklist ngày thi, ngủ sớm", "b": "10 câu khởi động", "link": "ngay-35.html", "title": "FE Ngày 35"}
+]
+</script>
+
+<script>
+(function () {
+  var WEEKS = [
+    { name: "Tuần 1", from: 1, to: 7, focus: "Cơ sở lý thuyết, phần cứng, OS · mã giả, mảng, tìm kiếm, sắp xếp", goal: "Trace vòng lặp và mảng không sai; mini test 60%+" },
+    { name: "Tuần 2", from: 8, to: 14, focus: "Mạng, CSDL, SQL, bảo mật · chuỗi, đệ quy, cấu trúc dữ liệu", goal: "Giải được subnet, SQL, mã hóa; mini test 65%+" },
+    { name: "Tuần 3", from: 15, to: 21, focus: "Phát triển, quản lý, chiến lược, pháp luật · câu tổng hợp", goal: "Học đủ mọi mảng của đề; mini test 65%+" },
+    { name: "Tuần 4", from: 22, to: 28, focus: "Luyện đề theo phần, thi thử A và B", goal: "Thi thử A 65%+, B 60%+" },
+    { name: "Tuần 5", from: 29, to: 35, focus: "Thi thử bấm giờ, ôn câu sai, công thức, từ vựng", goal: "Thi thử 70%+ cả hai phần" }
+  ];
+  var days = [];
+  try { days = JSON.parse(document.getElementById("days").textContent); } catch (e) { days = []; }
+  var WD = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
+
+  function tokyoToday() {
+    try {
+      var p = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+      return p; // YYYY-MM-DD
+    } catch (e) { return new Date().toISOString().slice(0, 10); }
+  }
+  function parse(s) { var a = s.split("-"); return new Date(Date.UTC(+a[0], +a[1] - 1, +a[2])); }
+  function fmt(s) { var d = parse(s); return WD[d.getUTCDay()] + " " + d.getUTCDate() + "/" + (d.getUTCMonth() + 1); }
+  function prevDay(s) { var d = parse(s); d.setUTCDate(d.getUTCDate() - 1); return d.getUTCDate() + "/" + (d.getUTCMonth() + 1); }
+  function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function linkHtml(day) {
+    if (day.link) return '<a href="' + esc(day.link) + '" target="_blank" rel="noopener">Mở bài: ' + esc(day.title || ("FE Ngày " + day.n)) + "</a>";
+    return '<span class="wait">Bài có vào tối ' + prevDay(day.d) + "</span>";
+  }
+
+  var today = tokyoToday();
+  var examDay = "2026-11-16";
+  var left = Math.round((parse(examDay) - parse(today)) / 86400000);
+  document.getElementById("countdown").textContent = left > 0 ? left : 0;
+
+  // Today panel
+  var t = document.getElementById("today");
+  var cur = days.filter(function (x) { return x.d === today; })[0];
+  if (today === examDay) {
+    t.innerHTML = '<span class="tag">Hôm nay</span><h2>Ngày thi FE. Bình tĩnh, đọc kỹ đề, chia thời gian đều.</h2>';
+  } else if (cur) {
+    t.innerHTML = '<span class="tag">Hôm nay</span>' +
+      "<h2>Ngày " + cur.n + " · " + fmt(cur.d) + "</h2>" +
+      '<div class="subj"><span><b>科目A</b>' + esc(cur.a) + "</span><span><b>科目B</b>" + esc(cur.b) + "</span></div>" +
+      (cur.link ? '<a class="btn" href="' + esc(cur.link) + '" target="_blank" rel="noopener">Mở bài hôm nay</a>'
+                : '<span class="pending">Bài hôm nay chưa có link. Nhắn Claude "soạn bài hôm nay" nếu cần.</span>');
+  } else if (today < days[0].d) {
+    t.innerHTML = '<span class="tag">Sắp bắt đầu</span><h2>Ngày 1 bắt đầu vào ' + fmt(days[0].d) + "</h2>";
+  } else {
+    t.hidden = true;
+  }
+
+  // Weeks
+  var root = document.getElementById("weeks");
+  WEEKS.forEach(function (w) {
+    var box = document.createElement("section");
+    box.className = "week";
+    var first = days[w.from - 1], last = days[w.to - 1];
+    var html = '<div class="week-head"><div class="w"><strong>' + w.name + '</strong><span class="range">' +
+      fmt(first.d) + " – " + fmt(last.d) + '</span></div><div class="goal">' + esc(w.focus) +
+      '</div><div class="goal"><b>Mục tiêu:</b> ' + esc(w.goal) + "</div></div>";
+    days.slice(w.from - 1, w.to).forEach(function (day) {
+      var cls = "day" + (day.review ? " review" : "") + (day.d < today ? " is-past" : "") + (day.d === today ? " is-today" : "");
+      html += '<div class="' + cls + '" id="ngay' + day.n + '"><div class="when"><span class="n">Ngày ' + day.n + "</span>" + fmt(day.d) + "</div>" +
+        '<div class="body"><div class="row"><b>科目A</b>' + esc(day.a) + '</div><div class="row"><b>科目B</b>' + esc(day.b) + "</div>" +
+        '<div class="link">' + linkHtml(day) + "</div></div></div>";
+    });
+    if (w.to === 35) {
+      html += '<div class="day exam"><div class="when"><span class="n">Thi</span>' + fmt(examDay) + '</div><div class="body"><div class="row"><b>科目A</b>90 phút · <b>科目B</b>100 phút</div><div class="row">Mục tiêu: 600/1000 mỗi phần</div></div></div>';
+    }
+    box.innerHTML = html;
+    root.appendChild(box);
+  });
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,836 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>FE Ngày 7 (18/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 7 (18/10): Ôn tập tuần 1 + mini test</h1>
+<p class="meta">Ngày 7 · CN 18/10 · 科目A: Ôn tập tuần 1 + mini test · 科目B: Ôn tập mảng, tìm kiếm, sắp xếp</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Ôn tập tuần 1 ｜ 第<span class="rd">(だい)</span>1週<span class="rd">(しゅう)</span>の復習<span class="rd">(ふくしゅう)</span></a></li><li><a href="#muc-3">科目B: Ôn tập mảng, tìm kiếm, sắp xếp ｜ 配列<span class="rd">(はいれつ)</span>・探索<span class="rd">(たんさく)</span>・整列<span class="rd">(せいれつ)</span>の復習<span class="rd">(ふくしゅう)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Tổng khoảng 2 tiếng: 1 tiếng 科目A, 1 tiếng 科目B. Hôm nay không học bài mới: đọc lại bảng tóm tắt, rồi làm mini test có bấm giờ.</p>
+<ul class="check">
+<li>Đọc bảng tóm tắt 科目A tuần 1, đánh dấu chỗ còn mơ hồ (15 phút)</li>
+<li>Mini test 科目A: 4 câu bài tập + 13 câu đề cũ, bấm giờ 30 phút, chưa xem đáp án (30 phút)</li>
+<li>Chấm điểm 科目A, đọc lời giải các câu sai (15 phút)</li>
+<li>Đọc bảng tóm tắt 科目B: mảng, tìm kiếm, sắp xếp (10 phút)</li>
+<li>Trace 3 bài 科目B trên giấy, kẻ bảng biến (25 phút)</li>
+<li>Làm 4 câu đề cũ 科目B qua link, đối chiếu lời giải (25 phút)</li>
+<li>Ghi các câu sai vào sổ, ôn bảng từ vựng cuối bài</li>
+</ul>
+<h2 id="muc-2">科目A: Ôn tập tuần 1 ｜ 第<span class="rd">(だい)</span>1週<span class="rd">(しゅう)</span>の復習<span class="rd">(ふくしゅう)</span></h2>
+<p>Tuần 1 gồm: cơ số, logic, xác suất thống kê, cấu trúc dữ liệu, phần cứng, OS, độ tin cậy. Mục tiêu mini test: đúng từ 13/17 câu trở lên (khoảng 75%).</p>
+<h3>Tóm tắt tuần 1 ｜ 要点<span class="rd">(ようてん)</span>まとめ</h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Đổi cơ số:</strong> số nhị phân/thập lục phân → thập phân: nhân từng chữ số với lũy thừa của cơ số. Phần lẻ: chữ số thứ k sau dấu chấm có trọng số 1/(cơ số)^k.</td>
+<td><strong>基数変換<span class="rd">(きすうへんかん)</span>：</strong>各桁<span class="rd">(かくけた)</span>に基数<span class="rd">(きすう)</span>のべき乗<span class="rd">(じょう)</span>を掛<span class="rd">(か)</span>けて足<span class="rd">(た)</span>す。小数部<span class="rd">(しょうすうぶ)</span>の第<span class="rd">(だい)</span>k桁<span class="rd">(けた)</span>の重<span class="rd">(おも)</span>みは 1/(基数<span class="rd">(きすう)</span>)^k。</td>
+</tr>
+<tr>
+<td><strong>Số bù 2 (n bit):</strong> đảo tất cả bit rồi cộng 1. Phạm vi 8 bit: −128 ～ +127.</td>
+<td><strong>2の補数<span class="rd">(ほすう)</span>：</strong>全<span class="rd">(すべ)</span>てのビットを反転<span class="rd">(はんてん)</span>して1を足<span class="rd">(た)</span>す。8ビットの範囲<span class="rd">(はんい)</span>は −128 ～ +127。</td>
+</tr>
+<tr>
+<td><strong>Dịch bit:</strong> dịch trái 1 bit = ×2, dịch phải 1 bit = ÷2.</td>
+<td><strong>シフト演算<span class="rd">(えんざん)</span>：</strong>左<span class="rd">(ひだり)</span>へ1ビットで×2、右<span class="rd">(みぎ)</span>へ1ビットで÷2。</td>
+</tr>
+<tr>
+<td><strong>Logic:</strong> AND để lấy ra/xóa bit, OR để đặt bit 1, XOR để đảo bit. De Morgan: NOT(A AND B) = NOT A OR NOT B.</td>
+<td><strong>論理演算<span class="rd">(ろんりえんざん)</span>：</strong>ANDで取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>し・クリア、ORでセット、XORで反転<span class="rd">(はんてん)</span>。ド・モルガン：NOT(A AND B) = NOT A OR NOT B。</td>
+</tr>
+<tr>
+<td><strong>Xác suất:</strong> tổ hợp nCr = n! / (r!(n−r)!). Kỳ vọng = Σ (giá trị × xác suất).</td>
+<td><strong>確率<span class="rd">(かくりつ)</span>：</strong>組合<span class="rd">(くみあ)</span>せ nCr = n! / (r!(n−r)!)。期待値<span class="rd">(きたいち)</span> = Σ（値<span class="rd">(あたい)</span>×確率<span class="rd">(かくりつ)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Stack và queue:</strong> stack vào sau ra trước (LIFO: push/pop); queue vào trước ra trước (FIFO: enqueue/dequeue).</td>
+<td><strong>スタックとキュー：</strong>スタックは後入<span class="rd">(あとい)</span>れ先出<span class="rd">(さきだ)</span>し（LIFO）、キューは先入<span class="rd">(さきい)</span>れ先出<span class="rd">(さきだ)</span>し（FIFO）。</td>
+</tr>
+<tr>
+<td><strong>Cây nhị phân:</strong> duyệt trước (gốc → trái → phải), giữa (trái → gốc → phải), sau (trái → phải → gốc). Cây nhị phân tìm kiếm: duyệt giữa cho dãy tăng dần.</td>
+<td><strong>2分木<span class="rd">(ぶんぎ)</span>：</strong>先行順<span class="rd">(せんこうじゅん)</span>・中間順<span class="rd">(ちゅうかんじゅん)</span>・後行順<span class="rd">(こうこうじゅん)</span>。2分探索木<span class="rd">(ぶんたんさくぎ)</span>は中間順<span class="rd">(ちゅうかんじゅん)</span>で昇順<span class="rd">(しょうじゅん)</span>になる。</td>
+</tr>
+<tr>
+<td><strong>Hash:</strong> hai khóa khác nhau cho cùng giá trị hash gọi là xung đột (synonym).</td>
+<td><strong>ハッシュ：</strong>異<span class="rd">(こと)</span>なるキーが同<span class="rd">(おな)</span>じハッシュ値<span class="rd">(ち)</span>になることを衝突<span class="rd">(しょうとつ)</span>（シノニム）という。</td>
+</tr>
+<tr>
+<td><strong>Hiệu năng CPU:</strong> thời gian 1 chu kỳ = 1 / tần số clock. MIPS = số lệnh mỗi giây ÷ 10^6 = tần số ÷ CPI ÷ 10^6.</td>
+<td><strong>CPU性能<span class="rd">(せいのう)</span>：</strong>1クロックの時間<span class="rd">(じかん)</span> = 1 / クロック周波数<span class="rd">(しゅうはすう)</span>。MIPS = 1秒間<span class="rd">(びょうかん)</span>の命令数<span class="rd">(めいれいすう)</span> ÷ 10^6 = 周波数<span class="rd">(しゅうはすう)</span> ÷ CPI ÷ 10^6。</td>
+</tr>
+<tr>
+<td><strong>Thời gian truy cập hiệu dụng:</strong> cache × h + bộ nhớ chính × (1 − h), với h là tỉ lệ hit.</td>
+<td><strong>実効<span class="rd">(じっこう)</span>アクセス時間<span class="rd">(じかん)</span>：</strong>キャッシュ × h ＋ 主記憶<span class="rd">(しゅきおく)</span> × (1 − h)（h：ヒット率<span class="rd">(りつ)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Lập lịch tiến trình:</strong> FCFS (đến trước phục vụ trước), SJF (việc ngắn trước, thời gian chờ trung bình nhỏ nhất), Round Robin (chia time slice).</td>
+<td><strong>スケジューリング：</strong>到着順<span class="rd">(とうちゃくじゅん)</span>（FCFS）、処理時間順<span class="rd">(しょりじかんじゅん)</span>（SJF、平均待<span class="rd">(へいきんま)</span>ち時間<span class="rd">(じかん)</span>が最小<span class="rd">(さいしょう)</span>）、ラウンドロビン（タイムクウォンタム）。</td>
+</tr>
+<tr>
+<td><strong>Thay trang:</strong> FIFO đuổi trang nạp vào sớm nhất; LRU đuổi trang lâu nhất chưa được tham chiếu.</td>
+<td><strong>ページ置換<span class="rd">(おきか)</span>え：</strong>FIFOは最<span class="rd">(もっと)</span>も古<span class="rd">(ふる)</span>く読<span class="rd">(よ)</span>み込<span class="rd">(こ)</span>んだページ、LRUは最<span class="rd">(もっと)</span>も長<span class="rd">(なが)</span>く参照<span class="rd">(さんしょう)</span>されていないページを追<span class="rd">(お)</span>い出<span class="rd">(だ)</span>す。</td>
+</tr>
+<tr>
+<td><strong>Độ sẵn sàng:</strong> 1 máy = MTBF / (MTBF + MTTR). Nối tiếp: R1 × R2. Song song: 1 − (1 − R1)(1 − R2).</td>
+<td><strong>稼働率<span class="rd">(かどうりつ)</span>：</strong>MTBF / (MTBF + MTTR)。直列<span class="rd">(ちょくれつ)</span>：R1 × R2。並列<span class="rd">(へいれつ)</span>：1 − (1 − R1)(1 − R2)。</td>
+</tr>
+<tr>
+<td><strong>RAID:</strong> RAID0 striping (không dư thừa); RAID1 mirroring (dung lượng 1/2); RAID5 chia khối + parity phân tán, dung lượng (n − 1)/n.</td>
+<td><strong>RAID：</strong>RAID0はストライピング（冗長性<span class="rd">(じょうちょうせい)</span>なし）、RAID1はミラーリング（容量<span class="rd">(ようりょう)</span>1/2）、RAID5はブロック単位<span class="rd">(たんい)</span>＋パリティ分散<span class="rd">(ぶんさん)</span>、容量<span class="rd">(ようりょう)</span>は (n − 1)/n。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Biểu diễn −20 bằng số bù 2 dạng 8 bit.</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> −20 を8ビットの2の補数<span class="rd">(ほすう)</span>で表<span class="rd">(あらわ)</span>したものはどれか。</td>
+</tr>
+<tr>
+<td>ア 10010100　イ 11101011　ウ 11101100　エ 00010100</td>
+<td>ア 10010100　イ 11101011　ウ 11101100　エ 00010100</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (11101100)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（11101100）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 20 = 00010100. Đảo bit → 11101011, cộng 1 → 11101100. Kiểm tra: 11101100 + 00010100 = 1 0000 0000 (bỏ bit tràn) = 0, đúng. Bẫy: ア là dấu-độ lớn (bit dấu + 20), イ là số bù 1 (quên cộng 1), エ là +20.</td>
+<td>解説<span class="rd">(かいせつ)</span>：20 = 00010100。反転<span class="rd">(はんてん)</span>して 11101011、1を足<span class="rd">(た)</span>して 11101100。確認<span class="rd">(かくにん)</span>：11101100 ＋ 00010100 ＝ 1 0000 0000（桁<span class="rd">(けた)</span>あふれを除<span class="rd">(のぞ)</span>くと0）。アは符号<span class="rd">(ふごう)</span>と絶対値<span class="rd">(ぜったいち)</span>、イは1の補数<span class="rd">(ほすう)</span>（1を足<span class="rd">(た)</span>し忘<span class="rd">(わす)</span>れ）、エは＋20。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> CPU có tần số clock 2 GHz, CPI trung bình là 4. Hiệu năng khoảng bao nhiêu MIPS?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> クロック周波数<span class="rd">(しゅうはすう)</span>2GHz、平均<span class="rd">(へいきん)</span>CPIが4のCPUの性能<span class="rd">(せいのう)</span>は約<span class="rd">(やく)</span>何<span class="rd">(なん)</span>MIPSか。</td>
+</tr>
+<tr>
+<td>ア 8　イ 50　ウ 500　エ 8,000</td>
+<td>ア 8　イ 50　ウ 500　エ 8,000</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (500 MIPS)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（500 MIPS）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: số lệnh mỗi giây = 2 × 10^9 ÷ 4 = 5 × 10^8 = 500 × 10^6 → 500 MIPS. Cách khác: 1 lệnh mất 4 × 0.5 ns = 2 ns, 1 s ÷ 2 ns = 5 × 10^8. Bẫy: エ là nhân thay vì chia (2,000 × 4); ア và イ là sai đơn vị 10^n.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1秒間<span class="rd">(びょうかん)</span>の命令数<span class="rd">(めいれいすう)</span> = 2 × 10^9 ÷ 4 = 5 × 10^8 → 500 MIPS。別解<span class="rd">(べっかい)</span>：1命令<span class="rd">(めいれい)</span> = 4 × 0.5 ns = 2 ns、1秒<span class="rd">(びょう)</span> ÷ 2 ns = 5 × 10^8。エは割<span class="rd">(わ)</span>らずに掛<span class="rd">(か)</span>けた誤<span class="rd">(あやま)</span>り、アとイは桁<span class="rd">(けた)</span>の誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A3</strong> Hai thiết bị A, B (độ sẵn sàng mỗi cái 0.9) nối song song, rồi nối tiếp với thiết bị C (0.95). Độ sẵn sàng của cả hệ thống là bao nhiêu?</td>
+<td><strong>問<span class="rd">(とい)</span>A3</strong> 稼働率<span class="rd">(かどうりつ)</span>0.9の装置<span class="rd">(そうち)</span>AとBを並列<span class="rd">(へいれつ)</span>に接続<span class="rd">(せつぞく)</span>し、それに稼働率<span class="rd">(かどうりつ)</span>0.95の装置<span class="rd">(そうち)</span>Cを直列<span class="rd">(ちょくれつ)</span>に接続<span class="rd">(せつぞく)</span>した。システム全体<span class="rd">(ぜんたい)</span>の稼働率<span class="rd">(かどうりつ)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 0.7695　イ 0.855　ウ 0.9405　エ 0.99</td>
+<td>ア 0.7695　イ 0.855　ウ 0.9405　エ 0.99</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (0.9405)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（0.9405）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: phần song song = 1 − (1 − 0.9)(1 − 0.9) = 1 − 0.01 = 0.99. Nối tiếp với C: 0.99 × 0.95 = 0.9405. Bẫy: ア là coi cả 3 đều nối tiếp (0.9 × 0.9 × 0.95); イ là chỉ tính 1 máy 0.9 × 0.95; エ là quên nhân với C.</td>
+<td>解説<span class="rd">(かいせつ)</span>：並列部分<span class="rd">(へいれつぶぶん)</span> = 1 − (1 − 0.9)(1 − 0.9) = 0.99。Cと直列<span class="rd">(ちょくれつ)</span>で 0.99 × 0.95 = 0.9405。アは3台<span class="rd">(だい)</span>とも直列<span class="rd">(ちょくれつ)</span>、イは1台<span class="rd">(だい)</span>分<span class="rd">(ぶん)</span>だけ、エはCを掛<span class="rd">(か)</span>け忘<span class="rd">(わす)</span>れた値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A4</strong> Ba tiến trình đến cùng lúc ở thời điểm 0, thời gian xử lý: P1 = 6, P2 = 2, P3 = 4 (ms). Lập lịch theo SJF (việc ngắn trước, không ngắt). Thời gian hoàn thành trung bình (turnaround) là bao nhiêu ms?</td>
+<td><strong>問<span class="rd">(とい)</span>A4</strong> 3つのプロセスが時刻<span class="rd">(じこく)</span>0に同時<span class="rd">(どうじ)</span>に到着<span class="rd">(とうちゃく)</span>した。処理時間<span class="rd">(しょりじかん)</span>は P1 = 6、P2 = 2、P3 = 4（ミリ秒<span class="rd">(びょう)</span>）。処理時間順<span class="rd">(しょりじかんじゅん)</span>（SJF、横取<span class="rd">(よこど)</span>りなし）で実行<span class="rd">(じっこう)</span>したときの平均<span class="rd">(へいきん)</span>ターンアラウンドタイムはどれか。</td>
+</tr>
+<tr>
+<td>ア 4　イ 約<span class="rd">(やく)</span> 6.67　ウ 約<span class="rd">(やく)</span> 8.67　エ 12</td>
+<td>ア 4　イ 約<span class="rd">(やく)</span> 6.67　ウ 約<span class="rd">(やく)</span> 8.67　エ 12</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (khoảng 6.67 ms)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（約<span class="rd">(やく)</span>6.67ミリ秒<span class="rd">(びょう)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thứ tự chạy P2 → P3 → P1. Thời điểm xong: P2 = 2, P3 = 2 + 4 = 6, P1 = 6 + 6 = 12. Trung bình = (2 + 6 + 12) ÷ 3 = 20 ÷ 3 ≈ 6.67. Bẫy: ウ là FCFS theo thứ tự P1, P2, P3 (6 + 8 + 12) ÷ 3 ≈ 8.67; ア là trung bình thời gian xử lý; エ là thời điểm xong của cả ba.</td>
+<td>解説<span class="rd">(かいせつ)</span>：実行順<span class="rd">(じっこうじゅん)</span>は P2 → P3 → P1。終了時刻<span class="rd">(しゅうりょうじこく)</span>は P2 = 2、P3 = 6、P1 = 12。平均<span class="rd">(へいきん)</span> = (2 + 6 + 12) ÷ 3 ≈ 6.67。ウは到着順<span class="rd">(とうちゃくじゅん)</span>（P1, P2, P3）の場合<span class="rd">(ばあい)</span>、アは処理時間<span class="rd">(しょりじかん)</span>の平均<span class="rd">(へいきん)</span>、エは全体<span class="rd">(ぜんたい)</span>の終了時刻<span class="rd">(しゅうりょうじこく)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Mini test 13 câu trộn chủ đề tuần 1. Mỗi câu ghi kỳ thi và số câu; bấm link để xem nguyên văn đề trên fe-siken.com. Làm hết rồi mới mở đáp án.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/30_aki/q1.html" target="_blank" rel="noopener">平成30年秋期 午前 問1</a></strong> (2018) · cơ số</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: số thập lục phân 0.248 bằng phân số thập phân nào?</td>
+<td>内容<span class="rd">(ないよう)</span>：16進数<span class="rd">(しんすう)</span>の小数<span class="rd">(しょうすう)</span> 0.248 を10進数<span class="rd">(しんすう)</span>の分数<span class="rd">(ぶんすう)</span>で表<span class="rd">(あらわ)</span>す。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (73/512)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（73/512）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 2/16 + 4/256 + 8/4096 = (512 + 64 + 8)/4096 = 584/4096 = 73/512. Mẹo: quy đồng về mẫu 4096 = 16^3 rồi rút gọn.</td>
+<td>解説<span class="rd">(かいせつ)</span>：2/16 + 4/256 + 8/4096 = (512 + 64 + 8)/4096 = 584/4096 = 73/512。コツ：分母<span class="rd">(ぶんぼ)</span>を 4096 = 16^3 にそろえてから約分<span class="rd">(やくぶん)</span>する。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/20_aki/q8.html" target="_blank" rel="noopener">平成20年秋期 午前 問8</a></strong> (2008) · xác suất</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 5 vé, trong đó 2 vé trúng. Rút đồng thời 2 vé, xác suất cả hai đều trúng?</td>
+<td>内容<span class="rd">(ないよう)</span>：5本<span class="rd">(ほん)</span>のくじのうち当<span class="rd">(あ)</span>たりは2本<span class="rd">(ほん)</span>。同時<span class="rd">(どうじ)</span>に2本<span class="rd">(ほん)</span>引<span class="rd">(ひ)</span>いて両方<span class="rd">(りょうほう)</span>当<span class="rd">(あ)</span>たる確率<span class="rd">(かくりつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (1/10)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（1/10）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: số cách chọn 2 trong 5 = 5C2 = 10; chỉ có 1 cách chọn đúng 2 vé trúng → 1/10. Kiểm tra cách khác: 2/5 × 1/4 = 1/10.</td>
+<td>解説<span class="rd">(かいせつ)</span>：5C2 = 10 通<span class="rd">(とお)</span>り、当<span class="rd">(あ)</span>たり2本<span class="rd">(ほん)</span>を選<span class="rd">(えら)</span>ぶのは1通<span class="rd">(とお)</span>り → 1/10。別解<span class="rd">(べっかい)</span>：2/5 × 1/4 = 1/10。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/27_haru/q3.html" target="_blank" rel="noopener">平成27年春期 午前 問3</a></strong> (2015) · kỳ vọng</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>27年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: f(x) là số nguyên lớn nhất không vượt quá x. x lấy ngẫu nhiên đều từ 19 giá trị −0.9, −0.8, …, 0.8, 0.9. Tìm kỳ vọng của f(x + 0.5).</td>
+<td>内容<span class="rd">(ないよう)</span>：f(x) は x 以下<span class="rd">(いか)</span>の最大<span class="rd">(さいだい)</span>の整数<span class="rd">(せいすう)</span>。x は −0.9 ～ 0.9 の0.1刻<span class="rd">(きざ)</span>みの19個<span class="rd">(こ)</span>から等確率<span class="rd">(とうかくりつ)</span>で選<span class="rd">(えら)</span>ぶ。f(x + 0.5) の期待値<span class="rd">(きたいち)</span>を求<span class="rd">(もと)</span>める。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (1/19)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（1/19）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: x + 0.5 chạy từ −0.4 đến 1.4. f = −1 với 4 giá trị (−0.4 ～ −0.1), f = 0 với 10 giá trị (0.0 ～ 0.9), f = 1 với 5 giá trị (1.0 ～ 1.4). Kỳ vọng = (−4 + 0 + 5)/19 = 1/19. Bẫy: f(−0.4) = −1 chứ không phải 0.</td>
+<td>解説<span class="rd">(かいせつ)</span>：x + 0.5 は −0.4 ～ 1.4。f = −1 が4個<span class="rd">(こ)</span>、f = 0 が10個<span class="rd">(こ)</span>、f = 1 が5個<span class="rd">(こ)</span>。期待値<span class="rd">(きたいち)</span> = (−4 + 5)/19 = 1/19。注意<span class="rd">(ちゅうい)</span>：f(−0.4) は0ではなく −1。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/26_haru/q7.html" target="_blank" rel="noopener">平成26年春期 午前 問7</a></strong> (2014) · stack/queue</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>7</strong></td>
+</tr>
+<tr>
+<td>Nội dung: stack và queue ban đầu rỗng. Thực hiện push(a), push(b), enq(pop()), enq(c), push(d), push(deq()), x ← pop(). x là gì?</td>
+<td>内容<span class="rd">(ないよう)</span>：空<span class="rd">(から)</span>のスタックとキューに push(a)、push(b)、enq(pop())、enq(c)、push(d)、push(deq())、x ← pop() を行<span class="rd">(おこな)</span>ったときの x。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: dữ liệu b</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：b</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: stack [a, b] → pop ra b, đưa vào queue [b]; queue [b, c]; stack [a, d]; deq lấy b (đầu queue) push vào → stack [a, d, b]; pop → b. Mẹo: kẻ 2 cột "stack / queue" và viết trạng thái sau từng thao tác.</td>
+<td>解説<span class="rd">(かいせつ)</span>：スタック [a, b] → pop で b をキューへ [b]、キュー [b, c]、スタック [a, d]、deq で b を取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>して push → [a, d, b]、pop で b。コツ：スタックとキューの状態<span class="rd">(じょうたい)</span>を1操作<span class="rd">(そうさ)</span>ずつ書<span class="rd">(か)</span>く。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/26_aki/q5.html" target="_blank" rel="noopener">平成26年秋期 午前 問5</a></strong> (2014) · stack</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: khi tính biểu thức có cộng trừ nhân chia, việc xử lý nào thích hợp dùng stack?</td>
+<td>内容<span class="rd">(ないよう)</span>：四則演算<span class="rd">(しそくえんざん)</span>の式<span class="rd">(しき)</span>を計算<span class="rd">(けいさん)</span>するとき、スタックを使<span class="rd">(つか)</span>うのに適<span class="rd">(てき)</span>した処理<span class="rd">(しょり)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: イ = cất kết quả trung gian, tính phép khác, rồi lấy kết quả vừa cất ra ghép lại → đúng tính chất LIFO. ア (lấy theo thứ tự đã cất) là queue; ウ, エ (sửa/chèn vào giữa) là thao tác danh sách, stack không làm được.</td>
+<td>解説<span class="rd">(かいせつ)</span>：イは途中結果<span class="rd">(とちゅうけっか)</span>を保存<span class="rd">(ほぞん)</span>し、別<span class="rd">(べつ)</span>の計算<span class="rd">(けいさん)</span>の後<span class="rd">(あと)</span>で取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>して使<span class="rd">(つか)</span>う → LIFO。アは格納順<span class="rd">(かくのうじゅん)</span>に取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>すのでキュー、ウ・エは途中<span class="rd">(とちゅう)</span>の要素<span class="rd">(ようそ)</span>を扱<span class="rd">(あつか)</span>うのでリスト向<span class="rd">(む)</span>き。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/06_haru/a2.html" target="_blank" rel="noopener">令和6年 科目A 公開問題 問2</a></strong> (2024) · hash</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 令和<span class="rd">(れいわ)</span>6年<span class="rd">(ねん)</span> 科目<span class="rd">(かもく)</span>A 公開問題<span class="rd">(こうかいもんだい)</span> 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: khóa là 1 chữ thường a～z, bảng hash 10 ô, hàm hash lấy chữ số hàng đơn vị của mã ASCII thập phân. Cặp khóa nào bị xung đột?</td>
+<td>内容<span class="rd">(ないよう)</span>：キーは英小文字<span class="rd">(えいこもじ)</span>1文字<span class="rd">(もじ)</span>、大<span class="rd">(おお)</span>きさ10のハッシュ表<span class="rd">(ひょう)</span>、ハッシュ関数<span class="rd">(かんすう)</span>は文字<span class="rd">(もじ)</span>コード（10進<span class="rd">(しん)</span>）の1の位<span class="rd">(くらい)</span>。衝突<span class="rd">(しょうとつ)</span>するキーの組<span class="rd">(くみ)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (d và x)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（d と x）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mã chữ thường liên tiếp nhau, nên xung đột khi khoảng cách giữa hai chữ là bội của 10. d → x cách 20 (d = 100, x = 120, cùng hàng đơn vị 0). a–i cách 8, b–r cách 16, c–l cách 9. Không cần nhớ mã ASCII, chỉ cần đếm khoảng cách.</td>
+<td>解説<span class="rd">(かいせつ)</span>：英小文字<span class="rd">(えいこもじ)</span>のコードは連続<span class="rd">(れんぞく)</span>しているので、差<span class="rd">(さ)</span>が10の倍数<span class="rd">(ばいすう)</span>なら衝突<span class="rd">(しょうとつ)</span>。d と x は差<span class="rd">(さ)</span>20（100 と 120）。a–i は8、b–r は16、c–l は9。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/04_menjo/q11.html" target="_blank" rel="noopener">令和4年度 午前免除試験 問11</a></strong> (2022) · MIPS</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 令和<span class="rd">(れいわ)</span>4年度<span class="rd">(ねんど)</span> 午前免除試験<span class="rd">(ごぜんめんじょしけん)</span> 問<span class="rd">(とい)</span>11</strong></td>
+</tr>
+<tr>
+<td>Nội dung: cho bảng tổ hợp lệnh (thời gian thực hiện và tỉ lệ xuất hiện). Tính hiệu năng MIPS.</td>
+<td>内容<span class="rd">(ないよう)</span>：命令<span class="rd">(めいれい)</span>ミックス（実行時間<span class="rd">(じっこうじかん)</span>と出現率<span class="rd">(しゅつげんりつ)</span>）の表<span class="rd">(ひょう)</span>から MIPS 値<span class="rd">(ち)</span>を求<span class="rd">(もと)</span>める。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (40 MIPS)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（40 MIPS）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thời gian trung bình 1 lệnh = 10 × 0.5 + 40 × 0.3 + 40 × 0.2 = 5 + 12 + 8 = 25 ns. Số lệnh/giây = 1 s ÷ 25 ns = 4 × 10^7 → 40 MIPS.</td>
+<td>解説<span class="rd">(かいせつ)</span>：平均命令実行時間<span class="rd">(へいきんめいれいじっこうじかん)</span> = 10 × 0.5 + 40 × 0.3 + 40 × 0.2 = 25 ns。1秒<span class="rd">(びょう)</span> ÷ 25 ns = 4 × 10^7 → 40 MIPS。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 8 — <a href="https://www.fe-siken.com/kakomon/24_aki/q10.html" target="_blank" rel="noopener">平成24年秋期 午前 問10</a></strong> (2012) · cache</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>8 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>10</strong></td>
+</tr>
+<tr>
+<td>Nội dung: bộ nhớ chính 60 ns, cache 10 ns, thời gian truy cập hiệu dụng 15 ns. Tỉ lệ hit của cache?</td>
+<td>内容<span class="rd">(ないよう)</span>：主記憶<span class="rd">(しゅきおく)</span>60 ns、キャッシュ10 ns、実効<span class="rd">(じっこう)</span>アクセス時間<span class="rd">(じかん)</span>15 ns のときのヒット率<span class="rd">(りつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (0.9)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（0.9）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 10h + 60(1 − h) = 15 → 60 − 50h = 15 → h = 0.9. Kiểm tra: 10 × 0.9 + 60 × 0.1 = 9 + 6 = 15. Bẫy: 0.1 là tỉ lệ miss.</td>
+<td>解説<span class="rd">(かいせつ)</span>：10h + 60(1 − h) = 15 → h = 0.9。確認<span class="rd">(かくにん)</span>：9 + 6 = 15。0.1 はミス率<span class="rd">(りつ)</span>なので注意<span class="rd">(ちゅうい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 9 — <a href="https://www.fe-siken.com/kakomon/29_haru/q19.html" target="_blank" rel="noopener">平成29年春期 午前 問19</a></strong> (2017) · thay trang</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>9 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>19</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 3 khung trang, chuỗi tham chiếu 1, 3, 2, 1, 4, 5, 2, 3, 4, 5. Số lần thay trang theo FIFO và LRU?</td>
+<td>内容<span class="rd">(ないよう)</span>：ページ枠<span class="rd">(わく)</span>3つ、参照列<span class="rd">(さんしょうれつ)</span> 1, 3, 2, 1, 4, 5, 2, 3, 4, 5。FIFOとLRUのページ置換<span class="rd">(おきか)</span>え回数<span class="rd">(かいすう)</span>の組合<span class="rd">(くみあ)</span>せ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (FIFO 3 lần, LRU 6 lần)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（FIFO 3回<span class="rd">(かい)</span>、LRU 6回<span class="rd">(かい)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 3 lần đầu chỉ nạp vào khung trống, không tính là thay. FIFO: 4 đuổi 1, 5 đuổi 3, (2 hit), 3 đuổi 2, (4, 5 hit) → 3 lần. LRU: (1 hit) 4 đuổi 3, 5 đuổi 2, 2 đuổi 1, 3 đuổi 4, 4 đuổi 5, 5 đuổi 2 → 6 lần. Bài học: LRU không phải lúc nào cũng tốt hơn FIFO.</td>
+<td>解説<span class="rd">(かいせつ)</span>：最初<span class="rd">(さいしょ)</span>の3回<span class="rd">(かい)</span>は空<span class="rd">(あ)</span>き枠<span class="rd">(わく)</span>への読込<span class="rd">(よみこ)</span>みなので数<span class="rd">(かぞ)</span>えない。FIFO：4→1、5→3、3→2 で3回<span class="rd">(かい)</span>。LRU：4→3、5→2、2→1、3→4、4→5、5→2 で6回<span class="rd">(かい)</span>。LRUが常<span class="rd">(つね)</span>に有利<span class="rd">(ゆうり)</span>とは限<span class="rd">(かぎ)</span>らない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 10 — <a href="https://www.fe-siken.com/kakomon/29_aki/q15.html" target="_blank" rel="noopener">平成29年秋期 午前 問15</a></strong> (2017) · MTBF/MTTR</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>10 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>15</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thiết bị có MTBF 45 giờ, MTTR 5 giờ. Nối tiếp 2 thiết bị như vậy, độ sẵn sàng của hệ thống?</td>
+<td>内容<span class="rd">(ないよう)</span>：MTBF 45時間<span class="rd">(じかん)</span>、MTTR 5時間<span class="rd">(じかん)</span>の装置<span class="rd">(そうち)</span>を2台<span class="rd">(だい)</span>直列<span class="rd">(ちょくれつ)</span>に接続<span class="rd">(せつぞく)</span>したシステムの稼働率<span class="rd">(かどうりつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (0.81)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（0.81）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 1 máy = 45 / (45 + 5) = 0.9. Nối tiếp: 0.9 × 0.9 = 0.81. Bẫy: 0.90 là quên bình phương; 0.99 là công thức song song.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1台<span class="rd">(だい)</span> = 45 / 50 = 0.9。直列<span class="rd">(ちょくれつ)</span>なので 0.9² = 0.81。0.90 は1台<span class="rd">(だい)</span>分<span class="rd">(ぶん)</span>、0.99 は並列<span class="rd">(へいれつ)</span>の値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 11 — <a href="https://www.fe-siken.com/kakomon/29_haru/q14.html" target="_blank" rel="noopener">平成29年春期 午前 問14</a></strong> (2017) · độ sẵn sàng</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>11 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>14</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 4 thiết bị độ sẵn sàng R: hai cặp song song, hai cặp đó nối tiếp nhau. Biểu thức độ sẵn sàng của toàn hệ thống?</td>
+<td>内容<span class="rd">(ないよう)</span>：稼働率<span class="rd">(かどうりつ)</span>Rの装置<span class="rd">(そうち)</span>4台<span class="rd">(だい)</span>。並列<span class="rd">(へいれつ)</span>の組<span class="rd">(くみ)</span>2つを直列<span class="rd">(ちょくれつ)</span>に接続<span class="rd">(せつぞく)</span>したシステムの稼働率<span class="rd">(かどうりつ)</span>の式<span class="rd">(しき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> ((1 − (1 − R)²)²)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（(1 − (1 − R)²)²）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mỗi cặp song song = 1 − (1 − R)². Hai cặp nối tiếp → nhân với nhau = (1 − (1 − R)²)². Mẹo loại nhanh: thử R = 0.5 → mỗi cặp 0.75, kết quả 0.5625; chỉ ウ cho ra số này.</td>
+<td>解説<span class="rd">(かいせつ)</span>：並列<span class="rd">(へいれつ)</span>の組<span class="rd">(くみ)</span> = 1 − (1 − R)²、2組<span class="rd">(くみ)</span>を直列<span class="rd">(ちょくれつ)</span>にして2乗<span class="rd">(じょう)</span>。コツ：R = 0.5 を代入<span class="rd">(だいにゅう)</span>すると 0.5625 になるのはウだけ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 12 — <a href="https://www.fe-siken.com/kakomon/29_aki/q12.html" target="_blank" rel="noopener">平成29年秋期 午前 問12</a></strong> (2017) · RAID</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>12 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>12</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mô tả nào đúng về cách ghi dữ liệu của RAID5?</td>
+<td>内容<span class="rd">(ないよう)</span>：RAID5の記録方式<span class="rd">(きろくほうしき)</span>に関<span class="rd">(かん)</span>する正<span class="rd">(ただ)</span>しい記述<span class="rd">(きじゅつ)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (chia theo khối, parity phân tán trên nhiều đĩa)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（ブロック単位<span class="rd">(たんい)</span>で分散<span class="rd">(ぶんさん)</span>、パリティも分散<span class="rd">(ぶんさん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: RAID5 = khối + parity rải đều. Các lựa chọn sai là RAID khác: theo byte + 1 đĩa parity riêng là RAID3; theo bit + mã ECC là RAID2; 2 đĩa ghi giống nhau là RAID1. Nhớ thêm: RAID4 cũng theo khối nhưng parity nằm trên 1 đĩa cố định.</td>
+<td>解説<span class="rd">(かいせつ)</span>：RAID5はブロック単位<span class="rd">(たんい)</span>＋パリティ分散<span class="rd">(ぶんさん)</span>。バイト単位<span class="rd">(たんい)</span>＋パリティ専用<span class="rd">(せんよう)</span>ディスクはRAID3、ビット単位<span class="rd">(たんい)</span>＋ECCはRAID2、ミラーはRAID1。RAID4はパリティ専用<span class="rd">(せんよう)</span>ディスクを使<span class="rd">(つか)</span>う。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 13 — <a href="https://www.fe-siken.com/kakomon/20_aki/q13.html" target="_blank" rel="noopener">平成20年秋期 午前 問13</a></strong> (2008) · tìm kiếm nhị phân</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>13 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>13</strong></td>
+</tr>
+<tr>
+<td>Nội dung: bảng 2,000 phần tử khác nhau đã sắp tăng dần, khóa chắc chắn có trong bảng. Số lần so sánh tối đa khi tìm kiếm nhị phân?</td>
+<td>内容<span class="rd">(ないよう)</span>：昇順<span class="rd">(しょうじゅん)</span>に整列<span class="rd">(せいれつ)</span>された相異<span class="rd">(あいこと)</span>なる2,000個<span class="rd">(こ)</span>の要素<span class="rd">(ようそ)</span>を2分探索<span class="rd">(ぶんたんさく)</span>する。キーが必<span class="rd">(かなら)</span>ず存在<span class="rd">(そんざい)</span>するときの最大比較回数<span class="rd">(さいだいひかくかいすう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (11 lần)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（11回<span class="rd">(かい)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tối đa = ⌊log₂N⌋ + 1. 2^10 = 1,024 ≤ 2,000 &lt; 2,048 = 2^11 → ⌊log₂2000⌋ = 10 → 11 lần. Bẫy: chọn 10 vì quên cộng 1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：最大比較回数<span class="rd">(さいだいひかくかいすう)</span> = ⌊log₂N⌋ + 1。2^10 = 1,024 ≦ 2,000 &lt; 2^11 なので 10 + 1 = 11回<span class="rd">(かい)</span>。1を足<span class="rd">(た)</span>し忘<span class="rd">(わす)</span>れて10を選<span class="rd">(えら)</span>ばないこと。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Ôn tập mảng, tìm kiếm, sắp xếp ｜ 配列<span class="rd">(はいれつ)</span>・探索<span class="rd">(たんさく)</span>・整列<span class="rd">(せいれつ)</span>の復習<span class="rd">(ふくしゅう)</span></h2>
+<p>Tuần 1 đã học: duyệt mảng và mảng 2 chiều, tìm kiếm tuyến tính và nhị phân, 4 kiểu sắp xếp. Hôm nay trace lại bằng tay để chắc tay trước tuần 2.</p>
+<h3>Tóm tắt tuần 1 ｜ 要点<span class="rd">(ようてん)</span>まとめ</h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mảng đánh số từ 1:</strong> phần tử cuối là a[aの要素数]. Đảo ngược: cặp a[i] và a[n − i + 1].</td>
+<td><strong>要素番号<span class="rd">(ようそばんごう)</span>は1から：</strong>最後<span class="rd">(さいご)</span>は a[aの要素数<span class="rd">(ようそすう)</span>]。逆順<span class="rd">(ぎゃくじゅん)</span>では a[i] と a[n − i + 1] を交換<span class="rd">(こうかん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Mảng 2 chiều:</strong> m[i, j] = hàng i, cột j. Đường chéo chính: i = j; đường chéo phụ (n × n): j = n − i + 1.</td>
+<td><strong>2次元配列<span class="rd">(じげんはいれつ)</span>：</strong>m[i, j] は i 行<span class="rd">(ぎょう)</span> j 列<span class="rd">(れつ)</span>。主対角線<span class="rd">(しゅたいかくせん)</span>は i = j、副対角線<span class="rd">(ふくたいかくせん)</span>は j = n − i + 1。</td>
+</tr>
+<tr>
+<td><strong>Tìm kiếm tuyến tính:</strong> so sánh từ đầu, trung bình n/2 lần, tối đa n lần. Lính canh (sentinel): đặt khóa ở cuối để bỏ điều kiện kiểm tra hết mảng.</td>
+<td><strong>線形探索<span class="rd">(せんけいたんさく)</span>：</strong>先頭<span class="rd">(せんとう)</span>から順<span class="rd">(じゅん)</span>に比較<span class="rd">(ひかく)</span>。平均<span class="rd">(へいきん)</span> n/2 回<span class="rd">(かい)</span>、最大<span class="rd">(さいだい)</span> n 回<span class="rd">(かい)</span>。番兵<span class="rd">(ばんぺい)</span>を末尾<span class="rd">(まつび)</span>に置<span class="rd">(お)</span>くと終了判定<span class="rd">(しゅうりょうはんてい)</span>を省<span class="rd">(はぶ)</span>ける。</td>
+</tr>
+<tr>
+<td><strong>Tìm kiếm nhị phân:</strong> mảng phải đã sắp xếp. mid ← (low + high) ÷ 2; nhỏ hơn thì low ← mid + 1, lớn hơn thì high ← mid − 1; lặp khi low ≤ high. Tối đa ⌊log₂N⌋ + 1 lần.</td>
+<td><strong>2分探索<span class="rd">(ぶんたんさく)</span>：</strong>整列済<span class="rd">(せいれつず)</span>みが前提<span class="rd">(ぜんてい)</span>。mid ← (low + high) ÷ 2、小<span class="rd">(ちい)</span>さければ low ← mid + 1、大<span class="rd">(おお)</span>きければ high ← mid − 1、low ≦ high の間<span class="rd">(あいだ)</span>繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>す。最大<span class="rd">(さいだい)</span> ⌊log₂N⌋ + 1 回<span class="rd">(かい)</span>。</td>
+</tr>
+<tr>
+<td><strong>Bẫy vòng lặp vô hạn:</strong> nếu viết low ← mid (không + 1) thì có thể kẹt mãi (xem Đề cũ B1).</td>
+<td><strong>無限<span class="rd">(むげん)</span>ループの罠<span class="rd">(わな)</span>：</strong>low ← mid（+1 なし）だと止<span class="rd">(と)</span>まらない場合<span class="rd">(ばあい)</span>がある。</td>
+</tr>
+<tr>
+<td><strong>Bubble sort:</strong> đổi chỗ 2 phần tử kề nhau nếu sai thứ tự; sau mỗi lượt, phần tử lớn nhất về cuối. O(n²), ổn định.</td>
+<td><strong>バブルソート：</strong>隣<span class="rd">(とな)</span>り合<span class="rd">(あ)</span>う要素<span class="rd">(ようそ)</span>を比較<span class="rd">(ひかく)</span>・交換<span class="rd">(こうかん)</span>。1パスごとに最大値<span class="rd">(さいだいち)</span>が末尾<span class="rd">(まつび)</span>に確定<span class="rd">(かくてい)</span>。O(n²)、安定<span class="rd">(あんてい)</span>。</td>
+</tr>
+<tr>
+<td><strong>Selection sort:</strong> tìm phần tử nhỏ nhất trong phần chưa sắp rồi đổi lên đầu. Số lần so sánh luôn n(n − 1)/2. O(n²), không ổn định.</td>
+<td><strong>選択<span class="rd">(せんたく)</span>ソート：</strong>未整列部分<span class="rd">(みせいれつぶぶん)</span>の最小値<span class="rd">(さいしょうち)</span>を先頭<span class="rd">(せんとう)</span>と交換<span class="rd">(こうかん)</span>。比較回数<span class="rd">(ひかくかいすう)</span>は常<span class="rd">(つね)</span>に n(n − 1)/2。O(n²)、安定<span class="rd">(あんてい)</span>でない。</td>
+</tr>
+<tr>
+<td><strong>Insertion sort:</strong> lấy phần tử tiếp theo, dịch các phần tử lớn hơn sang phải, chèn vào chỗ trống. Nhanh khi dữ liệu gần sắp sẵn. O(n²), ổn định.</td>
+<td><strong>挿入<span class="rd">(そうにゅう)</span>ソート：</strong>次<span class="rd">(つぎ)</span>の要素<span class="rd">(ようそ)</span>を取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>し、大<span class="rd">(おお)</span>きい要素<span class="rd">(ようそ)</span>を右<span class="rd">(みぎ)</span>へずらして挿入<span class="rd">(そうにゅう)</span>。ほぼ整列済<span class="rd">(せいれつず)</span>みなら速<span class="rd">(はや)</span>い。O(n²)、安定<span class="rd">(あんてい)</span>。</td>
+</tr>
+<tr>
+<td><strong>Quick sort:</strong> chọn pivot, chia thành nhóm nhỏ hơn và lớn hơn, đệ quy. Trung bình O(n log n), xấu nhất O(n²). Không ổn định.</td>
+<td><strong>クイックソート：</strong>基準値<span class="rd">(きじゅんち)</span>（ピボット）で分割<span class="rd">(ぶんかつ)</span>し、再帰的<span class="rd">(さいきてき)</span>に整列<span class="rd">(せいれつ)</span>。平均<span class="rd">(へいきん)</span> O(n log n)、最悪<span class="rd">(さいあく)</span> O(n²)、安定<span class="rd">(あんてい)</span>でない。</td>
+</tr>
+<tr>
+<td><strong>Cách trace:</strong> mỗi biến một cột, mỗi vòng một dòng; với câu điền chỗ trống, thử bằng mảng nhỏ 2–3 phần tử.</td>
+<td><strong>トレース：</strong>変数<span class="rd">(へんすう)</span>ごとに列<span class="rd">(れつ)</span>、1回<span class="rd">(かい)</span>の繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>しを1行<span class="rd">(ぎょう)</span>。空欄問題<span class="rd">(くうらんもんだい)</span>は2～3要素<span class="rd">(ようそ)</span>の小<span class="rd">(ちい)</span>さな配列<span class="rd">(はいれつ)</span>で試<span class="rd">(ため)</span>す。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<p><strong>Câu B1 ｜ 問<span class="rd">(とい)</span>B1</strong></p>
+<pre><code>○整数型: search(整数型の配列: data, 整数型: target)
+  整数型: low ← 1
+  整数型: high ← dataの要素数
+  整数型: mid
+  while (low ≦ high)
+    mid ← (low + high) ÷ 2
+    if (data[mid] = target)
+      return mid
+    elseif (data[mid] &lt; target)
+      low ← mid + 1
+    else
+      high ← mid − 1
+    endif
+  endwhile
+  return −1
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gọi search({3, 8, 12, 17, 25, 31, 40}, 10). Vòng while chạy bao nhiêu lần trước khi hàm trả về −1?</td>
+<td>search({3, 8, 12, 17, 25, 31, 40}, 10) を呼<span class="rd">(よ)</span>び出<span class="rd">(だ)</span>したとき、−1 が返<span class="rd">(かえ)</span>されるまでに while の繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>しは何回<span class="rd">(なんかい)</span>実行<span class="rd">(じっこう)</span>されるか。</td>
+</tr>
+<tr>
+<td>ア 2　イ 3　ウ 4　エ 7</td>
+<td>ア 2　イ 3　ウ 4　エ 7</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (3 lần)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（3回<span class="rd">(かい)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: vòng 1: low = 1, high = 7, mid = 4, data[4] = 17 &gt; 10 → high = 3. Vòng 2: mid = (1 + 3) ÷ 2 = 2, data[2] = 8 &lt; 10 → low = 3. Vòng 3: mid = 3, data[3] = 12 &gt; 10 → high = 2. Lúc này low = 3 &gt; high = 2 nên thoát, trả về −1. Bẫy: エ là số lần của tìm kiếm tuyến tính; ア là dừng sớm khi thấy 8 &lt; 10 &lt; 12 mà quên kiểm tra điều kiện while.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1回目<span class="rd">(かいめ)</span>：mid = 4、17 &gt; 10 → high = 3。2回目<span class="rd">(かいめ)</span>：mid = 2、8 &lt; 10 → low = 3。3回目<span class="rd">(かいめ)</span>：mid = 3、12 &gt; 10 → high = 2。low = 3 &gt; high = 2 で終了<span class="rd">(しゅうりょう)</span>し −1 を返<span class="rd">(かえ)</span>す。エは線形探索<span class="rd">(せんけいたんさく)</span>の回数<span class="rd">(かいすう)</span>、アは while の条件<span class="rd">(じょうけん)</span>を確認<span class="rd">(かくにん)</span>せずに止<span class="rd">(と)</span>めた誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B2 ｜ 問<span class="rd">(とい)</span>B2</strong></p>
+<pre><code>整数型の配列: a ← {5, 2, 4, 6, 1}
+整数型: i, j, x
+for (i を 2 から aの要素数 まで 1 ずつ増やす)
+  x ← a[i]
+  j ← i − 1
+  while ((j ≧ 1) and (a[j] &gt; x))
+    a[j + 1] ← a[j]
+    j ← j − 1
+  endwhile
+  a[j + 1] ← x
+endfor
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Đây là insertion sort. Nội dung mảng a ngay sau khi vòng for với i = 3 kết thúc là gì?</td>
+<td>挿入<span class="rd">(そうにゅう)</span>ソートのプログラムである。i = 3 の繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>しが終<span class="rd">(お)</span>わった直後<span class="rd">(ちょくご)</span>の配列<span class="rd">(はいれつ)</span> a の内容<span class="rd">(ないよう)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア {2, 4, 5, 6, 1}　イ {2, 5, 4, 6, 1}　ウ {1, 2, 4, 5, 6}　エ {2, 4, 5, 1, 6}</td>
+<td>ア {2, 4, 5, 6, 1}　イ {2, 5, 4, 6, 1}　ウ {1, 2, 4, 5, 6}　エ {2, 4, 5, 1, 6}</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア ({2, 4, 5, 6, 1})</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（{2, 4, 5, 6, 1}）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: i = 2: x = 2, a[1] = 5 &gt; 2 → dịch 5 sang phải, j = 0 thì dừng (điều kiện j ≥ 1 sai), a[1] = 2 → {2, 5, 4, 6, 1}. i = 3: x = 4, a[2] = 5 &gt; 4 → dịch, j = 1: a[1] = 2 &gt; 4 sai → dừng, a[2] = 4 → {2, 4, 5, 6, 1}. Bẫy: イ là trạng thái sau i = 2; ウ là kết quả cuối cùng; エ là nhầm với bubble sort (đưa số lớn về cuối). Thêm: cả chương trình thực hiện phép dịch a[j + 1] ← a[j] tổng cộng 1 + 1 + 0 + 4 = 6 lần.</td>
+<td>解説<span class="rd">(かいせつ)</span>：i = 2：x = 2、5 &gt; 2 なので右<span class="rd">(みぎ)</span>へずらし、j = 0 で終了<span class="rd">(しゅうりょう)</span>、a[1] = 2 → {2, 5, 4, 6, 1}。i = 3：x = 4、5 &gt; 4 でずらし、2 &gt; 4 は偽<span class="rd">(ぎ)</span>、a[2] = 4 → {2, 4, 5, 6, 1}。イは i = 2 の後<span class="rd">(あと)</span>、ウは最終結果<span class="rd">(さいしゅうけっか)</span>、エはバブルソートと混同<span class="rd">(こんどう)</span>したもの。参考<span class="rd">(さんこう)</span>：ずらしの回数<span class="rd">(かいすう)</span>は全体<span class="rd">(ぜんたい)</span>で 1 + 1 + 0 + 4 = 6回<span class="rd">(かい)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B3 ｜ 問<span class="rd">(とい)</span>B3</strong></p>
+<pre><code>整数型の二次元配列: m ← {{6, 1, 2}, {3, 5, 8}, {4, 7, 9}}
+整数型: i
+整数型: s ← 0
+for (i を 1 から 3 まで 1 ずつ増やす)
+  s ← s + m[i, 4 − i]
+endfor
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sau khi chạy, giá trị của s là bao nhiêu?</td>
+<td>実行後<span class="rd">(じっこうご)</span>の s の値<span class="rd">(あたい)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 11　イ 20　ウ 19　エ 9</td>
+<td>ア 11　イ 20　ウ 19　エ 9</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (11)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（11）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: m[i, 4 − i] là đường chéo phụ (từ góc trên phải xuống góc dưới trái). i = 1: m[1, 3] = 2; i = 2: m[2, 2] = 5; i = 3: m[3, 1] = 4 → s = 11. Bẫy: イ là đường chéo chính 6 + 5 + 9; ウ là tổng cột 3 (2 + 8 + 9); エ là tổng hàng 1 (6 + 1 + 2).</td>
+<td>解説<span class="rd">(かいせつ)</span>：m[i, 4 − i] は副対角線<span class="rd">(ふくたいかくせん)</span>（右上<span class="rd">(みぎうえ)</span>から左下<span class="rd">(ひだりした)</span>）。m[1, 3] = 2、m[2, 2] = 5、m[3, 1] = 4 → s = 11。イは主対角線<span class="rd">(しゅたいかくせん)</span>、ウは3列目<span class="rd">(れつめ)</span>の合計<span class="rd">(ごうけい)</span>、エは1行目<span class="rd">(ぎょうめ)</span>の合計<span class="rd">(ごうけい)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Đề 科目B dài, hãy mở link để đọc nguyên văn mã giả rồi tự trace trước khi xem tóm tắt lời giải bên dưới.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ B1 — <a href="https://www.fe-siken.com/kakomon/sample/b13.html" target="_blank" rel="noopener">サンプル問題 科目B 問13</a></strong> (2022, IPA công bố) · tìm kiếm nhị phân</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>B1 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>13（探索<span class="rd">(たんさく)</span>プログラム）</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm search tìm target trong mảng đã sắp tăng dần (không trùng), trả về chỉ số hoặc −1. Chương trình có lỗi khiến lặp vô hạn ở một trường hợp; chọn trường hợp đó.</td>
+<td>内容<span class="rd">(ないよう)</span>：整列済<span class="rd">(せいれつず)</span>みの配列<span class="rd">(はいれつ)</span>から target を探<span class="rd">(さが)</span>す2分探索<span class="rd">(ぶんたんさく)</span>。無限<span class="rd">(むげん)</span>ループになる入力<span class="rd">(にゅうりょく)</span>の条件<span class="rd">(じょうけん)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (mảng 2 phần tử, target bằng phần tử cuối)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（要素数<span class="rd">(ようそすう)</span>2で、target が末尾<span class="rd">(まつび)</span>の要素<span class="rd">(ようそ)</span>と等<span class="rd">(ひと)</span>しい）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: low = 1, high = 2 → mid = 1; data[1] &lt; target nên low ← mid = 1, trạng thái không đổi → lặp mãi. Lỗi gốc là cập nhật low ← mid thay vì mid + 1. So với Câu B1 ở trên: bản đúng dùng mid + 1 và mid − 1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：low = 1、high = 2 で mid = 1。data[1] &lt; target なので low ← mid = 1 となり状態<span class="rd">(じょうたい)</span>が変<span class="rd">(か)</span>わらず無限<span class="rd">(むげん)</span>ループ。原因<span class="rd">(げんいん)</span>は mid + 1 にしていないこと。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ B2 — <a href="https://www.fe-siken.com/kakomon/sample/b11.html" target="_blank" rel="noopener">サンプル問題 科目B 問11</a></strong> (2022, IPA công bố) · sắp xếp</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>B2 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>11（整列<span class="rd">(せいれつ)</span>プログラム）</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm binSort đặt mỗi giá trị n vào vị trí bins[n]. Chọn mảng đầu vào sao cho kết quả trả về đã sắp tăng dần và không có phần tử chưa xác định.</td>
+<td>内容<span class="rd">(ないよう)</span>：値<span class="rd">(あたい)</span> n を bins[n] に格納<span class="rd">(かくのう)</span>する整列<span class="rd">(せいれつ)</span>。結果<span class="rd">(けっか)</span>に未定義<span class="rd">(みていぎ)</span>の要素<span class="rd">(ようそ)</span>がなく昇順<span class="rd">(しょうじゅん)</span>になる引数<span class="rd">(ひきすう)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> ({2, 6, 3, 1, 4, 5})</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（{2, 6, 3, 1, 4, 5}）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mỗi giá trị chỉ có đúng 1 ô. Nếu có giá trị trùng thì ô đó bị ghi đè và một ô khác bỏ trống (chưa xác định). イ trùng 4, ウ trùng 2, エ trùng 3; chỉ ア là hoán vị của 1～6.</td>
+<td>解説<span class="rd">(かいせつ)</span>：値<span class="rd">(あたい)</span>ごとに格納先<span class="rd">(かくのうさき)</span>が1つなので、重複<span class="rd">(ちょうふく)</span>があると上書<span class="rd">(うわが)</span>きされ、空<span class="rd">(あ)</span>きの要素<span class="rd">(ようそ)</span>が残<span class="rd">(のこ)</span>る。イは4、ウは2、エは3が重複<span class="rd">(ちょうふく)</span>。重複<span class="rd">(ちょうふく)</span>がないのはアだけ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ B3 — <a href="https://www.fe-siken.com/kakomon/05_haru/b3.html" target="_blank" rel="noopener">令和5年度 科目B 問3</a></strong> (2023, đề công khai) · quick sort</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>B3 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>3（整列<span class="rd">(せいれつ)</span>プログラム）</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thủ tục sort(first, last) kiểu quick sort, pivot ở giữa. Với data = {2, 1, 3, 5, 4}, gọi sort(1, 5), dòng α in ra gì ở lần chạy đầu tiên?</td>
+<td>内容<span class="rd">(ないよう)</span>：中央<span class="rd">(ちゅうおう)</span>の要素<span class="rd">(ようそ)</span>を基準値<span class="rd">(きじゅんち)</span>とするクイックソート。data = {2, 1, 3, 5, 4} で sort(1, 5) を呼<span class="rd">(よ)</span>んだとき、α で最初<span class="rd">(さいしょ)</span>に出力<span class="rd">(しゅつりょく)</span>される内容<span class="rd">(ないよう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (2 1 3 5 4)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（2 1 3 5 4）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: pivot = data[(1 + 5) ÷ 2] = data[3] = 3. i quét từ trái, bỏ qua 2, 1 (nhỏ hơn 3), dừng ở i = 3; j quét từ phải, bỏ qua 4, 5 (lớn hơn 3), dừng ở j = 3. i ≥ j nên thoát mà chưa đổi chỗ lần nào → in mảng nguyên trạng. Bẫy: chọn "1 2 3 4 5" vì nghĩ đã sắp xong.</td>
+<td>解説<span class="rd">(かいせつ)</span>：基準値<span class="rd">(きじゅんち)</span>は data[3] = 3。i は 2、1 を飛<span class="rd">(と)</span>ばして 3 で停止<span class="rd">(ていし)</span>、j は 4、5 を飛<span class="rd">(と)</span>ばして 3 で停止<span class="rd">(ていし)</span>。i ≧ j なので交換<span class="rd">(こうかん)</span>なしで抜<span class="rd">(ぬ)</span>け、配列<span class="rd">(はいれつ)</span>はそのまま出力<span class="rd">(しゅつりょく)</span>される。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ B4 — <a href="https://www.fe-siken.com/kakomon/sample/b14.html" target="_blank" rel="noopener">サンプル問題 科目B 問14</a></strong> (2022, IPA công bố) · mảng đã sắp</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>B4 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>14（配列<span class="rd">(はいれつ)</span>の特徴値<span class="rd">(とくちょうち)</span>を返<span class="rd">(かえ)</span>すプログラム）</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm summarize nhận mảng đã sắp, gọi findRank với p = {0, 0.25, 0.5, 0.75, 1} để lấy 5 giá trị đặc trưng (giống tứ phân vị). Tìm kết quả với mảng {0.1, 0.2, …, 0.9, 1}.</td>
+<td>内容<span class="rd">(ないよう)</span>：整列済<span class="rd">(せいれつず)</span>みの配列<span class="rd">(はいれつ)</span>に対<span class="rd">(たい)</span>し、p = {0, 0.25, 0.5, 0.75, 1} ごとに findRank を呼<span class="rd">(よ)</span>び、5つの特徴値<span class="rd">(とくちょうち)</span>（四分位数<span class="rd">(しぶんいすう)</span>に近<span class="rd">(ちか)</span>い）を返<span class="rd">(かえ)</span>す。{0.1, 0.2, …, 0.9, 1} のときの戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ク</strong> ({0.1, 0.4, 0.6, 0.8, 1})</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ク</strong>（{0.1, 0.4, 0.6, 0.8, 1}）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: n = 10, chỉ số = ⌈p × 9⌉ rồi cộng 1 vì mảng đánh số từ 1. p = 0 → 0 → phần tử 1 (0.1); 0.25 × 9 = 2.25 → 3 → phần tử 4 (0.4); 0.5 × 9 = 4.5 → 5 → phần tử 6 (0.6); 0.75 × 9 = 6.75 → 7 → phần tử 8 (0.8); 1 × 9 = 9 → phần tử 10 (1). Bẫy: quên làm tròn lên hoặc quên + 1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：n = 10、⌈p × 9⌉ に1を足<span class="rd">(た)</span>した要素番号<span class="rd">(ようそばんごう)</span>。0 → 1番目<span class="rd">(ばんめ)</span>、2.25 → 3 → 4番目<span class="rd">(ばんめ)</span>、4.5 → 5 → 6番目<span class="rd">(ばんめ)</span>、6.75 → 7 → 8番目<span class="rd">(ばんめ)</span>、9 → 10番目<span class="rd">(ばんめ)</span>。切<span class="rd">(き)</span>り上<span class="rd">(あ)</span>げと +1 を忘<span class="rd">(わす)</span>れないこと。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ôn tập / Tóm tắt điểm chính</td>
+<td>復習<span class="rd">(ふくしゅう)</span> / 要点<span class="rd">(ようてん)</span>まとめ</td>
+</tr>
+<tr>
+<td>Đổi cơ số / Số bù 2</td>
+<td>基数変換<span class="rd">(きすうへんかん)</span> / 2の補数<span class="rd">(ほすう)</span></td>
+</tr>
+<tr>
+<td>Phần nguyên / Phần lẻ</td>
+<td>整数部<span class="rd">(せいすうぶ)</span> / 小数部<span class="rd">(しょうすうぶ)</span></td>
+</tr>
+<tr>
+<td>Xác suất / Kỳ vọng / Tổ hợp</td>
+<td>確率<span class="rd">(かくりつ)</span> / 期待値<span class="rd">(きたいち)</span> / 組合<span class="rd">(くみあ)</span>せ</td>
+</tr>
+<tr>
+<td>Vào sau ra trước / Vào trước ra trước</td>
+<td>後入<span class="rd">(あとい)</span>れ先出<span class="rd">(さきだ)</span>し（LIFO） / 先入<span class="rd">(さきい)</span>れ先出<span class="rd">(さきだ)</span>し（FIFO）</td>
+</tr>
+<tr>
+<td>Xung đột hash</td>
+<td>衝突<span class="rd">(しょうとつ)</span>（シノニム）</td>
+</tr>
+<tr>
+<td>Tần số clock / Số lệnh</td>
+<td>クロック周波数<span class="rd">(しゅうはすう)</span> / 命令数<span class="rd">(めいれいすう)</span></td>
+</tr>
+<tr>
+<td>Bộ nhớ chính / Tỉ lệ hit</td>
+<td>主記憶<span class="rd">(しゅきおく)</span> / ヒット率<span class="rd">(りつ)</span></td>
+</tr>
+<tr>
+<td>Thời gian truy cập hiệu dụng</td>
+<td>実効<span class="rd">(じっこう)</span>アクセス時間<span class="rd">(じかん)</span></td>
+</tr>
+<tr>
+<td>Thời gian hoàn thành / Thời gian chờ</td>
+<td>ターンアラウンドタイム / 待<span class="rd">(ま)</span>ち時間<span class="rd">(じかん)</span></td>
+</tr>
+<tr>
+<td>Thay trang / Khung trang</td>
+<td>ページ置換<span class="rd">(おきか)</span>え / ページ枠<span class="rd">(わく)</span></td>
+</tr>
+<tr>
+<td>Độ sẵn sàng / Nối tiếp / Song song</td>
+<td>稼働率<span class="rd">(かどうりつ)</span> / 直列<span class="rd">(ちょくれつ)</span> / 並列<span class="rd">(へいれつ)</span></td>
+</tr>
+<tr>
+<td>Thời gian trung bình giữa hai lần hỏng / Thời gian sửa trung bình</td>
+<td>平均故障間隔<span class="rd">(へいきんこしょうかんかく)</span>（MTBF） / 平均修復時間<span class="rd">(へいきんしゅうふくじかん)</span>（MTTR）</td>
+</tr>
+<tr>
+<td>Tính dư thừa / Mirroring / Parity</td>
+<td>冗長性<span class="rd">(じょうちょうせい)</span> / ミラーリング / パリティ</td>
+</tr>
+<tr>
+<td>Tìm kiếm tuyến tính / Tìm kiếm nhị phân / Lính canh</td>
+<td>線形探索<span class="rd">(せんけいたんさく)</span> / 2分探索<span class="rd">(ぶんたんさく)</span> / 番兵<span class="rd">(ばんぺい)</span></td>
+</tr>
+<tr>
+<td>Sắp xếp / Tăng dần / Giảm dần</td>
+<td>整列<span class="rd">(せいれつ)</span>（ソート） / 昇順<span class="rd">(しょうじゅん)</span> / 降順<span class="rd">(こうじゅん)</span></td>
+</tr>
+<tr>
+<td>Ổn định (sort) / Pivot</td>
+<td>安定<span class="rd">(あんてい)</span> / 基準値<span class="rd">(きじゅんち)</span>（ピボット）</td>
+</tr>
+<tr>
+<td>Đường chéo chính / Đường chéo phụ</td>
+<td>主対角線<span class="rd">(しゅたいかくせん)</span> / 副対角線<span class="rd">(ふくたいかくせん)</span></td>
+</tr>
+<tr>
+<td>Vòng lặp vô hạn</td>
+<td>無限<span class="rd">(むげん)</span>ループ</td>
+</tr>
+<tr>
+<td>Ghi đè / Trùng lặp / Chưa xác định</td>
+<td>上書<span class="rd">(うわが)</span>き / 重複<span class="rd">(ちょうふく)</span> / 未定義<span class="rd">(みていぎ)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

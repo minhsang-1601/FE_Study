@@ -1,0 +1,436 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 24 (04/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 24 (04/11): Luyện đề ストラテジ và 4 câu thuật toán</h1>
+<p class="meta">Ngày 24 · Thứ Tư 04/11 · 科目A: luyện đề ストラテジ · 科目B: 4 câu thuật toán</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Luyện đề ストラテジ ｜ ストラテジ系<span class="rd">(けい)</span>の演習<span class="rd">(えんしゅう)</span></a></li><li><a href="#muc-3">科目B: 4 câu thuật toán ｜ アルゴリズム4問<span class="rd">(もん)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Phần ストラテジ chiếm khoảng 20/60 câu 科目A, nhiều câu chỉ cần nhớ thuật ngữ, nhưng có vài dạng tính toán: điểm đặt hàng, kỳ vọng, lợi nhuận lớn nhất.</p>
+<ul class="check">
+<li>Đọc bảng tóm tắt (10 phút)</li>
+<li>2 bài tự luyện + 5 câu đề cũ (45 phút)</li>
+<li>科目B: 4 câu, bấm giờ 20 phút (45 phút)</li>
+<li>Xem lại câu sai (20 phút)</li>
+</ul>
+<h2 id="muc-2">科目A: Luyện đề ストラテジ ｜ ストラテジ系<span class="rd">(けい)</span>の演習<span class="rd">(えんしゅう)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Điểm đặt hàng (đặt hàng theo lượng cố định):</strong> = lượng tiêu thụ trung bình/ngày × số ngày chờ hàng + tồn kho an toàn. Lượng đặt hàng kinh tế không dùng trong công thức này.</td>
+<td><strong>発注点<span class="rd">(はっちゅうてん)</span>（定量発注方式<span class="rd">(ていりょうはっちゅうほうしき)</span>）：</strong>= 1日<span class="rd">(にち)</span>の平均消費量<span class="rd">(へいきんしょうひりょう)</span> × 調達期間<span class="rd">(ちょうたつきかん)</span> + 安全在庫<span class="rd">(あんぜんざいこ)</span>。経済的発注量<span class="rd">(けいざいてきはっちゅうりょう)</span>は使<span class="rd">(つか)</span>わない。</td>
+</tr>
+<tr>
+<td><strong>Cây quyết định:</strong> tính kỳ vọng từ phải sang trái; tại nút quyết định chọn nhánh có kỳ vọng lớn nhất; nhớ trừ chi phí.</td>
+<td><strong>デシジョンツリー：</strong>右<span class="rd">(みぎ)</span>から期待値<span class="rd">(きたいち)</span>を計算<span class="rd">(けいさん)</span>し、決定点<span class="rd">(けっていてん)</span>では最大<span class="rd">(さいだい)</span>の枝<span class="rd">(えだ)</span>を選<span class="rd">(えら)</span>ぶ。費用<span class="rd">(ひよう)</span>を引<span class="rd">(ひ)</span>く。</td>
+</tr>
+<tr>
+<td><strong>Lợi nhuận lớn nhất (quy hoạch tuyến tính):</strong> thử 3 phương án: chỉ làm X tối đa, chỉ làm Y tối đa, và làm sao dùng hết cả 2 nguyên liệu (giải hệ phương trình). Chọn lợi nhuận lớn nhất.</td>
+<td><strong>最大利益<span class="rd">(さいだいりえき)</span>（線形計画法<span class="rd">(せんけいけいかくほう)</span>）：</strong>Xだけ最大<span class="rd">(さいだい)</span>、Yだけ最大<span class="rd">(さいだい)</span>、原料<span class="rd">(げんりょう)</span>を使<span class="rd">(つか)</span>い切<span class="rd">(き)</span>る組合<span class="rd">(くみあ)</span>せ（連立方程式<span class="rd">(れんりつほうていしき)</span>）の3通<span class="rd">(とお)</span>りを比<span class="rd">(くら)</span>べる。</td>
+</tr>
+<tr>
+<td><strong>Ma trận Ansoff:</strong> sản phẩm cũ × thị trường cũ = thâm nhập thị trường; sản phẩm mới × thị trường cũ = phát triển sản phẩm; sản phẩm cũ × thị trường mới = mở rộng thị trường; mới × mới = đa dạng hóa.</td>
+<td><strong>アンゾフの成長<span class="rd">(せいちょう)</span>マトリクス：</strong>既存製品<span class="rd">(きそんせいひん)</span>×既存市場<span class="rd">(きそんしじょう)</span> = 市場浸透<span class="rd">(しじょうしんとう)</span>、新製品<span class="rd">(しんせいひん)</span>×既存市場<span class="rd">(きそんしじょう)</span> = 製品開発<span class="rd">(せいひんかいはつ)</span>、既存製品<span class="rd">(きそんせいひん)</span>×新市場<span class="rd">(しんしじょう)</span> = 市場開拓<span class="rd">(しじょうかいたく)</span>、新<span class="rd">(しん)</span>×新<span class="rd">(しん)</span> = 多角化<span class="rd">(たかくか)</span>。</td>
+</tr>
+<tr>
+<td><strong>Trình tự mua sắm hệ thống:</strong> RFI (xin thông tin) → RFP (yêu cầu đề xuất) → đánh giá đề xuất → chọn nhà cung cấp → ký hợp đồng.</td>
+<td><strong>調達<span class="rd">(ちょうたつ)</span>の手順<span class="rd">(てじゅん)</span>：</strong>RFI（情報提供依頼<span class="rd">(じょうほうていきょういらい)</span>）→ RFP（提案依頼書<span class="rd">(ていあんいらいしょ)</span>）→ 提案評価<span class="rd">(ていあんひょうか)</span> → 供給者<span class="rd">(きょうきゅうしゃ)</span>の選定<span class="rd">(せんてい)</span> → 契約<span class="rd">(けいやく)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Mỗi ngày dùng 20 cái, chờ hàng 4 ngày, tồn kho an toàn 15 cái. Điểm đặt hàng?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> 1日<span class="rd">(にち)</span>20個<span class="rd">(こ)</span>消費<span class="rd">(しょうひ)</span>、調達期間<span class="rd">(ちょうたつきかん)</span>4日<span class="rd">(にち)</span>、安全在庫<span class="rd">(あんぜんざいこ)</span>15個<span class="rd">(こ)</span>。発注点<span class="rd">(はっちゅうてん)</span>は。</td>
+</tr>
+<tr>
+<td>ア 65　イ 80　ウ 95　エ 100</td>
+<td>ア 65　イ 80　ウ 95　エ 100</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (95)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（95）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 20 × 4 + 15 = 95.</td>
+<td>解説<span class="rd">(かいせつ)</span>：20 × 4 + 15 = 95。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Dự án A: 60% lời 100 triệu, 40% lỗ 50 triệu. Dự án B: chắc chắn lời 35 triệu. Chọn dự án có kỳ vọng lớn hơn.</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> 案<span class="rd">(あん)</span>A：60%で100百万円<span class="rd">(ひゃくまんえん)</span>の利益<span class="rd">(りえき)</span>、40%で50百万円<span class="rd">(ひゃくまんえん)</span>の損失<span class="rd">(そんしつ)</span>。案<span class="rd">(あん)</span>B：確実<span class="rd">(かくじつ)</span>に35百万円<span class="rd">(ひゃくまんえん)</span>。期待値<span class="rd">(きたいち)</span>が大<span class="rd">(おお)</span>きいのは。</td>
+</tr>
+<tr>
+<td>ア A (40)　イ A (80)　ウ B (35)　エ bằng nhau</td>
+<td>ア A（40）　イ A（80）　ウ B（35）　エ 同<span class="rd">(おな)</span>じ</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (A, kỳ vọng 40 triệu)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（A、期待値<span class="rd">(きたいち)</span>40）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: A = 100 × 0.6 − 50 × 0.4 = 60 − 20 = 40 &gt; 35. イ là quên trừ phần lỗ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：60 − 20 = 40 &gt; 35。イは損失<span class="rd">(そんしつ)</span>を引<span class="rd">(ひ)</span>き忘<span class="rd">(わす)</span>れ。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/05_menjo/q57.html" target="_blank" rel="noopener">令和5年度 問57</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>57</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đặt hàng theo lượng cố định, lượng đặt hàng kinh tế 600 cái, chờ hàng 5 ngày, tồn kho an toàn 30 cái, tiêu thụ trung bình 50 cái/ngày. Điểm đặt hàng? ア 220　イ 250　ウ 280　エ 300</td>
+<td>内容<span class="rd">(ないよう)</span>：経済的発注量<span class="rd">(けいざいてきはっちゅうりょう)</span>600個<span class="rd">(こ)</span>、調達期間<span class="rd">(ちょうたつきかん)</span>5日<span class="rd">(にち)</span>、安全在庫<span class="rd">(あんぜんざいこ)</span>30個<span class="rd">(こ)</span>、1日<span class="rd">(にち)</span>50個<span class="rd">(こ)</span>。発注点<span class="rd">(はっちゅうてん)</span>は。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (280)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（280）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 50 × 5 + 30 = 280. Số 600 là bẫy.</td>
+<td>解説<span class="rd">(かいせつ)</span>：250 + 30 = 280。600は使<span class="rd">(つか)</span>わない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/01_aki/q76.html" target="_blank" rel="noopener">令和元年秋期 午前 問76</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>76</strong></td>
+</tr>
+<tr>
+<td>Nội dung: sản xuất X (lời 100 yên/cái) và Y (150 yên/cái) từ nguyên liệu A, B có giới hạn (bảng ở link: điều kiện là 2X + Y ≤ 100 và X + 2Y ≤ 80). Lợi nhuận lớn nhất? ア 5.000　イ 6.000　ウ 7.000　エ 8.000</td>
+<td>内容<span class="rd">(ないよう)</span>：製品<span class="rd">(せいひん)</span>X（100円<span class="rd">(えん)</span>）とY（150円<span class="rd">(えん)</span>）を原料<span class="rd">(げんりょう)</span>A・Bの制約<span class="rd">(せいやく)</span>のもとで生産<span class="rd">(せいさん)</span>。最大利益<span class="rd">(さいだいりえき)</span>は。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (7.000)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（7,000円<span class="rd">(えん)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chỉ X: tối đa 50 cái = 5.000; chỉ Y: tối đa 40 cái = 6.000; dùng hết cả 2: 2X + Y = 100, X + 2Y = 80 → X = 40, Y = 20 → 4.000 + 3.000 = 7.000.</td>
+<td>解説<span class="rd">(かいせつ)</span>：Xのみ5,000、Yのみ6,000、連立<span class="rd">(れんりつ)</span>でX = 40・Y = 20 → 7,000。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/03_menjo/q76.html" target="_blank" rel="noopener">令和3年度 問76</a></strong> (2021)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>3年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>76</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chọn biện pháp marketing a hoặc b bằng cây quyết định (mỗi biện pháp có xác suất các tình huống, có lựa chọn trả thêm chi phí). Chọn biện pháp và kỳ vọng tăng lợi nhuận lớn nhất. Xem cây ở link.</td>
+<td>内容<span class="rd">(ないよう)</span>：施策<span class="rd">(しさく)</span>aとbをデシジョンツリーで比較<span class="rd">(ひかく)</span>し、利益増加額<span class="rd">(りえきぞうかがく)</span>の期待値<span class="rd">(きたいち)</span>が最大<span class="rd">(さいだい)</span>の施策<span class="rd">(しさく)</span>と値<span class="rd">(あたい)</span>を選<span class="rd">(えら)</span>ぶ。図<span class="rd">(ず)</span>はリンク先<span class="rd">(さき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (biện pháp b, 82 tỉ yên)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（施策<span class="rd">(しさく)</span>b、82億円<span class="rd">(おくえん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tính nút quyết định trong trước (trả thêm chi phí hay không, chọn bên lớn hơn), rồi kỳ vọng mỗi biện pháp: a = 70 tỉ, b = 82 tỉ. Chọn b.</td>
+<td>解説<span class="rd">(かいせつ)</span>：内側<span class="rd">(うちがわ)</span>の決定点<span class="rd">(けっていてん)</span>から計算<span class="rd">(けいさん)</span>。aは70億円<span class="rd">(おくえん)</span>、bは82億円<span class="rd">(おくえん)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/02_menjo/q68.html" target="_blank" rel="noopener">令和2年度 問68</a></strong> (2020)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 令和<span class="rd">(れいわ)</span>2年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>68</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong ma trận Ansoff, cái nào là chiến lược đa dạng hóa? ア đưa sản phẩm mới vào thị trường hiện tại　イ tìm cơ hội tăng trưởng ở sản phẩm và thị trường mới qua phát triển công nghệ, liên kết, M&amp;A　ウ tăng quảng cáo sản phẩm hiện có ở thị trường hiện tại　エ đưa sản phẩm hiện có ra thị trường nước ngoài</td>
+<td>内容<span class="rd">(ないよう)</span>：アンゾフの成長<span class="rd">(せいちょう)</span>マトリクスで多角化戦略<span class="rd">(たかくかせんりゃく)</span>に当<span class="rd">(あ)</span>たるもの。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア phát triển sản phẩm, ウ thâm nhập thị trường, エ mở rộng thị trường.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アは製品開発<span class="rd">(せいひんかいはつ)</span>、ウは市場浸透<span class="rd">(しじょうしんとう)</span>、エは市場開拓<span class="rd">(しじょうかいたく)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/30_aki/q66.html" target="_blank" rel="noopener">平成30年秋期 午前 問66</a></strong> (2018)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>66</strong></td>
+</tr>
+<tr>
+<td>Nội dung: sơ đồ trình tự mua sắm hệ thống thông tin có ô trống a–d. Ô b là gì? ア RFI　イ RFP　ウ chọn nhà cung cấp　エ ký hợp đồng</td>
+<td>内容<span class="rd">(ないよう)</span>：情報<span class="rd">(じょうほう)</span>システムの調達手順<span class="rd">(ちょうたつてじゅん)</span>の図<span class="rd">(ず)</span>で空欄<span class="rd">(くうらん)</span>bに入<span class="rd">(はい)</span>るもの。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (RFP)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（RFP）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thứ tự: a RFI → b RFP (soạn và gửi) → đánh giá đề xuất → c chọn nhà cung cấp → d ký hợp đồng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：RFI → RFP → 評価<span class="rd">(ひょうか)</span> → 選定<span class="rd">(せんてい)</span> → 契約<span class="rd">(けいやく)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: 4 câu thuật toán ｜ アルゴリズム4問<span class="rd">(もん)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ma trận kề của đồ thị vô hướng:</strong> có cạnh u–v thì gán cả [u, v] và [v, u] = 1, ma trận đối xứng, đường chéo bằng 0.</td>
+<td><strong>無向<span class="rd">(むこう)</span>グラフの隣接行列<span class="rd">(りんせつぎょうれつ)</span>：</strong>辺<span class="rd">(へん)</span>u–vなら[u, v]と[v, u]を1にする。対称<span class="rd">(たいしょう)</span>で対角<span class="rd">(たいかく)</span>は0。</td>
+</tr>
+<tr>
+<td><strong>Điều kiện biên:</strong> khi nhánh trước đã loại một phần (ví dụ tuổi ≤ 3), nhánh sau chỉ cần điều kiện phần còn lại. Thử các giá trị biên (3, 4, 9, 10).</td>
+<td><strong>境界<span class="rd">(きょうかい)</span>の条件<span class="rd">(じょうけん)</span>：</strong>前<span class="rd">(まえ)</span>の分岐<span class="rd">(ぶんき)</span>で除外済<span class="rd">(じょがいず)</span>みの範囲<span class="rd">(はんい)</span>は考<span class="rd">(かんが)</span>えなくてよい。境界値<span class="rd">(きょうかいち)</span>で確認<span class="rd">(かくにん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Đảo mảng:</strong> đổi chỗ phần tử thứ i với phần tử thứ n − i + 1, i chạy tới n ÷ 2.</td>
+<td><strong>配列<span class="rd">(はいれつ)</span>の逆順<span class="rd">(ぎゃくじゅん)</span>：</strong>i番目<span class="rd">(ばんめ)</span>とn − i + 1番目<span class="rd">(ばんめ)</span>を交換<span class="rd">(こうかん)</span>、iはn ÷ 2まで。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/06_haru/b3.html" target="_blank" rel="noopener">令和6年度 科目B 問3</a></strong> (2024, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm edgesToMatrix đổi danh sách cạnh của đồ thị vô hướng (ví dụ {{1,3},{1,4},{3,4},{2,4},{4,5}}) thành ma trận kề nodeNum × nodeNum. Trong vòng lặp với mỗi cạnh u = edge[1], v = edge[2], điền lệnh vào chỗ trống.</td>
+<td>内容<span class="rd">(ないよう)</span>：無向<span class="rd">(むこう)</span>グラフの辺<span class="rd">(へん)</span>の配列<span class="rd">(はいれつ)</span>を隣接行列<span class="rd">(りんせつぎょうれつ)</span>に変換<span class="rd">(へんかん)</span>する関数<span class="rd">(かんすう)</span>edgesToMatrix。ループ内<span class="rd">(ない)</span>の空欄<span class="rd">(くうらん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (adjMatrix[u, v] ← 1 và adjMatrix[v, u] ← 1)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（adjMatrix[u, v] ← 1 と adjMatrix[v, u] ← 1）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: vô hướng nên phải đánh dấu cả hai chiều. Gán [u, u] hay [v, v] là vòng tự thân, sai.</td>
+<td>解説<span class="rd">(かいせつ)</span>：無向<span class="rd">(むこう)</span>なので両方向<span class="rd">(りょうほうこう)</span>。[u, u]は自己<span class="rd">(じこ)</span>ループで誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/05_haru/b3.html" target="_blank" rel="noopener">令和5年度 科目B 問3</a></strong> (2023, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thủ tục sort (kiểu quick sort, pivot là phần tử giữa) sắp xếp mảng toàn cục data = {2, 1, 3, 5, 4}. Gọi sort(1, 5): lần đầu tiên chạy dòng α thì in ra gì? ア 1 2 3 4 5　イ 1 2 3 5 4　ウ 2 1 3 4 5　エ 2 1 3 5 4</td>
+<td>内容<span class="rd">(ないよう)</span>：data = {2, 1, 3, 5, 4}をクイックソートで整列<span class="rd">(せいれつ)</span>する手続<span class="rd">(てつづ)</span>きsort。sort(1, 5)で最初<span class="rd">(さいしょ)</span>にα行<span class="rd">(ぎょう)</span>を実行<span class="rd">(じっこう)</span>したときの出力<span class="rd">(しゅつりょく)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (2 1 3 5 4)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（2 1 3 5 4）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: pivot = data[(1 + 5) ÷ 2] = data[3] = 3. i dừng ở 3 (vì 2, 1 &lt; 3); j dừng ở 3 (vì 4, 5 &gt; 3). i ≥ j nên thoát vòng, chưa đổi chỗ lần nào: mảng vẫn như ban đầu.</td>
+<td>解説<span class="rd">(かいせつ)</span>：pivot = 3。iもjも3で止<span class="rd">(と)</span>まりi ≥ jで終了<span class="rd">(しゅうりょう)</span>。交換<span class="rd">(こうかん)</span>なしで元<span class="rd">(もと)</span>のまま。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/sample20220425/b1.html" target="_blank" rel="noopener">科目Bサンプル問題(2022年4月) 問1</a></strong> (đề mẫu 4/2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 科目<span class="rd">(かもく)</span>Bサンプル問題<span class="rd">(もんだい)</span>（2022年<span class="rd">(ねん)</span>4月<span class="rd">(がつ)</span>） 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: vé vào cửa: 0–3 tuổi 100 yên, 4–9 tuổi 300 yên, từ 10 tuổi 500 yên. Hàm fee: nếu age ≤ 3 trả 100; nếu [chỗ trống] trả 300; còn lại 500. Chọn điều kiện.</td>
+<td>内容<span class="rd">(ないよう)</span>：0〜3歳<span class="rd">(さい)</span>100円<span class="rd">(えん)</span>、4〜9歳<span class="rd">(さい)</span>300円<span class="rd">(えん)</span>、10歳以上<span class="rd">(さいいじょう)</span>500円<span class="rd">(えん)</span>。関数<span class="rd">(かんすう)</span>feeの空欄<span class="rd">(くうらん)</span>の条件<span class="rd">(じょうけん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: カ</strong> (age が 9 以下)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：カ</strong>（ageが9以下<span class="rd">(いか)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tới chỗ trống thì đã biết age ≥ 4, chỉ cần chặn trên age ≤ 9. "nhỏ hơn 9" làm 9 tuổi bị tính 500 yên.</td>
+<td>解説<span class="rd">(かいせつ)</span>：すでに4以上<span class="rd">(いじょう)</span>なので上限<span class="rd">(じょうげん)</span>だけでよい。「9より小<span class="rd">(ちい)</span>さい」だと9歳<span class="rd">(さい)</span>が500円<span class="rd">(えん)</span>になる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/sample20220425/b2.html" target="_blank" rel="noopener">科目Bサンプル問題(2022年4月) 問2</a></strong> (đề mẫu 4/2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 科目<span class="rd">(かもく)</span>Bサンプル問題<span class="rd">(もんだい)</span>（2022年<span class="rd">(ねん)</span>4月<span class="rd">(がつ)</span>） 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chương trình đảo ngược thứ tự phần tử của mảng số nguyên (ví dụ {1, 2, 3, 4, 5} → {5, 4, 3, 2, 1}). Điền a (chỉ số right) và b (lệnh đổi chỗ). Xem code ở link.</td>
+<td>内容<span class="rd">(ないよう)</span>：整数型<span class="rd">(せいすうがた)</span>配列<span class="rd">(はいれつ)</span>の要素<span class="rd">(ようそ)</span>を逆順<span class="rd">(ぎゃくじゅん)</span>にするプログラム。空欄<span class="rd">(くうらん)</span>a（rightの式<span class="rd">(しき)</span>）とb（交換<span class="rd">(こうかん)</span>）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (right ← 要素数 − left + 1; array[left] ← tmp)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（right = 要素数<span class="rd">(ようそすう)</span> − left + 1、array[left] ← tmp）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: lần 1: right = 5, tmp = 5, array[5] ← 1, array[1] ← 5 → {5, 2, 3, 4, 1}. Lần 2: right = 4 → {5, 4, 3, 2, 1}. Thiếu "+ 1" thì đổi nhầm phần tử thứ 4.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1回目<span class="rd">(かいめ)</span>で両端<span class="rd">(りょうたん)</span>、2回目<span class="rd">(かいめ)</span>で2番目<span class="rd">(ばんめ)</span>と4番目<span class="rd">(ばんめ)</span>を交換<span class="rd">(こうかん)</span>。+1がないと位置<span class="rd">(いち)</span>がずれる。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Điểm đặt hàng / lượng đặt hàng kinh tế / tồn kho an toàn / thời gian chờ hàng</td>
+<td>発注点<span class="rd">(はっちゅうてん)</span> / 経済的発注量<span class="rd">(けいざいてきはっちゅうりょう)</span> / 安全在庫<span class="rd">(あんぜんざいこ)</span> / 調達期間<span class="rd">(ちょうたつきかん)</span></td>
+</tr>
+<tr>
+<td>Kỳ vọng / cây quyết định</td>
+<td>期待値<span class="rd">(きたいち)</span> / デシジョンツリー</td>
+</tr>
+<tr>
+<td>Quy hoạch tuyến tính / hệ phương trình</td>
+<td>線形計画法<span class="rd">(せんけいけいかくほう)</span> / 連立方程式<span class="rd">(れんりつほうていしき)</span></td>
+</tr>
+<tr>
+<td>Thâm nhập / phát triển sản phẩm / mở rộng thị trường / đa dạng hóa</td>
+<td>市場浸透<span class="rd">(しじょうしんとう)</span> / 製品開発<span class="rd">(せいひんかいはつ)</span> / 市場開拓<span class="rd">(しじょうかいたく)</span> / 多角化<span class="rd">(たかくか)</span></td>
+</tr>
+<tr>
+<td>Yêu cầu thông tin / yêu cầu đề xuất</td>
+<td>情報提供依頼<span class="rd">(じょうほうていきょういらい)</span>（RFI） / 提案依頼書<span class="rd">(ていあんいらいしょ)</span>（RFP）</td>
+</tr>
+<tr>
+<td>Ma trận kề / đồ thị vô hướng / cạnh / đỉnh</td>
+<td>隣接行列<span class="rd">(りんせつぎょうれつ)</span> / 無向<span class="rd">(むこう)</span>グラフ / 辺<span class="rd">(へん)</span> / 頂点<span class="rd">(ちょうてん)</span></td>
+</tr>
+<tr>
+<td>Đảo ngược / đổi chỗ</td>
+<td>逆順<span class="rd">(ぎゃくじゅん)</span> / 交換<span class="rd">(こうかん)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

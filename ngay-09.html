@@ -1,0 +1,467 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 9 (20/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 9 (20/10): Địa chỉ IP, subnet, NAT, DNS, DHCP và đệ quy</h1>
+<p class="meta">Ngày 9 · Thứ Ba 20/10 · 科目A: IP, subnet, NAT, DNS, DHCP · 科目B: đệ quy</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Địa chỉ IP và các giao thức hỗ trợ ｜ IPアドレスと関連<span class="rd">(かんれん)</span>プロトコル</a></li><li><a href="#muc-3">科目B: Đệ quy ｜ 再帰<span class="rd">(さいき)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Bài soạn bù. Nếu đã qua ngày này, dùng bài như tài liệu ôn: phần subnet và đệ quy đều hay ra.</p>
+<ul class="check">
+<li>Đọc lý thuyết địa chỉ IP và subnet (20 phút)</li>
+<li>3 bài tự luyện + 5 câu đề cũ 科目A (40 phút)</li>
+<li>Đọc lý thuyết đệ quy, 2 bài tự luyện 科目B (40 phút)</li>
+<li>Đề cũ 科目B (20 phút)</li>
+</ul>
+<h2 id="muc-2">科目A: Địa chỉ IP và các giao thức hỗ trợ ｜ IPアドレスと関連<span class="rd">(かんれん)</span>プロトコル</h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Địa chỉ IPv4:</strong> 32 bit, chia thành phần mạng và phần host. Subnet mask là dãy 1 liên tục rồi tới 0 liên tục (ví dụ 255.255.255.128 = /25).</td>
+<td><strong>IPv4アドレス：</strong>32ビット、ネットワーク部<span class="rd">(ぶ)</span>とホスト部<span class="rd">(ぶ)</span>。サブネットマスクは1が連続<span class="rd">(れんぞく)</span>した後<span class="rd">(あと)</span>に0が続<span class="rd">(つづ)</span>く。</td>
+</tr>
+<tr>
+<td><strong>Địa chỉ mạng:</strong> IP AND mask. Địa chỉ broadcast: phần host toàn 1. Số host dùng được: 2^(số bit host) − 2.</td>
+<td><strong>ネットワークアドレス：</strong>IP AND マスク。ブロードキャストはホスト部<span class="rd">(ぶ)</span>がすべて1。ホスト数<span class="rd">(すう)</span> = 2^(ホスト部<span class="rd">(ぶ)</span>) − 2。</td>
+</tr>
+<tr>
+<td><strong>Cùng mạng hay không:</strong> AND IP của từng máy với mask, so kết quả. Chỉ cần tính octet cuối nếu 3 octet đầu của mask là 255.</td>
+<td><strong>同<span class="rd">(おな)</span>じネットワークか：</strong>AND結果<span class="rd">(けっか)</span>を比較<span class="rd">(ひかく)</span>。マスクが255.255.255.xなら第<span class="rd">(だい)</span>4オクテットだけ計算<span class="rd">(けいさん)</span>。</td>
+</tr>
+<tr>
+<td><strong>NAT:</strong> đổi IP riêng ↔ IP toàn cầu. NAPT (IP masquerade) đổi cả số cổng, nhiều máy dùng chung 1 IP toàn cầu.</td>
+<td><strong>NAT：</strong>プライベート ↔ グローバル。NAPTはポート番号<span class="rd">(ばんごう)</span>も変換<span class="rd">(へんかん)</span>し、複数台<span class="rd">(ふくすうだい)</span>で1つのグローバルIPを共有<span class="rd">(きょうゆう)</span>。</td>
+</tr>
+<tr>
+<td><strong>DNS:</strong> tên miền ↔ IP. <strong>DHCP:</strong> tự cấp IP cho máy. <strong>ARP:</strong> IP → MAC; <strong>RARP:</strong> MAC → IP. <strong>ICMP:</strong> báo lỗi, ping.</td>
+<td><strong>DNS：</strong>名前解決<span class="rd">(なまえかいけつ)</span>。<strong>DHCP：</strong>IP自動割当<span class="rd">(じどうわりあて)</span>。<strong>ARP：</strong>IP → MAC、<strong>RARP：</strong>MAC → IP。<strong>ICMP：</strong>エラー通知<span class="rd">(つうち)</span>・ping。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Máy có IP 192.168.10.75/26. Địa chỉ mạng là gì?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> 192.168.10.75/26のネットワークアドレスは。</td>
+</tr>
+<tr>
+<td>ア 192.168.10.0　イ 192.168.10.64　ウ 192.168.10.72　エ 192.168.10.128</td>
+<td>ア 192.168.10.0　イ 192.168.10.64　ウ 192.168.10.72　エ 192.168.10.128</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: /26 → octet cuối mask = 11000000 = 192. 75 = 01001011; AND 11000000 = 01000000 = 64.</td>
+<td>解説<span class="rd">(かいせつ)</span>：75 AND 192 = 64。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Cũng mạng đó (/26), địa chỉ broadcast là gì?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> 同<span class="rd">(おな)</span>じネットワーク（/26）のブロードキャストアドレスは。</td>
+</tr>
+<tr>
+<td>ア 192.168.10.63　イ 192.168.10.127　ウ 192.168.10.191　エ 192.168.10.255</td>
+<td>ア .63　イ .127　ウ .191　エ .255</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (192.168.10.127)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（192.168.10.127）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: phần host 6 bit; mạng 64 → 64 + 63 = 127.</td>
+<td>解説<span class="rd">(かいせつ)</span>：64 + (2⁶ − 1) = 127。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A3</strong> Mạng /27 có bao nhiêu host dùng được?</td>
+<td><strong>問<span class="rd">(とい)</span>A3</strong> /27で使<span class="rd">(つか)</span>えるホスト数<span class="rd">(すう)</span>は。</td>
+</tr>
+<tr>
+<td>ア 14　イ 30　ウ 32　エ 62</td>
+<td>ア 14　イ 30　ウ 32　エ 62</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (30)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（30）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 32 − 27 = 5 bit; 2⁵ − 2 = 30. ウ là quên trừ 2.</td>
+<td>解説<span class="rd">(かいせつ)</span>：2⁵ − 2 = 30。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/21_aki/q39.html" target="_blank" rel="noopener">平成21年秋期 午前 問39</a></strong> (2009)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>21年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>39</strong></td>
+</tr>
+<tr>
+<td>Nội dung: host 10.1.2.146, mask 255.255.255.240 thuộc mạng con nào? ア 10.1.2.132/26　イ 10.1.2.132/28　ウ 10.1.2.144/26　エ 10.1.2.144/28</td>
+<td>内容<span class="rd">(ないよう)</span>：10.1.2.146、マスク255.255.255.240のホストが属<span class="rd">(ぞく)</span>するサブネット。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mask .240 = /28. 146 = 10010010; AND 11110000 = 10010000 = 144. Nên 10.1.2.144/28.</td>
+<td>解説<span class="rd">(かいせつ)</span>：146 AND 240 = 144。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/20_aki/q50.html" target="_blank" rel="noopener">平成20年秋期 午前 問50</a></strong> (2008)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>50</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mạng 192.168.0.x, mask 255.255.255.0. Địa chỉ broadcast? ア 192.168.0.0　イ 192.168.0.255　ウ 192.168.255.0　エ 192.168.255.255</td>
+<td>内容<span class="rd">(ないよう)</span>：ブロードキャストアドレス。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: phần host 8 bit toàn 1 = 255. ア là địa chỉ mạng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ホスト部<span class="rd">(ぶ)</span>をすべて1に。アはネットワークアドレス。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/05_menjo/q24.html" target="_blank" rel="noopener">令和5年度 問24</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>24</strong></td>
+</tr>
+<tr>
+<td>Nội dung: subnet mask (VLSM) nào hợp lệ? ア 255.255.255.1　イ 255.255.255.32　ウ 255.255.255.64　エ 255.255.255.128</td>
+<td>内容<span class="rd">(ないよう)</span>：可変長<span class="rd">(かへんちょう)</span>サブネットマスクとして正<span class="rd">(ただ)</span>しいもの。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mask phải là 1 liên tục rồi 0. 128 = 10000000 hợp lệ; 1, 32, 64 đều có 0 đứng trước 1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1の後<span class="rd">(あと)</span>に0だけが続<span class="rd">(つづ)</span>くのは128だけ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/28_aki/q32.html" target="_blank" rel="noopener">平成28年秋期 午前 問32</a></strong> (2016)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>28年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>32</strong></td>
+</tr>
+<tr>
+<td>Nội dung: giao thức nào cấp phát IP động? ア ARP　イ DHCP　ウ RIP　エ SMTP</td>
+<td>内容<span class="rd">(ないよう)</span>：IPアドレスを動的<span class="rd">(どうてき)</span>に割<span class="rd">(わ)</span>り当<span class="rd">(あ)</span>てるプロトコル。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (DHCP)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（DHCP）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: RIP là giao thức định tuyến theo số hop; SMTP gửi mail.</td>
+<td>解説<span class="rd">(かいせつ)</span>：RIPはルーティング、SMTPはメール。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/03_menjo/q34.html" target="_blank" rel="noopener">令和3年度 問34</a></strong> (2021)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>3年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>34</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chức năng của RARP? ア kiểm tra gói IP có tới đích không　イ lấy IP từ MAC　ウ lấy IP từ tên miền và tên máy　エ đổi IP riêng ↔ IP toàn cầu</td>
+<td>内容<span class="rd">(ないよう)</span>：RARPの機能<span class="rd">(きのう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア ICMP, ウ DNS, エ NAT.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはICMP、ウはDNS、エはNAT。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Đệ quy ｜ 再帰<span class="rd">(さいき)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hàm đệ quy:</strong> hàm tự gọi chính nó. Bắt buộc có điều kiện dừng và đối số phải tiến dần về điều kiện dừng.</td>
+<td><strong>再帰関数<span class="rd">(さいきかんすう)</span>：</strong>自分自身<span class="rd">(じぶんじしん)</span>を呼<span class="rd">(よ)</span>ぶ。終了条件<span class="rd">(しゅうりょうじょうけん)</span>と、引数<span class="rd">(ひきすう)</span>がそこへ近<span class="rd">(ちか)</span>づくことが必要<span class="rd">(ひつよう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Trace:</strong> viết từng lời gọi xuống tới điều kiện dừng, rồi tính ngược lên. Ví dụ f(3) = 3 × f(2) = 3 × 2 × f(1) = 6.</td>
+<td><strong>トレース：</strong>終了条件<span class="rd">(しゅうりょうじょうけん)</span>まで展開<span class="rd">(てんかい)</span>してから戻<span class="rd">(もど)</span>って計算<span class="rd">(けいさん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<pre><code>〇整数型: sum(整数型: n)
+  if (n = 0)
+    return 0
+  endif
+  return n + sum(n − 1)
+
+〇整数型: pw(整数型: x, 整数型: n)
+  if (n = 0)
+    return 1
+  endif
+  return x × pw(x, n − 1)
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu B1</strong> sum(4) trả về bao nhiêu?</td>
+<td><strong>問<span class="rd">(とい)</span>B1</strong> sum(4)の戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>は。</td>
+</tr>
+<tr>
+<td>ア 4　イ 6　ウ 10　エ 24</td>
+<td>ア 4　イ 6　ウ 10　エ 24</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (10)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（10）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 4 + 3 + 2 + 1 + 0 = 10. エ là nhầm với giai thừa.</td>
+<td>解説<span class="rd">(かいせつ)</span>：4 + 3 + 2 + 1 + 0 = 10。エは階乗<span class="rd">(かいじょう)</span>と混同<span class="rd">(こんどう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu B2</strong> pw(2, 5) trả về bao nhiêu, và hàm pw được gọi tổng cộng bao nhiêu lần (kể cả lần gọi đầu)?</td>
+<td><strong>問<span class="rd">(とい)</span>B2</strong> pw(2, 5)の戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>と、pwが呼<span class="rd">(よ)</span>ばれる総回数<span class="rd">(そうかいすう)</span>（最初<span class="rd">(さいしょ)</span>を含<span class="rd">(ふく)</span>む）は。</td>
+</tr>
+<tr>
+<td>ア 10, 5 lần　イ 32, 5 lần　ウ 32, 6 lần　エ 25, 6 lần</td>
+<td>ア 10・5回<span class="rd">(かい)</span>　イ 32・5回<span class="rd">(かい)</span>　ウ 32・6回<span class="rd">(かい)</span>　エ 25・6回<span class="rd">(かい)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (32, 6 lần)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（32、6回<span class="rd">(かい)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: n = 5, 4, 3, 2, 1, 0: 6 lần gọi. 2⁵ = 32. Bẫy イ: quên lần gọi với n = 0.</td>
+<td>解説<span class="rd">(かいせつ)</span>：n = 5〜0の6回<span class="rd">(かい)</span>。2⁵ = 32。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/28_haru/q7.html" target="_blank" rel="noopener">平成28年春期 午前 問7</a></strong> (2016)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>28年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>7</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm đệ quy tính giai thừa F(n): n = 0 thì 1; n &gt; 0 thì [a]. Chọn a: ア n + F(n − 1)　イ n − 1 + F(n)　ウ n × F(n − 1)　エ (n − 1) × F(n)</td>
+<td>内容<span class="rd">(ないよう)</span>：階乗<span class="rd">(かいじょう)</span>を再帰的<span class="rd">(さいきてき)</span>に定義<span class="rd">(ていぎ)</span>するF(n)の空欄<span class="rd">(くうらん)</span>a。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: F(4) = 4 × 3 × 2 × 1 × 1 = 24. ア ra 11 (cộng thay vì nhân); イ, エ gọi F(n) với cùng đối số nên không dừng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アは和<span class="rd">(わ)</span>になり11、イ・エは引数<span class="rd">(ひきすう)</span>が減<span class="rd">(へ)</span>らず終<span class="rd">(お)</span>わらない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/sample/b7.html" target="_blank" rel="noopener">サンプル問題 科目B 問7</a></strong> (đề mẫu dạng mới; lời giải chi tiết ở bài ngày 25)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>7</strong></td>
+</tr>
+<tr>
+<td>Nội dung: cùng ý tưởng trong mã giả 科目B: hàm factorial(n), chọn bước đệ quy trong 6 lựa chọn.</td>
+<td>内容<span class="rd">(ないよう)</span>：擬似言語<span class="rd">(ぎじげんご)</span>の階乗関数<span class="rd">(かいじょうかんすう)</span>factorialの空欄<span class="rd">(くうらん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: カ</strong> (n × factorial(n − 1))</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：カ</strong>（n × factorial(n − 1)）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: giống đề 1. Đây là ví dụ đề 科目A cũ được "chuyển" sang dạng 科目B.</td>
+<td>解説<span class="rd">(かいせつ)</span>：過去問<span class="rd">(かこもん)</span>1と同<span class="rd">(おな)</span>じ考<span class="rd">(かんが)</span>え方<span class="rd">(かた)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phần mạng / phần host / mặt nạ mạng con</td>
+<td>ネットワーク部<span class="rd">(ぶ)</span> / ホスト部<span class="rd">(ぶ)</span> / サブネットマスク</td>
+</tr>
+<tr>
+<td>Địa chỉ mạng / broadcast</td>
+<td>ネットワークアドレス / ブロードキャストアドレス</td>
+</tr>
+<tr>
+<td>Mặt nạ độ dài thay đổi</td>
+<td>可変長<span class="rd">(かへんちょう)</span>サブネットマスク（VLSM）</td>
+</tr>
+<tr>
+<td>Địa chỉ riêng / địa chỉ toàn cầu</td>
+<td>プライベートIPアドレス / グローバルIPアドレス</td>
+</tr>
+<tr>
+<td>Phân giải tên / cấp phát động</td>
+<td>名前解決<span class="rd">(なまえかいけつ)</span> / 動的割当<span class="rd">(どうてきわりあて)</span></td>
+</tr>
+<tr>
+<td>Đệ quy / điều kiện dừng / đối số</td>
+<td>再帰<span class="rd">(さいき)</span> / 終了条件<span class="rd">(しゅうりょうじょうけん)</span> / 引数<span class="rd">(ひきすう)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

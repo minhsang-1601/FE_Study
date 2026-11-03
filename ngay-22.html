@@ -1,0 +1,465 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 22 (02/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 22 (02/11): Luyện câu tính toán テクノロジ và 4 câu thuật toán</h1>
+<p class="meta">Ngày 22 · Thứ Hai 02/11 · 科目A: câu tính toán テクノロジ · 科目B: 4 câu thuật toán</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Câu tính toán テクノロジ ｜ テクノロジ系<span class="rd">(けい)</span>の計算問題<span class="rd">(けいさんもんだい)</span></a></li><li><a href="#muc-3">科目B: 4 câu thuật toán ｜ アルゴリズム4問<span class="rd">(もん)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Tuần 4 bắt đầu luyện đề. Hôm nay: câu tính toán phần テクノロジ (gần như kỳ nào cũng có 3–5 câu) và 4 câu thuật toán 科目B, bấm giờ.</p>
+<ul class="check">
+<li>Đọc bảng công thức tính toán (15 phút)</li>
+<li>Làm 3 bài tự luyện + 5 câu đề cũ, tính ra giấy (45 phút)</li>
+<li>科目B: 4 câu đề mẫu/đề công khai, mỗi câu tối đa 5 phút (40 phút)</li>
+<li>Chấm, xem lại câu sai (20 phút)</li>
+</ul>
+<h2 id="muc-2">科目A: Câu tính toán テクノロジ ｜ テクノロジ系<span class="rd">(けい)</span>の計算問題<span class="rd">(けいさんもんだい)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Thời gian truyền</strong> = dữ liệu (bit) ÷ (tốc độ đường truyền × hiệu suất). Nhớ đổi byte sang bit (× 8) trước khi chia.</td>
+<td><strong>伝送時間<span class="rd">(でんそうじかん)</span></strong> = データ量<span class="rd">(りょう)</span>（ビット）÷（回線速度<span class="rd">(かいせんそくど)</span> × 伝送効率<span class="rd">(でんそうこうりつ)</span>）。バイトはビットに直<span class="rd">(なお)</span>す（× 8）。</td>
+</tr>
+<tr>
+<td><strong>Dữ liệu âm thanh PCM</strong> = tần số lấy mẫu × số bit lượng tử ÷ 8 × số giây × số kênh (byte).</td>
+<td><strong>音声<span class="rd">(おんせい)</span>データ量<span class="rd">(りょう)</span></strong> = 標本化周波数<span class="rd">(ひょうほんかしゅうはすう)</span> × 量子化<span class="rd">(りょうしか)</span>ビット数<span class="rd">(すう)</span> ÷ 8 × 秒数<span class="rd">(びょうすう)</span> × チャネル数<span class="rd">(すう)</span>（バイト）。</td>
+</tr>
+<tr>
+<td><strong>Dữ liệu ảnh</strong> = số điểm ảnh ngang × dọc × số bit màu ÷ 8 (byte).</td>
+<td><strong>画像<span class="rd">(がぞう)</span>データ量<span class="rd">(りょう)</span></strong> = 横<span class="rd">(よこ)</span>×縦<span class="rd">(たて)</span>の画素数<span class="rd">(がそすう)</span> × 色<span class="rd">(いろ)</span>のビット数<span class="rd">(すう)</span> ÷ 8。</td>
+</tr>
+<tr>
+<td><strong>Khả dụng:</strong> MTBF ÷ (MTBF + MTTR). Nối tiếp: A × B. Song song: 1 − (1 − A)(1 − B).</td>
+<td><strong>稼働率<span class="rd">(かどうりつ)</span>：</strong>MTBF ÷（MTBF + MTTR）。直列<span class="rd">(ちょくれつ)</span>はA × B、並列<span class="rd">(へいれつ)</span>は1 −（1 − A）(1 − B)。</td>
+</tr>
+<tr>
+<td><strong>Thời gian truy cập hiệu dụng (cache):</strong> thời gian cache × tỉ lệ trúng + thời gian bộ nhớ chính × (1 − tỉ lệ trúng).</td>
+<td><strong>実効<span class="rd">(じっこう)</span>アクセス時間<span class="rd">(じかん)</span>：</strong>キャッシュ時間<span class="rd">(じかん)</span> × ヒット率<span class="rd">(りつ)</span> + 主記憶時間<span class="rd">(しゅきおくじかん)</span> × (1 − ヒット率<span class="rd">(りつ)</span>)。</td>
+</tr>
+<tr>
+<td><strong>MIPS:</strong> số triệu lệnh mỗi giây = 1 ÷ thời gian trung bình 1 lệnh (micro giây). Thời gian trung bình = Σ (thời gian lệnh × tỉ lệ xuất hiện).</td>
+<td><strong>MIPS：</strong>1秒間<span class="rd">(びょうかん)</span>の百万命令数<span class="rd">(ひゃくまんめいれいすう)</span> = 1 ÷ 平均命令実行時間<span class="rd">(へいきんめいれいじっこうじかん)</span>（マイクロ秒<span class="rd">(びょう)</span>）。平均<span class="rd">(へいきん)</span> = Σ（命令時間<span class="rd">(めいれいじかん)</span> × 出現率<span class="rd">(しゅつげんりつ)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Mẹo:</strong> viết đơn vị bên cạnh từng số; k = 10³, M = 10⁶, G = 10⁹ (trừ khi đề nói 2¹⁰); 1 giây = 10³ ms = 10⁶ μs = 10⁹ ns.</td>
+<td><strong>コツ：</strong>単位<span class="rd">(たんい)</span>を必<span class="rd">(かなら)</span>ず書<span class="rd">(か)</span>く。k = 10³、M = 10⁶、G = 10⁹（問題文<span class="rd">(もんだいぶん)</span>で2¹⁰と指定<span class="rd">(してい)</span>がない限<span class="rd">(かぎ)</span>り）。1秒<span class="rd">(びょう)</span> = 10³ミリ秒<span class="rd">(びょう)</span> = 10⁶マイクロ秒<span class="rd">(びょう)</span> = 10⁹ナノ秒<span class="rd">(びょう)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Ảnh 1.000 × 800 điểm ảnh, mỗi điểm 24 bit, không nén. Dung lượng bao nhiêu?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> 1,000 × 800画素<span class="rd">(がそ)</span>、1画素<span class="rd">(がそ)</span>24ビット、圧縮<span class="rd">(あっしゅく)</span>なしの画像<span class="rd">(がぞう)</span>のデータ量<span class="rd">(りょう)</span>は。</td>
+</tr>
+<tr>
+<td>ア 0.8 MB　イ 2.4 MB　ウ 19.2 MB　エ 24 MB</td>
+<td>ア 0.8Mバイト　イ 2.4Mバイト　ウ 19.2Mバイト　エ 24Mバイト</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (2.4 MB)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（2.4Mバイト）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 1.000 × 800 = 800.000 điểm; 24 bit = 3 byte; 800.000 × 3 = 2.400.000 byte = 2.4 MB. ウ là quên chia 8 (đơn vị bit).</td>
+<td>解説<span class="rd">(かいせつ)</span>：80万画素<span class="rd">(まんがそ)</span> × 3バイト = 240万<span class="rd">(まん)</span>バイト。ウはビットのまま。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Cache 10 ns, bộ nhớ chính 60 ns, tỉ lệ trúng 90%. Thời gian truy cập hiệu dụng?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> キャッシュ10ナノ秒<span class="rd">(びょう)</span>、主記憶<span class="rd">(しゅきおく)</span>60ナノ秒<span class="rd">(びょう)</span>、ヒット率<span class="rd">(りつ)</span>90%の実効<span class="rd">(じっこう)</span>アクセス時間<span class="rd">(じかん)</span>は。</td>
+</tr>
+<tr>
+<td>ア 9 ns　イ 15 ns　ウ 35 ns　エ 55 ns</td>
+<td>ア 9　イ 15　ウ 35　エ 55（ナノ秒<span class="rd">(びょう)</span>）</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (15 ns)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（15ナノ秒<span class="rd">(びょう)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 10 × 0.9 + 60 × 0.1 = 9 + 6 = 15.</td>
+<td>解説<span class="rd">(かいせつ)</span>：10 × 0.9 + 60 × 0.1 = 15。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A3</strong> Máy có 2 loại lệnh: loại X 0.02 μs chiếm 60%, loại Y 0.07 μs chiếm 40%. Hiệu năng khoảng bao nhiêu MIPS?</td>
+<td><strong>問<span class="rd">(とい)</span>A3</strong> 命令<span class="rd">(めいれい)</span>X 0.02マイクロ秒<span class="rd">(びょう)</span>（60%）、命令<span class="rd">(めいれい)</span>Y 0.07マイクロ秒<span class="rd">(びょう)</span>（40%）。約何<span class="rd">(やくなん)</span>MIPSか。</td>
+</tr>
+<tr>
+<td>ア 20　イ 25　ウ 40　エ 50</td>
+<td>ア 20　イ 25　ウ 40　エ 50</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (25)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（25）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: trung bình = 0.02 × 0.6 + 0.07 × 0.4 = 0.012 + 0.028 = 0.04 μs. MIPS = 1 ÷ 0.04 = 25.</td>
+<td>解説<span class="rd">(かいせつ)</span>：平均<span class="rd">(へいきん)</span> = 0.012 + 0.028 = 0.04マイクロ秒<span class="rd">(びょう)</span>。1 ÷ 0.04 = 25MIPS。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/30_aki/q31.html" target="_blank" rel="noopener">平成30年秋期 午前 問31</a></strong> (2018)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>31</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đường truyền 1.5 Mbit/s, hiệu suất 50%, truyền 12 MB dữ liệu. Mất bao nhiêu giây? ア 16　イ 32　ウ 64　エ 128</td>
+<td>内容<span class="rd">(ないよう)</span>：1.5Mビット/秒<span class="rd">(びょう)</span>、伝送効率<span class="rd">(でんそうこうりつ)</span>50%で12Mバイトを送<span class="rd">(おく)</span>る伝送時間<span class="rd">(でんそうじかん)</span>（秒<span class="rd">(びょう)</span>）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (128)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（128）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 12 × 8 = 96 Mbit; tốc độ thực 1.5 × 0.5 = 0.75 Mbit/s; 96 ÷ 0.75 = 128 giây.</td>
+<td>解説<span class="rd">(かいせつ)</span>：96Mビット ÷ 0.75Mビット/秒<span class="rd">(びょう)</span> = 128秒<span class="rd">(びょう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/03_menjo/q30.html" target="_blank" rel="noopener">令和3年度 問30</a></strong> (2021)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>3年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>30</strong></td>
+</tr>
+<tr>
+<td>Nội dung: LAN 100 Mbit/s, hiệu suất 50%, gửi liên tiếp 1.000 bản ghi, mỗi bản 1.000 byte. Bao nhiêu giây? ア 0.02　イ 0.08　ウ 0.16　エ 1.6</td>
+<td>内容<span class="rd">(ないよう)</span>：100Mビット/秒<span class="rd">(びょう)</span>のLAN、伝送効率<span class="rd">(でんそうこうりつ)</span>50%、1,000バイトの電文<span class="rd">(でんぶん)</span>を1,000件<span class="rd">(けん)</span>。伝送時間<span class="rd">(でんそうじかん)</span>は。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (0.16)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（0.16）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: dữ liệu 1 MB = 8 Mbit; tốc độ thực 50 Mbit/s; 8 ÷ 50 = 0.16 giây.</td>
+<td>解説<span class="rd">(かいせつ)</span>：8Mビット ÷ 50Mビット/秒<span class="rd">(びょう)</span> = 0.16秒<span class="rd">(びょう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/06_menjo/q23.html" target="_blank" rel="noopener">令和6年度 問23</a></strong> (2024)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>23</strong></td>
+</tr>
+<tr>
+<td>Nội dung: gửi file 100 MB qua đường 10 Mbit/s, hiệu suất 75% (1 Mbit = 10⁶ bit). Khoảng bao nhiêu giây? ア 13　イ 60　ウ 80　エ 107</td>
+<td>内容<span class="rd">(ないよう)</span>：10Mビット/秒<span class="rd">(びょう)</span>、伝送効率<span class="rd">(でんそうこうりつ)</span>75%で100Mバイトのファイルを送<span class="rd">(おく)</span>る時間<span class="rd">(じかん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (107)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（107）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 800 Mbit ÷ 7.5 Mbit/s ≈ 106.7 giây. Bẫy ア: quên × 8.</td>
+<td>解説<span class="rd">(かいせつ)</span>：800 ÷ 7.5 ≒ 107秒<span class="rd">(びょう)</span>。アは8倍<span class="rd">(ばい)</span>を忘<span class="rd">(わす)</span>れた値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/28_aki/q15.html" target="_blank" rel="noopener">平成28年秋期 午前 問15</a></strong> (2016)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>28年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>15</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 2 máy nối song song, chỉ cần 1 máy chạy. Máy A: MTBF 480, MTTR 20; máy B: MTBF 950, MTTR 50. Khả dụng toàn hệ thống (%)? ア 91.2　イ 95.5　ウ 96.5　エ 99.8</td>
+<td>内容<span class="rd">(ないよう)</span>：2台<span class="rd">(だい)</span>並列<span class="rd">(へいれつ)</span>、どちらか1台<span class="rd">(だい)</span>稼働<span class="rd">(かどう)</span>でよい。A：MTBF 480・MTTR 20、B：MTBF 950・MTTR 50。全体<span class="rd">(ぜんたい)</span>の稼働率<span class="rd">(かどうりつ)</span>は。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (99.8)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（99.8）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: A = 480 ÷ 500 = 0.96; B = 950 ÷ 1.000 = 0.95. Song song: 1 − 0.04 × 0.05 = 0.998. ア là nhân nối tiếp (0.912).</td>
+<td>解説<span class="rd">(かいせつ)</span>：1 − 0.04 × 0.05 = 0.998。アは直列<span class="rd">(ちょくれつ)</span>で計算<span class="rd">(けいさん)</span>した誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/24_haru/q26.html" target="_blank" rel="noopener">平成24年春期 午前 問26</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>26</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 60 phút âm thanh mono, lấy mẫu 44.1 kHz, lượng tử 16 bit, PCM không nén. Khoảng bao nhiêu MB? ア 80　イ 160　ウ 320　エ 640</td>
+<td>内容<span class="rd">(ないよう)</span>：60分<span class="rd">(ぷん)</span>のモノラル音声<span class="rd">(おんせい)</span>、44.1kHz、16ビット、PCM、圧縮<span class="rd">(あっしゅく)</span>なし。約何<span class="rd">(やくなん)</span>Mバイトか。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (320)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（320）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 44.100 × 2 byte = 88.200 byte/giây; × 3.600 giây ≈ 317.5 MB, gần 320.</td>
+<td>解説<span class="rd">(かいせつ)</span>：88,200バイト/秒<span class="rd">(びょう)</span> × 3,600秒<span class="rd">(びょう)</span> ≒ 317.5Mバイト。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: 4 câu thuật toán ｜ アルゴリズム4問<span class="rd">(もん)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phân bổ thời gian:</strong> 科目B có 100 phút cho 20 câu, tức 5 phút/câu. Quá 6 phút thì đánh dấu, chọn tạm một đáp án, làm câu sau.</td>
+<td><strong>時間配分<span class="rd">(じかんはいぶん)</span>：</strong>100分<span class="rd">(ぷん)</span>で20問<span class="rd">(もん)</span>、1問<span class="rd">(もん)</span>5分<span class="rd">(ふん)</span>。6分<span class="rd">(ふん)</span>を超<span class="rd">(こ)</span>えたら仮<span class="rd">(かり)</span>の解答<span class="rd">(かいとう)</span>をして次<span class="rd">(つぎ)</span>へ。</td>
+</tr>
+<tr>
+<td><strong>Thứ tự đọc:</strong> (1) phần mô tả: hàm làm gì, trả về gì; (2) xem chỗ trống; (3) loại lựa chọn vô lý (lặp vô hạn, ra ngoài mảng); (4) trace với dữ liệu nhỏ để chọn giữa 2 lựa chọn còn lại.</td>
+<td><strong>読<span class="rd">(よ)</span>む順番<span class="rd">(じゅんばん)</span>：</strong>(1)説明文<span class="rd">(せつめいぶん)</span>で目的<span class="rd">(もくてき)</span>と戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>、(2)空欄<span class="rd">(くうらん)</span>の位置<span class="rd">(いち)</span>、(3)無限<span class="rd">(むげん)</span>ループや範囲外<span class="rd">(はんいがい)</span>になる選択肢<span class="rd">(せんたくし)</span>を消<span class="rd">(け)</span>す、(4)小<span class="rd">(ちい)</span>さいデータでトレース。</td>
+</tr>
+<tr>
+<td><strong>Bẫy hay gặp:</strong> chỉ số mảng bắt đầu từ 1; <code>and</code> / <code>or</code>; điều kiện <code>&gt;</code> hay <code>≥</code>; biến chưa được gán ("未定義").</td>
+<td><strong>よくある罠<span class="rd">(わな)</span>：</strong>添字<span class="rd">(そえじ)</span>は1から、and / or、&gt; と ≥ の違<span class="rd">(ちが)</span>い、未定義<span class="rd">(みていぎ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Làm cả 4 câu trong 20 phút trên trang gốc (bấm link để xem code), rồi mới mở đáp án.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/06_haru/b1.html" target="_blank" rel="noopener">令和6年度 科目B 問1</a></strong> (2024, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm maximum nhận 3 số nguyên khác nhau x, y, z, trả về số lớn nhất. Điều kiện if nào để trả về x? Lựa chọn: x &gt; y / x &gt; y and x &gt; z / x &gt; y and y &gt; z / x &gt; z / x &gt; z and z &gt; y / z &gt; y</td>
+<td>内容<span class="rd">(ないよう)</span>：異<span class="rd">(こと)</span>なる3つの整数<span class="rd">(せいすう)</span>x, y, zの最大値<span class="rd">(さいだいち)</span>を返<span class="rd">(かえ)</span>す関数<span class="rd">(かんすう)</span>maximum。xを返<span class="rd">(かえ)</span>すif文<span class="rd">(ぶん)</span>の条件<span class="rd">(じょうけん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (x &gt; y and x &gt; z)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（x &gt; y and x &gt; z）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: x lớn nhất khi lớn hơn cả y và z, cần and. ア và エ chỉ so một phía; ウ, オ so thêm y với z là không cần và làm sai trường hợp khác.</td>
+<td>解説<span class="rd">(かいせつ)</span>：xがyとzの両方<span class="rd">(りょうほう)</span>より大<span class="rd">(おお)</span>きいとき。片方<span class="rd">(かたほう)</span>だけの比較<span class="rd">(ひかく)</span>では不十分<span class="rd">(ふじゅうぶん)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/sample/b4.html" target="_blank" rel="noopener">サンプル問題 科目B 問4</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>4</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm gcd tìm ước chung lớn nhất của 2 số dương bằng phép trừ lặp: bằng nhau thì là kết quả; số lớn trừ số nhỏ rồi lặp lại. Điền a, c (loại vòng lặp) và b (điều kiện trước <code>x ← x − y</code>).</td>
+<td>内容<span class="rd">(ないよう)</span>：引<span class="rd">(ひ)</span>き算<span class="rd">(ざん)</span>を繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>して最大公約数<span class="rd">(さいだいこうやくすう)</span>を求<span class="rd">(もと)</span>める関数<span class="rd">(かんすう)</span>gcd。空欄<span class="rd">(くうらん)</span>a・c（ループの種類<span class="rd">(しゅるい)</span>）とb（x ← x − yの条件<span class="rd">(じょうけん)</span>）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (a, c là while; b là x &gt; y)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（a・cはwhile、bはx &gt; y）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: lặp tới khi x = y nên dùng while. Chỉ trừ x − y khi x &gt; y, nếu không x sẽ âm và lặp mãi. Trace 36, 60: (36, 24) → (12, 24) → (12, 12) → 12.</td>
+<td>解説<span class="rd">(かいせつ)</span>：x = yになるまで繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>すのでwhile。x &gt; yのときだけx − y。36と60 → 12。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/sample/b5.html" target="_blank" rel="noopener">サンプル問題 科目B 問5</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm calc nhận 2 số thực dương x, y, trả về √(x² + y²) (cạnh huyền), chỉ dùng hàm pow(a, b) = aᵇ. Chọn biểu thức cho chỗ trống.</td>
+<td>内容<span class="rd">(ないよう)</span>：正<span class="rd">(せい)</span>の実数<span class="rd">(じっすう)</span>x, yから√(x² + y²)を返<span class="rd">(かえ)</span>す関数<span class="rd">(かんすう)</span>calc。pow(a, b)はaのb乗<span class="rd">(じょう)</span>。空欄<span class="rd">(くうらん)</span>の式<span class="rd">(しき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: オ</strong> (pow(pow(x, 2) + pow(y, 2), 0.5))</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：オ</strong>（pow(pow(x, 2) + pow(y, 2), 0.5)）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: căn bậc hai = mũ 0.5. Bên trong là x² + y² = pow(x, 2) + pow(y, 2). Các lựa chọn khác chia cho √2 hoặc xʸ, không phải căn của tổng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：平方根<span class="rd">(へいほうこん)</span>は0.5乗<span class="rd">(じょう)</span>。中身<span class="rd">(なかみ)</span>はx² + y²。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/sample20220425/b3.html" target="_blank" rel="noopener">科目Bサンプル問題(2022年4月) 問3</a></strong> (đề mẫu công bố 4/2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 科目<span class="rd">(かもく)</span>Bサンプル問題<span class="rd">(もんだい)</span>（2022年<span class="rd">(ねん)</span>4月<span class="rd">(がつ)</span>） 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thủ tục append thêm 1 ký tự vào cuối danh sách liên kết đơn. Mỗi phần tử ListElement có val và next; biến listHead trỏ phần tử đầu, danh sách rỗng thì listHead "chưa xác định". Điền a (điều kiện) và b (lệnh nối).</td>
+<td>内容<span class="rd">(ないよう)</span>：単方向<span class="rd">(たんほうこう)</span>リストの末尾<span class="rd">(まつび)</span>に文字<span class="rd">(もじ)</span>を追加<span class="rd">(ついか)</span>する手続<span class="rd">(てつづ)</span>きappend。ListElementはvalとnext、listHeadは先頭<span class="rd">(せんとう)</span>、空<span class="rd">(から)</span>なら未定義<span class="rd">(みていぎ)</span>。空欄<span class="rd">(くうらん)</span>aとb。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: a: "listHead là chưa xác định" thì phần tử mới là đầu danh sách. b: ngược lại, đi prev tới phần tử cuối (next chưa xác định) rồi gán prev.next ← curr.</td>
+<td>解説<span class="rd">(かいせつ)</span>：aは「listHeadが未定義<span class="rd">(みていぎ)</span>」。bは末尾<span class="rd">(まつび)</span>までたどってprev.next ← curr。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tốc độ đường truyền / hiệu suất truyền / thời gian truyền</td>
+<td>回線速度<span class="rd">(かいせんそくど)</span> / 伝送効率<span class="rd">(でんそうこうりつ)</span> / 伝送時間<span class="rd">(でんそうじかん)</span></td>
+</tr>
+<tr>
+<td>Tần số lấy mẫu / số bit lượng tử</td>
+<td>標本化周波数<span class="rd">(ひょうほんかしゅうはすう)</span> / 量子化<span class="rd">(りょうしか)</span>ビット数<span class="rd">(すう)</span></td>
+</tr>
+<tr>
+<td>Điểm ảnh / nén</td>
+<td>画素<span class="rd">(がそ)</span> / 圧縮<span class="rd">(あっしゅく)</span></td>
+</tr>
+<tr>
+<td>Tỉ lệ trúng / thời gian truy cập hiệu dụng</td>
+<td>ヒット率<span class="rd">(りつ)</span> / 実効<span class="rd">(じっこう)</span>アクセス時間<span class="rd">(じかん)</span></td>
+</tr>
+<tr>
+<td>Thời gian thực hiện lệnh trung bình</td>
+<td>平均命令実行時間<span class="rd">(へいきんめいれいじっこうじかん)</span></td>
+</tr>
+<tr>
+<td>Nối tiếp / song song</td>
+<td>直列<span class="rd">(ちょくれつ)</span> / 並列<span class="rd">(へいれつ)</span></td>
+</tr>
+<tr>
+<td>Ước chung lớn nhất / căn bậc hai</td>
+<td>最大公約数<span class="rd">(さいだいこうやくすう)</span> / 平方根<span class="rd">(へいほうこん)</span></td>
+</tr>
+<tr>
+<td>Danh sách liên kết đơn / chưa xác định</td>
+<td>単方向<span class="rd">(たんほうこう)</span>リスト / 未定義<span class="rd">(みていぎ)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,878 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>FE Ngày 20 (31/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 20 (31/10): Pháp luật trong IT và bài tổng hợp 科目B</h1>
+<p class="meta">Ngày 20 · Thứ Bảy 31/10 · 科目A: 法務 · 科目B: 総合問題</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Pháp luật ｜ 法務<span class="rd">(ほうむ)</span></a></li><li><a href="#muc-3">科目B: Bài tổng hợp ｜ 総合問題<span class="rd">(そうごうもんだい)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Tổng khoảng 2 tiếng: 1 tiếng 科目A, 1 tiếng 科目B.</p>
+<ul class="check">
+<li>Đọc lý thuyết bản quyền, sở hữu công nghiệp, bí mật kinh doanh, bảo vệ thông tin cá nhân, luật cấm truy cập trái phép, phái cử và hợp đồng thầu (25 phút)</li>
+<li>Làm 4 câu bài tập 科目A, tự giải trước rồi mới xem đáp án (10 phút)</li>
+<li>Làm 9 câu đề cũ phần 法務 (25 phút)</li>
+<li>Đọc các mẫu thuật toán hay gặp trong bài tổng hợp 科目B (10 phút)</li>
+<li>Trace 3 bài 科目B trên giấy, kẻ bảng biến (20 phút)</li>
+<li>Làm 5 câu đề cũ 科目B 令和7年度, bấm giờ 6 phút/câu (30 phút)</li>
+<li>Ôn bảng từ vựng cuối bài</li>
+</ul>
+<h2 id="muc-2">科目A: Pháp luật ｜ 法務<span class="rd">(ほうむ)</span></h2>
+<p>Mỗi kỳ có khoảng 2–3 câu luật. Câu hỏi gần như luôn xoay quanh vài điểm cố định: "ai giữ bản quyền", "cái gì được bảo vệ", "ai ra lệnh cho người lao động", "cái gì là thông tin cá nhân". Học thuộc các điểm dưới đây là đủ.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Luật bản quyền bảo vệ "cách thể hiện":</strong> chương trình (cả mã nguồn lẫn mã đối tượng), tài liệu thiết kế, manual, cơ sở dữ liệu có tính sáng tạo.</td>
+<td><strong>著作権法<span class="rd">(ちょさくけんほう)</span>は「表現<span class="rd">(ひょうげん)</span>」を保護<span class="rd">(ほご)</span>：</strong>プログラム（ソースもオブジェクトも）、設計書<span class="rd">(せっけいしょ)</span>、マニュアル、創作性<span class="rd">(そうさくせい)</span>のあるデータベース。</td>
+</tr>
+<tr>
+<td><strong>Không được bảo vệ bởi bản quyền:</strong> thuật toán, ngôn ngữ lập trình, quy ước (protocol, 規約), ý tưởng. (Điều 10 khoản 3)</td>
+<td><strong>著作権法<span class="rd">(ちょさくけんほう)</span>で保護<span class="rd">(ほご)</span>されない：</strong>アルゴリズム（解法<span class="rd">(かいほう)</span>）、プログラム言語<span class="rd">(げんご)</span>、規約<span class="rd">(きやく)</span>（プロトコル）、アイデア。（第<span class="rd">(だい)</span>10条<span class="rd">(じょう)</span>第<span class="rd">(だい)</span>3項<span class="rd">(こう)</span>）</td>
+</tr>
+<tr>
+<td><strong>Phát sinh tự động:</strong> bản quyền có ngay khi tạo ra tác phẩm, không cần đăng ký (無方式主義). Thời hạn: 70 năm sau khi tác giả mất (tác phẩm đứng tên pháp nhân: 70 năm sau công bố).</td>
+<td><strong>無方式主義<span class="rd">(むほうしきしゅぎ)</span>：</strong>創作<span class="rd">(そうさく)</span>した時点<span class="rd">(じてん)</span>で発生<span class="rd">(はっせい)</span>し、登録<span class="rd">(とうろく)</span>は不要<span class="rd">(ふよう)</span>。保護期間<span class="rd">(ほごきかん)</span>は著作者<span class="rd">(ちょさくしゃ)</span>の死後<span class="rd">(しご)</span>70年<span class="rd">(ねん)</span>（法人名義<span class="rd">(ほうじんめいぎ)</span>は公表後<span class="rd">(こうひょうご)</span>70年<span class="rd">(ねん)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Tác phẩm công việc (職務著作):</strong> nhân viên làm theo chỉ thị của công ty, công bố dưới tên công ty, không có thỏa thuận khác → công ty là tác giả.</td>
+<td><strong>職務著作<span class="rd">(しょくむちょさく)</span>：</strong>法人<span class="rd">(ほうじん)</span>の発意<span class="rd">(はつい)</span>で従業員<span class="rd">(じゅうぎょういん)</span>が職務上<span class="rd">(しょくむじょう)</span>作成<span class="rd">(さくせい)</span>し、法人名義<span class="rd">(ほうじんめいぎ)</span>で公表<span class="rd">(こうひょう)</span>、別段<span class="rd">(べつだん)</span>の定<span class="rd">(さだ)</span>めなし → 著作者<span class="rd">(ちょさくしゃ)</span>は法人<span class="rd">(ほうじん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Ai giữ bản quyền khi thuê ngoài:</strong> hợp đồng thầu (請負) không có thỏa thuận → <strong>bên nhận thầu (bên làm ra)</strong>. Phái cử (派遣) → <strong>bên nhận phái cử (派遣先)</strong>, vì người lao động làm theo lệnh của 派遣先.</td>
+<td><strong>帰属<span class="rd">(きぞく)</span>：</strong>請負<span class="rd">(うけおい)</span>で特約<span class="rd">(とくやく)</span>なし → <strong>受託者<span class="rd">(じゅたくしゃ)</span>（作<span class="rd">(つく)</span>った側<span class="rd">(がわ)</span>）</strong>。派遣<span class="rd">(はけん)</span> → <strong>派遣先<span class="rd">(はけんさき)</span></strong>（派遣先<span class="rd">(はけんさき)</span>の指揮命令<span class="rd">(しきめいれい)</span>で作成<span class="rd">(さくせい)</span>するため）。</td>
+</tr>
+<tr>
+<td><strong>Quyền nhân thân của tác giả (著作者人格権):</strong> quyền công bố, quyền đứng tên, quyền giữ nguyên vẹn. Không chuyển nhượng được (bản quyền tài sản thì chuyển nhượng được).</td>
+<td><strong>著作者人格権<span class="rd">(ちょさくしゃじんかくけん)</span>：</strong>公表権<span class="rd">(こうひょうけん)</span>・氏名表示権<span class="rd">(しめいひょうじけん)</span>・同一性保持権<span class="rd">(どういつせいほじけん)</span>。譲渡<span class="rd">(じょうと)</span>できない（著作財産権<span class="rd">(ちょさくざいさんけん)</span>は譲渡可能<span class="rd">(じょうとかのう)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Quyền sở hữu công nghiệp:</strong> phải nộp đơn và đăng ký. Sáng chế (特許) 20 năm từ ngày nộp đơn; giải pháp hữu ích 10 năm; kiểu dáng 25 năm; nhãn hiệu 10 năm (gia hạn được).</td>
+<td><strong>産業財産権<span class="rd">(さんぎょうざいさんけん)</span>：</strong>出願<span class="rd">(しゅつがん)</span>・登録<span class="rd">(とうろく)</span>が必要<span class="rd">(ひつよう)</span>。特許権<span class="rd">(とっきょけん)</span>は出願<span class="rd">(しゅつがん)</span>から20年<span class="rd">(ねん)</span>、実用新案権<span class="rd">(じつようしんあんけん)</span>10年<span class="rd">(ねん)</span>、意匠権<span class="rd">(いしょうけん)</span>25年<span class="rd">(ねん)</span>、商標権<span class="rd">(しょうひょうけん)</span>10年<span class="rd">(ねん)</span>（更新可<span class="rd">(こうしんか)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Bí mật kinh doanh (Luật chống cạnh tranh không lành mạnh):</strong> đủ 3 điều kiện: được quản lý như bí mật, hữu ích cho kinh doanh, chưa được công chúng biết. Không cần đăng ký.</td>
+<td><strong>営業秘密<span class="rd">(えいぎょうひみつ)</span>（不正競争防止法<span class="rd">(ふせいきょうそうぼうしほう)</span>）：</strong>秘密管理性<span class="rd">(ひみつかんりせい)</span>・有用性<span class="rd">(ゆうようせい)</span>・非公知性<span class="rd">(ひこうちせい)</span>の3要件<span class="rd">(ようけん)</span>。登録<span class="rd">(とうろく)</span>は不要<span class="rd">(ふよう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Thông tin cá nhân:</strong> thông tin về người <strong>còn sống</strong>, xác định được một người cụ thể (tên, ngày sinh, ảnh khuôn mặt, vân tay, email chứa tên…). Thông tin đã công khai vẫn là thông tin cá nhân. Thông tin của pháp nhân thì không.</td>
+<td><strong>個人情報<span class="rd">(こじんじょうほう)</span>：生存<span class="rd">(せいぞん)</span>する個人<span class="rd">(こじん)</span></strong>に関<span class="rd">(かん)</span>する情報<span class="rd">(じょうほう)</span>で、特定<span class="rd">(とくてい)</span>の個人<span class="rd">(こじん)</span>を識別<span class="rd">(しきべつ)</span>できるもの（氏名<span class="rd">(しめい)</span>・生年月日<span class="rd">(せいねんがっぴ)</span>・顔画像<span class="rd">(かおがぞう)</span>・指紋<span class="rd">(しもん)</span>・氏名入<span class="rd">(しめいい)</span>りメールアドレス等<span class="rd">(とう)</span>）。公開<span class="rd">(こうかい)</span>されていても該当<span class="rd">(がいとう)</span>する。法人<span class="rd">(ほうじん)</span>の情報<span class="rd">(じょうほう)</span>は該当<span class="rd">(がいとう)</span>しない。</td>
+</tr>
+<tr>
+<td><strong>Các loại đặc biệt:</strong> thông tin cần lưu ý (bệnh án, tiền án, chủng tộc, tín ngưỡng) → thu thập phải có đồng ý. Thông tin ẩn danh đã xử lý (匿名加工情報) → không còn là thông tin cá nhân, có thể cung cấp cho bên thứ ba theo quy định.</td>
+<td><strong>要配慮個人情報<span class="rd">(ようはいりょこじんじょうほう)</span>：</strong>病歴<span class="rd">(びょうれき)</span>・犯罪歴<span class="rd">(はんざいれき)</span>・人種<span class="rd">(じんしゅ)</span>・信条<span class="rd">(しんじょう)</span>等<span class="rd">(とう)</span>。取得<span class="rd">(しゅとく)</span>に本人<span class="rd">(ほんにん)</span>の同意<span class="rd">(どうい)</span>が必要<span class="rd">(ひつよう)</span>。<strong>匿名加工情報<span class="rd">(とくめいかこうじょうほう)</span>：</strong>個人<span class="rd">(こじん)</span>を識別<span class="rd">(しきべつ)</span>できないよう加工<span class="rd">(かこう)</span>したもの。個人情報<span class="rd">(こじんじょうほう)</span>ではない。</td>
+</tr>
+<tr>
+<td><strong>Cung cấp cho bên thứ ba:</strong> nguyên tắc cần đồng ý của người đó. Ngoại lệ: theo pháp luật, bảo vệ tính mạng… Ủy thác xử lý (委託) không bị coi là "bên thứ ba".</td>
+<td><strong>第三者提供<span class="rd">(だいさんしゃていきょう)</span>：</strong>原則<span class="rd">(げんそく)</span>本人<span class="rd">(ほんにん)</span>の同意<span class="rd">(どうい)</span>が必要<span class="rd">(ひつよう)</span>。法令<span class="rd">(ほうれい)</span>に基<span class="rd">(もと)</span>づく場合<span class="rd">(ばあい)</span>等<span class="rd">(とう)</span>は例外<span class="rd">(れいがい)</span>。業務委託<span class="rd">(ぎょうむいたく)</span>先<span class="rd">(さき)</span>は第三者<span class="rd">(だいさんしゃ)</span>に当<span class="rd">(あ)</span>たらない。</td>
+</tr>
+<tr>
+<td><strong>Luật cấm truy cập trái phép:</strong> cấm (1) dùng ID/mật khẩu của người khác, (2) lợi dụng lỗ hổng để vượt kiểm soát truy cập, (3) cung cấp ID/mật khẩu người khác cho bên thứ ba (hành vi tiếp tay), (4) lấy trộm hoặc lừa lấy ID (phishing). Điều kiện: máy tính kết nối mạng và có kiểm soát truy cập.</td>
+<td><strong>不正<span class="rd">(ふせい)</span>アクセス禁止法<span class="rd">(きんしほう)</span>：</strong>①他人<span class="rd">(たにん)</span>のID・パスワードの無断使用<span class="rd">(むだんしよう)</span>、②脆弱性<span class="rd">(ぜいじゃくせい)</span>を突<span class="rd">(つ)</span>いて制限<span class="rd">(せいげん)</span>を回避<span class="rd">(かいひ)</span>、③他人<span class="rd">(たにん)</span>のIDを第三者<span class="rd">(だいさんしゃ)</span>に提供<span class="rd">(ていきょう)</span>（助長行為<span class="rd">(じょちょうこうい)</span>）、④不正取得<span class="rd">(ふせいしゅとく)</span>・フィッシング。ネットワーク接続<span class="rd">(せつぞく)</span>とアクセス制御<span class="rd">(せいぎょ)</span>が前提<span class="rd">(ぜんてい)</span>。</td>
+</tr>
+<tr>
+<td><strong>Luật khác hay làm bẫy:</strong> tạo virus → Bộ luật hình sự (tội tạo bản ghi điện từ chỉ thị bất chính). Spam quảng cáo → Luật email đặc định (phải opt-in). Giao dịch nội gián → Luật công cụ tài chính. Mua bán tại nhà, cooling-off → Luật giao dịch thương mại đặc định.</td>
+<td><strong>紛<span class="rd">(まぎ)</span>らわしい法律<span class="rd">(ほうりつ)</span>：</strong>ウイルス作成<span class="rd">(さくせい)</span>→刑法<span class="rd">(けいほう)</span>（不正指令電磁的記録<span class="rd">(ふせいしれいでんじてききろく)</span>に関<span class="rd">(かん)</span>する罪<span class="rd">(つみ)</span>）。迷惑<span class="rd">(めいわく)</span>メール→特定電子<span class="rd">(とくていでんし)</span>メール法<span class="rd">(ほう)</span>（オプトイン）。インサイダー取引<span class="rd">(とりひき)</span>→金融商品取引法<span class="rd">(きんゆうしょうひんとりひきほう)</span>。クーリングオフ→特定商取引法<span class="rd">(とくていしょうとりひきほう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Phái cử lao động (派遣):</strong> công ty phái cử (派遣元) <strong>ký hợp đồng lao động</strong>; công ty nhận (派遣先) <strong>ra lệnh công việc</strong>. Người tuyển dụng ≠ người ra lệnh. Cấm phái cử lại (二重派遣); 派遣先 không được chọn người qua phỏng vấn trước.</td>
+<td><strong>労働者派遣<span class="rd">(ろうどうしゃはけん)</span>：派遣元<span class="rd">(はけんもと)</span></strong>が雇用契約<span class="rd">(こようけいやく)</span>、<strong>派遣先<span class="rd">(はけんさき)</span></strong>が指揮命令<span class="rd">(しきめいれい)</span>。雇用者<span class="rd">(こようしゃ)</span>と指揮命令者<span class="rd">(しきめいれいしゃ)</span>が異<span class="rd">(こと)</span>なる。二重派遣<span class="rd">(にじゅうはけん)</span>禁止<span class="rd">(きんし)</span>、派遣先<span class="rd">(はけんさき)</span>による事前面接<span class="rd">(じぜんめんせつ)</span>は不可<span class="rd">(ふか)</span>。</td>
+</tr>
+<tr>
+<td><strong>Hợp đồng thầu (請負):</strong> bên nhận thầu chịu trách nhiệm hoàn thành sản phẩm, <strong>tự ra lệnh</strong> cho nhân viên của mình, kể cả khi làm tại văn phòng khách. Nếu khách ra lệnh trực tiếp → <strong>thầu giả (偽装請負)</strong>, vi phạm.</td>
+<td><strong>請負<span class="rd">(うけおい)</span>：</strong>受託者<span class="rd">(じゅたくしゃ)</span>が仕事<span class="rd">(しごと)</span>の完成<span class="rd">(かんせい)</span>に責任<span class="rd">(せきにん)</span>を持<span class="rd">(も)</span>ち、<strong>自社<span class="rd">(じしゃ)</span>の従業員<span class="rd">(じゅうぎょういん)</span>に自<span class="rd">(みずか)</span>ら指揮命令<span class="rd">(しきめいれい)</span></strong>する（客先常駐<span class="rd">(きゃくさきじょうちゅう)</span>でも同<span class="rd">(おな)</span>じ）。発注者<span class="rd">(はっちゅうしゃ)</span>が直接<span class="rd">(ちょくせつ)</span>指示<span class="rd">(しじ)</span>すると<strong>偽装請負<span class="rd">(ぎそううけおい)</span></strong>。</td>
+</tr>
+<tr>
+<td><strong>Ủy thác (準委任):</strong> trả tiền cho việc thực hiện công việc, không bắt buộc hoàn thành sản phẩm (ví dụ: tư vấn, vận hành). Nhân viên vẫn làm theo lệnh của bên nhận ủy thác.</td>
+<td><strong>準委任契約<span class="rd">(じゅんいにんけいやく)</span>：</strong>業務<span class="rd">(ぎょうむ)</span>の遂行<span class="rd">(すいこう)</span>に対<span class="rd">(たい)</span>して報酬<span class="rd">(ほうしゅう)</span>。完成義務<span class="rd">(かんせいぎむ)</span>はない。指揮命令<span class="rd">(しきめいれい)</span>は受託者側<span class="rd">(じゅたくしゃがわ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Bảng "ai làm gì" ｜ 契約形態<span class="rd">(けいやくけいたい)</span>の比較<span class="rd">(ひかく)</span></strong></p>
+<div class="tbl"><table class="plain">
+<thead>
+<tr>
+<th>Hình thức</th>
+<th>Hợp đồng lao động với</th>
+<th>Ra lệnh công việc</th>
+<th>Bản quyền mặc định</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>派遣 (phái cử)</td>
+<td>派遣元</td>
+<td>派遣先</td>
+<td>派遣先</td>
+</tr>
+<tr>
+<td>請負 (thầu)</td>
+<td>Bên nhận thầu</td>
+<td>Bên nhận thầu</td>
+<td>Bên nhận thầu</td>
+</tr>
+<tr>
+<td>準委任 (ủy thác)</td>
+<td>Bên nhận ủy thác</td>
+<td>Bên nhận ủy thác</td>
+<td>Theo hợp đồng</td>
+</tr>
+<tr>
+<td>出向 (biệt phái)</td>
+<td>Công ty nhận (hoặc cả hai)</td>
+<td>Công ty nhận</td>
+<td>Công ty nhận</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Nhân viên công ty X viết một chương trình theo chỉ thị của công ty, trong giờ làm việc; chương trình phát hành dưới tên công ty X, nội quy không có quy định đặc biệt. Ai là tác giả (giữ bản quyền)?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> X社<span class="rd">(しゃ)</span>の従業員<span class="rd">(じゅうぎょういん)</span>が会社<span class="rd">(かいしゃ)</span>の指示<span class="rd">(しじ)</span>で業務時間内<span class="rd">(ぎょうむじかんない)</span>にプログラムを作成<span class="rd">(さくせい)</span>し、X社<span class="rd">(しゃ)</span>名義<span class="rd">(めいぎ)</span>で公表<span class="rd">(こうひょう)</span>した。就業規則<span class="rd">(しゅうぎょうきそく)</span>に特段<span class="rd">(とくだん)</span>の定<span class="rd">(さだ)</span>めはない。著作者<span class="rd">(ちょさくしゃ)</span>は誰<span class="rd">(だれ)</span>か。</td>
+</tr>
+<tr>
+<td>ア Nhân viên đó　イ Công ty X　ウ Nhân viên và công ty X cùng sở hữu　エ Không ai, vì chưa đăng ký</td>
+<td>ア その従業員<span class="rd">(じゅうぎょういん)</span>　イ X社<span class="rd">(しゃ)</span>　ウ 従業員<span class="rd">(じゅうぎょういん)</span>とX社<span class="rd">(しゃ)</span>の共有<span class="rd">(きょうゆう)</span>　エ 登録<span class="rd">(とうろく)</span>していないので誰<span class="rd">(だれ)</span>にもない</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đủ điều kiện "tác phẩm công việc" (theo ý công ty, trong công việc, đứng tên công ty, không có thỏa thuận khác) → công ty là tác giả. ア là bẫy cho người nghĩ "ai viết người đó giữ". エ sai vì bản quyền phát sinh tự động, không cần đăng ký.</td>
+<td>解説<span class="rd">(かいせつ)</span>：職務著作<span class="rd">(しょくむちょさく)</span>の要件<span class="rd">(ようけん)</span>（法人<span class="rd">(ほうじん)</span>の発意<span class="rd">(はつい)</span>・職務上<span class="rd">(しょくむじょう)</span>・法人名義<span class="rd">(ほうじんめいぎ)</span>・別段<span class="rd">(べつだん)</span>の定<span class="rd">(さだ)</span>めなし）を満<span class="rd">(み)</span>たすので法人<span class="rd">(ほうじん)</span>が著作者<span class="rd">(ちょさくしゃ)</span>。アは「作<span class="rd">(つく)</span>った人<span class="rd">(ひと)</span>が持<span class="rd">(も)</span>つ」と考<span class="rd">(かんが)</span>える人<span class="rd">(ひと)</span>への罠<span class="rd">(わな)</span>。エは無方式主義<span class="rd">(むほうしきしゅぎ)</span>に反<span class="rd">(はん)</span>する。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Trong hình thức phái cử lao động, ai trực tiếp ra lệnh công việc cho người lao động được phái cử?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> 労働者派遣<span class="rd">(ろうどうしゃはけん)</span>において、派遣労働者<span class="rd">(はけんろうどうしゃ)</span>に業務<span class="rd">(ぎょうむ)</span>の指揮命令<span class="rd">(しきめいれい)</span>を行<span class="rd">(おこな)</span>うのは誰<span class="rd">(だれ)</span>か。</td>
+</tr>
+<tr>
+<td>ア Công ty phái cử (派遣元)　イ Công ty nhận phái cử (派遣先)　ウ Người lao động tự quyết định　エ Cả 派遣元 và 派遣先 cùng ra lệnh</td>
+<td>ア 派遣元<span class="rd">(はけんもと)</span>　イ 派遣先<span class="rd">(はけんさき)</span>　ウ 労働者<span class="rd">(ろうどうしゃ)</span>自身<span class="rd">(じしん)</span>　エ 派遣元<span class="rd">(はけんもと)</span>と派遣先<span class="rd">(はけんさき)</span>の両方<span class="rd">(りょうほう)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đặc trưng của phái cử là "ký hợp đồng với 派遣元, làm theo lệnh của 派遣先". ア là người ký hợp đồng lao động, không phải người ra lệnh hằng ngày. Nếu thấy câu hỏi "người tuyển dụng khác người ra lệnh" → đáp án là 派遣.</td>
+<td>解説<span class="rd">(かいせつ)</span>：派遣<span class="rd">(はけん)</span>は「雇用契約<span class="rd">(こようけいやく)</span>は派遣元<span class="rd">(はけんもと)</span>、指揮命令<span class="rd">(しきめいれい)</span>は派遣先<span class="rd">(はけんさき)</span>」。アは雇用主<span class="rd">(こようぬし)</span>であり、日々<span class="rd">(ひび)</span>の指揮命令者<span class="rd">(しきめいれいしゃ)</span>ではない。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A3</strong> Hành vi nào bị xử phạt theo Luật cấm truy cập trái phép?</td>
+<td><strong>問<span class="rd">(とい)</span>A3</strong> 不正<span class="rd">(ふせい)</span>アクセス禁止法<span class="rd">(きんしほう)</span>で処罰<span class="rd">(しょばつ)</span>の対象<span class="rd">(たいしょう)</span>となる行為<span class="rd">(こうい)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア Đăng ID và mật khẩu của người khác lên diễn đàn mà không được phép　イ Tạo virus máy tính và lưu trên máy mình để phát tán　ウ Gửi hàng loạt email quảng cáo không có sự đồng ý của người nhận　エ Sao chép sách chuyên ngành và bán</td>
+<td>ア 他人<span class="rd">(たにん)</span>のIDとパスワードを無断<span class="rd">(むだん)</span>で掲示板<span class="rd">(けいじばん)</span>に公開<span class="rd">(こうかい)</span>する　イ 配布<span class="rd">(はいふ)</span>目的<span class="rd">(もくてき)</span>でウイルスを作成<span class="rd">(さくせい)</span>する　ウ 同意<span class="rd">(どうい)</span>のない広告<span class="rd">(こうこく)</span>メールを大量送信<span class="rd">(たいりょうそうしん)</span>する　エ 専門書<span class="rd">(せんもんしょ)</span>を複製<span class="rd">(ふくせい)</span>して販売<span class="rd">(はんばい)</span>する</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cung cấp ID/mật khẩu người khác cho bên thứ ba là "hành vi tiếp tay truy cập trái phép", bị luật này cấm dù chưa ai đăng nhập. イ bị xử theo Bộ luật hình sự; ウ theo Luật email đặc định; エ theo Luật bản quyền. Đề thi luôn trộn các luật này làm bẫy.</td>
+<td>解説<span class="rd">(かいせつ)</span>：他人<span class="rd">(たにん)</span>の識別符号<span class="rd">(しきべつふごう)</span>の無断提供<span class="rd">(むだんていきょう)</span>は「不正<span class="rd">(ふせい)</span>アクセスを助長<span class="rd">(じょちょう)</span>する行為<span class="rd">(こうい)</span>」として禁止<span class="rd">(きんし)</span>。イは刑法<span class="rd">(けいほう)</span>、ウは特定電子<span class="rd">(とくていでんし)</span>メール法<span class="rd">(ほう)</span>、エは著作権法<span class="rd">(ちょさくけんほう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A4</strong> Thông tin nào là "thông tin cá nhân cần lưu ý đặc biệt" (要配慮個人情報)?</td>
+<td><strong>問<span class="rd">(とい)</span>A4</strong> 要配慮個人情報<span class="rd">(ようはいりょこじんじょうほう)</span>に該当<span class="rd">(がいとう)</span>するものはどれか。</td>
+</tr>
+<tr>
+<td>ア Họ tên và địa chỉ　イ Tiền sử bệnh　ウ Địa chỉ email công việc　エ Số điện thoại của trụ sở công ty</td>
+<td>ア 氏名<span class="rd">(しめい)</span>と住所<span class="rd">(じゅうしょ)</span>　イ 病歴<span class="rd">(びょうれき)</span>　ウ 業務用<span class="rd">(ぎょうむよう)</span>メールアドレス　エ 会社<span class="rd">(かいしゃ)</span>の代表電話番号<span class="rd">(だいひょうでんわばんごう)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 要配慮 là thông tin dễ dẫn đến phân biệt đối xử: bệnh án, tiền án, chủng tộc, tín ngưỡng. ア, ウ là thông tin cá nhân thông thường. エ là thông tin pháp nhân, không phải thông tin cá nhân.</td>
+<td>解説<span class="rd">(かいせつ)</span>：要配慮<span class="rd">(ようはいりょ)</span>は差別<span class="rd">(さべつ)</span>につながりうる情報<span class="rd">(じょうほう)</span>（病歴<span class="rd">(びょうれき)</span>・犯罪歴<span class="rd">(はんざいれき)</span>・人種<span class="rd">(じんしゅ)</span>・信条<span class="rd">(しんじょう)</span>）。ア・ウは通常<span class="rd">(つうじょう)</span>の個人情報<span class="rd">(こじんじょうほう)</span>、エは法人<span class="rd">(ほうじん)</span>の情報<span class="rd">(じょうほう)</span>で個人情報<span class="rd">(こじんじょうほう)</span>ではない。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Mỗi câu ghi kỳ thi và số câu; bấm link để xem nguyên văn đề trên fe-siken.com.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/26_aki/q79.html" target="_blank" rel="noopener">平成26年秋期 午前 問79</a></strong> (2014); cùng đề còn có ở 平成24年春期 問78, 平成29年春期 問79</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>79</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chọn câu đúng về phạm vi bảo vệ phần mềm của luật bản quyền. Các lựa chọn nói về OS, thuật toán và ngôn ngữ lập trình, tài liệu mô tả thuật toán, mã nguồn và mã đối tượng.</td>
+<td>内容<span class="rd">(ないよう)</span>：ソフトウェアに対<span class="rd">(たい)</span>する著作権法<span class="rd">(ちょさくけんほう)</span>の保護範囲<span class="rd">(ほごはんい)</span>として適切<span class="rd">(てきせつ)</span>なものを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (cả mã nguồn và mã đối tượng đều được bảo vệ)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（ソースプログラムもオブジェクトプログラムも保護<span class="rd">(ほご)</span>される）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: OS cũng là chương trình nên được bảo vệ; thuật toán và ngôn ngữ lập trình không được bảo vệ (Điều 10 khoản 3); chương trình cài đặt thuật toán thì được bảo vệ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：OSも保護対象<span class="rd">(ほごたいしょう)</span>。アルゴリズムとプログラム言語<span class="rd">(げんご)</span>は対象外<span class="rd">(たいしょうがい)</span>（第<span class="rd">(だい)</span>10条<span class="rd">(じょう)</span>第<span class="rd">(だい)</span>3項<span class="rd">(こう)</span>）。それを実装<span class="rd">(じっそう)</span>したプログラムは保護<span class="rd">(ほご)</span>される。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/22_haru/q78.html" target="_blank" rel="noopener">平成22年春期 午前 問78</a></strong> (2010); đề tương tự có ở 応用情報 令和4年秋期 問78</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>22年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>78</strong></td>
+</tr>
+<tr>
+<td>Nội dung: công ty A thuê công ty con B làm hệ thống; B làm phần định nghĩa yêu cầu rồi thuê lại công ty C làm thiết kế, lập trình, kiểm thử; nhân viên D của C trực tiếp làm. Không có thỏa thuận về bản quyền. Ai giữ bản quyền chương trình?</td>
+<td>内容<span class="rd">(ないよう)</span>：A社<span class="rd">(しゃ)</span>→B社<span class="rd">(しゃ)</span>→C社<span class="rd">(しゃ)</span>と請負<span class="rd">(うけおい)</span>で再委託<span class="rd">(さいいたく)</span>し、C社<span class="rd">(しゃ)</span>のD社員<span class="rd">(しゃいん)</span>が開発<span class="rd">(かいはつ)</span>。特約<span class="rd">(とくやく)</span>がない場合<span class="rd">(ばあい)</span>の著作権<span class="rd">(ちょさくけん)</span>の帰属先<span class="rd">(きぞくさき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (công ty C)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（C社<span class="rd">(しゃ)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: hai lớp đều là hợp đồng thầu → bên thực sự làm ra (C) giữ bản quyền. D là nhân viên làm trong công việc → tác phẩm công việc thuộc về C, không phải D.</td>
+<td>解説<span class="rd">(かいせつ)</span>：請負<span class="rd">(うけおい)</span>なので実際<span class="rd">(じっさい)</span>に開発<span class="rd">(かいはつ)</span>したC社<span class="rd">(しゃ)</span>。D社員<span class="rd">(しゃいん)</span>の成果<span class="rd">(せいか)</span>は職務著作<span class="rd">(しょくむちょさく)</span>としてC社<span class="rd">(しゃ)</span>に帰属<span class="rd">(きぞく)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/29_haru/q80.html" target="_blank" rel="noopener">平成29年春期 午前 問80</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>80</strong></td>
+</tr>
+<tr>
+<td>Nội dung: bí mật kinh doanh theo Luật chống cạnh tranh không lành mạnh cần "được quản lý như bí mật" và "hữu ích cho kinh doanh". Điều kiện thứ ba là gì?</td>
+<td>内容<span class="rd">(ないよう)</span>：不正競争防止法<span class="rd">(ふせいきょうそうぼうしほう)</span>の営業秘密<span class="rd">(えいぎょうひみつ)</span>の要件<span class="rd">(ようけん)</span>のうち、秘密管理性<span class="rd">(ひみつかんりせい)</span>・有用性<span class="rd">(ゆうようせい)</span>以外<span class="rd">(いがい)</span>の1つ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (chưa được công chúng biết)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（公然<span class="rd">(こうぜん)</span>と知<span class="rd">(し)</span>られていないこと）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 3 điều kiện = 秘密管理性・有用性・非公知性. Các bẫy: "đã nộp đơn sáng chế" (nộp sáng chế là công khai, ngược với bí mật), "thời hạn 10 năm" (không có thời hạn).</td>
+<td>解説<span class="rd">(かいせつ)</span>：秘密管理性<span class="rd">(ひみつかんりせい)</span>・有用性<span class="rd">(ゆうようせい)</span>・非公知性<span class="rd">(ひこうちせい)</span>。特許出願<span class="rd">(とっきょしゅつがん)</span>は公開<span class="rd">(こうかい)</span>されるので逆<span class="rd">(ぎゃく)</span>。期間<span class="rd">(きかん)</span>の制限<span class="rd">(せいげん)</span>もない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/30_aki/q79.html" target="_blank" rel="noopener">平成30年秋期 午前 問79</a></strong> (2018)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>79</strong></td>
+</tr>
+<tr>
+<td>Nội dung: theo hướng dẫn của Ủy ban bảo vệ thông tin cá nhân, cái nào <strong>không</strong> phải thông tin cá nhân? Các lựa chọn: video camera giám sát nhận ra mặt người, phiếu khấu trừ thuế không ghi My Number, bản sao lưu dữ liệu vân tay, kết quả khảo sát đã xử lý thành thông tin ẩn danh.</td>
+<td>内容<span class="rd">(ないよう)</span>：個人情報<span class="rd">(こじんじょうほう)</span>に該当<span class="rd">(がいとう)</span>しないものを選<span class="rd">(えら)</span>ぶ。防犯<span class="rd">(ぼうはん)</span>カメラ映像<span class="rd">(えいぞう)</span>、源泉徴収票<span class="rd">(げんせんちょうしゅうひょう)</span>、指紋<span class="rd">(しもん)</span>データのバックアップ、匿名加工情報<span class="rd">(とくめいかこうじょうほう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: "thông tin ẩn danh đã xử lý (匿名加工情報)"</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：匿名加工情報<span class="rd">(とくめいかこうじょうほう)</span>に加工<span class="rd">(かこう)</span>したアンケート情報<span class="rd">(じょうほう)</span></strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: video và vân tay xác định được người; phiếu thuế có tên và địa chỉ nên vẫn là thông tin cá nhân dù không có My Number. Chỉ thông tin đã ẩn danh hóa là không còn xác định được người.</td>
+<td>解説<span class="rd">(かいせつ)</span>：映像<span class="rd">(えいぞう)</span>・指紋<span class="rd">(しもん)</span>は個人識別<span class="rd">(こじんしきべつ)</span>可能<span class="rd">(かのう)</span>。源泉徴収票<span class="rd">(げんせんちょうしゅうひょう)</span>は氏名<span class="rd">(しめい)</span>・住所<span class="rd">(じゅうしょ)</span>があるので個人情報<span class="rd">(こじんじょうほう)</span>。匿名加工情報<span class="rd">(とくめいかこうじょうほう)</span>だけが識別<span class="rd">(しきべつ)</span>できない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/25_aki/q80.html" target="_blank" rel="noopener">平成25年秋期 午前 問80</a></strong> (2013)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>25年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>80</strong></td>
+</tr>
+<tr>
+<td>Nội dung: câu nào đúng theo Luật bảo vệ thông tin cá nhân? Các lựa chọn nói về email chứa tên người, kết quả đánh giá nhân viên, thông tin đã đăng báo, thông tin trụ sở công ty.</td>
+<td>内容<span class="rd">(ないよう)</span>：個人情報保護法<span class="rd">(こじんじょうほうほごほう)</span>に照<span class="rd">(て)</span>らして適切<span class="rd">(てきせつ)</span>なもの。メールアドレス、人事評価<span class="rd">(じんじひょうか)</span>、公開済<span class="rd">(こうかいず)</span>みの情報<span class="rd">(じょうほう)</span>、法人<span class="rd">(ほうじん)</span>の情報<span class="rd">(じょうほう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: "email mà chuỗi ký tự hoặc tên miền xác định được một người cụ thể là thông tin cá nhân"</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：文字列<span class="rd">(もじれつ)</span>やドメイン名<span class="rd">(めい)</span>から特定<span class="rd">(とくてい)</span>の個人<span class="rd">(こじん)</span>を識別<span class="rd">(しきべつ)</span>できるメールアドレスは個人情報<span class="rd">(こじんじょうほう)</span>である</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đánh giá nhân viên có kèm tên → là thông tin cá nhân; đã đăng báo vẫn là thông tin cá nhân; thông tin của pháp nhân không phải thông tin cá nhân.</td>
+<td>解説<span class="rd">(かいせつ)</span>：人事評価<span class="rd">(じんじひょうか)</span>も識別<span class="rd">(しきべつ)</span>できれば個人情報<span class="rd">(こじんじょうほう)</span>。公開<span class="rd">(こうかい)</span>されていても該当<span class="rd">(がいとう)</span>。法人<span class="rd">(ほうじん)</span>は個人<span class="rd">(こじん)</span>ではない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/23_toku/q80.html" target="_blank" rel="noopener">平成23年特別 午前 問80</a></strong> (2011)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>23年<span class="rd">(ねん)</span>特別<span class="rd">(とくべつ)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>80</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hành vi nào là truy cập trái phép theo Luật cấm truy cập trái phép? Các lựa chọn: giao dịch nội gián, tạo virus làm rối màn hình, đăng ảnh báo lên web mà không xin phép, dùng ID/mật khẩu người khác để vào trang có kiểm soát truy cập.</td>
+<td>内容<span class="rd">(ないよう)</span>：不正<span class="rd">(ふせい)</span>アクセス禁止法<span class="rd">(きんしほう)</span>の不正<span class="rd">(ふせい)</span>アクセス行為<span class="rd">(こうい)</span>に該当<span class="rd">(がいとう)</span>するもの。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: "dùng ID và mật khẩu của người khác không được phép để vào trang có kiểm soát truy cập"</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：他人<span class="rd">(たにん)</span>のIDとパスワードを無断<span class="rd">(むだん)</span>で使<span class="rd">(つか)</span>い、アクセス制御<span class="rd">(せいぎょ)</span>されたサイトにアクセスする</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: các lựa chọn còn lại thuộc Luật công cụ tài chính (nội gián), Bộ luật hình sự (cản trở nghiệp vụ bằng máy tính), Luật bản quyền (ảnh báo). Cùng kiểu bẫy với Câu A3.</td>
+<td>解説<span class="rd">(かいせつ)</span>：他<span class="rd">(ほか)</span>は金融商品取引法<span class="rd">(きんゆうしょうひんとりひきほう)</span>、刑法<span class="rd">(けいほう)</span>（電子計算機損壊等業務妨害罪<span class="rd">(でんしけいさんきそんかいとうぎょうむぼうがいざい)</span>）、著作権法<span class="rd">(ちょさくけんほう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/04_menjo/q80.html" target="_blank" rel="noopener">令和4年度 問80</a></strong> (2022, 免除試験); đề giống còn có ở 初級シスアド 平成18年秋期 問78</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 令和<span class="rd">(れいわ)</span>4年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>80</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hình thức lao động nào mà người lao động làm theo lệnh của một bên khác với bên có quan hệ hợp đồng lao động? Các lựa chọn: biệt phái chuyển hẳn, thầu, bán thời gian, phái cử.</td>
+<td>内容<span class="rd">(ないよう)</span>：雇用関係<span class="rd">(こようかんけい)</span>とは別<span class="rd">(べつ)</span>の指揮命令系統<span class="rd">(しきめいれいけいとう)</span>に従<span class="rd">(したが)</span>う労働形態<span class="rd">(ろうどうけいたい)</span>はどれか。移籍出向<span class="rd">(いせきしゅっこう)</span>・請負<span class="rd">(うけおい)</span>・パートタイム・派遣<span class="rd">(はけん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: "phái cử (派遣)"</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：派遣<span class="rd">(はけん)</span></strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: biệt phái chuyển hẳn thì ký hợp đồng mới với công ty nhận nên người tuyển = người ra lệnh; thầu thì công ty mình ra lệnh dù làm tại văn phòng khách; bán thời gian chỉ khác giờ làm.</td>
+<td>解説<span class="rd">(かいせつ)</span>：移籍出向<span class="rd">(いせきしゅっこう)</span>は出向先<span class="rd">(しゅっこうさき)</span>と雇用契約<span class="rd">(こようけいやく)</span>、請負<span class="rd">(うけおい)</span>は自社<span class="rd">(じしゃ)</span>が指揮<span class="rd">(しき)</span>、パートは時間<span class="rd">(じかん)</span>が短<span class="rd">(みじか)</span>いだけ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 8 — <a href="https://www.fe-siken.com/kakomon/25_aki/q79.html" target="_blank" rel="noopener">平成25年秋期 午前 問79</a></strong> (2013)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>8 — 平成<span class="rd">(へいせい)</span>25年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>79</strong></td>
+</tr>
+<tr>
+<td>Nội dung: A thuê B (hợp đồng thầu) làm hệ thống. Tình huống nào là "thầu giả"? Bốn lựa chọn kết hợp: nhân viên của ai, làm ở đâu, theo lệnh của quản lý bên nào.</td>
+<td>内容<span class="rd">(ないよう)</span>：A社<span class="rd">(しゃ)</span>がB社<span class="rd">(しゃ)</span>に請負<span class="rd">(うけおい)</span>で開発<span class="rd">(かいはつ)</span>を委託<span class="rd">(いたく)</span>。偽装請負<span class="rd">(ぎそううけおい)</span>とされる事象<span class="rd">(じしょう)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (nhân viên B làm tại A, theo lệnh của quản lý A)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（B社員<span class="rd">(しゃいん)</span>がA社<span class="rd">(しゃ)</span>でA社<span class="rd">(しゃ)</span>の責任者<span class="rd">(せきにんしゃ)</span>の指揮命令<span class="rd">(しきめいれい)</span>を受<span class="rd">(う)</span>ける）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chỉ cần hỏi "nhân viên bên nhận thầu (B) có bị khách (A) ra lệnh không". Làm việc ở văn phòng khách không phải vấn đề; bị khách ra lệnh mới là vấn đề.</td>
+<td>解説<span class="rd">(かいせつ)</span>：受託者<span class="rd">(じゅたくしゃ)</span>Bの社員<span class="rd">(しゃいん)</span>が発注者<span class="rd">(はっちゅうしゃ)</span>Aから指揮命令<span class="rd">(しきめいれい)</span>を受<span class="rd">(う)</span>けるかが判断基準<span class="rd">(はんだんきじゅん)</span>。作業場所<span class="rd">(さぎょうばしょ)</span>は問題<span class="rd">(もんだい)</span>ではない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 9 — <a href="https://www.fe-siken.com/kakomon/30_aki/q80.html" target="_blank" rel="noopener">平成30年秋期 午前 問80</a></strong> (2018)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>9 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>80</strong></td>
+</tr>
+<tr>
+<td>Nội dung: dù ký hợp đồng thầu, hành vi nào của bên nhận thầu khiến thực tế bị coi là phái cử lao động?</td>
+<td>内容<span class="rd">(ないよう)</span>：請負契約<span class="rd">(うけおいけいやく)</span>でも、労働者派遣<span class="rd">(ろうどうしゃはけん)</span>とみなされる受託者<span class="rd">(じゅたくしゃ)</span>の行為<span class="rd">(こうい)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (việc duyệt nghỉ phép làm theo chỉ thị của bên đặt hàng)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（休暇取得<span class="rd">(きゅうかしゅとく)</span>の承認<span class="rd">(しょうにん)</span>を発注者側<span class="rd">(はっちゅうしゃがわ)</span>の指示<span class="rd">(しじ)</span>に従<span class="rd">(したが)</span>って行<span class="rd">(おこな)</span>う）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: trong thầu, quản lý giờ giấc, nghỉ phép, kỷ luật, đánh giá phải do bên nhận thầu tự làm. Các lựa chọn còn lại (tự đánh giá, tự giữ kỷ luật, người phụ trách bên nhận thầu làm đầu mối) đều đúng chuẩn thầu.</td>
+<td>解説<span class="rd">(かいせつ)</span>：請負<span class="rd">(うけおい)</span>では勤怠管理<span class="rd">(きんたいかんり)</span>・休暇<span class="rd">(きゅうか)</span>・規律<span class="rd">(きりつ)</span>・評価<span class="rd">(ひょうか)</span>は受託者<span class="rd">(じゅたくしゃ)</span>が自<span class="rd">(みずか)</span>ら行<span class="rd">(おこな)</span>う。発注者<span class="rd">(はっちゅうしゃ)</span>の指示<span class="rd">(しじ)</span>で休暇<span class="rd">(きゅうか)</span>を承認<span class="rd">(しょうにん)</span>するのは指揮命令<span class="rd">(しきめいれい)</span>を受<span class="rd">(う)</span>けている状態<span class="rd">(じょうたい)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Bài tổng hợp ｜ 総合問題<span class="rd">(そうごうもんだい)</span></h2>
+<p>Hôm nay luyện bộ đề công khai mới nhất 令和7年度 (5 câu thuật toán). Mỗi câu một kiểu: đếm bội số, đếm tổ hợp đồng xu, ngăn xếp, tìm chuỗi con, công thức thống kê. Mục tiêu: mỗi câu ≤ 6 phút.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hai hàm "trả về cùng giá trị":</strong> hiểu hàm đơn giản (thường là vòng lặp vét cạn) trước, rồi mới xem hàm nhanh. Thử với một bộ số nhỏ, tính kết quả của hàm đơn giản, rồi thế từng lựa chọn vào hàm nhanh.</td>
+<td><strong>同<span class="rd">(おな)</span>じ値<span class="rd">(あたい)</span>を返<span class="rd">(かえ)</span>す2つの関数<span class="rd">(かんすう)</span>：</strong>まず単純<span class="rd">(たんじゅん)</span>な方<span class="rd">(ほう)</span>（全探索<span class="rd">(ぜんたんさく)</span>）を理解<span class="rd">(りかい)</span>し、小<span class="rd">(ちい)</span>さな値<span class="rd">(あたい)</span>で結果<span class="rd">(けっか)</span>を出<span class="rd">(だ)</span>してから、速<span class="rd">(はや)</span>い方<span class="rd">(ほう)</span>に選択肢<span class="rd">(せんたくし)</span>を入<span class="rd">(い)</span>れて比<span class="rd">(くら)</span>べる。</td>
+</tr>
+<tr>
+<td><strong>Đếm bội số của k trong [n, m]:</strong> tìm bội số đầu tiên ≥ n (cộng tối đa k − 1 lần), rồi nhảy k bước một.</td>
+<td><strong>[n, m]のkの倍数<span class="rd">(ばいすう)</span>の個数<span class="rd">(こすう)</span>：</strong>n以上<span class="rd">(いじょう)</span>の最初<span class="rd">(さいしょ)</span>の倍数<span class="rd">(ばいすう)</span>を求<span class="rd">(もと)</span>め（最大<span class="rd">(さいだい)</span>k−1回<span class="rd">(かい)</span>の加算<span class="rd">(かさん)</span>）、そこからkずつ進<span class="rd">(すす)</span>む。</td>
+</tr>
+<tr>
+<td><strong>Điều kiện vòng lặp &gt; hay ≥:</strong> luôn thử trường hợp giá trị đúng bằng biên (rest = 0, i = n). Đề thi rất hay đặt bẫy ở chỗ này.</td>
+<td><strong>ループ条件<span class="rd">(じょうけん)</span>の &gt; と ≧：</strong>境界値<span class="rd">(きょうかいち)</span>（rest = 0、i = n）で必<span class="rd">(かなら)</span>ず試<span class="rd">(ため)</span>す。よく狙<span class="rd">(ねら)</span>われる。</td>
+</tr>
+<tr>
+<td><strong>Ngăn xếp bằng mảng:</strong> nếu biến vị trí trỏ tới "ô trống tiếp theo" thì push: ghi vào stack[pos] rồi pos + 1; pop: pos − 1 rồi đọc stack[pos]. Nếu trỏ tới "phần tử trên cùng" thì ngược lại.</td>
+<td><strong>配列<span class="rd">(はいれつ)</span>によるスタック：</strong>位置<span class="rd">(いち)</span>が「次<span class="rd">(つぎ)</span>に格納<span class="rd">(かくのう)</span>する位置<span class="rd">(いち)</span>」なら、pushは格納<span class="rd">(かくのう)</span>してから+1、popは−1してから取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>す。「先頭要素<span class="rd">(せんとうようそ)</span>の位置<span class="rd">(いち)</span>」なら逆<span class="rd">(ぎゃく)</span>。</td>
+</tr>
+<tr>
+<td><strong>Tìm chuỗi con (so khớp đơn giản):</strong> vị trí bắt đầu i chạy từ 1 đến (độ dài data − độ dài key + 1); so data[i + j − 1] với key[j]. Gặp ký tự khác là dừng sớm.</td>
+<td><strong>文字列探索<span class="rd">(もじれつたんさく)</span>（素朴法<span class="rd">(そぼくほう)</span>）：</strong>開始位置<span class="rd">(かいしいち)</span>iは1から（dataの長<span class="rd">(なが)</span>さ − keyの長<span class="rd">(なが)</span>さ + 1）まで。data[i + j − 1] と key[j] を比較<span class="rd">(ひかく)</span>し、不一致<span class="rd">(ふいっち)</span>で打<span class="rd">(う)</span>ち切<span class="rd">(き)</span>る。</td>
+</tr>
+<tr>
+<td><strong>Đếm số lần điều kiện "đúng":</strong> khác với số lần điều kiện được kiểm tra. Kẻ bảng i, j, kết quả so sánh rồi đếm.</td>
+<td><strong>条件<span class="rd">(じょうけん)</span>が真<span class="rd">(しん)</span>になる回数<span class="rd">(かいすう)</span>：</strong>評価<span class="rd">(ひょうか)</span>された回数<span class="rd">(かいすう)</span>とは違<span class="rd">(ちが)</span>う。i・j・比較結果<span class="rd">(ひかくけっか)</span>の表<span class="rd">(ひょう)</span>を作<span class="rd">(つく)</span>って数<span class="rd">(かぞ)</span>える。</td>
+</tr>
+<tr>
+<td><strong>Bài có công thức (thống kê, tài chính):</strong> đối ứng ký hiệu trong công thức với biến trong code; tính tay một ô bằng số trong đề để kiểm tra.</td>
+<td><strong>数式<span class="rd">(すうしき)</span>のある問題<span class="rd">(もんだい)</span>：</strong>式<span class="rd">(しき)</span>の記号<span class="rd">(きごう)</span>と変数<span class="rd">(へんすう)</span>を対応<span class="rd">(たいおう)</span>させ、表<span class="rd">(ひょう)</span>の1つのセルを手計算<span class="rd">(てけいさん)</span>して確<span class="rd">(たし)</span>かめる。</td>
+</tr>
+<tr>
+<td><strong>Mẫu Euclid (ƯCLN):</strong> lặp r ← a mod b, a ← b, b ← r cho tới khi b = 0; kết quả là a.</td>
+<td><strong>ユークリッドの互除法<span class="rd">(ごじょほう)</span>：</strong>b = 0 になるまで r ← a mod b、a ← b、b ← r を繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>し、aが最大公約数<span class="rd">(さいだいこうやくすう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Mẫu tổng tiền tố (prefix sum):</strong> p[i] = p[i − 1] + a[i]; tổng đoạn a[l..r] = p[r] − p[l − 1].</td>
+<td><strong>累積和<span class="rd">(るいせきわ)</span>：</strong>p[i] = p[i − 1] + a[i]。区間<span class="rd">(くかん)</span> a[l..r] の和<span class="rd">(わ)</span>は p[r] − p[l − 1]。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<p><strong>Câu B1 ｜ 問<span class="rd">(とい)</span>B1</strong></p>
+<pre><code>○整数型: gcd(整数型: a, 整数型: b)
+  整数型: r
+  while (b ≠ 0)
+    r ← a mod b
+    a ← b
+    b ← r
+  endwhile
+  return a
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gcd(84, 36) trả về giá trị nào?</td>
+<td>gcd(84, 36) の戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 6　イ 12　ウ 36　エ 84</td>
+<td>ア 6　イ 12　ウ 36　エ 84</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (12)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（12）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: lần 1: r = 84 mod 36 = 12, a = 36, b = 12. Lần 2: r = 36 mod 12 = 0, a = 12, b = 0 → dừng, trả về 12. Vòng lặp chạy 2 lần. Bẫy ア: 6 là ước chung nhưng không phải lớn nhất. Bẫy ウ: dừng sau lần 1 và trả về a = 36 (quên rằng điều kiện xét b, không phải r).</td>
+<td>解説<span class="rd">(かいせつ)</span>：1回目<span class="rd">(かいめ)</span>：r = 12、a = 36、b = 12。2回目<span class="rd">(かいめ)</span>：r = 0、a = 12、b = 0 で終了<span class="rd">(しゅうりょう)</span>。戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>12。アは公約数<span class="rd">(こうやくすう)</span>だが最大<span class="rd">(さいだい)</span>ではない。ウは1回<span class="rd">(かい)</span>で止<span class="rd">(と)</span>めた誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B2 ｜ 問<span class="rd">(とい)</span>B2</strong></p>
+<pre><code>文字型の配列: s ← {&quot;(&quot;, &quot;(&quot;, &quot;)&quot;, &quot;(&quot;, &quot;(&quot;, &quot;)&quot;, &quot;)&quot;, &quot;)&quot;}
+整数型: depth ← 0
+整数型: maxD ← 0
+整数型: i
+for (i を 1 から sの要素数 まで 1 ずつ増やす)
+  if (s[i] = &quot;(&quot;)
+    depth ← depth + 1
+    if (depth &gt; maxD)
+      maxD ← depth
+    endif
+  else
+    depth ← depth − 1
+  endif
+endfor
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sau khi chạy, maxD bằng bao nhiêu? (Biến depth hoạt động như số phần tử của một ngăn xếp.)</td>
+<td>実行後<span class="rd">(じっこうご)</span>の maxD の値<span class="rd">(あたい)</span>はどれか。（depth はスタックの要素数<span class="rd">(ようそすう)</span>のように働<span class="rd">(はたら)</span>く。）</td>
+</tr>
+<tr>
+<td>ア 2　イ 3　ウ 4　エ 8</td>
+<td>ア 2　イ 3　ウ 4　エ 8</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (3)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（3）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: depth lần lượt: 1, 2, 1, 2, 3, 2, 1, 0. Giá trị lớn nhất là 3 (tại i = 5). Bẫy ウ: 4 là số dấu "(", không phải độ sâu. Bẫy エ: số phần tử của mảng. Bẫy ア: chỉ nhìn 2 dấu "(" đầu tiên.</td>
+<td>解説<span class="rd">(かいせつ)</span>：depthは 1, 2, 1, 2, 3, 2, 1, 0 と変化<span class="rd">(へんか)</span>し、最大<span class="rd">(さいだい)</span>は3（i = 5）。ウは"("の個数<span class="rd">(こすう)</span>、エは要素数<span class="rd">(ようそすう)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B3 ｜ 問<span class="rd">(とい)</span>B3</strong></p>
+<pre><code>整数型の配列: a ← {2, 5, 1, 4, 3}
+整数型の配列: p ← {5個の0}
+整数型: i
+p[1] ← a[1]
+for (i を 2 から 5 まで 1 ずつ増やす)
+  p[i] ← [  空欄  ]
+endfor
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chương trình tạo mảng p sao cho p[i] là tổng a[1] + … + a[i]. Điền gì vào chỗ trống?</td>
+<td>p[i] が a[1] から a[i] までの和<span class="rd">(わ)</span>になるように配列<span class="rd">(はいれつ)</span> p を作<span class="rd">(つく)</span>る。空欄<span class="rd">(くうらん)</span>に入<span class="rd">(い)</span>れる正<span class="rd">(ただ)</span>しい答<span class="rd">(こた)</span>えはどれか。</td>
+</tr>
+<tr>
+<td>ア p[i] + a[i]　イ p[i − 1] + a[i]　ウ p[i − 1] + a[i − 1]　エ a[i − 1] + a[i]</td>
+<td>ア p[i] + a[i]　イ p[i − 1] + a[i]　ウ p[i − 1] + a[i − 1]　エ a[i − 1] + a[i]</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (p[i − 1] + a[i])</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（p[i − 1] + a[i]）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: với イ, p = {2, 7, 8, 12, 15}. Kiểm tra p[5] = 2 + 5 + 1 + 4 + 3 = 15, đúng. ア: p[i] lúc đó còn là 0 nên p[i] = a[i], sai. ウ: p[2] = 2 + 2 = 4, sai (cộng nhầm a[1] hai lần). エ: chỉ là tổng 2 phần tử liền kề. Ứng dụng: tổng a[2] + a[3] + a[4] = p[4] − p[1] = 12 − 2 = 10.</td>
+<td>解説<span class="rd">(かいせつ)</span>：イなら p = {2, 7, 8, 12, 15}、p[5] = 15 で正<span class="rd">(ただ)</span>しい。アは p[i] がまだ0なので a[i] だけになる。ウは p[2] = 4 となり誤<span class="rd">(あやま)</span>り。エは隣<span class="rd">(とな)</span>り合<span class="rd">(あ)</span>う2要素<span class="rd">(ようそ)</span>の和<span class="rd">(わ)</span>。応用<span class="rd">(おうよう)</span>：a[2]〜a[4] の和<span class="rd">(わ)</span>は p[4] − p[1] = 10。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Bộ 科目B công khai 令和7年度 (2025). Trang fe-siken có đầy đủ mã giả; hãy mở link, tự làm trong 6 phút rồi mới đọc phần giải dưới đây.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/07_haru/b1.html" target="_blank" rel="noopener">令和7年度 科目B 問1</a></strong> (2025)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hai hàm cùng trả về số bội số của 4 trong khoảng từ n đến m. Hàm 1 duyệt từng số; hàm 2 trước tiên tăng n lên đến bội số của 4 đầu tiên, rồi nhảy từng bước. Điền điều kiện vòng lặp thứ nhất (a) và cách nhảy của vòng lặp thứ hai (b).</td>
+<td>内容<span class="rd">(ないよう)</span>：nからmまでの4の倍数<span class="rd">(ばいすう)</span>の個数<span class="rd">(こすう)</span>を返<span class="rd">(かえ)</span>す2つの関数<span class="rd">(かんすう)</span>。関数<span class="rd">(かんすう)</span>2の空欄<span class="rd">(くうらん)</span>a（最初<span class="rd">(さいしょ)</span>の倍数<span class="rd">(ばいすう)</span>を探<span class="rd">(さが)</span>すループ）とb（数<span class="rd">(かぞ)</span>えるループの増分<span class="rd">(ぞうぶん)</span>）を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: カ</strong> (a: lặp i từ 1 đến 3; b: j bắt đầu từ tempN, tăng 4 mỗi lần, không vượt m)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：カ</strong>（a：iを1から3まで、b：jをtempNから4ずつ増<span class="rd">(ふ)</span>やす）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: n mod 4 có thể là 1, 2, 3 nên cần cộng tối đa 3 lần để tới bội số của 4 → vòng lặp 3 lần. Sau đó nhảy 4. Kiểm tra n = 5, m = 16: bội số 8, 12, 16 → 3; nhảy từ 8 bước 4 → 3, khớp. Nhảy bước 1 cho 9, sai.</td>
+<td>解説<span class="rd">(かいせつ)</span>：n mod 4 は最大<span class="rd">(さいだい)</span>3なので最大<span class="rd">(さいだい)</span>3回<span class="rd">(かい)</span>の加算<span class="rd">(かさん)</span>が必要<span class="rd">(ひつよう)</span>。n = 5、m = 16 で確認<span class="rd">(かくにん)</span>：8, 12, 16 の3個<span class="rd">(こ)</span>。1ずつだと9になり誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/07_haru/b2.html" target="_blank" rel="noopener">令和7年度 科目B 問2</a></strong> (2025)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm change(n) đếm số cách trả đúng n yên bằng đồng 1, 5, 10 yên. Mỗi vòng lặp xét số tiền còn lại sau khi dùng một số đồng 10 yên, cộng thêm (số còn lại ÷ 5) + 1 cách, rồi trừ 10. Điền điều kiện của vòng while.</td>
+<td>内容<span class="rd">(ないよう)</span>：1円<span class="rd">(えん)</span>・5円<span class="rd">(えん)</span>・10円<span class="rd">(えん)</span>硬貨<span class="rd">(こうか)</span>でn円<span class="rd">(えん)</span>を支払<span class="rd">(しはら)</span>う組合<span class="rd">(くみあわ)</span>せの数<span class="rd">(かず)</span>を返<span class="rd">(かえ)</span>す関数<span class="rd">(かんすう)</span>。whileの条件<span class="rd">(じょうけん)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (rest ≧ 0)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（rest ≧ 0）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thử n = 20 (đáp số đúng là 9: không dùng 10 yên có 5 cách, dùng 1 đồng có 3 cách, dùng 2 đồng có 1 cách). count = 5 (rest = 20), 5 + 3 = 8 (rest = 10), rest = 0 vẫn phải đếm thêm 1 → 9. Với "rest &gt; 0" sẽ dừng ở 8, sai. Các điều kiện ≥ 5, ≥ 10 bị loại ngay bằng n = 12 (đáp số 4).</td>
+<td>解説<span class="rd">(かいせつ)</span>：n = 20（正解<span class="rd">(せいかい)</span>9通<span class="rd">(とお)</span>り）で試<span class="rd">(ため)</span>す。5 → 8 → rest = 0 のときも1通<span class="rd">(とお)</span>り数<span class="rd">(かぞ)</span>える必要<span class="rd">(ひつよう)</span>があり9。rest &gt; 0 だと8で止<span class="rd">(と)</span>まる。境界値<span class="rd">(きょうかいち)</span>の典型問題<span class="rd">(てんけいもんだい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/07_haru/b3.html" target="_blank" rel="noopener">令和7年度 科目B 問3</a></strong> (2025)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: ngăn xếp cài bằng mảng 4 phần tử và biến stackPos trỏ tới vị trí sẽ lưu giá trị tiếp theo. Điền chỉ số ghi trong push (a) và giá trị gán lại cho stackPos trong pop (b).</td>
+<td>内容<span class="rd">(ないよう)</span>：要素数<span class="rd">(ようそすう)</span>4の配列<span class="rd">(はいれつ)</span>と「次<span class="rd">(つぎ)</span>に格納<span class="rd">(かくのう)</span>する位置<span class="rd">(いち)</span>」stackPos で実装<span class="rd">(じっそう)</span>したスタック。push の格納位置<span class="rd">(かくのういち)</span>aと pop での stackPos の更新<span class="rd">(こうしん)</span>bを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (a: stackPos; b: stackPos − 1)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（a：stackPos、b：stackPos − 1）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: stackPos là ô trống tiếp theo → push ghi vào stack[stackPos] rồi tăng 1. Phần tử trên cùng nằm ở stackPos − 1 → pop phải giảm stackPos trước rồi mới đọc. Ví dụ: stackPos = 3 → giảm thành 2 → trả về stack[2].</td>
+<td>解説<span class="rd">(かいせつ)</span>：stackPos は次<span class="rd">(つぎ)</span>の空<span class="rd">(あ)</span>き位置<span class="rd">(いち)</span>なので、pushは stack[stackPos] に格納<span class="rd">(かくのう)</span>して+1。popは先<span class="rd">(さき)</span>に−1してから取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>す。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/07_haru/b4.html" target="_blank" rel="noopener">令和7年度 科目B 問4</a></strong> (2025)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>4</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm search tìm mọi vị trí bắt đầu mà dãy key xuất hiện trong dãy data. Gọi với data = a b a b c a b c, key = a b c. Hỏi điều kiện ở dòng β (so sánh một ký tự) đúng bao nhiêu lần.</td>
+<td>内容<span class="rd">(ないよう)</span>：data の中<span class="rd">(なか)</span>で key が現<span class="rd">(あらわ)</span>れる開始位置<span class="rd">(かいしいち)</span>をすべて返<span class="rd">(かえ)</span>す関数<span class="rd">(かんすう)</span>。data = a b a b c a b c、key = a b c のとき、βの条件<span class="rd">(じょうけん)</span>が真<span class="rd">(しん)</span>になる回数<span class="rd">(かいすう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ク</strong> (8 lần)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ク</strong>（8回<span class="rd">(かい)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: i chạy 1..6. i = 1: a, b khớp, c ≠ a → 2 lần đúng. i = 3: khớp đủ 3. i = 6: khớp đủ 3. i = 2, 4, 5: sai ngay ký tự đầu → 0. Tổng 2 + 3 + 3 = 8; kết quả trả về {3, 6}. Bẫy: đếm tổng số lần so sánh (gồm cả lần sai, nhiều hơn 8) hoặc chỉ đếm số lần khớp trọn vẹn (2).</td>
+<td>解説<span class="rd">(かいせつ)</span>：i = 1 で2回<span class="rd">(かい)</span>、i = 3 と i = 6 で各<span class="rd">(かく)</span>3回<span class="rd">(かい)</span>、他<span class="rd">(ほか)</span>は0回<span class="rd">(かい)</span>。合計<span class="rd">(ごうけい)</span>8回<span class="rd">(かい)</span>、戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>は {3, 6}。比較回数<span class="rd">(ひかくかいすう)</span>全体<span class="rd">(ぜんたい)</span>や一致<span class="rd">(いっち)</span>した個数<span class="rd">(こすう)</span>（2）と混同<span class="rd">(こんどう)</span>しない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/07_haru/b5.html" target="_blank" rel="noopener">令和7年度 科目B 問5</a></strong> (2025)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: bảng 2×2 về hiệu quả vắc-xin (đã tiêm/chưa tiêm × mắc bệnh/không). Hàm f tính "tần số lý thuyết" của từng ô = (tổng hàng × tổng cột) ÷ tổng chung. Hỏi giá trị hai ô a và b.</td>
+<td>内容<span class="rd">(ないよう)</span>：ワクチンの効果<span class="rd">(こうか)</span>の2×2集計表<span class="rd">(しゅうけいひょう)</span>から理論度数<span class="rd">(りろんどすう)</span>＝（行<span class="rd">(ぎょう)</span>の合計<span class="rd">(ごうけい)</span>×列<span class="rd">(れつ)</span>の合計<span class="rd">(ごうけい)</span>）÷総計<span class="rd">(そうけい)</span>を求<span class="rd">(もと)</span>める関数<span class="rd">(かんすう)</span>。表<span class="rd">(ひょう)</span>のaとbの値<span class="rd">(あたい)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: オ</strong> (a = 80, b = 6)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：オ</strong>（a = 80、b = 6）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: dữ liệu {{82, 6}, {58, 8}}, tổng 154. a: hàng 1 = 88, cột 1 = 140 → 88 × 140 ÷ 154 = 12320 ÷ 154 = 80. b: hàng 2 = 66, cột 2 = 14 → 66 × 14 ÷ 154 = 924 ÷ 154 = 6. Không cần biết thống kê, chỉ cần làm đúng công thức đề cho.</td>
+<td>解説<span class="rd">(かいせつ)</span>：総計<span class="rd">(そうけい)</span>154。a = 88 × 140 ÷ 154 = 80、b = 66 × 14 ÷ 154 = 6。統計<span class="rd">(とうけい)</span>の知識<span class="rd">(ちしき)</span>は不要<span class="rd">(ふよう)</span>で、式<span class="rd">(しき)</span>どおりに計算<span class="rd">(けいさん)</span>すればよい。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pháp luật / Tuân thủ pháp luật</td>
+<td>法務<span class="rd">(ほうむ)</span> / コンプライアンス（法令遵守<span class="rd">(ほうれいじゅんしゅ)</span>）</td>
+</tr>
+<tr>
+<td>Luật bản quyền / Bản quyền / Tác giả</td>
+<td>著作権法<span class="rd">(ちょさくけんほう)</span> / 著作権<span class="rd">(ちょさくけん)</span> / 著作者<span class="rd">(ちょさくしゃ)</span></td>
+</tr>
+<tr>
+<td>Tác phẩm công việc</td>
+<td>職務著作<span class="rd">(しょくむちょさく)</span></td>
+</tr>
+<tr>
+<td>Quyền nhân thân của tác giả</td>
+<td>著作者人格権<span class="rd">(ちょさくしゃじんかくけん)</span></td>
+</tr>
+<tr>
+<td>Thuộc về (ai giữ)</td>
+<td>帰属<span class="rd">(きぞく)</span></td>
+</tr>
+<tr>
+<td>Không cần thủ tục</td>
+<td>無方式主義<span class="rd">(むほうしきしゅぎ)</span></td>
+</tr>
+<tr>
+<td>Quyền sở hữu công nghiệp</td>
+<td>産業財産権<span class="rd">(さんぎょうざいさんけん)</span></td>
+</tr>
+<tr>
+<td>Sáng chế / Giải pháp hữu ích / Kiểu dáng / Nhãn hiệu</td>
+<td>特許権<span class="rd">(とっきょけん)</span> / 実用新案権<span class="rd">(じつようしんあんけん)</span> / 意匠権<span class="rd">(いしょうけん)</span> / 商標権<span class="rd">(しょうひょうけん)</span></td>
+</tr>
+<tr>
+<td>Nộp đơn</td>
+<td>出願<span class="rd">(しゅつがん)</span></td>
+</tr>
+<tr>
+<td>Luật chống cạnh tranh không lành mạnh / Bí mật kinh doanh</td>
+<td>不正競争防止法<span class="rd">(ふせいきょうそうぼうしほう)</span> / 営業秘密<span class="rd">(えいぎょうひみつ)</span></td>
+</tr>
+<tr>
+<td>Quản lý bí mật / Hữu ích / Chưa công khai</td>
+<td>秘密管理性<span class="rd">(ひみつかんりせい)</span> / 有用性<span class="rd">(ゆうようせい)</span> / 非公知性<span class="rd">(ひこうちせい)</span></td>
+</tr>
+<tr>
+<td>Luật bảo vệ thông tin cá nhân</td>
+<td>個人情報保護法<span class="rd">(こじんじょうほうほごほう)</span></td>
+</tr>
+<tr>
+<td>Thông tin cần lưu ý đặc biệt</td>
+<td>要配慮個人情報<span class="rd">(ようはいりょこじんじょうほう)</span></td>
+</tr>
+<tr>
+<td>Thông tin đã ẩn danh hóa</td>
+<td>匿名加工情報<span class="rd">(とくめいかこうじょうほう)</span></td>
+</tr>
+<tr>
+<td>Cung cấp cho bên thứ ba / Sự đồng ý của người đó</td>
+<td>第三者提供<span class="rd">(だいさんしゃていきょう)</span> / 本人<span class="rd">(ほんにん)</span>の同意<span class="rd">(どうい)</span></td>
+</tr>
+<tr>
+<td>Luật cấm truy cập trái phép</td>
+<td>不正<span class="rd">(ふせい)</span>アクセス禁止法<span class="rd">(きんしほう)</span></td>
+</tr>
+<tr>
+<td>Hành vi tiếp tay</td>
+<td>助長行為<span class="rd">(じょちょうこうい)</span></td>
+</tr>
+<tr>
+<td>Mã định danh (ID, mật khẩu)</td>
+<td>識別符号<span class="rd">(しきべつふごう)</span></td>
+</tr>
+<tr>
+<td>Luật email đặc định / Bộ luật hình sự</td>
+<td>特定電子<span class="rd">(とくていでんし)</span>メール法<span class="rd">(ほう)</span> / 刑法<span class="rd">(けいほう)</span></td>
+</tr>
+<tr>
+<td>Phái cử lao động / Bên phái cử / Bên nhận phái cử</td>
+<td>労働者派遣<span class="rd">(ろうどうしゃはけん)</span> / 派遣元<span class="rd">(はけんもと)</span> / 派遣先<span class="rd">(はけんさき)</span></td>
+</tr>
+<tr>
+<td>Phái cử lại</td>
+<td>二重派遣<span class="rd">(にじゅうはけん)</span></td>
+</tr>
+<tr>
+<td>Hợp đồng thầu / Thầu giả</td>
+<td>請負<span class="rd">(うけおい)</span> / 偽装請負<span class="rd">(ぎそううけおい)</span></td>
+</tr>
+<tr>
+<td>Hợp đồng ủy thác</td>
+<td>準委任契約<span class="rd">(じゅんいにんけいやく)</span></td>
+</tr>
+<tr>
+<td>Hợp đồng lao động / Quan hệ chỉ huy</td>
+<td>雇用契約<span class="rd">(こようけいやく)</span> / 指揮命令<span class="rd">(しきめいれい)</span></td>
+</tr>
+<tr>
+<td>Bên đặt hàng / Bên nhận thầu</td>
+<td>発注者<span class="rd">(はっちゅうしゃ)</span> / 受託者<span class="rd">(じゅたくしゃ)</span></td>
+</tr>
+<tr>
+<td>Biệt phái</td>
+<td>出向<span class="rd">(しゅっこう)</span></td>
+</tr>
+<tr>
+<td>Ước chung lớn nhất / Thuật toán Euclid</td>
+<td>最大公約数<span class="rd">(さいだいこうやくすう)</span> / ユークリッドの互除法<span class="rd">(ごじょほう)</span></td>
+</tr>
+<tr>
+<td>Tổng tiền tố</td>
+<td>累積和<span class="rd">(るいせきわ)</span></td>
+</tr>
+<tr>
+<td>Bội số</td>
+<td>倍数<span class="rd">(ばいすう)</span></td>
+</tr>
+<tr>
+<td>Tổ hợp / Đồng xu</td>
+<td>組合<span class="rd">(くみあわ)</span>せ / 硬貨<span class="rd">(こうか)</span></td>
+</tr>
+<tr>
+<td>Tìm chuỗi / Vị trí bắt đầu</td>
+<td>文字列探索<span class="rd">(もじれつたんさく)</span> / 開始位置<span class="rd">(かいしいち)</span></td>
+</tr>
+<tr>
+<td>Tần số lý thuyết / Tổng chung</td>
+<td>理論度数<span class="rd">(りろんどすう)</span> / 総計<span class="rd">(そうけい)</span></td>
+</tr>
+<tr>
+<td>Giá trị biên</td>
+<td>境界値<span class="rd">(きょうかいち)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

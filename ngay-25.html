@@ -1,0 +1,438 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 25 (05/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 25 (05/11): Ôn số học máy tính và thuật toán khó (đệ quy, cây, sắp xếp)</h1>
+<p class="meta">Ngày 25 · Thứ Năm 05/11 · 科目A: số học máy tính, sai số · 科目B: đệ quy, cây, sắp xếp</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Số học máy tính và sai số ｜ 数値表現<span class="rd">(すうちひょうげん)</span>と誤差<span class="rd">(ごさ)</span></a></li><li><a href="#muc-3">科目B: Đệ quy, cây, sắp xếp ｜ 再帰<span class="rd">(さいき)</span>・木<span class="rd">(き)</span>・整列<span class="rd">(せいれつ)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>科目A ôn lại phần đầu tiên đã học (ngày 1–2): bù 2, dịch bit, sai số. Đây là những câu dễ lấy điểm nếu nhớ quy tắc. 科目B dồn sức cho dạng khó nhất: đệ quy, duyệt cây, sắp xếp.</p>
+<ul class="check">
+<li>科目A: đọc bảng quy tắc + 5 câu đề cũ (40 phút)</li>
+<li>科目B: đọc mẹo trace đệ quy (10 phút)</li>
+<li>2 bài tự luyện + 3 câu đề mẫu 科目B (60 phút)</li>
+<li>Xem lại câu sai (10 phút)</li>
+</ul>
+<h2 id="muc-2">科目A: Số học máy tính và sai số ｜ 数値表現<span class="rd">(すうちひょうげん)</span>と誤差<span class="rd">(ごさ)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bù 2:</strong> đảo tất cả bit rồi cộng 1. Đảo bit = XOR với 11…1. Với n bit, phạm vi −2ⁿ⁻¹ tới 2ⁿ⁻¹ − 1 (8 bit: −128 tới 127).</td>
+<td><strong>2の補数<span class="rd">(ほすう)</span>：</strong>全<span class="rd">(ぜん)</span>ビット反転<span class="rd">(はんてん)</span>して1を足<span class="rd">(た)</span>す。反転<span class="rd">(はんてん)</span>は11…1とのXOR。nビットで−2ⁿ⁻¹〜2ⁿ⁻¹ − 1。</td>
+</tr>
+<tr>
+<td><strong>Bù 1 và dấu–độ lớn:</strong> bù 1 chỉ đảo bit (không cộng 1). Dấu–độ lớn: bit đầu là dấu, phần còn lại là giá trị tuyệt đối.</td>
+<td><strong>1の補数<span class="rd">(ほすう)</span>・符号<span class="rd">(ふごう)</span>と絶対値<span class="rd">(ぜったいち)</span>：</strong>1の補数<span class="rd">(ほすう)</span>は反転<span class="rd">(はんてん)</span>のみ。符号付<span class="rd">(ふごうつ)</span>き絶対値<span class="rd">(ぜったいち)</span>は先頭<span class="rd">(せんとう)</span>が符号<span class="rd">(ふごう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Dịch số học sang phải:</strong> giữ nguyên bit dấu, chép bit dấu vào chỗ trống (chia 2ⁿ). Dịch logic: luôn điền 0.</td>
+<td><strong>算術右<span class="rd">(さんじゅつみぎ)</span>シフト：</strong>符号<span class="rd">(ふごう)</span>ビットを保<span class="rd">(たも)</span>ち、空<span class="rd">(あ)</span>いた所<span class="rd">(ところ)</span>に符号<span class="rd">(ふごう)</span>ビットを入<span class="rd">(い)</span>れる（2ⁿで割<span class="rd">(わ)</span>る）。論理<span class="rd">(ろんり)</span>シフトは0を入<span class="rd">(い)</span>れる。</td>
+</tr>
+<tr>
+<td><strong>Mất chữ số có nghĩa (桁落ち):</strong> trừ hai số gần bằng nhau, chữ số có nghĩa giảm mạnh.</td>
+<td><strong>桁落<span class="rd">(けたお)</span>ち：</strong>ほぼ等<span class="rd">(ひと)</span>しい数<span class="rd">(かず)</span>の減算<span class="rd">(げんざん)</span>で有効桁数<span class="rd">(ゆうこうけたすう)</span>が大<span class="rd">(おお)</span>きく減<span class="rd">(へ)</span>る。</td>
+</tr>
+<tr>
+<td><strong>Mất thông tin (情報落ち):</strong> cộng/trừ số rất lớn với số rất nhỏ, phần số nhỏ không được phản ánh. Xảy ra khi chênh lệch số mũ ≥ số bit phần định trị.</td>
+<td><strong>情報落<span class="rd">(じょうほうお)</span>ち：</strong>絶対値<span class="rd">(ぜったいち)</span>の大<span class="rd">(おお)</span>きい数<span class="rd">(かず)</span>と小<span class="rd">(ちい)</span>さい数<span class="rd">(かず)</span>の加減算<span class="rd">(かげんざん)</span>で小<span class="rd">(ちい)</span>さい方<span class="rd">(ほう)</span>が反映<span class="rd">(はんえい)</span>されない。指数<span class="rd">(しすう)</span>の差<span class="rd">(さ)</span> ≥ 仮数部<span class="rd">(かすうぶ)</span>のビット数<span class="rd">(すう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Tràn số (桁あふれ) và sai số làm tròn (丸め誤差):</strong> tràn là kết quả vượt giá trị lớn nhất biểu diễn được; làm tròn là sai số do làm tròn, cắt bỏ chữ số cuối.</td>
+<td><strong>桁<span class="rd">(けた)</span>あふれ・丸<span class="rd">(まる)</span>め誤差<span class="rd">(ごさ)</span>：</strong>桁<span class="rd">(けた)</span>あふれは最大値<span class="rd">(さいだいち)</span>を超<span class="rd">(こ)</span>える、丸<span class="rd">(まる)</span>め誤差<span class="rd">(ごさ)</span>は四捨五入<span class="rd">(ししゃごにゅう)</span>・切捨<span class="rd">(きりす)</span>てによる誤差<span class="rd">(ごさ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/sample/a1.html" target="_blank" rel="noopener">サンプル問題 科目A 問1</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: n là số dương 8 bit. Biểu thức nào cho ra −n ở dạng bù 2? ア (n OR 10000000) + 00000001　イ (n OR 11111110) + 11111111　ウ (n XOR 10000000) + 11111111　エ (n XOR 11111111) + 00000001</td>
+<td>内容<span class="rd">(ないよう)</span>：8ビットの正<span class="rd">(せい)</span>の数<span class="rd">(かず)</span>nについて、−nを2の補数<span class="rd">(ほすう)</span>で求<span class="rd">(もと)</span>める式<span class="rd">(しき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: XOR với 11111111 đảo hết bit, rồi + 1. OR không đảo bit; ウ chỉ đảo bit đầu.</td>
+<td>解説<span class="rd">(かいせつ)</span>：XOR 11111111で全<span class="rd">(ぜん)</span>ビット反転<span class="rd">(はんてん)</span>、+1。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/24_aki/q1.html" target="_blank" rel="noopener">平成24年秋期 午前 問1</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: lấy 00010100 trừ đi (11010000 dịch số học sang phải 2 bit). Số âm dùng bù 2. Kết quả? ア 00001000　イ 00011111　ウ 00100000　エ 11100000</td>
+<td>内容<span class="rd">(ないよう)</span>：11010000を2ビット算術右<span class="rd">(さんじゅつみぎ)</span>シフトした値<span class="rd">(あたい)</span>を00010100から引<span class="rd">(ひ)</span>く。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (00100000)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（00100000）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: dịch: 11110100 = −12. 00010100 = 20. 20 − (−12) = 32 = 00100000.</td>
+<td>解説<span class="rd">(かいせつ)</span>：11110100 = −12、20 − (−12) = 32。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/19_aki/q3.html" target="_blank" rel="noopener">平成19年秋期 午前 問3</a></strong> (2007)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>19年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: dãy 4 bit 1101 hiểu theo a: bù 1, b: bù 2, c: dấu–độ lớn. Xếp giá trị từ nhỏ tới lớn. ア a, c, b　イ b, a, c　ウ b, c, a　エ c, b, a</td>
+<td>内容<span class="rd">(ないよう)</span>：1101をa 1の補数<span class="rd">(ほすう)</span>、b 2の補数<span class="rd">(ほすう)</span>、c 符号付<span class="rd">(ふごうつ)</span>き絶対値<span class="rd">(ぜったいち)</span>で解釈<span class="rd">(かいしゃく)</span>し小<span class="rd">(ちい)</span>さい順<span class="rd">(じゅん)</span>に並<span class="rd">(なら)</span>べる。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (c, b, a)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（c, b, a）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: a: đảo bit 0010 → −2; b: 0010 + 1 = 0011 → −3; c: dấu 1, 101 = 5 → −5. −5 &lt; −3 &lt; −2.</td>
+<td>解説<span class="rd">(かいせつ)</span>：a = −2、b = −3、c = −5。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/27_haru/q2.html" target="_blank" rel="noopener">平成27年春期 午前 問2</a></strong> (2015)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>27年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mô tả nào là "桁落ち"? ア trừ hai số dấu phẩy động gần bằng nhau, chữ số có nghĩa giảm mạnh　イ kết quả vượt giá trị lớn nhất　ウ sai số do làm tròn, cắt phần nhỏ hơn chữ số cuối　エ khi cộng, chữ số thấp của một số không phản ánh vào kết quả</td>
+<td>内容<span class="rd">(ないよう)</span>：桁落<span class="rd">(けたお)</span>ちの説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: イ là tràn số, ウ là sai số làm tròn, エ là mất thông tin.</td>
+<td>解説<span class="rd">(かいせつ)</span>：イは桁<span class="rd">(けた)</span>あふれ、ウは丸<span class="rd">(まる)</span>め誤差<span class="rd">(ごさ)</span>、エは情報落<span class="rd">(じょうほうお)</span>ち。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/20_haru/q5.html" target="_blank" rel="noopener">平成20年春期 午前 問5</a></strong> (2008)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: máy có phần định trị 23 bit. Phép tính nào gây mất thông tin? ア (10.101)₂×2⁻¹⁶ − (1.001)₂×2⁻¹⁵　イ (10.101)₂×2¹⁶ − (1.001)₂×2¹⁶　ウ (1.01)₂×2¹⁸ + (1.01)₂×2⁻⁵　エ (1.001)₂×2²⁰ − (1.1111)₂×2²¹</td>
+<td>内容<span class="rd">(ないよう)</span>：仮数部<span class="rd">(かすうぶ)</span>23ビットで情報落<span class="rd">(じょうほうお)</span>ちが発生<span class="rd">(はっせい)</span>する計算式<span class="rd">(けいさんしき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chênh lệch số mũ: ウ là 18 − (−5) = 23, bằng số bit định trị, nên số nhỏ mất hết. Các câu khác chênh 0–1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ウは指数<span class="rd">(しすう)</span>の差<span class="rd">(さ)</span>が23で、小<span class="rd">(ちい)</span>さい方<span class="rd">(ほう)</span>が消<span class="rd">(き)</span>える。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Đệ quy, cây, sắp xếp ｜ 再帰<span class="rd">(さいき)</span>・木<span class="rd">(き)</span>・整列<span class="rd">(せいれつ)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Đệ quy:</strong> mỗi hàm đệ quy cần (1) điều kiện dừng và (2) lời gọi với đối số nhỏ dần. Thiếu (2) là lặp vô hạn, một lựa chọn bẫy hay gặp.</td>
+<td><strong>再帰<span class="rd">(さいき)</span>：</strong>(1)終了条件<span class="rd">(しゅうりょうじょうけん)</span>と(2)引数<span class="rd">(ひきすう)</span>が小<span class="rd">(ちい)</span>さくなる呼<span class="rd">(よ)</span>び出<span class="rd">(だ)</span>しが必要<span class="rd">(ひつよう)</span>。(2)がないと無限<span class="rd">(むげん)</span>ループ。</td>
+</tr>
+<tr>
+<td><strong>Trace đệ quy:</strong> viết theo dạng bậc thang: f(4) = 4 × f(3) = 4 × 3 × f(2)… rồi tính ngược lên khi tới điều kiện dừng.</td>
+<td><strong>トレース：</strong>f(4) = 4 × f(3) = …と階段状<span class="rd">(かいだんじょう)</span>に書<span class="rd">(か)</span>き、終了条件<span class="rd">(しゅうりょうじょうけん)</span>から戻<span class="rd">(もど)</span>って計算<span class="rd">(けいさん)</span>する。</td>
+</tr>
+<tr>
+<td><strong>Duyệt cây nhị phân:</strong> trước (pre-order): nút → trái → phải. Giữa (in-order): trái → nút → phải. Sau (post-order): trái → phải → nút. Với cây tìm kiếm nhị phân, duyệt giữa cho dãy tăng dần.</td>
+<td><strong>2分木<span class="rd">(ぶんぎ)</span>の走査<span class="rd">(そうさ)</span>：</strong>先行順<span class="rd">(せんこうじゅん)</span>：節<span class="rd">(せつ)</span>→左<span class="rd">(ひだり)</span>→右<span class="rd">(みぎ)</span>。中間順<span class="rd">(ちゅうかんじゅん)</span>：左<span class="rd">(ひだり)</span>→節<span class="rd">(せつ)</span>→右<span class="rd">(みぎ)</span>。後行順<span class="rd">(こうこうじゅん)</span>：左<span class="rd">(ひだり)</span>→右<span class="rd">(みぎ)</span>→節<span class="rd">(せつ)</span>。2分探索木<span class="rd">(ぶんたんさくぎ)</span>の中間順<span class="rd">(ちゅうかんじゅん)</span>は昇順<span class="rd">(しょうじゅん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Sắp xếp:</strong> quick sort chọn pivot, đưa nhỏ hơn sang trái, lớn hơn sang phải rồi đệ quy hai nửa. Bin sort đặt giá trị n vào ô n, chỉ đúng khi không có giá trị trùng.</td>
+<td><strong>整列<span class="rd">(せいれつ)</span>：</strong>クイックソートは基準値<span class="rd">(きじゅんち)</span>で左右<span class="rd">(さゆう)</span>に分<span class="rd">(わ)</span>けて再帰<span class="rd">(さいき)</span>。ビンソートは値<span class="rd">(あたい)</span>nを位置<span class="rd">(いち)</span>nに置<span class="rd">(お)</span>く、重複<span class="rd">(ちょうふく)</span>がない場合<span class="rd">(ばあい)</span>のみ。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<pre><code>〇整数型: f(整数型: n)
+  if (n ≦ 1)
+    return 1
+  endif
+  return f(n − 1) + f(n − 2)
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu B1</strong> f(5) trả về bao nhiêu?</td>
+<td><strong>問<span class="rd">(とい)</span>B1</strong> f(5)の戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>は。</td>
+</tr>
+<tr>
+<td>ア 5　イ 8　ウ 13　エ 15</td>
+<td>ア 5　イ 8　ウ 13　エ 15</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (8)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（8）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: f(0) = f(1) = 1; f(2) = 2; f(3) = 3; f(4) = 5; f(5) = 8. Mẹo: tính từ dưới lên thay vì vẽ cả cây gọi.</td>
+<td>解説<span class="rd">(かいせつ)</span>：f(2) = 2、f(3) = 3、f(4) = 5、f(5) = 8。下<span class="rd">(した)</span>から計算<span class="rd">(けいさん)</span>すると速<span class="rd">(はや)</span>い。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu B2</strong> Cây tìm kiếm nhị phân tạo bằng cách chèn lần lượt 50, 30, 70, 20, 40, 60. Duyệt trước (pre-order) cho dãy nào?</td>
+<td><strong>問<span class="rd">(とい)</span>B2</strong> 50, 30, 70, 20, 40, 60の順<span class="rd">(じゅん)</span>に挿入<span class="rd">(そうにゅう)</span>した2分探索木<span class="rd">(ぶんたんさくぎ)</span>を先行順<span class="rd">(せんこうじゅん)</span>で走査<span class="rd">(そうさ)</span>した結果<span class="rd">(けっか)</span>は。</td>
+</tr>
+<tr>
+<td>ア 20 30 40 50 60 70　イ 50 30 20 40 70 60　ウ 20 40 30 60 70 50　エ 50 30 70 20 40 60</td>
+<td>ア 20 30 40 50 60 70　イ 50 30 20 40 70 60　ウ 20 40 30 60 70 50　エ 50 30 70 20 40 60</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cây: 50 gốc; trái 30 (con 20, 40); phải 70 (con trái 60). Pre-order: 50, 30, 20, 40, 70, 60. ア là in-order, ウ là post-order, エ là theo tầng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：根<span class="rd">(ね)</span>50、左<span class="rd">(ひだり)</span>30（20, 40）、右<span class="rd">(みぎ)</span>70（60）。アは中間順<span class="rd">(ちゅうかんじゅん)</span>、ウは後行順<span class="rd">(こうこうじゅん)</span>、エは幅優先<span class="rd">(はばゆうせん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/sample/b7.html" target="_blank" rel="noopener">サンプル問題 科目B 問7</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>7</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm đệ quy factorial(n): n = 0 thì trả 1, ngược lại trả tích 1 tới n. Chỗ trống là bước đệ quy. Lựa chọn: (n−1) × factorial(n) / factorial(n−1) / n / n × (n−1) / n × factorial(1) / n × factorial(n−1)</td>
+<td>内容<span class="rd">(ないよう)</span>：階乗<span class="rd">(かいじょう)</span>を求<span class="rd">(もと)</span>める再帰関数<span class="rd">(さいきかんすう)</span>factorialの空欄<span class="rd">(くうらん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: カ</strong> (n × factorial(n − 1))</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：カ</strong>（n × factorial(n − 1)）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 4! = 4 × 3! = … = 24. factorial(n) hay factorial(1) gọi lại chính nó với cùng đối số nên lặp vô hạn; factorial(n − 1) không nhân n nên luôn ra 1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：factorial(n)やfactorial(1)は無限<span class="rd">(むげん)</span>ループ、factorial(n − 1)だけだと常<span class="rd">(つね)</span>に1。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/sample/b9.html" target="_blank" rel="noopener">サンプル問題 科目B 問9</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>9</strong></td>
+</tr>
+<tr>
+<td>Nội dung: cây nhị phân 14 nút (1 có con 2, 3; 2 có 4, 5; … 7 chỉ có con trái 14). Thủ tục order(n): có 2 con thì order(trái), in n, order(phải); có 1 con thì order(con), in n; lá thì in n. Gọi order(1) in ra thứ tự nào?</td>
+<td>内容<span class="rd">(ないよう)</span>：14節<span class="rd">(せつ)</span>の2分木<span class="rd">(ぶんぎ)</span>を手続<span class="rd">(てつづ)</span>きorderで走査<span class="rd">(そうさ)</span>。order(1)の出力順<span class="rd">(しゅつりょくじゅん)</span>は。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (8, 4, 9, 2, 10, 5, 11, 1, 12, 6, 13, 3, 14, 7)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（8, 4, 9, 2, 10, 5, 11, 1, 12, 6, 13, 3, 14, 7）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đây là duyệt giữa (trái → nút → phải). Bắt đầu từ lá trái nhất 8, rồi 4, 9, 2… Nút 7 chỉ có con trái 14 nên in 14 rồi 7.</td>
+<td>解説<span class="rd">(かいせつ)</span>：中間順<span class="rd">(ちゅうかんじゅん)</span>。最<span class="rd">(もっと)</span>も左<span class="rd">(ひだり)</span>の8から。7は左<span class="rd">(ひだり)</span>の子<span class="rd">(こ)</span>14の後<span class="rd">(あと)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/sample/b11.html" target="_blank" rel="noopener">サンプル問題 科目B 問11</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>11</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm binSort đặt mỗi giá trị n vào bins[n] và trả về mảng. Với mảng đầu vào nào thì kết quả không có phần tử chưa xác định và tăng dần? ア {2, 6, 3, 1, 4, 5}　イ {3, 1, 4, 4, 5, 2}　ウ {4, 2, 1, 5, 6, 2}　エ {5, 3, 4, 3, 2, 6}</td>
+<td>内容<span class="rd">(ないよう)</span>：ビンソートの関数<span class="rd">(かんすう)</span>binSortが未定義<span class="rd">(みていぎ)</span>の要素<span class="rd">(ようそ)</span>なしで昇順<span class="rd">(しょうじゅん)</span>の配列<span class="rd">(はいれつ)</span>を返<span class="rd">(かえ)</span>す入力<span class="rd">(にゅうりょく)</span>は。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chỉ ア không có giá trị trùng. イ trùng 4 nên bins[6] trống; ウ trùng 2 nên bins[3] trống; エ trùng 3 nên bins[1] trống.</td>
+<td>解説<span class="rd">(かいせつ)</span>：重複<span class="rd">(ちょうふく)</span>がないのはアだけ。重複<span class="rd">(ちょうふく)</span>があると埋<span class="rd">(う)</span>まらない位置<span class="rd">(いち)</span>が出<span class="rd">(で)</span>る。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bù 1 / bù 2 / dấu–độ lớn</td>
+<td>1の補数<span class="rd">(ほすう)</span> / 2の補数<span class="rd">(ほすう)</span> / 符号付<span class="rd">(ふごうつ)</span>き絶対値<span class="rd">(ぜったいち)</span></td>
+</tr>
+<tr>
+<td>Dịch số học / dịch logic</td>
+<td>算術<span class="rd">(さんじゅつ)</span>シフト / 論理<span class="rd">(ろんり)</span>シフト</td>
+</tr>
+<tr>
+<td>Mất chữ số có nghĩa / mất thông tin / tràn số / sai số làm tròn</td>
+<td>桁落<span class="rd">(けたお)</span>ち / 情報落<span class="rd">(じょうほうお)</span>ち / 桁<span class="rd">(けた)</span>あふれ / 丸<span class="rd">(まる)</span>め誤差<span class="rd">(ごさ)</span></td>
+</tr>
+<tr>
+<td>Phần định trị / số mũ</td>
+<td>仮数部<span class="rd">(かすうぶ)</span> / 指数部<span class="rd">(しすうぶ)</span></td>
+</tr>
+<tr>
+<td>Đệ quy / điều kiện dừng / giai thừa</td>
+<td>再帰<span class="rd">(さいき)</span> / 終了条件<span class="rd">(しゅうりょうじょうけん)</span> / 階乗<span class="rd">(かいじょう)</span></td>
+</tr>
+<tr>
+<td>Duyệt trước / giữa / sau</td>
+<td>先行順<span class="rd">(せんこうじゅん)</span> / 中間順<span class="rd">(ちゅうかんじゅん)</span> / 後行順<span class="rd">(こうこうじゅん)</span></td>
+</tr>
+<tr>
+<td>Gốc / lá / nút / con</td>
+<td>根<span class="rd">(ね)</span> / 葉<span class="rd">(は)</span> / 節<span class="rd">(せつ)</span>（ノード） / 子<span class="rd">(こ)</span></td>
+</tr>
+<tr>
+<td>Phần tử chốt / trùng lặp</td>
+<td>基準値<span class="rd">(きじゅんち)</span>（ピボット） / 重複<span class="rd">(ちょうふく)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

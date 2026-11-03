@@ -1,0 +1,839 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>FE Ngày 18 (29/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 18 (29/10): Kế toán doanh nghiệp và bài toán bảo mật 科目B</h1>
+<p class="meta">Ngày 18 · Thứ Năm 29/10 · 科目A: Kế toán, điểm hòa vốn · 科目B: Bài toán bảo mật</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Hoạt động doanh nghiệp và kế toán ｜ 企業活動<span class="rd">(きぎょうかつどう)</span>・会計<span class="rd">(かいけい)</span></a></li><li><a href="#muc-3">科目B: Bài toán bảo mật ｜ 情報<span class="rd">(じょうほう)</span>セキュリティ問題<span class="rd">(もんだい)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Tổng khoảng 2 tiếng: 1 tiếng 科目A, 1 tiếng 科目B.</p>
+<ul class="check">
+<li>Đọc lý thuyết báo cáo tài chính và điểm hòa vốn, tự viết lại công thức ra giấy (20 phút)</li>
+<li>Làm 4 câu bài tập 科目A, tự tính trước rồi mới xem đáp án (15 phút)</li>
+<li>Làm 10 câu đề cũ phần 会計・財務 (25 phút)</li>
+<li>Đọc lý thuyết cách làm bài bảo mật 科目B: tìm "ai làm gì", nguyên tắc quyền tối thiểu, phân tách nhiệm vụ (15 phút)</li>
+<li>Trace 2 bài mã giả và làm 1 câu tình huống (15 phút)</li>
+<li>Làm 6 câu đề cũ bảo mật 科目B, mỗi câu tối đa 5 phút (30 phút)</li>
+<li>Ôn bảng từ vựng cuối bài</li>
+</ul>
+<h2 id="muc-2">科目A: Hoạt động doanh nghiệp và kế toán ｜ 企業活動<span class="rd">(きぎょうかつどう)</span>・会計<span class="rd">(かいけい)</span></h2>
+<p>Phần này mỗi đề thường có 1–2 câu tính toán. Chỉ cần nhớ chắc 3 thứ: thứ tự các loại lợi nhuận trên báo cáo kết quả kinh doanh, công thức điểm hòa vốn, và 3 loại dòng tiền.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Báo cáo kết quả kinh doanh (P/L):</strong> cho biết doanh thu, chi phí và lợi nhuận trong một kỳ.</td>
+<td><strong>損益計算書<span class="rd">(そんえきけいさんしょ)</span>（P/L）：</strong>一定期間<span class="rd">(いっていきかん)</span>の収益<span class="rd">(しゅうえき)</span>・費用<span class="rd">(ひよう)</span>・利益<span class="rd">(りえき)</span>を表<span class="rd">(あらわ)</span>す。</td>
+</tr>
+<tr>
+<td><strong>Lợi nhuận gộp</strong> = Doanh thu − Giá vốn hàng bán</td>
+<td><strong>売上総利益<span class="rd">(うりあげそうりえき)</span></strong>＝売上高<span class="rd">(うりあげだか)</span>−売上原価<span class="rd">(うりあげげんか)</span></td>
+</tr>
+<tr>
+<td><strong>Lợi nhuận hoạt động</strong> = Lợi nhuận gộp − Chi phí bán hàng và quản lý</td>
+<td><strong>営業利益<span class="rd">(えいぎょうりえき)</span></strong>＝売上総利益<span class="rd">(うりあげそうりえき)</span>−販売費<span class="rd">(はんばいひ)</span>及<span class="rd">(およ)</span>び一般管理費<span class="rd">(いっぱんかんりひ)</span></td>
+</tr>
+<tr>
+<td><strong>Lợi nhuận thường xuyên</strong> = Lợi nhuận hoạt động + Thu nhập ngoài hoạt động − Chi phí ngoài hoạt động (ví dụ lãi vay).</td>
+<td><strong>経常利益<span class="rd">(けいじょうりえき)</span></strong>＝営業利益<span class="rd">(えいぎょうりえき)</span>＋営業外収益<span class="rd">(えいぎょうがいしゅうえき)</span>−営業外費用<span class="rd">(えいぎょうがいひよう)</span>（支払利息<span class="rd">(しはらいりそく)</span>など）</td>
+</tr>
+<tr>
+<td><strong>Lợi nhuận trước thuế</strong> = Lợi nhuận thường xuyên + Lãi bất thường − Lỗ bất thường; sau đó trừ thuế thu nhập ra <strong>Lợi nhuận ròng</strong>.</td>
+<td><strong>税引前当期純利益<span class="rd">(ぜいびきまえとうきじゅんりえき)</span></strong>＝経常利益<span class="rd">(けいじょうりえき)</span>＋特別利益<span class="rd">(とくべつりえき)</span>−特別損失<span class="rd">(とくべつそんしつ)</span>。法人税<span class="rd">(ほうじんぜい)</span>等<span class="rd">(とう)</span>を引<span class="rd">(ひ)</span>くと<strong>当期純利益<span class="rd">(とうきじゅんりえき)</span></strong>。</td>
+</tr>
+<tr>
+<td><strong>Mẹo nhớ thứ tự:</strong> 売上総 → 営業 → 経常 → 税引前 → 当期純. "Ngoài hoạt động" (営業外) nằm giữa 営業 và 経常; "bất thường" (特別) nằm giữa 経常 và 税引前.</td>
+<td><strong>覚<span class="rd">(おぼ)</span>え方<span class="rd">(かた)</span>：</strong>売上総<span class="rd">(うりあげそう)</span>→営業<span class="rd">(えいぎょう)</span>→経常<span class="rd">(けいじょう)</span>→税引前<span class="rd">(ぜいびきまえ)</span>→当期純<span class="rd">(とうきじゅん)</span>。営業外<span class="rd">(えいぎょうがい)</span>は営業<span class="rd">(えいぎょう)</span>と経常<span class="rd">(けいじょう)</span>の間<span class="rd">(あいだ)</span>、特別<span class="rd">(とくべつ)</span>は経常<span class="rd">(けいじょう)</span>と税引前<span class="rd">(ぜいびきまえ)</span>の間<span class="rd">(あいだ)</span>。</td>
+</tr>
+<tr>
+<td><strong>Bảng cân đối kế toán (B/S):</strong> tình hình tài chính tại một thời điểm (cuối kỳ). Tài sản = Nợ phải trả + Vốn chủ sở hữu.</td>
+<td><strong>貸借対照表<span class="rd">(たいしゃくたいしょうひょう)</span>（B/S）：</strong>期末<span class="rd">(きまつ)</span>時点<span class="rd">(じてん)</span>の財政状態<span class="rd">(ざいせいじょうたい)</span>。資産<span class="rd">(しさん)</span>＝負債<span class="rd">(ふさい)</span>＋純資産<span class="rd">(じゅんしさん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Báo cáo lưu chuyển tiền tệ (C/F):</strong> 3 loại. Hoạt động kinh doanh: bán hàng, mua hàng, trả lương. Hoạt động đầu tư: mua/bán tài sản cố định, chứng khoán. Hoạt động tài chính: vay/trả nợ, phát hành cổ phiếu, trả cổ tức.</td>
+<td><strong>キャッシュフロー計算書<span class="rd">(けいさんしょ)</span>：</strong>営業活動<span class="rd">(えいぎょうかつどう)</span>（販売<span class="rd">(はんばい)</span>・仕入<span class="rd">(しい)</span>れ・給料<span class="rd">(きゅうりょう)</span>）、投資活動<span class="rd">(とうしかつどう)</span>（固定資産<span class="rd">(こていしさん)</span>・有価証券<span class="rd">(ゆうかしょうけん)</span>の売買<span class="rd">(ばいばい)</span>）、財務活動<span class="rd">(ざいむかつどう)</span>（借入<span class="rd">(かりい)</span>れ・返済<span class="rd">(へんさい)</span>・株式発行<span class="rd">(かぶしきはっこう)</span>・配当<span class="rd">(はいとう)</span>）の3区分<span class="rd">(くぶん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Chi phí cố định:</strong> không đổi theo doanh thu (tiền thuê, lương cơ bản). <strong>Chi phí biến đổi:</strong> tăng theo doanh thu (nguyên vật liệu).</td>
+<td><strong>固定費<span class="rd">(こていひ)</span>：</strong>売上<span class="rd">(うりあげ)</span>に関係<span class="rd">(かんけい)</span>なく一定<span class="rd">(いってい)</span>。<strong>変動費<span class="rd">(へんどうひ)</span>：</strong>売上<span class="rd">(うりあげ)</span>に比例<span class="rd">(ひれい)</span>して増<span class="rd">(ふ)</span>える。</td>
+</tr>
+<tr>
+<td><strong>Tỷ lệ chi phí biến đổi</strong> = Chi phí biến đổi ÷ Doanh thu. <strong>Lợi nhuận biên (số dư đảm phí)</strong> = Doanh thu − Chi phí biến đổi.</td>
+<td><strong>変動費率<span class="rd">(へんどうひりつ)</span></strong>＝変動費<span class="rd">(へんどうひ)</span>÷売上高<span class="rd">(うりあげだか)</span>。<strong>限界利益<span class="rd">(げんかいりえき)</span></strong>＝売上高<span class="rd">(うりあげだか)</span>−変動費<span class="rd">(へんどうひ)</span>。</td>
+</tr>
+<tr>
+<td><strong>Điểm hòa vốn (doanh thu)</strong> = Chi phí cố định ÷ (1 − Tỷ lệ chi phí biến đổi). Tại đây lợi nhuận = 0, tức doanh thu = cố định + biến đổi.</td>
+<td><strong>損益分岐点売上高<span class="rd">(そんえきぶんきてんうりあげだか)</span></strong>＝固定費<span class="rd">(こていひ)</span>÷（1−変動費率<span class="rd">(へんどうひりつ)</span>）。利益<span class="rd">(りえき)</span>が0、売上高<span class="rd">(うりあげだか)</span>＝固定費<span class="rd">(こていひ)</span>＋変動費<span class="rd">(へんどうひ)</span>。</td>
+</tr>
+<tr>
+<td><strong>Doanh thu cần để đạt lợi nhuận mục tiêu</strong> = (Chi phí cố định + Lợi nhuận mục tiêu) ÷ (1 − Tỷ lệ chi phí biến đổi).</td>
+<td><strong>目標利益<span class="rd">(もくひょうりえき)</span>達成<span class="rd">(たっせい)</span>に必要<span class="rd">(ひつよう)</span>な売上高<span class="rd">(うりあげだか)</span></strong>＝（固定費<span class="rd">(こていひ)</span>＋目標利益<span class="rd">(もくひょうりえき)</span>）÷（1−変動費率<span class="rd">(へんどうひりつ)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Xu hướng:</strong> chi phí cố định giảm hoặc tỷ lệ biến đổi giảm → điểm hòa vốn thấp hơn (dễ có lãi hơn). Vượt điểm hòa vốn, công ty có tỷ lệ biến đổi thấp thì lãi tăng nhanh hơn.</td>
+<td><strong>傾向<span class="rd">(けいこう)</span>：</strong>固定費<span class="rd">(こていひ)</span>や変動費率<span class="rd">(へんどうひりつ)</span>が下<span class="rd">(さ)</span>がると損益分岐点<span class="rd">(そんえきぶんきてん)</span>は下<span class="rd">(さ)</span>がる。損益分岐点<span class="rd">(そんえきぶんきてん)</span>を超<span class="rd">(こ)</span>えると、変動費率<span class="rd">(へんどうひりつ)</span>が低<span class="rd">(ひく)</span>い企業<span class="rd">(きぎょう)</span>ほど利益<span class="rd">(りえき)</span>が速<span class="rd">(はや)</span>く増<span class="rd">(ふ)</span>える。</td>
+</tr>
+<tr>
+<td><strong>Khấu hao đường thẳng:</strong> mỗi năm = (Nguyên giá − Giá trị còn lại) ÷ Số năm sử dụng. <strong>Khấu hao số dư giảm dần:</strong> mỗi năm = Giá trị sổ sách đầu năm × tỷ lệ cố định.</td>
+<td><strong>定額法<span class="rd">(ていがくほう)</span>：</strong>毎年<span class="rd">(まいとし)</span>（取得価額<span class="rd">(しゅとくかがく)</span>−残存価額<span class="rd">(ざんぞんかがく)</span>）÷耐用年数<span class="rd">(たいようねんすう)</span>。<strong>定率法<span class="rd">(ていりつほう)</span>：</strong>期首<span class="rd">(きしゅ)</span>帳簿価額<span class="rd">(ちょうぼかがく)</span>×一定率<span class="rd">(いっていりつ)</span>。</td>
+</tr>
+<tr>
+<td><strong>Chỉ số:</strong> ROE = Lợi nhuận ròng ÷ Vốn chủ sở hữu; ROA = Lợi nhuận ÷ Tổng tài sản; Tỷ lệ vốn chủ = Vốn chủ ÷ Tổng vốn; Tỷ lệ thanh toán hiện hành = Tài sản ngắn hạn ÷ Nợ ngắn hạn (càng cao càng an toàn).</td>
+<td><strong>財務指標<span class="rd">(ざいむしひょう)</span>：</strong>ROE（自己資本利益率<span class="rd">(じこしほんりえきりつ)</span>）＝当期純利益<span class="rd">(とうきじゅんりえき)</span>÷自己資本<span class="rd">(じこしほん)</span>；ROA（総資産利益率<span class="rd">(そうしさんりえきりつ)</span>）＝利益<span class="rd">(りえき)</span>÷総資産<span class="rd">(そうしさん)</span>；自己資本比率<span class="rd">(じこしほんひりつ)</span>＝自己資本<span class="rd">(じこしほん)</span>÷総資本<span class="rd">(そうしほん)</span>；流動比率<span class="rd">(りゅうどうひりつ)</span>＝流動資産<span class="rd">(りゅうどうしさん)</span>÷流動負債<span class="rd">(りゅうどうふさい)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Ví dụ nhanh ｜ 計算例<span class="rd">(けいさんれい)</span></strong>: doanh thu 1.000, chi phí biến đổi 600, chi phí cố định 300 → tỷ lệ biến đổi 0,6 → điểm hòa vốn = 300 ÷ 0,4 = 750.</p>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Doanh thu 500 triệu yên, chi phí biến đổi 300 triệu yên, chi phí cố định 120 triệu yên. Doanh thu hòa vốn là bao nhiêu triệu yên?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> 売上高<span class="rd">(うりあげだか)</span>500百万円<span class="rd">(ひゃくまんえん)</span>、変動費<span class="rd">(へんどうひ)</span>300百万円<span class="rd">(ひゃくまんえん)</span>、固定費<span class="rd">(こていひ)</span>120百万円<span class="rd">(ひゃくまんえん)</span>のとき、損益分岐点売上高<span class="rd">(そんえきぶんきてんうりあげだか)</span>は何百万円<span class="rd">(なんびゃくまんえん)</span>か。</td>
+</tr>
+<tr>
+<td>ア 200　イ 300　ウ 420　エ 600</td>
+<td>ア 200　イ 300　ウ 420　エ 600</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (300)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（300）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tỷ lệ biến đổi = 300 ÷ 500 = 0,6. Điểm hòa vốn = 120 ÷ (1 − 0,6) = 120 ÷ 0,4 = 300. Kiểm tra: doanh thu 300 → biến đổi 180, cố định 120, tổng 300, lãi 0. Bẫy: ア chia cho 0,6 (quên lấy 1 − tỷ lệ); ウ là cố định + biến đổi ở mức doanh thu hiện tại; エ chia cho 0,2.</td>
+<td>解説<span class="rd">(かいせつ)</span>：変動費率<span class="rd">(へんどうひりつ)</span>＝300÷500＝0.6。損益分岐点<span class="rd">(そんえきぶんきてん)</span>＝120÷（1−0.6）＝300。確認<span class="rd">(かくにん)</span>：売上<span class="rd">(うりあげ)</span>300なら変動費<span class="rd">(へんどうひ)</span>180＋固定費<span class="rd">(こていひ)</span>120＝300で利益<span class="rd">(りえき)</span>0。アは0.6で割<span class="rd">(わ)</span>った誤<span class="rd">(あやま)</span>り、ウは現在<span class="rd">(げんざい)</span>の固定費<span class="rd">(こていひ)</span>＋変動費<span class="rd">(へんどうひ)</span>、エは0.2で割<span class="rd">(わ)</span>った誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Cùng công ty ở Câu A1, giữ nguyên tỷ lệ biến đổi và chi phí cố định. Để đạt lợi nhuận 60 triệu yên thì cần doanh thu bao nhiêu?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> 問<span class="rd">(とい)</span>A1と同<span class="rd">(おな)</span>じ企業<span class="rd">(きぎょう)</span>で、変動費率<span class="rd">(へんどうひりつ)</span>と固定費<span class="rd">(こていひ)</span>は変<span class="rd">(か)</span>わらないとする。利益<span class="rd">(りえき)</span>60百万円<span class="rd">(ひゃくまんえん)</span>を達成<span class="rd">(たっせい)</span>するのに必要<span class="rd">(ひつよう)</span>な売上高<span class="rd">(うりあげだか)</span>はいくらか。</td>
+</tr>
+<tr>
+<td>ア 180　イ 300　ウ 360　エ 450</td>
+<td>ア 180　イ 300　ウ 360　エ 450</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (450)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（450）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: (120 + 60) ÷ 0,4 = 450. Kiểm tra: 450 − 450 × 0,6 − 120 = 450 − 270 − 120 = 60. Bẫy: ア chỉ cộng cố định + lợi nhuận, quên chi phí biến đổi; イ là điểm hòa vốn; ウ lấy điểm hòa vốn + 60 (sai vì mỗi 1 yên doanh thu thêm chỉ mang lại 0,4 yên lãi).</td>
+<td>解説<span class="rd">(かいせつ)</span>：（120＋60）÷0.4＝450。確認<span class="rd">(かくにん)</span>：450−270−120＝60。アは変動費<span class="rd">(へんどうひ)</span>を忘<span class="rd">(わす)</span>れた値<span class="rd">(あたい)</span>、イは損益分岐点<span class="rd">(そんえきぶんきてん)</span>、ウは損益分岐点<span class="rd">(そんえきぶんきてん)</span>＋60（売上<span class="rd">(うりあげ)</span>1円<span class="rd">(えん)</span>増<span class="rd">(ふ)</span>えても利益<span class="rd">(りえき)</span>は0.4円<span class="rd">(えん)</span>しか増<span class="rd">(ふ)</span>えないので誤<span class="rd">(あやま)</span>り）。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A3</strong> Doanh thu 1.000; giá vốn 600; chi phí bán hàng và quản lý 250; thu nhập ngoài hoạt động 30; chi phí ngoài hoạt động 50; lỗ bất thường 20. Lợi nhuận thường xuyên là bao nhiêu?</td>
+<td><strong>問<span class="rd">(とい)</span>A3</strong> 売上高<span class="rd">(うりあげだか)</span>1,000、売上原価<span class="rd">(うりあげげんか)</span>600、販売費<span class="rd">(はんばいひ)</span>及<span class="rd">(およ)</span>び一般管理費<span class="rd">(いっぱんかんりひ)</span>250、営業外収益<span class="rd">(えいぎょうがいしゅうえき)</span>30、営業外費用<span class="rd">(えいぎょうがいひよう)</span>50、特別損失<span class="rd">(とくべつそんしつ)</span>20のとき、経常利益<span class="rd">(けいじょうりえき)</span>はいくらか。</td>
+</tr>
+<tr>
+<td>ア 110　イ 130　ウ 150　エ 400</td>
+<td>ア 110　イ 130　ウ 150　エ 400</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (130)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（130）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: lợi nhuận gộp = 1.000 − 600 = 400; lợi nhuận hoạt động = 400 − 250 = 150; thường xuyên = 150 + 30 − 50 = 130. Lỗ bất thường không tính vào lợi nhuận thường xuyên. Bẫy: ア đã trừ cả lỗ bất thường (đó là lợi nhuận trước thuế); ウ là lợi nhuận hoạt động; エ là lợi nhuận gộp.</td>
+<td>解説<span class="rd">(かいせつ)</span>：売上総利益<span class="rd">(うりあげそうりえき)</span>400、営業利益<span class="rd">(えいぎょうりえき)</span>150、経常利益<span class="rd">(けいじょうりえき)</span>＝150＋30−50＝130。特別損失<span class="rd">(とくべつそんしつ)</span>は経常利益<span class="rd">(けいじょうりえき)</span>に含<span class="rd">(ふく)</span>めない。アは税引前当期純利益<span class="rd">(ぜいびきまえとうきじゅんりえき)</span>、ウは営業利益<span class="rd">(えいぎょうりえき)</span>、エは売上総利益<span class="rd">(うりあげそうりえき)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A4</strong> Mua máy chủ giá 1.200 vạn yên, giá trị còn lại 0, thời gian sử dụng 5 năm, khấu hao đường thẳng. Giá trị sổ sách sau 3 năm là bao nhiêu vạn yên?</td>
+<td><strong>問<span class="rd">(とい)</span>A4</strong> 取得価額<span class="rd">(しゅとくかがく)</span>1,200万円<span class="rd">(まんえん)</span>、残存価額<span class="rd">(ざんぞんかがく)</span>0円<span class="rd">(えん)</span>、耐用年数<span class="rd">(たいようねんすう)</span>5年<span class="rd">(ねん)</span>のサーバを定額法<span class="rd">(ていがくほう)</span>で償却<span class="rd">(しょうきゃく)</span>する。3年<span class="rd">(ねん)</span>経過後<span class="rd">(けいかご)</span>の帳簿価額<span class="rd">(ちょうぼかがく)</span>は何万円<span class="rd">(なんまんえん)</span>か。</td>
+</tr>
+<tr>
+<td>ア 240　イ 480　ウ 720　エ 960</td>
+<td>ア 240　イ 480　ウ 720　エ 960</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (480)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（480）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: khấu hao mỗi năm = 1.200 ÷ 5 = 240; sau 3 năm đã khấu hao 720; còn lại 1.200 − 720 = 480. Bẫy: ア là khấu hao 1 năm; ウ là tổng khấu hao lũy kế (đề hỏi giá trị còn lại); エ là giá trị sau 1 năm.</td>
+<td>解説<span class="rd">(かいせつ)</span>：年間<span class="rd">(ねんかん)</span>償却費<span class="rd">(しょうきゃくひ)</span>＝1,200÷5＝240、3年<span class="rd">(ねん)</span>の累計<span class="rd">(るいけい)</span>720、帳簿価額<span class="rd">(ちょうぼかがく)</span>＝1,200−720＝480。アは1年分<span class="rd">(ねんぶん)</span>の償却費<span class="rd">(しょうきゃくひ)</span>、ウは減価償却累計額<span class="rd">(げんかしょうきゃくるいけいがく)</span>、エは1年後<span class="rd">(ねんご)</span>の帳簿価額<span class="rd">(ちょうぼかがく)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Mỗi câu ghi kỳ thi và số câu; bấm link để xem nguyên văn đề (nhiều câu có bảng số liệu, nên mở link để xem bảng).</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/26_haru/q78.html" target="_blank" rel="noopener">平成26年春期 午前 問78</a></strong> (2014)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>78</strong></td>
+</tr>
+<tr>
+<td>Nội dung: từ báo cáo kết quả kinh doanh có 2 khoản chi phí cố định, 2 khoản chi phí biến đổi và doanh thu 700 (triệu yên), tính doanh thu hòa vốn.</td>
+<td>内容<span class="rd">(ないよう)</span>：固定費<span class="rd">(こていひ)</span>2項目<span class="rd">(こうもく)</span>、変動費<span class="rd">(へんどうひ)</span>2項目<span class="rd">(こうもく)</span>、売上高<span class="rd">(うりあげだか)</span>700百万円<span class="rd">(ひゃくまんえん)</span>の損益計算書<span class="rd">(そんえきけいさんしょ)</span>から損益分岐点<span class="rd">(そんえきぶんきてん)</span>を求<span class="rd">(もと)</span>める。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (625)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（625）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cố định = 200 + 300 = 500; biến đổi = 100 + 40 = 140; tỷ lệ = 140 ÷ 700 = 0,2; hòa vốn = 500 ÷ 0,8 = 625. Bước khó là phân loại đúng khoản nào là cố định, khoản nào là biến đổi trong bảng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：固定費<span class="rd">(こていひ)</span>500、変動費<span class="rd">(へんどうひ)</span>140、変動費率<span class="rd">(へんどうひりつ)</span>0.2、損益分岐点<span class="rd">(そんえきぶんきてん)</span>＝500÷0.8＝625。表<span class="rd">(ひょう)</span>の費用<span class="rd">(ひよう)</span>を固定費<span class="rd">(こていひ)</span>と変動費<span class="rd">(へんどうひ)</span>に正<span class="rd">(ただ)</span>しく分<span class="rd">(わ)</span>けるのがポイント。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/01_aki/q78.html" target="_blank" rel="noopener">令和元年秋期 午前 問78</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>78</strong></td>
+</tr>
+<tr>
+<td>Nội dung: doanh thu 100, biến đổi 60, cố định 30 (triệu yên). Cần doanh thu bao nhiêu để lãi 18? (cùng dạng Câu A2)</td>
+<td>内容<span class="rd">(ないよう)</span>：売上高<span class="rd">(うりあげだか)</span>100、変動費<span class="rd">(へんどうひ)</span>60、固定費<span class="rd">(こていひ)</span>30（百万円<span class="rd">(ひゃくまんえん)</span>）のとき、利益<span class="rd">(りえき)</span>18を得<span class="rd">(え)</span>るための売上高<span class="rd">(うりあげだか)</span>（問<span class="rd">(とい)</span>A2と同<span class="rd">(おな)</span>じ形式<span class="rd">(けいしき)</span>）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (120)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（120）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tỷ lệ biến đổi 0,6 → (30 + 18) ÷ 0,4 = 120. Kiểm tra: 120 − 72 − 30 = 18.</td>
+<td>解説<span class="rd">(かいせつ)</span>：変動費率<span class="rd">(へんどうひりつ)</span>0.6、（30＋18）÷0.4＝120。確認<span class="rd">(かくにん)</span>：120−72−30＝18。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/22_haru/q77.html" target="_blank" rel="noopener">平成22年春期 午前 問77</a></strong> (2010); trang ghi câu này cũng ra ở 基本情報 平成14年春期 問75 và 応用情報 平成29年春期 問77</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>22年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>77</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chọn câu mô tả đúng đặc điểm của điểm hòa vốn (ảnh hưởng của chi phí cố định và tỷ lệ biến đổi).</td>
+<td>内容<span class="rd">(ないよう)</span>：損益分岐点<span class="rd">(そんえきぶんきてん)</span>の特性<span class="rd">(とくせい)</span>（固定費<span class="rd">(こていひ)</span>・変動費率<span class="rd">(へんどうひりつ)</span>の影響<span class="rd">(えいきょう)</span>）として正<span class="rd">(ただ)</span>しい記述<span class="rd">(きじゅつ)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án:</strong> "Doanh thu tại điểm hòa vốn bằng tổng chi phí cố định và chi phí biến đổi" (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：</strong>「損益分岐点<span class="rd">(そんえきぶんきてん)</span>での売上高<span class="rd">(うりあげだか)</span>は固定費<span class="rd">(こていひ)</span>と変動費<span class="rd">(へんどうひ)</span>の和<span class="rd">(わ)</span>に等<span class="rd">(ひと)</span>しい」（記号<span class="rd">(きごう)</span>はリンク参照<span class="rd">(さんしょう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: lợi nhuận = 0 nên doanh thu = tổng chi phí. Các câu sai nói ngược chiều (giảm cố định hay giảm tỷ lệ biến đổi đều làm điểm hòa vốn GIẢM) hoặc nói "tỷ lệ thuận": với cố định 100, tỷ lệ 0,2 / 0,5 / 0,8 cho 125 / 200 / 500, không tỷ lệ thuận.</td>
+<td>解説<span class="rd">(かいせつ)</span>：利益<span class="rd">(りえき)</span>0なので売上高<span class="rd">(うりあげだか)</span>＝総費用<span class="rd">(そうひよう)</span>。誤<span class="rd">(あやま)</span>りの選択肢<span class="rd">(せんたくし)</span>は向<span class="rd">(む)</span>きが逆<span class="rd">(ぎゃく)</span>（固定費<span class="rd">(こていひ)</span>・変動費率<span class="rd">(へんどうひりつ)</span>が下<span class="rd">(さ)</span>がると損益分岐点<span class="rd">(そんえきぶんきてん)</span>は下<span class="rd">(さ)</span>がる）か「正比例<span class="rd">(せいひれい)</span>」：固定費<span class="rd">(こていひ)</span>100で変動費率<span class="rd">(へんどうひりつ)</span>0.2／0.5／0.8なら125／200／500で比例<span class="rd">(ひれい)</span>しない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/24_haru/q77.html" target="_blank" rel="noopener">平成24年春期 午前 問77</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>77</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đồ thị hòa vốn của công ty A (cố định 70, tỷ lệ biến đổi 0,3) và B (cố định 30, tỷ lệ 0,7). Chọn nhận định đúng về khả năng sinh lời.</td>
+<td>内容<span class="rd">(ないよう)</span>：A社<span class="rd">(しゃ)</span>（固定費<span class="rd">(こていひ)</span>70、変動費率<span class="rd">(へんどうひりつ)</span>0.3）とB社<span class="rd">(しゃ)</span>（固定費<span class="rd">(こていひ)</span>30、変動費率<span class="rd">(へんどうひりつ)</span>0.7）の損益分岐点<span class="rd">(そんえきぶんきてん)</span>の図<span class="rd">(ず)</span>から、収益性<span class="rd">(しゅうえきせい)</span>について正<span class="rd">(ただ)</span>しい記述<span class="rd">(きじゅつ)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án:</strong> "A có tỷ lệ biến đổi thấp hơn nên khi vượt điểm hòa vốn, cùng doanh thu thì A lãi nhiều hơn B" (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：</strong>「A社<span class="rd">(しゃ)</span>は変動費率<span class="rd">(へんどうひりつ)</span>が低<span class="rd">(ひく)</span>いので、損益分岐点<span class="rd">(そんえきぶんきてん)</span>を超<span class="rd">(こ)</span>えた同<span class="rd">(おな)</span>じ売上高<span class="rd">(うりあげだか)</span>ではA社<span class="rd">(しゃ)</span>の利益<span class="rd">(りえき)</span>が大<span class="rd">(おお)</span>きい」（記号<span class="rd">(きごう)</span>はリンク参照<span class="rd">(さんしょう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cả hai hòa vốn ở 100 (70 ÷ 0,7 = 100; 30 ÷ 0,3 = 100). Ở doanh thu 150: A = 150 − 45 − 70 = 35; B = 150 − 105 − 30 = 15. Vượt hòa vốn, mỗi đồng doanh thu thêm A lãi 0,7, B chỉ 0,3. Lưu ý: trang giải thích ghi "điểm hòa vốn không bằng nhau", nhưng tự tính thì cả hai đều bằng 100; dù vậy đáp án không đổi vì lựa chọn còn lại sai ở phần lợi nhuận.</td>
+<td>解説<span class="rd">(かいせつ)</span>：損益分岐点<span class="rd">(そんえきぶんきてん)</span>はどちらも100（70÷0.7、30÷0.3）。売上<span class="rd">(うりあげ)</span>150ではA社<span class="rd">(しゃ)</span>35、B社<span class="rd">(しゃ)</span>15。超過分<span class="rd">(ちょうかぶん)</span>1円<span class="rd">(えん)</span>あたりの利益<span class="rd">(りえき)</span>はA社<span class="rd">(しゃ)</span>0.7、B社<span class="rd">(しゃ)</span>0.3。注意<span class="rd">(ちゅうい)</span>：サイトの解説<span class="rd">(かいせつ)</span>には「損益分岐点<span class="rd">(そんえきぶんきてん)</span>は等<span class="rd">(ひと)</span>しくない」とあるが、計算<span class="rd">(けいさん)</span>では両社<span class="rd">(りょうしゃ)</span>とも100。正解<span class="rd">(せいかい)</span>は変<span class="rd">(か)</span>わらない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/04_menjo/q78.html" target="_blank" rel="noopener">令和4年度 問78</a></strong> (2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>4年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>78</strong></td>
+</tr>
+<tr>
+<td>Nội dung: từ số liệu doanh thu, giá vốn, chi phí bán hàng và quản lý (cùng một số khoản khác), tính lợi nhuận hoạt động.</td>
+<td>内容<span class="rd">(ないよう)</span>：売上高<span class="rd">(うりあげだか)</span>、売上原価<span class="rd">(うりあげげんか)</span>、販売費<span class="rd">(はんばいひ)</span>及<span class="rd">(およ)</span>び一般管理費<span class="rd">(いっぱんかんりひ)</span>などの資料<span class="rd">(しりょう)</span>から営業利益<span class="rd">(えいぎょうりえき)</span>を求<span class="rd">(もと)</span>める。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (300)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（300）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: lợi nhuận gộp = 1.500 − 1.000 = 500; hoạt động = 500 − 200 = 300. Các khoản ngoài hoạt động không dùng ở bước này (chúng dùng cho lợi nhuận thường xuyên).</td>
+<td>解説<span class="rd">(かいせつ)</span>：売上総利益<span class="rd">(うりあげそうりえき)</span>＝1,500−1,000＝500、営業利益<span class="rd">(えいぎょうりえき)</span>＝500−200＝300。営業外<span class="rd">(えいぎょうがい)</span>の項目<span class="rd">(こうもく)</span>は経常利益<span class="rd">(けいじょうりえき)</span>で使<span class="rd">(つか)</span>う。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/24_haru/q76.html" target="_blank" rel="noopener">平成24年春期 午前 問76</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>76</strong></td>
+</tr>
+<tr>
+<td>Nội dung: điền các ô trống trên báo cáo kết quả kinh doanh và tính lợi nhuận thường xuyên (triệu yên).</td>
+<td>内容<span class="rd">(ないよう)</span>：損益計算書<span class="rd">(そんえきけいさんしょ)</span>の空欄<span class="rd">(くうらん)</span>を埋<span class="rd">(う)</span>め、経常利益<span class="rd">(けいじょうりえき)</span>を求<span class="rd">(もと)</span>める。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (434)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（434）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: hoạt động = 1.585 − 951 − 160 = 474; thường xuyên = 474 + 80 − 120 = 434. Lựa chọn 474 là bẫy dừng ở lợi nhuận hoạt động.</td>
+<td>解説<span class="rd">(かいせつ)</span>：営業利益<span class="rd">(えいぎょうりえき)</span>＝1,585−951−160＝474、経常利益<span class="rd">(けいじょうりえき)</span>＝474＋80−120＝434。474は営業利益<span class="rd">(えいぎょうりえき)</span>で止<span class="rd">(と)</span>めたひっかけ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/29_haru/q77.html" target="_blank" rel="noopener">平成29年春期 午前 問77</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>77</strong></td>
+</tr>
+<tr>
+<td>Nội dung: khoản nào thuộc dòng tiền từ hoạt động kinh doanh?</td>
+<td>内容<span class="rd">(ないよう)</span>：営業活動<span class="rd">(えいぎょうかつどう)</span>によるキャッシュフローに該当<span class="rd">(がいとう)</span>するものを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án:</strong> "Chi tiền mua hàng hóa" (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：</strong>「商品<span class="rd">(しょうひん)</span>の仕入<span class="rd">(しい)</span>れによる支出<span class="rd">(ししゅつ)</span>」（記号<span class="rd">(きごう)</span>はリンク参照<span class="rd">(さんしょう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mua hàng là hoạt động cốt lõi → kinh doanh. Phát hành cổ phiếu và trả vay ngắn hạn → tài chính; bán tài sản cố định hữu hình → đầu tư.</td>
+<td>解説<span class="rd">(かいせつ)</span>：仕入<span class="rd">(しい)</span>れは本業<span class="rd">(ほんぎょう)</span>なので営業活動<span class="rd">(えいぎょうかつどう)</span>。株式発行<span class="rd">(かぶしきはっこう)</span>・短期借入金<span class="rd">(たんきかりいれきん)</span>の返済<span class="rd">(へんさい)</span>は財務活動<span class="rd">(ざいむかつどう)</span>、有形固定資産<span class="rd">(ゆうけいこていしさん)</span>の売却<span class="rd">(ばいきゃく)</span>は投資活動<span class="rd">(とうしかつどう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 8 — <a href="https://www.fe-siken.com/kakomon/18_haru/q72.html" target="_blank" rel="noopener">平成18年春期 午前 問72</a></strong> (2006)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>8 — 平成<span class="rd">(へいせい)</span>18年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>72</strong></td>
+</tr>
+<tr>
+<td>Nội dung: câu nào mô tả bảng cân đối kế toán?</td>
+<td>内容<span class="rd">(ないよう)</span>：貸借対照表<span class="rd">(たいしゃくたいしょうひょう)</span>の説明<span class="rd">(せつめい)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án:</strong> "Thể hiện tình hình tài chính tại thời điểm cuối kỳ kế toán" (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：</strong>「会計期間<span class="rd">(かいけいきかん)</span>末<span class="rd">(まつ)</span>の財政状態<span class="rd">(ざいせいじょうたい)</span>を表<span class="rd">(あらわ)</span>す」（記号<span class="rd">(きごう)</span>はリンク参照<span class="rd">(さんしょう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: B/S = một thời điểm; P/L và C/F = một khoảng thời gian. Lựa chọn "liệt kê doanh thu, chi phí trong kỳ và cho ra lợi nhuận" là P/L; "thu chi tiền mặt trong kỳ" là sổ quỹ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：B/Sは時点<span class="rd">(じてん)</span>、P/LとC/Fは期間<span class="rd">(きかん)</span>。「期間<span class="rd">(きかん)</span>の収益<span class="rd">(しゅうえき)</span>と費用<span class="rd">(ひよう)</span>から利益<span class="rd">(りえき)</span>」はP/L、「現金<span class="rd">(げんきん)</span>の出入<span class="rd">(でい)</span>り」は現金出納帳<span class="rd">(げんきんすいとうちょう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 9 — <a href="https://www.fe-siken.com/kakomon/29_haru/q78.html" target="_blank" rel="noopener">平成29年春期 午前 問78</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>9 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>78</strong></td>
+</tr>
+<tr>
+<td>Nội dung: tòa nhà nguyên giá 10.000 nghìn yên, đã khấu hao lũy kế 3.000, đường thẳng, 20 năm, giá trị còn lại 0. Khấu hao kỳ này?</td>
+<td>内容<span class="rd">(ないよう)</span>：取得価額<span class="rd">(しゅとくかがく)</span>10,000千円<span class="rd">(せんえん)</span>、前期<span class="rd">(ぜんき)</span>までの累計額<span class="rd">(るいけいがく)</span>3,000千円<span class="rd">(せんえん)</span>、定額法<span class="rd">(ていがくほう)</span>、耐用年数<span class="rd">(たいようねんすう)</span>20年<span class="rd">(ねん)</span>、残存価額<span class="rd">(ざんぞんかがく)</span>0円<span class="rd">(えん)</span>の建物<span class="rd">(たてもの)</span>の当期<span class="rd">(とうき)</span>減価償却費<span class="rd">(げんかしょうきゃくひ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án:</strong> 500 nghìn yên (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：</strong>500千円<span class="rd">(せんえん)</span>（記号<span class="rd">(きごう)</span>はリンク参照<span class="rd">(さんしょう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đường thẳng = 10.000 ÷ 20 = 500, năm nào cũng như nhau. Số 3.000 là thông tin gây nhiễu (chỉ cho biết đã qua 6 năm). Bẫy: lấy (10.000 − 3.000) ÷ 20 = 350.</td>
+<td>解説<span class="rd">(かいせつ)</span>：定額法<span class="rd">(ていがくほう)</span>は毎年<span class="rd">(まいとし)</span>同額<span class="rd">(どうがく)</span>で10,000÷20＝500。累計額<span class="rd">(るいけいがく)</span>3,000は惑<span class="rd">(まど)</span>わせる情報<span class="rd">(じょうほう)</span>（6年<span class="rd">(ねん)</span>経過<span class="rd">(けいか)</span>を示<span class="rd">(しめ)</span>すだけ）。（10,000−3,000）÷20＝350はひっかけ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 10 — <a href="https://www.fe-siken.com/kakomon/18_aki/q72.html" target="_blank" rel="noopener">平成18年秋期 午前 問72</a></strong> (2006)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>10 — 平成<span class="rd">(へいせい)</span>18年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>72</strong></td>
+</tr>
+<tr>
+<td>Nội dung: câu nào mô tả ROE?</td>
+<td>内容<span class="rd">(ないよう)</span>：ROEの説明<span class="rd">(せつめい)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (chỉ số khả năng sinh lời trên vốn chủ sở hữu)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（自己資本<span class="rd">(じこしほん)</span>に対<span class="rd">(たい)</span>する収益性<span class="rd">(しゅうえきせい)</span>を示<span class="rd">(しめ)</span>す指標<span class="rd">(しひょう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ROE = lợi nhuận ròng ÷ vốn chủ. Các bẫy: "sinh lời trên tổng tài sản" là ROA; "tỷ lệ vốn chủ trên tổng vốn" là tỷ lệ vốn chủ sở hữu; còn lại là vòng quay tổng vốn.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ROE＝当期純利益<span class="rd">(とうきじゅんりえき)</span>÷自己資本<span class="rd">(じこしほん)</span>。総資産<span class="rd">(そうしさん)</span>に対<span class="rd">(たい)</span>する収益性<span class="rd">(しゅうえきせい)</span>はROA、自己資本<span class="rd">(じこしほん)</span>と総資本<span class="rd">(そうしほん)</span>の比率<span class="rd">(ひりつ)</span>は自己資本比率<span class="rd">(じこしほんひりつ)</span>、残<span class="rd">(のこ)</span>りは総資本回転率<span class="rd">(そうしほんかいてんりつ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Bài toán bảo mật ｜ 情報<span class="rd">(じょうほう)</span>セキュリティ問題<span class="rd">(もんだい)</span></h2>
+<p>Trong 科目B (20 câu), câu bảo mật là dạng đọc tình huống, không có mã giả. Đáp án đúng gần như luôn là biện pháp "giải quyết đúng rủi ro được hỏi, cho đúng người, với quyền tối thiểu". Đọc câu hỏi TRƯỚC, rồi mới đọc tình huống.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Thứ tự đọc đề:</strong> (1) đọc câu hỏi để biết đề hỏi rủi ro, biện pháp hay phân quyền; (2) gạch chân ai làm gì, thay đổi gì so với hiện tại; (3) loại lựa chọn không liên quan đến thay đổi đó.</td>
+<td><strong>解<span class="rd">(と)</span>き方<span class="rd">(かた)</span>：</strong>①設問<span class="rd">(せつもん)</span>を先<span class="rd">(さき)</span>に読<span class="rd">(よ)</span>む（リスク・対策<span class="rd">(たいさく)</span>・権限<span class="rd">(けんげん)</span>のどれか）②誰<span class="rd">(だれ)</span>が何<span class="rd">(なに)</span>をするか、現状<span class="rd">(げんじょう)</span>から何<span class="rd">(なに)</span>が変<span class="rd">(か)</span>わるかに線<span class="rd">(せん)</span>を引<span class="rd">(ひ)</span>く③変化<span class="rd">(へんか)</span>と関係<span class="rd">(かんけい)</span>ない選択肢<span class="rd">(せんたくし)</span>を消<span class="rd">(け)</span>す。</td>
+</tr>
+<tr>
+<td><strong>Rủi ro "mới phát sinh/tăng lên":</strong> chỉ chọn rủi ro do thay đổi gây ra. Rủi ro tồn tại cả trước và sau thay đổi (như bị phishing) không phải là đáp án.</td>
+<td><strong>新<span class="rd">(あら)</span>たに生<span class="rd">(しょう)</span>じる・増加<span class="rd">(ぞうか)</span>するリスク：</strong>変更<span class="rd">(へんこう)</span>によって生<span class="rd">(う)</span>まれるものだけ。変更<span class="rd">(へんこう)</span>前後<span class="rd">(ぜんご)</span>で変<span class="rd">(か)</span>わらないリスクは正解<span class="rd">(せいかい)</span>ではない。</td>
+</tr>
+<tr>
+<td><strong>Nguyên tắc quyền tối thiểu:</strong> mỗi người chỉ được cấp quyền cần cho công việc (người chỉ kiểm tra → chỉ quyền xem).</td>
+<td><strong>最小権限<span class="rd">(さいしょうけんげん)</span>の原則<span class="rd">(げんそく)</span>：</strong>業務<span class="rd">(ぎょうむ)</span>に必要<span class="rd">(ひつよう)</span>な権限<span class="rd">(けんげん)</span>だけを与<span class="rd">(あた)</span>える（確認<span class="rd">(かくにん)</span>だけの人<span class="rd">(ひと)</span>は参照<span class="rd">(さんしょう)</span>権限<span class="rd">(けんげん)</span>のみ）。</td>
+</tr>
+<tr>
+<td><strong>Phân tách nhiệm vụ:</strong> người nhập/sửa và người phê duyệt phải khác nhau để phát hiện sai sót và gian lận.</td>
+<td><strong>職務分掌<span class="rd">(しょくむぶんしょう)</span>：</strong>入力<span class="rd">(にゅうりょく)</span>・変更<span class="rd">(へんこう)</span>する人<span class="rd">(ひと)</span>と承認<span class="rd">(しょうにん)</span>する人<span class="rd">(ひと)</span>を分<span class="rd">(わ)</span>け、誤<span class="rd">(あやま)</span>りや不正<span class="rd">(ふせい)</span>を防<span class="rd">(ふせ)</span>ぐ。</td>
+</tr>
+<tr>
+<td><strong>Xác thực đa yếu tố:</strong> kết hợp điều mình biết (mật khẩu), điều mình có (điện thoại, token), đặc điểm cơ thể. Dùng khi truy cập từ bên ngoài, khi bỏ giới hạn mạng nội bộ.</td>
+<td><strong>多要素認証<span class="rd">(たようそにんしょう)</span>：</strong>知識<span class="rd">(ちしき)</span>（パスワード）・所持<span class="rd">(しょじ)</span>（スマホ、トークン）・生体<span class="rd">(せいたい)</span>を組<span class="rd">(く)</span>み合<span class="rd">(あ)</span>わせる。社外<span class="rd">(しゃがい)</span>からの接続<span class="rd">(せつぞく)</span>時<span class="rd">(じ)</span>に有効<span class="rd">(ゆうこう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Phân định trách nhiệm cloud:</strong> IaaS: nhà cung cấp lo phần cứng; PaaS: nhà cung cấp lo thêm OS, middleware, DBMS; SaaS: nhà cung cấp lo cả ứng dụng. Lỗ hổng trong code ứng dụng do mình (hoặc bên phát triển được thuê) lo.</td>
+<td><strong>責任分界<span class="rd">(せきにんぶんかい)</span>：</strong>IaaSはハードウェアまで、PaaSはOS・ミドルウェア・DBMSまで、SaaSはアプリまで事業者<span class="rd">(じぎょうしゃ)</span>が管理<span class="rd">(かんり)</span>。自社<span class="rd">(じしゃ)</span>アプリの脆弱性<span class="rd">(ぜいじゃくせい)</span>は利用者<span class="rd">(りようしゃ)</span>側<span class="rd">(がわ)</span>（開発委託先<span class="rd">(かいはついたくさき)</span>）が対応<span class="rd">(たいおう)</span>。</td>
+</tr>
+<tr>
+<td><strong>BYOD:</strong> rủi ro chính là thiết bị cá nhân nhiễm mã độc kết nối vào mạng công ty và lây lan; số kết nối VPN tăng → ảnh hưởng tính sẵn sàng.</td>
+<td><strong>BYOD：</strong>私物<span class="rd">(しぶつ)</span>端末<span class="rd">(たんまつ)</span>のマルウェアが社内<span class="rd">(しゃない)</span>ネットワークに拡散<span class="rd">(かくさん)</span>するリスク、VPN接続<span class="rd">(せつぞく)</span>の増加<span class="rd">(ぞうか)</span>による可用性<span class="rd">(かようせい)</span>低下<span class="rd">(ていか)</span>。</td>
+</tr>
+<tr>
+<td><strong>3 tính chất CIA:</strong> bí mật (chỉ người được phép xem), toàn vẹn (không bị sửa sai), sẵn sàng (dùng được khi cần).</td>
+<td><strong>情報<span class="rd">(じょうほう)</span>セキュリティの3要素<span class="rd">(ようそ)</span>：</strong>機密性<span class="rd">(きみつせい)</span>・完全性<span class="rd">(かんぜんせい)</span>・可用性<span class="rd">(かようせい)</span>。</td>
+</tr>
+<tr>
+<td><strong>Xử lý rủi ro:</strong> tránh (bỏ hoạt động), giảm (biện pháp kỹ thuật), chuyển (bảo hiểm, thuê ngoài), chấp nhận.</td>
+<td><strong>リスク対応<span class="rd">(たいおう)</span>：</strong>回避<span class="rd">(かいひ)</span>・低減<span class="rd">(ていげん)</span>・移転<span class="rd">(いてん)</span>・受容<span class="rd">(じゅよう)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<p><strong>Câu B1 ｜ 問<span class="rd">(とい)</span>B1</strong></p>
+<pre><code>文字列型: correct ← &quot;Secr3t&quot;
+文字列型の配列: inputs ← {&quot;abc&quot;, &quot;pass&quot;, &quot;x1&quot;, &quot;Secr3t&quot;, &quot;Secr3t&quot;}
+文字列型の配列: out ← {}
+整数型: failCount ← 0
+論理型: locked ← false
+整数型: i
+for (i を 1 から inputsの要素数 まで 1 ずつ増やす)
+  if (locked = true)
+    outの末尾に &quot;LOCKED&quot; を追加する
+  elseif (inputs[i] = correct)
+    outの末尾に &quot;OK&quot; を追加する
+    failCount ← 0
+  else
+    failCount ← failCount + 1
+    if (failCount ≧ 3)
+      locked ← true
+    endif
+    outの末尾に &quot;NG&quot; を追加する
+  endif
+endfor
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chương trình mô phỏng khóa tài khoản sau nhiều lần đăng nhập sai. Sau khi chạy, nội dung mảng out là gì?</td>
+<td>ログイン失敗<span class="rd">(しっぱい)</span>が続<span class="rd">(つづ)</span>くとアカウントをロックするプログラムである。実行後<span class="rd">(じっこうご)</span>の配列<span class="rd">(はいれつ)</span> out の内容<span class="rd">(ないよう)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア {"NG", "NG", "NG", "OK", "OK"}　イ {"NG", "NG", "NG", "LOCKED", "LOCKED"}　ウ {"NG", "NG", "LOCKED", "LOCKED", "LOCKED"}　エ {"NG", "NG", "NG", "LOCKED", "OK"}</td>
+<td>ア {"NG", "NG", "NG", "OK", "OK"}　イ {"NG", "NG", "NG", "LOCKED", "LOCKED"}　ウ {"NG", "NG", "LOCKED", "LOCKED", "LOCKED"}　エ {"NG", "NG", "NG", "LOCKED", "OK"}</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: i = 1 "abc": sai, failCount = 1, NG. i = 2: failCount = 2, NG. i = 3: failCount = 3 → locked = true, nhưng lệnh thêm "NG" vẫn chạy sau đó → NG. i = 4, 5: locked = true nên nhánh đầu chạy → LOCKED, dù mật khẩu đúng. Bẫy: ウ nghĩ lần sai thứ 3 in LOCKED; ア quên kiểm tra locked; エ nghĩ nhập đúng thì mở khóa. Đây là biện pháp chống tấn công dò mật khẩu (brute force).</td>
+<td>解説<span class="rd">(かいせつ)</span>：i＝1〜3は失敗<span class="rd">(しっぱい)</span>でNG、3回目<span class="rd">(かいめ)</span>で locked＝true になるが、その後<span class="rd">(あと)</span>にNGを追加<span class="rd">(ついか)</span>する。i＝4、5は locked が真<span class="rd">(しん)</span>なので、正<span class="rd">(ただ)</span>しいパスワードでもLOCKED。ウは3回目<span class="rd">(かいめ)</span>をLOCKEDと誤解<span class="rd">(ごかい)</span>、アは locked の判定<span class="rd">(はんてい)</span>を見落<span class="rd">(みお)</span>とし、エは正<span class="rd">(ただ)</span>しい入力<span class="rd">(にゅうりょく)</span>で解除<span class="rd">(かいじょ)</span>されると誤解<span class="rd">(ごかい)</span>。総当<span class="rd">(そうあ)</span>たり攻撃<span class="rd">(こうげき)</span>への対策<span class="rd">(たいさく)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B2 ｜ 問<span class="rd">(とい)</span>B2</strong></p>
+<pre><code>○整数型の配列: encrypt(整数型の配列: p, 整数型: k)
+  整数型の配列: c ← {}
+  整数型: i
+  for (i を 1 から pの要素数 まで 1 ずつ増やす)
+    cの末尾に (p[i] + k) mod 26 の値を追加する
+  endfor
+  return c
+
+○整数型の配列: decrypt(整数型の配列: c, 整数型: k)
+  整数型の配列: p ← {}
+  整数型: i
+  for (i を 1 から cの要素数 まで 1 ずつ増やす)
+    pの末尾に (c[i] + [  空欄  ]) mod 26 の値を追加する
+  endfor
+  return p
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mật mã Caesar: chữ cái A–Z được biểu diễn bằng 0–25; k là khóa (0 &lt; k &lt; 26). Ví dụ encrypt({7, 4, 11, 11, 14}, 3) ("HELLO") trả về {10, 7, 14, 14, 17} ("KHOOR"). Điền gì vào chỗ trống để decrypt trả lại bản rõ?</td>
+<td>シーザー暗号<span class="rd">(あんごう)</span>：英字<span class="rd">(えいじ)</span>A〜Zを0〜25で表<span class="rd">(あらわ)</span>し、k（0＜k＜26）を鍵<span class="rd">(かぎ)</span>とする。encrypt({7, 4, 11, 11, 14}, 3)（HELLO）は {10, 7, 14, 14, 17}（KHOOR）を返<span class="rd">(かえ)</span>す。decrypt が平文<span class="rd">(ひらぶん)</span>を返<span class="rd">(かえ)</span>すように空欄<span class="rd">(くうらん)</span>を埋<span class="rd">(う)</span>めよ。</td>
+</tr>
+<tr>
+<td>ア k　イ 26 − k　ウ 26 + k　エ k − 26</td>
+<td>ア k　イ 26 − k　ウ 26 + k　エ k − 26</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (26 − k)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（26 − k）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cộng k rồi cộng 26 − k = cộng 26, mà mod 26 thì cộng 26 không đổi gì → trở về giá trị ban đầu. Thử: c = 10, k = 3 → (10 + 23) mod 26 = 33 mod 26 = 7 = H. Thử trường hợp vòng: p = 25 (Z) → c = 28 mod 26 = 2; giải mã (2 + 23) mod 26 = 25, đúng. Bẫy: ウ và エ đều ≡ +k (mod 26), tức là mã hóa thêm lần nữa, giống ア. Dùng 26 − k thay vì −k để tránh số âm khi lấy mod. Đây là mật mã khóa chung (cùng khóa để mã hóa và giải mã).</td>
+<td>解説<span class="rd">(かいせつ)</span>：k を足<span class="rd">(た)</span>した後<span class="rd">(あと)</span>に 26−k を足<span class="rd">(た)</span>すと合計<span class="rd">(ごうけい)</span>26、mod 26 では元<span class="rd">(もと)</span>に戻<span class="rd">(もど)</span>る。c＝10、k＝3：(10＋23) mod 26＝7（H）。Z（25）→2→(2＋23) mod 26＝25 で正<span class="rd">(ただ)</span>しい。ウ・エは mod 26 で＋k と同<span class="rd">(おな)</span>じでアと同様<span class="rd">(どうよう)</span>にもう一度<span class="rd">(いちど)</span>暗号化<span class="rd">(あんごうか)</span>してしまう。−k ではなく 26−k にするのは負<span class="rd">(ふ)</span>の数<span class="rd">(かず)</span>を避<span class="rd">(さ)</span>けるため。共通鍵暗号<span class="rd">(きょうつうかぎあんごう)</span>の考<span class="rd">(かんが)</span>え方<span class="rd">(かた)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B3 ｜ 問<span class="rd">(とい)</span>B3</strong> (dạng tình huống như đề thi thật)</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Công ty X có 300 nhân viên. Bộ phận kinh doanh gửi báo giá cho khách hàng qua email, đính kèm file. Tháng trước, một nhân viên chọn nhầm địa chỉ gợi ý tự động và gửi danh sách khách hàng cho người ngoài. Biện pháp nào hiệu quả nhất để ngăn sự cố CÙNG LOẠI tái diễn?</td>
+<td>従業員<span class="rd">(じゅうぎょういん)</span>300名<span class="rd">(めい)</span>のX社<span class="rd">(しゃ)</span>では、営業部<span class="rd">(えいぎょうぶ)</span>が見積書<span class="rd">(みつもりしょ)</span>を電子<span class="rd">(でんし)</span>メールの添付<span class="rd">(てんぷ)</span>ファイルで顧客<span class="rd">(こきゃく)</span>に送<span class="rd">(おく)</span>っている。先月<span class="rd">(せんげつ)</span>、従業員<span class="rd">(じゅうぎょういん)</span>がアドレスの自動補完<span class="rd">(じどうほかん)</span>で宛先<span class="rd">(あてさき)</span>を誤<span class="rd">(あやま)</span>り、顧客<span class="rd">(こきゃく)</span>一覧<span class="rd">(いちらん)</span>を社外<span class="rd">(しゃがい)</span>の第三者<span class="rd">(だいさんしゃ)</span>に送信<span class="rd">(そうしん)</span>した。同種<span class="rd">(どうしゅ)</span>の事故<span class="rd">(じこ)</span>の再発<span class="rd">(さいはつ)</span>防止<span class="rd">(ぼうし)</span>に最<span class="rd">(もっと)</span>も有効<span class="rd">(ゆうこう)</span>なものはどれか。</td>
+</tr>
+<tr>
+<td>ア Cài phần mềm diệt virus mới nhất trên mọi PC.　イ Mã hóa toàn bộ ổ đĩa PC.　ウ Tắt gợi ý địa chỉ tự động; email gửi ra ngoài được giữ lại vài phút để xác nhận người nhận, và file đính kèm được mã hóa với mật khẩu gửi qua kênh khác.　エ Tăng cường quy tắc tường lửa chặn truy cập từ ngoài vào.</td>
+<td>ア 全<span class="rd">(ぜん)</span>PCに最新<span class="rd">(さいしん)</span>のウイルス対策<span class="rd">(たいさく)</span>ソフトを導入<span class="rd">(どうにゅう)</span>する。イ PCのディスク全体<span class="rd">(ぜんたい)</span>を暗号化<span class="rd">(あんごうか)</span>する。ウ アドレスの自動補完<span class="rd">(じどうほかん)</span>を無効<span class="rd">(むこう)</span>にし、社外宛<span class="rd">(しゃがいあて)</span>メールは数分間<span class="rd">(すうふんかん)</span>保留<span class="rd">(ほりゅう)</span>して宛先<span class="rd">(あてさき)</span>を確認<span class="rd">(かくにん)</span>させ、添付<span class="rd">(てんぷ)</span>ファイルは暗号化<span class="rd">(あんごうか)</span>してパスワードを別<span class="rd">(べつ)</span>の経路<span class="rd">(けいろ)</span>で伝<span class="rd">(つた)</span>える。エ 外部<span class="rd">(がいぶ)</span>からのアクセスを遮断<span class="rd">(しゃだん)</span>するファイアウォールのルールを強化<span class="rd">(きょうか)</span>する。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: nguyên nhân là lỗi thao tác chọn nhầm người nhận (sai sót của con người, không phải tấn công). ウ chặn đúng nguyên nhân (bỏ gợi ý tự động, giữ lại để kiểm tra) và giảm thiệt hại nếu vẫn gửi nhầm (file đã mã hóa). ア chống mã độc, イ chống mất máy, エ chống truy cập từ ngoài: đều là biện pháp tốt nhưng không liên quan đến rủi ro được hỏi. Đây chính là cách loại lựa chọn trong đề thật.</td>
+<td>解説<span class="rd">(かいせつ)</span>：原因<span class="rd">(げんいん)</span>は人<span class="rd">(ひと)</span>の操作<span class="rd">(そうさ)</span>ミス（誤送信<span class="rd">(ごそうしん)</span>）で、攻撃<span class="rd">(こうげき)</span>ではない。ウは原因<span class="rd">(げんいん)</span>を直接<span class="rd">(ちょくせつ)</span>防<span class="rd">(ふせ)</span>ぎ、誤送信<span class="rd">(ごそうしん)</span>しても被害<span class="rd">(ひがい)</span>を減<span class="rd">(へ)</span>らす。アはマルウェア、イはPC紛失<span class="rd">(ふんしつ)</span>、エは外部<span class="rd">(がいぶ)</span>からの不正<span class="rd">(ふせい)</span>アクセスへの対策<span class="rd">(たいさく)</span>で、問<span class="rd">(と)</span>われたリスクと関係<span class="rd">(かんけい)</span>ない。本番<span class="rd">(ほんばん)</span>でもこの消去法<span class="rd">(しょうきょほう)</span>を使<span class="rd">(つか)</span>う。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Đề bảo mật 科目B dài, nên mở link đọc nguyên văn tình huống trước khi xem tóm tắt và lời giải dưới đây.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/06_haru/b6.html" target="_blank" rel="noopener">令和6年度 科目B 問6</a></strong> (2024)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>6</strong></td>
+</tr>
+<tr>
+<td>Nội dung: công ty thương mại 450 người làm từ xa; dịch vụ cloud (groupware, họp trực tuyến) hiện chỉ cho đăng nhập từ mạng công ty bằng ID và mật khẩu. Để giảm tải mạng, công ty định cho nhân viên kết nối thẳng từ nhà đến cloud. Cần yêu cầu biện pháp gì để giảm rủi ro truy cập trái phép?</td>
+<td>内容<span class="rd">(ないよう)</span>：テレワークを行<span class="rd">(おこな)</span>う450名<span class="rd">(めい)</span>の商社<span class="rd">(しょうしゃ)</span>。クラウドサービスは社内<span class="rd">(しゃない)</span>ネットワークからのみ、IDとパスワードでログインできる。回線<span class="rd">(かいせん)</span>の混雑<span class="rd">(こんざつ)</span>対策<span class="rd">(たいさく)</span>として自宅<span class="rd">(じたく)</span>から直接<span class="rd">(ちょくせつ)</span>接続<span class="rd">(せつぞく)</span>させる計画<span class="rd">(けいかく)</span>で、不正<span class="rd">(ふせい)</span>ログインのリスクを下<span class="rd">(さ)</span>げる対策<span class="rd">(たいさく)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (bắt buộc xác thực 2 yếu tố khi truy cập từ ngoài)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（社外<span class="rd">(しゃがい)</span>からのアクセスに2要素認証<span class="rd">(にようそにんしょう)</span>を必須<span class="rd">(ひっす)</span>にする）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: kết nối thẳng thì lưu lượng không đi qua mạng công ty, nên giám sát hay giới hạn tốc độ ở mạng công ty vô tác dụng. Rủi ro mới là mất giới hạn "chỉ từ mạng nội bộ", chỉ còn ID/mật khẩu → thêm yếu tố thứ hai. Tắt chức năng cấm sao chép thì làm yếu bảo mật.</td>
+<td>解説<span class="rd">(かいせつ)</span>：直接<span class="rd">(ちょくせつ)</span>接続<span class="rd">(せつぞく)</span>では社内<span class="rd">(しゃない)</span>ネットワークを通<span class="rd">(とお)</span>らないので監視<span class="rd">(かんし)</span>・速度<span class="rd">(そくど)</span>制限<span class="rd">(せいげん)</span>は無効<span class="rd">(むこう)</span>。社内<span class="rd">(しゃない)</span>限定<span class="rd">(げんてい)</span>がなくなりID・パスワードだけになるため、2要素<span class="rd">(にようそ)</span>目<span class="rd">(め)</span>を追加<span class="rd">(ついか)</span>する。コピー禁止<span class="rd">(きんし)</span>機能<span class="rd">(きのう)</span>の無効化<span class="rd">(むこうか)</span>は逆効果<span class="rd">(ぎゃくこうか)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/05_haru/b6.html" target="_blank" rel="noopener">令和5年度 科目B 問6</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>6</strong></td>
+</tr>
+<tr>
+<td>Nội dung: công ty A thuê ngoài nghiệp vụ nhân sự cho công ty C. Máy photocopy đa năng ở C dùng chức năng scan gửi email với thiết lập mặc định: người gửi, tiêu đề, nội dung giống hệt nhau cho mọi lần scan, và thiết lập này được công bố trên web nhà sản xuất. File lớn được lưu trên server nội bộ, email chỉ chứa URL. A cho rằng cần xử lý rủi ro nào?</td>
+<td>内容<span class="rd">(ないよう)</span>：A社<span class="rd">(しゃ)</span>は人事<span class="rd">(じんじ)</span>業務<span class="rd">(ぎょうむ)</span>をC社<span class="rd">(しゃ)</span>に委託<span class="rd">(いたく)</span>する。C社<span class="rd">(しゃ)</span>の複合機<span class="rd">(ふくごうき)</span>のスキャンデータのメール送信<span class="rd">(そうしん)</span>は初期<span class="rd">(しょき)</span>設定<span class="rd">(せってい)</span>のままで、差出人<span class="rd">(さしだしにん)</span>・件名<span class="rd">(けんめい)</span>・本文<span class="rd">(ほんぶん)</span>が毎回<span class="rd">(まいかい)</span>同<span class="rd">(おな)</span>じ、設定<span class="rd">(せってい)</span>はメーカーのWebで公開<span class="rd">(こうかい)</span>されている。対策<span class="rd">(たいさく)</span>が必要<span class="rd">(ひつよう)</span>と判断<span class="rd">(はんだん)</span>したリスクを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (kẻ tấn công giả email của máy photocopy, nhân viên bấm URL vào trang lừa đảo và làm lộ thông tin cá nhân ứng viên)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（複合機<span class="rd">(ふくごうき)</span>からのメールを装<span class="rd">(よそお)</span>った攻撃者<span class="rd">(こうげきしゃ)</span>のメールのURLをクリックし、フィッシングサイトで個人情報<span class="rd">(こじんじょうほう)</span>が漏<span class="rd">(も)</span>れる）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thiết lập mặc định công khai → kẻ tấn công dễ làm email giả y hệt → nhân viên tin. Các bẫy: email giống nhau nên không bị coi là spam; file đính kèm đã mã hóa với khóa riêng nên chặn bắt được cũng không đọc được; server nằm trong mạng nội bộ nên người ngoài có URL cũng không truy cập được.</td>
+<td>解説<span class="rd">(かいせつ)</span>：初期<span class="rd">(しょき)</span>設定<span class="rd">(せってい)</span>が公開<span class="rd">(こうかい)</span>されているので本物<span class="rd">(ほんもの)</span>そっくりの偽<span class="rd">(にせ)</span>メールが作<span class="rd">(つく)</span>れる。迷惑<span class="rd">(めいわく)</span>メール扱<span class="rd">(あつか)</span>いされる理由<span class="rd">(りゆう)</span>はなく、添付<span class="rd">(てんぷ)</span>は暗号化<span class="rd">(あんごうか)</span>済<span class="rd">(ず)</span>み、サーバは社内<span class="rd">(しゃない)</span>にあり外部<span class="rd">(がいぶ)</span>から届<span class="rd">(とど)</span>かないので他<span class="rd">(た)</span>は誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/sample/b17.html" target="_blank" rel="noopener">サンプル問題 科目B 問17</a></strong> (IPA công bố 2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>17</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trang EC của công ty A chạy trên PaaS của công ty B, công ty C phát triển và vận hành theo hợp đồng (C chịu trách nhiệm lỗ hổng ứng dụng web). Kiểm tra phát hiện: (1) lỗ hổng OS của app server, (2) XSS, (3) lỗ hổng DBMS. Chọn đúng tổ chức xử lý từng mục.</td>
+<td>内容<span class="rd">(ないよう)</span>：A社<span class="rd">(しゃ)</span>のECサイトはB社<span class="rd">(しゃ)</span>のPaaS上<span class="rd">(じょう)</span>で稼働<span class="rd">(かどう)</span>し、C社<span class="rd">(しゃ)</span>が開発<span class="rd">(かいはつ)</span>・運用<span class="rd">(うんよう)</span>を受託<span class="rd">(じゅたく)</span>（Webアプリの脆弱性<span class="rd">(ぜいじゃくせい)</span>対策<span class="rd">(たいさく)</span>はC社<span class="rd">(しゃ)</span>）。診断<span class="rd">(しんだん)</span>結果<span class="rd">(けっか)</span>①OSの脆弱性<span class="rd">(ぜいじゃくせい)</span>②XSS③DBMSの脆弱性<span class="rd">(ぜいじゃくせい)</span>の対応<span class="rd">(たいおう)</span>組織<span class="rd">(そしき)</span>の組合<span class="rd">(くみあ)</span>せ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án:</strong> (1) B, (2) C, (3) B (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：</strong>①B社<span class="rd">(しゃ)</span>②C社<span class="rd">(しゃ)</span>③B社<span class="rd">(しゃ)</span>（記号<span class="rd">(きごう)</span>はリンク参照<span class="rd">(さんしょう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: PaaS → nhà cung cấp (B) quản lý OS và DBMS. XSS là lỗi trong code ứng dụng web → bên phát triển (C). Bẫy hay gặp: nghĩ công ty A (chủ trang) phải tự sửa.</td>
+<td>解説<span class="rd">(かいせつ)</span>：PaaSではOS・DBMSは事業者<span class="rd">(じぎょうしゃ)</span>B社<span class="rd">(しゃ)</span>が管理<span class="rd">(かんり)</span>。XSSはWebアプリの実装<span class="rd">(じっそう)</span>の問題<span class="rd">(もんだい)</span>なのでC社<span class="rd">(しゃ)</span>。A社<span class="rd">(しゃ)</span>自身<span class="rd">(じしん)</span>が対応<span class="rd">(たいおう)</span>すると考<span class="rd">(かんが)</span>えるのはひっかけ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/sample/b18.html" target="_blank" rel="noopener">サンプル問題 科目B 問18</a></strong> (IPA công bố 2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>18</strong></td>
+</tr>
+<tr>
+<td>Nội dung: công ty phần mềm A định cho khoảng 810 nhân viên làm tại khách hàng dùng PC cá nhân (BYOD) kết nối VPN vào hệ thống. Chọn tổ hợp 2 rủi ro tăng lên hoặc mới phát sinh.</td>
+<td>内容<span class="rd">(ないよう)</span>：A社<span class="rd">(しゃ)</span>は客先常駐<span class="rd">(きゃくさきじょうちゅう)</span>の開発部員<span class="rd">(かいはつぶいん)</span>約<span class="rd">(やく)</span>810名<span class="rd">(めい)</span>に個人所有<span class="rd">(こじんしょゆう)</span>PCからのVPN接続<span class="rd">(せつぞく)</span>を許可<span class="rd">(きょか)</span>する予定<span class="rd">(よてい)</span>。増加<span class="rd">(ぞうか)</span>・新<span class="rd">(あら)</span>たに生<span class="rd">(しょう)</span>じるリスク2つの組合<span class="rd">(くみあ)</span>せ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án:</strong> "VPN tăng gây giảm tính sẵn sàng" và "PC cá nhân nhiễm mã độc kết nối VPN, lây lan vào mạng nội bộ" (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：</strong>「VPN接続<span class="rd">(せつぞく)</span>増加<span class="rd">(ぞうか)</span>による可用性<span class="rd">(かようせい)</span>の低下<span class="rd">(ていか)</span>」と「マルウェア感染<span class="rd">(かんせん)</span>した個人所有<span class="rd">(こじんしょゆう)</span>PCからの社内<span class="rd">(しゃない)</span>への拡散<span class="rd">(かくさん)</span>」（記号<span class="rd">(きごう)</span>はリンク参照<span class="rd">(さんしょう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chỉ chọn rủi ro do thay đổi gây ra. Nhân viên tại khách hàng không được cấp PC công ty nên không có rủi ro làm mất PC công ty; bị phishing thì trước sau như nhau; nhân viên hành chính không thuộc đối tượng BYOD.</td>
+<td>解説<span class="rd">(かいせつ)</span>：変更<span class="rd">(へんこう)</span>で生<span class="rd">(う)</span>まれるリスクだけを選<span class="rd">(えら)</span>ぶ。客先常駐者<span class="rd">(きゃくさきじょうちゅうしゃ)</span>にはA社<span class="rd">(しゃ)</span>PCがないので紛失<span class="rd">(ふんしつ)</span>リスクはなし、フィッシングは前後<span class="rd">(ぜんご)</span>で同<span class="rd">(おな)</span>じ、総務部員<span class="rd">(そうむぶいん)</span>は対象外<span class="rd">(たいしょうがい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/sample/b19.html" target="_blank" rel="noopener">サンプル問題 科目B 問19</a></strong> (IPA công bố 2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>19</strong></td>
+</tr>
+<tr>
+<td>Nội dung: công ty bán hàng qua mạng A thuê công ty B nhập đơn hàng. Quy tắc: người nhập không được là người phê duyệt; đơn do B nhập thì A phê duyệt. Người phụ trách của B nhập đơn, quản lý của B chỉ kiểm tra rồi báo A sửa. Chọn quyền cho 2 vai trò của B trong bảng phân quyền.</td>
+<td>内容<span class="rd">(ないよう)</span>：通信販売<span class="rd">(つうしんはんばい)</span>のA社<span class="rd">(しゃ)</span>は受注<span class="rd">(じゅちゅう)</span>入力<span class="rd">(にゅうりょく)</span>をB社<span class="rd">(しゃ)</span>に委託<span class="rd">(いたく)</span>。入力者<span class="rd">(にゅうりょくしゃ)</span>と承認者<span class="rd">(しょうにんしゃ)</span>は別<span class="rd">(べつ)</span>、B社<span class="rd">(しゃ)</span>の入力<span class="rd">(にゅうりょく)</span>はA社<span class="rd">(しゃ)</span>が承認<span class="rd">(しょうにん)</span>。B社<span class="rd">(しゃ)</span>販売担当者<span class="rd">(はんばいたんとうしゃ)</span>は入力<span class="rd">(にゅうりょく)</span>、B社<span class="rd">(しゃ)</span>販売責任者<span class="rd">(はんばいせきにんしゃ)</span>は確認<span class="rd">(かくにん)</span>のみ。表<span class="rd">(ひょう)</span>の空欄<span class="rd">(くうらん)</span>a1、a2の権限<span class="rd">(けんげん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án:</strong> người phụ trách B: nhập + xem; quản lý B: chỉ xem (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：</strong>B社<span class="rd">(しゃ)</span>販売担当者<span class="rd">(はんばいたんとうしゃ)</span>＝入力<span class="rd">(にゅうりょく)</span>・参照<span class="rd">(さんしょう)</span>、B社<span class="rd">(しゃ)</span>販売責任者<span class="rd">(はんばいせきにんしゃ)</span>＝参照<span class="rd">(さんしょう)</span>のみ（記号<span class="rd">(きごう)</span>はリンク参照<span class="rd">(さんしょう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: quyền phê duyệt thuộc quản lý bán hàng của A. Quản lý B chỉ kiểm tra → quyền tối thiểu là chỉ xem; cho thêm quyền nhập hay phê duyệt đều vi phạm nguyên tắc. Đây là bài kết hợp quyền tối thiểu và phân tách nhiệm vụ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：承認<span class="rd">(しょうにん)</span>権限<span class="rd">(けんげん)</span>はA社<span class="rd">(しゃ)</span>の販売責任者<span class="rd">(はんばいせきにんしゃ)</span>。B社<span class="rd">(しゃ)</span>販売責任者<span class="rd">(はんばいせきにんしゃ)</span>は確認<span class="rd">(かくにん)</span>だけなので最小権限<span class="rd">(さいしょうけんげん)</span>で参照<span class="rd">(さんしょう)</span>のみ。最小権限<span class="rd">(さいしょうけんげん)</span>と職務分掌<span class="rd">(しょくむぶんしょう)</span>の組合<span class="rd">(くみあ)</span>せ問題<span class="rd">(もんだい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/sample/b20.html" target="_blank" rel="noopener">サンプル問題 科目B 問20</a></strong> (IPA công bố 2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>20</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 6 nhân viên vận hành đều có toàn quyền với tường lửa, nên một người vừa sửa rule vừa tự phê duyệt được (kiểm toán chỉ ra). Chọn biện pháp ngăn thay đổi rule sai.</td>
+<td>内容<span class="rd">(ないよう)</span>：運用担当者<span class="rd">(うんようたんとうしゃ)</span>6名<span class="rd">(めい)</span>全員<span class="rd">(ぜんいん)</span>がFWの全権限<span class="rd">(ぜんけんげん)</span>を持<span class="rd">(も)</span>ち、同<span class="rd">(おな)</span>じ人<span class="rd">(ひと)</span>がルール変更<span class="rd">(へんこう)</span>と承認<span class="rd">(しょうにん)</span>をできる（監査<span class="rd">(かんさ)</span>の指摘<span class="rd">(してき)</span>）。誤<span class="rd">(あやま)</span>ったルール変更<span class="rd">(へんこう)</span>を防<span class="rd">(ふせ)</span>ぐ対策<span class="rd">(たいさく)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án:</strong> tách thành người sửa rule và người kiểm tra log/phê duyệt, mỗi bên chỉ có quyền tối thiểu cần thiết (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：</strong>ルール変更者<span class="rd">(へんこうしゃ)</span>とログ確認<span class="rd">(かくにん)</span>・承認者<span class="rd">(しょうにんしゃ)</span>に分<span class="rd">(わ)</span>け、それぞれ必要<span class="rd">(ひつよう)</span>最小限<span class="rd">(さいしょうげん)</span>の権限<span class="rd">(けんげん)</span>を与<span class="rd">(あた)</span>える（記号<span class="rd">(きごう)</span>はリンク参照<span class="rd">(さんしょう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: vấn đề là phân tách nhiệm vụ. EDR, xác thực đa yếu tố, chia nhóm đăng nhập console/từ xa là biện pháp đăng nhập, không giải quyết "một người làm cả hai việc". Giao cho 1 người hoặc luân phiên theo ngày vẫn để một người vừa sửa vừa duyệt.</td>
+<td>解説<span class="rd">(かいせつ)</span>：論点<span class="rd">(ろんてん)</span>は職務分掌<span class="rd">(しょくむぶんしょう)</span>。EDR・多要素認証<span class="rd">(たようそにんしょう)</span>・ログイン方法<span class="rd">(ほうほう)</span>の分離<span class="rd">(ぶんり)</span>は認証<span class="rd">(にんしょう)</span>対策<span class="rd">(たいさく)</span>で、一人<span class="rd">(ひとり)</span>で変更<span class="rd">(へんこう)</span>と承認<span class="rd">(しょうにん)</span>ができる問題<span class="rd">(もんだい)</span>は解決<span class="rd">(かいけつ)</span>しない。一人<span class="rd">(ひとり)</span>に集中<span class="rd">(しゅうちゅう)</span>・曜日<span class="rd">(ようび)</span>交代<span class="rd">(こうたい)</span>も同様<span class="rd">(どうよう)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Báo cáo kết quả kinh doanh / Bảng cân đối kế toán / Báo cáo lưu chuyển tiền tệ</td>
+<td>損益計算書<span class="rd">(そんえきけいさんしょ)</span> / 貸借対照表<span class="rd">(たいしゃくたいしょうひょう)</span> / キャッシュフロー計算書<span class="rd">(けいさんしょ)</span></td>
+</tr>
+<tr>
+<td>Báo cáo tài chính</td>
+<td>財務諸表<span class="rd">(ざいむしょひょう)</span></td>
+</tr>
+<tr>
+<td>Doanh thu / Giá vốn hàng bán</td>
+<td>売上高<span class="rd">(うりあげだか)</span> / 売上原価<span class="rd">(うりあげげんか)</span></td>
+</tr>
+<tr>
+<td>Chi phí bán hàng và quản lý doanh nghiệp</td>
+<td>販売費<span class="rd">(はんばいひ)</span>及<span class="rd">(およ)</span>び一般管理費<span class="rd">(いっぱんかんりひ)</span></td>
+</tr>
+<tr>
+<td>Lợi nhuận gộp / hoạt động / thường xuyên</td>
+<td>売上総利益<span class="rd">(うりあげそうりえき)</span> / 営業利益<span class="rd">(えいぎょうりえき)</span> / 経常利益<span class="rd">(けいじょうりえき)</span></td>
+</tr>
+<tr>
+<td>Lợi nhuận trước thuế / Lợi nhuận ròng</td>
+<td>税引前当期純利益<span class="rd">(ぜいびきまえとうきじゅんりえき)</span> / 当期純利益<span class="rd">(とうきじゅんりえき)</span></td>
+</tr>
+<tr>
+<td>Thu nhập / Chi phí ngoài hoạt động</td>
+<td>営業外収益<span class="rd">(えいぎょうがいしゅうえき)</span> / 営業外費用<span class="rd">(えいぎょうがいひよう)</span></td>
+</tr>
+<tr>
+<td>Lãi / Lỗ bất thường</td>
+<td>特別利益<span class="rd">(とくべつりえき)</span> / 特別損失<span class="rd">(とくべつそんしつ)</span></td>
+</tr>
+<tr>
+<td>Tài sản / Nợ phải trả / Vốn chủ sở hữu (tài sản thuần)</td>
+<td>資産<span class="rd">(しさん)</span> / 負債<span class="rd">(ふさい)</span> / 純資産<span class="rd">(じゅんしさん)</span>（自己資本<span class="rd">(じこしほん)</span>）</td>
+</tr>
+<tr>
+<td>Tài sản ngắn hạn / Nợ ngắn hạn</td>
+<td>流動資産<span class="rd">(りゅうどうしさん)</span> / 流動負債<span class="rd">(りゅうどうふさい)</span></td>
+</tr>
+<tr>
+<td>Chi phí cố định / Chi phí biến đổi / Tỷ lệ chi phí biến đổi</td>
+<td>固定費<span class="rd">(こていひ)</span> / 変動費<span class="rd">(へんどうひ)</span> / 変動費率<span class="rd">(へんどうひりつ)</span></td>
+</tr>
+<tr>
+<td>Điểm hòa vốn / Lợi nhuận biên</td>
+<td>損益分岐点<span class="rd">(そんえきぶんきてん)</span> / 限界利益<span class="rd">(げんかいりえき)</span></td>
+</tr>
+<tr>
+<td>Khấu hao / Đường thẳng / Số dư giảm dần</td>
+<td>減価償却<span class="rd">(げんかしょうきゃく)</span> / 定額法<span class="rd">(ていがくほう)</span> / 定率法<span class="rd">(ていりつほう)</span></td>
+</tr>
+<tr>
+<td>Nguyên giá / Giá trị còn lại / Thời gian sử dụng / Giá trị sổ sách</td>
+<td>取得価額<span class="rd">(しゅとくかがく)</span> / 残存価額<span class="rd">(ざんぞんかがく)</span> / 耐用年数<span class="rd">(たいようねんすう)</span> / 帳簿価額<span class="rd">(ちょうぼかがく)</span></td>
+</tr>
+<tr>
+<td>ROE / ROA / Tỷ lệ vốn chủ sở hữu / Tỷ lệ thanh toán hiện hành</td>
+<td>自己資本利益率<span class="rd">(じこしほんりえきりつ)</span> / 総資産利益率<span class="rd">(そうしさんりえきりつ)</span> / 自己資本比率<span class="rd">(じこしほんひりつ)</span> / 流動比率<span class="rd">(りゅうどうひりつ)</span></td>
+</tr>
+<tr>
+<td>Quyền tối thiểu / Phân tách nhiệm vụ</td>
+<td>最小権限<span class="rd">(さいしょうけんげん)</span> / 職務分掌<span class="rd">(しょくむぶんしょう)</span></td>
+</tr>
+<tr>
+<td>Xác thực đa yếu tố / 2 yếu tố</td>
+<td>多要素認証<span class="rd">(たようそにんしょう)</span> / 2要素認証<span class="rd">(にようそにんしょう)</span></td>
+</tr>
+<tr>
+<td>Phân định trách nhiệm / Thuê ngoài</td>
+<td>責任分界<span class="rd">(せきにんぶんかい)</span> / 委託<span class="rd">(いたく)</span>・委託先<span class="rd">(いたくさき)</span></td>
+</tr>
+<tr>
+<td>Lỗ hổng / Kiểm tra lỗ hổng</td>
+<td>脆弱性<span class="rd">(ぜいじゃくせい)</span> / 脆弱性診断<span class="rd">(ぜいじゃくせいしんだん)</span></td>
+</tr>
+<tr>
+<td>Tính bí mật / toàn vẹn / sẵn sàng</td>
+<td>機密性<span class="rd">(きみつせい)</span> / 完全性<span class="rd">(かんぜんせい)</span> / 可用性<span class="rd">(かようせい)</span></td>
+</tr>
+<tr>
+<td>Tránh / Giảm / Chuyển / Chấp nhận rủi ro</td>
+<td>リスク回避<span class="rd">(かいひ)</span> / 低減<span class="rd">(ていげん)</span> / 移転<span class="rd">(いてん)</span> / 受容<span class="rd">(じゅよう)</span></td>
+</tr>
+<tr>
+<td>Gửi nhầm / Phishing / Mã độc</td>
+<td>誤送信<span class="rd">(ごそうしん)</span> / フィッシング / マルウェア</td>
+</tr>
+<tr>
+<td>Mật mã khóa chung / Bản rõ / Bản mã</td>
+<td>共通鍵暗号<span class="rd">(きょうつうかぎあんごう)</span> / 平文<span class="rd">(ひらぶん)</span> / 暗号文<span class="rd">(あんごうぶん)</span></td>
+</tr>
+<tr>
+<td>Tấn công dò mật khẩu / Khóa tài khoản</td>
+<td>総当<span class="rd">(そうあ)</span>たり攻撃<span class="rd">(こうげき)</span> / アカウントロック</td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

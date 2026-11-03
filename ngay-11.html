@@ -1,0 +1,855 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>FE Ngày 11 (22/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 11 (22/10): SQL, giao dịch và danh sách liên kết</h1>
+<p class="meta">Ngày 11 · Thứ Năm 22/10 · 科目A: SQL・トランザクション · 科目B: 連結リスト</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: SQL và giao dịch ｜ SQL・トランザクション処理<span class="rd">(しょり)</span></a></li><li><a href="#muc-3">科目B: Danh sách liên kết ｜ 連結<span class="rd">(れんけつ)</span>リスト</a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Tổng khoảng 2 tiếng: 1 tiếng 科目A, 1 tiếng 科目B.</p>
+<ul class="check">
+<li>Đọc lý thuyết SQL: thứ tự mệnh đề, hàm gộp, truy vấn con (15 phút)</li>
+<li>Đọc lý thuyết giao dịch: ACID, khóa, deadlock, phục hồi sự cố (15 phút)</li>
+<li>Làm 4 câu bài tập 科目A, tự giải trước rồi mới xem đáp án (15 phút)</li>
+<li>Làm 7 câu đề cũ 科目A bên dưới (15 phút)</li>
+<li>Đọc lý thuyết danh sách liên kết trong mã giả: ListElement, next, 未定義 (15 phút)</li>
+<li>Trace 3 bài 科目B trên giấy, vẽ ô và mũi tên cho từng nút (30 phút)</li>
+<li>Làm 7 câu đề cũ phần リスト (15 phút)</li>
+<li>Ôn bảng từ vựng cuối bài</li>
+</ul>
+<h2 id="muc-2">科目A: SQL và giao dịch ｜ SQL・トランザクション処理<span class="rd">(しょり)</span></h2>
+<p>Phần CSDL thường có 4–5 câu trong 科目A. Hai dạng gặp nhiều nhất là đọc câu SQL có GROUP BY/HAVING, và chọn cách phục hồi (ロールバック hay ロールフォワード). Bạn làm Talend/ETL nên SQL là lợi thế; chỉ cần nhớ đúng thuật ngữ tiếng Nhật.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Thứ tự viết câu SELECT:</strong> SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY. Đặt WHERE sau GROUP BY là sai cú pháp: đề hay dùng làm lựa chọn bẫy.</td>
+<td><strong>SELECT文<span class="rd">(ぶん)</span>の記述順<span class="rd">(きじゅつじゅん)</span>：</strong>SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY。GROUP BYの後<span class="rd">(あと)</span>にWHEREを書<span class="rd">(か)</span>くのは構文誤<span class="rd">(こうぶんあやま)</span>り（よく誤答<span class="rd">(ごとう)</span>の選択肢<span class="rd">(せんたくし)</span>になる）。</td>
+</tr>
+<tr>
+<td><strong>WHERE và HAVING:</strong> WHERE lọc từng dòng trước khi gom nhóm; HAVING lọc từng nhóm sau khi gom, nên dùng được hàm gộp như AVG, COUNT.</td>
+<td><strong>WHEREとHAVING：</strong>WHEREはグループ化<span class="rd">(か)</span>の前<span class="rd">(まえ)</span>に行<span class="rd">(ぎょう)</span>を絞<span class="rd">(しぼ)</span>り込<span class="rd">(こ)</span>む。HAVINGはグループ化<span class="rd">(か)</span>の後<span class="rd">(あと)</span>にグループを絞<span class="rd">(しぼ)</span>り込<span class="rd">(こ)</span>むので、AVGやCOUNTなどの集合関数<span class="rd">(しゅうごうかんすう)</span>が使<span class="rd">(つか)</span>える。</td>
+</tr>
+<tr>
+<td><strong>Hàm gộp:</strong> COUNT (đếm), SUM (tổng), AVG (trung bình), MAX, MIN. <code>COUNT(*)</code> đếm cả dòng có NULL; <code>COUNT(cột)</code> bỏ qua NULL.</td>
+<td><strong>集合関数<span class="rd">(しゅうごうかんすう)</span>：</strong>COUNT（件数<span class="rd">(けんすう)</span>）、SUM（合計<span class="rd">(ごうけい)</span>）、AVG（平均<span class="rd">(へいきん)</span>）、MAX、MIN。<code>COUNT(*)</code> はNULLを含<span class="rd">(ふく)</span>む行<span class="rd">(ぎょう)</span>も数<span class="rd">(かぞ)</span>え、<code>COUNT(列名)</code> はNULLを数<span class="rd">(かぞ)</span>えない。</td>
+</tr>
+<tr>
+<td><strong>Kết bảng:</strong> FROM A, B WHERE A.khóa = B.khóa, hoặc INNER JOIN … ON. LEFT OUTER JOIN giữ lại cả dòng bên trái không có cặp (cột bên phải thành NULL).</td>
+<td><strong>結合<span class="rd">(けつごう)</span>：</strong>FROM A, B WHERE A.キー = B.キー、または INNER JOIN … ON。LEFT OUTER JOIN は相手<span class="rd">(あいて)</span>がない左表<span class="rd">(ひだりひょう)</span>の行<span class="rd">(ぎょう)</span>も残<span class="rd">(のこ)</span>す（右側<span class="rd">(みぎがわ)</span>の列<span class="rd">(れつ)</span>はNULL）。</td>
+</tr>
+<tr>
+<td><strong>Truy vấn con:</strong> IN (danh sách giá trị), EXISTS (có ít nhất 1 dòng thì đúng). Truy vấn con tương quan dùng cột của truy vấn ngoài, chạy lại cho từng dòng ngoài.</td>
+<td><strong>副問合<span class="rd">(ふくといあわ)</span>せ：</strong>IN（値<span class="rd">(あたい)</span>の集合<span class="rd">(しゅうごう)</span>）、EXISTS（1行<span class="rd">(ぎょう)</span>以上<span class="rd">(いじょう)</span>あれば真<span class="rd">(しん)</span>）。相関副問合<span class="rd">(そうかんふくといあわ)</span>せは外側<span class="rd">(そとがわ)</span>の列<span class="rd">(れつ)</span>を使<span class="rd">(つか)</span>い、外側<span class="rd">(そとがわ)</span>の行<span class="rd">(ぎょう)</span>ごとに実行<span class="rd">(じっこう)</span>される。</td>
+</tr>
+<tr>
+<td><strong>Các nhóm lệnh:</strong> DML: SELECT, INSERT, UPDATE, DELETE. DDL: CREATE, DROP, ALTER. DCL: GRANT (cấp quyền), REVOKE (thu hồi quyền).</td>
+<td><strong>SQLの分類<span class="rd">(ぶんるい)</span>：</strong>DML（データ操作<span class="rd">(そうさ)</span>）：SELECT・INSERT・UPDATE・DELETE。DDL（データ定義<span class="rd">(ていぎ)</span>）：CREATE・DROP・ALTER。DCL：GRANT（権限付与<span class="rd">(けんげんふよ)</span>）・REVOKE（権限取消<span class="rd">(けんげんとりけし)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Giao dịch:</strong> một nhóm thao tác phải thành công trọn vẹn hoặc không có gì xảy ra. COMMIT: xác nhận; ROLLBACK: hủy, trở về trạng thái trước giao dịch.</td>
+<td><strong>トランザクション：</strong>全部<span class="rd">(ぜんぶ)</span>成功<span class="rd">(せいこう)</span>するか、全部<span class="rd">(ぜんぶ)</span>なかったことにするかの処理<span class="rd">(しょり)</span>の単位<span class="rd">(たんい)</span>。COMMIT：確定<span class="rd">(かくてい)</span>。ROLLBACK：取<span class="rd">(と)</span>り消<span class="rd">(け)</span>して開始前<span class="rd">(かいしまえ)</span>の状態<span class="rd">(じょうたい)</span>に戻<span class="rd">(もど)</span>す。</td>
+</tr>
+<tr>
+<td><strong>ACID — Atomicity (tính nguyên tử):</strong> hoặc làm hết, hoặc không làm gì.</td>
+<td><strong>ACID特性<span class="rd">(とくせい)</span> — 原子性<span class="rd">(げんしせい)</span>：</strong>全部<span class="rd">(ぜんぶ)</span>実行<span class="rd">(じっこう)</span>されるか、全<span class="rd">(まった)</span>く実行<span class="rd">(じっこう)</span>されないかのどちらか。</td>
+</tr>
+<tr>
+<td><strong>Consistency (tính nhất quán):</strong> trước và sau giao dịch, dữ liệu không mâu thuẫn (ví dụ tổng tiền chuyển khoản không đổi).</td>
+<td><strong>一貫性<span class="rd">(いっかんせい)</span>：</strong>トランザクションの前後<span class="rd">(ぜんご)</span>でデータに矛盾<span class="rd">(むじゅん)</span>がない（例<span class="rd">(れい)</span>：振込<span class="rd">(ふりこみ)</span>の合計金額<span class="rd">(ごうけいきんがく)</span>が変<span class="rd">(か)</span>わらない）。</td>
+</tr>
+<tr>
+<td><strong>Isolation (tính độc lập):</strong> chạy song song nhưng kết quả giống như chạy lần lượt.</td>
+<td><strong>独立性<span class="rd">(どくりつせい)</span>（隔離性<span class="rd">(かくりせい)</span>）：</strong>同時<span class="rd">(どうじ)</span>に実行<span class="rd">(じっこう)</span>しても、順番<span class="rd">(じゅんばん)</span>に実行<span class="rd">(じっこう)</span>した結果<span class="rd">(けっか)</span>と同<span class="rd">(おな)</span>じになる。</td>
+</tr>
+<tr>
+<td><strong>Durability (tính bền vững):</strong> đã COMMIT thì kết quả không mất dù hệ thống sập sau đó.</td>
+<td><strong>耐久性<span class="rd">(たいきゅうせい)</span>（永続性<span class="rd">(えいぞくせい)</span>）：</strong>コミットした結果<span class="rd">(けっか)</span>は、その後<span class="rd">(ご)</span>障害<span class="rd">(しょうがい)</span>が起<span class="rd">(お)</span>きても失<span class="rd">(うしな)</span>われない。</td>
+</tr>
+<tr>
+<td><strong>Điều khiển truy cập đồng thời:</strong> nếu không khóa, hai giao dịch cùng đọc rồi cùng ghi sẽ làm mất một lần cập nhật (lost update).</td>
+<td><strong>排他制御<span class="rd">(はいたせいぎょ)</span>：</strong>ロックしないと、二<span class="rd">(ふた)</span>つのトランザクションが同時<span class="rd">(どうじ)</span>に読<span class="rd">(よ)</span>んで書<span class="rd">(か)</span>き込<span class="rd">(こ)</span>み、一方<span class="rd">(いっぽう)</span>の更新<span class="rd">(こうしん)</span>が消<span class="rd">(き)</span>える（ロストアップデート）。</td>
+</tr>
+<tr>
+<td><strong>Khóa chia sẻ (đọc) và khóa độc quyền (ghi):</strong> chia sẻ + chia sẻ: được. Mọi tổ hợp có khóa độc quyền: phải chờ.</td>
+<td><strong>共有<span class="rd">(きょうゆう)</span>ロックと専有<span class="rd">(せんゆう)</span>ロック：</strong>共有<span class="rd">(きょうゆう)</span>と共有<span class="rd">(きょうゆう)</span>は両立<span class="rd">(りょうりつ)</span>できる。専有<span class="rd">(せんゆう)</span>ロックが絡<span class="rd">(から)</span>む組合<span class="rd">(くみあ)</span>せは全<span class="rd">(すべ)</span>て待<span class="rd">(ま)</span>ちになる。</td>
+</tr>
+<tr>
+<td><strong>Độ mịn của khóa:</strong> khóa phạm vi lớn (cả bảng) thì ít chi phí quản lý nhưng chờ nhiều, tính đồng thời thấp; khóa nhỏ (từng dòng) thì ngược lại.</td>
+<td><strong>ロックの粒度<span class="rd">(りゅうど)</span>：</strong>大<span class="rd">(おお)</span>きい（表<span class="rd">(ひょう)</span>単位<span class="rd">(たんい)</span>）と管理<span class="rd">(かんり)</span>は楽<span class="rd">(らく)</span>だが待<span class="rd">(ま)</span>ちが増<span class="rd">(ふ)</span>え、同時実行性<span class="rd">(どうじじっこうせい)</span>が下<span class="rd">(さ)</span>がる。小<span class="rd">(ちい)</span>さい（行<span class="rd">(ぎょう)</span>単位<span class="rd">(たんい)</span>）とその逆<span class="rd">(ぎゃく)</span>。</td>
+</tr>
+<tr>
+<td><strong>Deadlock:</strong> T1 giữ X chờ Y, T2 giữ Y chờ X → chờ nhau mãi. Cách tránh: mọi giao dịch khóa tài nguyên theo cùng một thứ tự.</td>
+<td><strong>デッドロック：</strong>T1がXを持<span class="rd">(も)</span>ってYを待<span class="rd">(ま)</span>ち、T2がYを持<span class="rd">(も)</span>ってXを待<span class="rd">(ま)</span>つ状態<span class="rd">(じょうたい)</span>。対策<span class="rd">(たいさく)</span>：全<span class="rd">(すべ)</span>てのトランザクションが同<span class="rd">(おな)</span>じ順序<span class="rd">(じゅんじょ)</span>で資源<span class="rd">(しげん)</span>をロックする。</td>
+</tr>
+<tr>
+<td><strong>Khóa 2 pha (2PL):</strong> pha 1 chỉ xin khóa, pha 2 chỉ nhả khóa. Bảo đảm tính khả tuần tự, nhưng <strong>không</strong> ngăn được deadlock.</td>
+<td><strong>2相<span class="rd">(そう)</span>ロック：</strong>ロックを獲得<span class="rd">(かくとく)</span>する段階<span class="rd">(だんかい)</span>と解放<span class="rd">(かいほう)</span>する段階<span class="rd">(だんかい)</span>を分<span class="rd">(わ)</span>ける。直列可能性<span class="rd">(ちょくれつかのうせい)</span>を保証<span class="rd">(ほしょう)</span>するが、デッドロックは防<span class="rd">(ふせ)</span>げない。</td>
+</tr>
+<tr>
+<td><strong>Nhật ký (log):</strong> ghi giá trị trước cập nhật (dùng để hủy) và giá trị sau cập nhật (dùng để làm lại).</td>
+<td><strong>ログ（ジャーナル）：</strong>更新前<span class="rd">(こうしんまえ)</span>ログ（取<span class="rd">(と)</span>り消<span class="rd">(け)</span>し用<span class="rd">(よう)</span>）と更新後<span class="rd">(こうしんご)</span>ログ（やり直<span class="rd">(なお)</span>し用<span class="rd">(よう)</span>）を記録<span class="rd">(きろく)</span>する。</td>
+</tr>
+<tr>
+<td><strong>Điểm kiểm tra (checkpoint):</strong> thời điểm ghi nội dung bộ đệm xuống đĩa, đồng bộ CSDL. Khi hệ thống sập chỉ cần xử lý từ checkpoint gần nhất.</td>
+<td><strong>チェックポイント：</strong>バッファの内容<span class="rd">(ないよう)</span>をディスクに書<span class="rd">(か)</span>き出<span class="rd">(だ)</span>して同期<span class="rd">(どうき)</span>する時点<span class="rd">(じてん)</span>。障害時<span class="rd">(しょうがいじ)</span>は直前<span class="rd">(ちょくぜん)</span>のチェックポイントから処理<span class="rd">(しょり)</span>すればよい。</td>
+</tr>
+<tr>
+<td><strong>Rollback (lùi):</strong> dùng log trước cập nhật, hủy giao dịch <strong>chưa COMMIT</strong>.</td>
+<td><strong>ロールバック（後退復帰<span class="rd">(こうたいふっき)</span>）：</strong>更新前<span class="rd">(こうしんまえ)</span>ログで、コミットしていないトランザクションを取<span class="rd">(と)</span>り消<span class="rd">(け)</span>す。</td>
+</tr>
+<tr>
+<td><strong>Rollforward (tiến):</strong> dùng log sau cập nhật, làm lại giao dịch <strong>đã COMMIT</strong> nhưng chưa phản ánh vào CSDL. Hỏng đĩa: khôi phục từ bản sao lưu rồi rollforward.</td>
+<td><strong>ロールフォワード（前進復帰<span class="rd">(ぜんしんふっき)</span>）：</strong>更新後<span class="rd">(こうしんご)</span>ログで、コミット済<span class="rd">(ず)</span>みだが反映<span class="rd">(はんえい)</span>されていない更新<span class="rd">(こうしん)</span>をやり直<span class="rd">(なお)</span>す。媒体障害<span class="rd">(ばいたいしょうがい)</span>：バックアップから復元<span class="rd">(ふくげん)</span>してからロールフォワード。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Bảng phục hồi sau sự cố hệ thống ｜ システム障害<span class="rd">(しょうがい)</span>時<span class="rd">(じ)</span>の回復<span class="rd">(かいふく)</span></strong></p>
+<div class="tbl"><table class="plain">
+<thead>
+<tr>
+<th>Trạng thái giao dịch lúc sự cố</th>
+<th>Xử lý</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>COMMIT trước checkpoint</td>
+<td>Không cần làm gì</td>
+</tr>
+<tr>
+<td>COMMIT sau checkpoint</td>
+<td>Rollforward (ロールフォワード)</td>
+</tr>
+<tr>
+<td>Chưa COMMIT</td>
+<td>Rollback (ロールバック)</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<p>Bảng 社員 dùng cho Câu A1: (社員番号, 部署, 給与): (1, 営業, 30), (2, 営業, 25), (3, 開発, 40), (4, 開発, 35), (5, 開発, 30), (6, 総務, 28).</p>
+<pre><code>SELECT 部署, AVG(給与) FROM 社員
+  WHERE 給与 &gt;= 30
+  GROUP BY 部署
+  HAVING COUNT(*) &gt;= 2
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Kết quả của câu SQL trên là gì?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> 上<span class="rd">(うえ)</span>のSQL文<span class="rd">(ぶん)</span>の実行結果<span class="rd">(じっこうけっか)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 0 dòng　イ 1 dòng: (開発, 35)　ウ 2 dòng: (営業, 27.5), (開発, 35)　エ 2 dòng: (営業, 30), (開発, 35)</td>
+<td>ア 0行<span class="rd">(ぎょう)</span>　イ 1行<span class="rd">(ぎょう)</span>：（開発<span class="rd">(かいはつ)</span>, 35）　ウ 2行<span class="rd">(ぎょう)</span>：（営業<span class="rd">(えいぎょう)</span>, 27.5）、（開発<span class="rd">(かいはつ)</span>, 35）　エ 2行<span class="rd">(ぎょう)</span>：（営業<span class="rd">(えいぎょう)</span>, 30）、（開発<span class="rd">(かいはつ)</span>, 35）</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (1 dòng: 開発, 35)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（1行<span class="rd">(ぎょう)</span>：開発<span class="rd">(かいはつ)</span>, 35）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: (1) WHERE giữ dòng có 給与 ≥ 30: số 1 (営業 30), 3, 4, 5 (開発 40, 35, 30). (2) Gom nhóm: 営業 có 1 dòng, 開発 có 3 dòng. (3) HAVING ≥ 2 dòng → chỉ còn 開発, AVG = (40 + 35 + 30) ÷ 3 = 35. Bẫy: ウ là kết quả nếu quên WHERE (営業 có 2 dòng, trung bình 27.5); エ là khi áp HAVING lên số dòng trước WHERE nhưng tính AVG sau WHERE.</td>
+<td>解説<span class="rd">(かいせつ)</span>：(1) WHEREで給与<span class="rd">(きゅうよ)</span>30以上<span class="rd">(いじょう)</span>の行<span class="rd">(ぎょう)</span>を残<span class="rd">(のこ)</span>す：1（営業<span class="rd">(えいぎょう)</span>30）、3・4・5（開発<span class="rd">(かいはつ)</span>40・35・30）。(2) グループ化<span class="rd">(か)</span>：営業<span class="rd">(えいぎょう)</span>1行<span class="rd">(ぎょう)</span>、開発<span class="rd">(かいはつ)</span>3行<span class="rd">(ぎょう)</span>。(3) HAVINGで2行<span class="rd">(ぎょう)</span>以上<span class="rd">(いじょう)</span>→開発<span class="rd">(かいはつ)</span>のみ、平均<span class="rd">(へいきん)</span> = (40 + 35 + 30) ÷ 3 = 35。ウはWHEREを無視<span class="rd">(むし)</span>した結果<span class="rd">(けっか)</span>、エはHAVINGの件数<span class="rd">(けんすう)</span>をWHERE前<span class="rd">(まえ)</span>で数<span class="rd">(かぞ)</span>えた誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Tính chất ACID nào bảo đảm rằng kết quả đã COMMIT không bị mất kể cả khi hệ thống sập ngay sau đó?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> コミットした結果<span class="rd">(けっか)</span>が、直後<span class="rd">(ちょくご)</span>にシステム障害<span class="rd">(しょうがい)</span>が発生<span class="rd">(はっせい)</span>しても失<span class="rd">(うしな)</span>われないことを保証<span class="rd">(ほしょう)</span>するACID特性<span class="rd">(とくせい)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア Tính nguyên tử　イ Tính nhất quán　ウ Tính độc lập　エ Tính bền vững</td>
+<td>ア 原子性<span class="rd">(げんしせい)</span>　イ 一貫性<span class="rd">(いっかんせい)</span>　ウ 独立性<span class="rd">(どくりつせい)</span>　エ 耐久性<span class="rd">(たいきゅうせい)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (tính bền vững)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（耐久性<span class="rd">(たいきゅうせい)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: "không mất sau khi COMMIT" là Durability. Phân biệt bẫy: nguyên tử = làm hết hoặc không làm gì; nhất quán = không mâu thuẫn dữ liệu; độc lập = chạy song song không ảnh hưởng nhau.</td>
+<td>解説<span class="rd">(かいせつ)</span>：「コミット後<span class="rd">(ご)</span>に失<span class="rd">(うしな)</span>われない」は耐久性<span class="rd">(たいきゅうせい)</span>。原子性<span class="rd">(げんしせい)</span>は「全部<span class="rd">(ぜんぶ)</span>か無<span class="rd">(む)</span>か」、一貫性<span class="rd">(いっかんせい)</span>は「矛盾<span class="rd">(むじゅん)</span>がない」、独立性<span class="rd">(どくりつせい)</span>は「同時実行<span class="rd">(どうじじっこう)</span>でも互<span class="rd">(たが)</span>いに影響<span class="rd">(えいきょう)</span>しない」。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A3</strong> Tồn kho hàng X là 10. Giao dịch T1 và T2 chạy đồng thời, <strong>không khóa</strong>, theo thứ tự: T1 đọc (10) → T2 đọc (10) → T1 ghi giá trị đã đọc − 3 → T2 ghi giá trị đã đọc − 3. Tồn kho cuối cùng là bao nhiêu?</td>
+<td><strong>問<span class="rd">(とい)</span>A3</strong> 商品<span class="rd">(しょうひん)</span>Xの在庫<span class="rd">(ざいこ)</span>は10。T1とT2がロックなしで、T1読込<span class="rd">(よみこみ)</span>（10）→T2読込<span class="rd">(よみこみ)</span>（10）→T1が読<span class="rd">(よ)</span>んだ値<span class="rd">(あたい)</span>−3を書込<span class="rd">(かきこみ)</span>→T2が読<span class="rd">(よ)</span>んだ値<span class="rd">(あたい)</span>−3を書込<span class="rd">(かきこみ)</span>、の順<span class="rd">(じゅん)</span>に実行<span class="rd">(じっこう)</span>した。最終的<span class="rd">(さいしゅうてき)</span>な在庫<span class="rd">(ざいこ)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 4　イ 7　ウ 10　エ 1</td>
+<td>ア 4　イ 7　ウ 10　エ 1</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (7)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（7）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: T1 ghi 10 − 3 = 7; T2 cũng đã đọc 10 nên ghi 10 − 3 = 7, đè lên kết quả của T1. Một lần trừ bị mất (lost update). Giá trị đúng là 4 (ア), chỉ đạt được khi T1 xin khóa độc quyền trước khi đọc, T2 phải chờ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：T1は 10 − 3 = 7 を書<span class="rd">(か)</span>き込<span class="rd">(こ)</span>む。T2も10を読<span class="rd">(よ)</span>んでいたので 10 − 3 = 7 を書<span class="rd">(か)</span>き込<span class="rd">(こ)</span>み、T1の更新<span class="rd">(こうしん)</span>を上書<span class="rd">(うわが)</span>きする（ロストアップデート）。正<span class="rd">(ただ)</span>しい値<span class="rd">(あたい)</span>4（ア）は、T1が読<span class="rd">(よ)</span>む前<span class="rd">(まえ)</span>に専有<span class="rd">(せんゆう)</span>ロックをかけ、T2を待<span class="rd">(ま)</span>たせれば得<span class="rd">(え)</span>られる。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A4</strong> Có 3 giao dịch: T1 COMMIT trước checkpoint; T2 bắt đầu trước checkpoint và COMMIT sau checkpoint; T3 bắt đầu trước checkpoint và chưa COMMIT thì hệ thống sập (đĩa không hỏng). Cách phục hồi đúng là gì?</td>
+<td><strong>問<span class="rd">(とい)</span>A4</strong> T1はチェックポイント前<span class="rd">(まえ)</span>にコミット、T2はチェックポイント前<span class="rd">(まえ)</span>に開始<span class="rd">(かいし)</span>してチェックポイント後<span class="rd">(ご)</span>にコミット、T3はチェックポイント前<span class="rd">(まえ)</span>に開始<span class="rd">(かいし)</span>し、コミット前<span class="rd">(まえ)</span>にシステム障害<span class="rd">(しょうがい)</span>が発生<span class="rd">(はっせい)</span>した（ディスクは正常<span class="rd">(せいじょう)</span>）。適切<span class="rd">(てきせつ)</span>な回復<span class="rd">(かいふく)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア T1 và T2 rollforward, T3 rollback　イ T2 rollforward, T3 rollback　ウ T2 và T3 rollforward　エ Chỉ rollback T3</td>
+<td>ア T1とT2をロールフォワード、T3をロールバック　イ T2をロールフォワード、T3をロールバック　ウ T2とT3をロールフォワード　エ T3だけをロールバック</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: T1 đã được ghi xuống đĩa ở checkpoint nên không cần làm gì (ア sai). T2 đã COMMIT nhưng phần sau checkpoint có thể còn trong bộ đệm → rollforward bằng log sau cập nhật. T3 chưa COMMIT nhưng phần trước checkpoint đã ghi xuống đĩa → rollback bằng log trước cập nhật. エ quên T2; ウ làm lại cả giao dịch chưa xác nhận, vi phạm tính nguyên tử.</td>
+<td>解説<span class="rd">(かいせつ)</span>：T1はチェックポイントでディスクに反映済<span class="rd">(はんえいず)</span>みなので何<span class="rd">(なに)</span>もしない（アは誤<span class="rd">(あやま)</span>り）。T2はコミット済<span class="rd">(ず)</span>みだが、チェックポイント後<span class="rd">(ご)</span>の更新<span class="rd">(こうしん)</span>が未反映<span class="rd">(みはんえい)</span>の可能性<span class="rd">(かのうせい)</span>→更新後<span class="rd">(こうしんご)</span>ログでロールフォワード。T3は未<span class="rd">(み)</span>コミットだが、チェックポイント前<span class="rd">(まえ)</span>の更新<span class="rd">(こうしん)</span>がディスクにある→更新前<span class="rd">(こうしんまえ)</span>ログでロールバック。エはT2を忘<span class="rd">(わす)</span>れている。ウは未確定<span class="rd">(みかくてい)</span>の処理<span class="rd">(しょり)</span>をやり直<span class="rd">(なお)</span>し、原子性<span class="rd">(げんしせい)</span>に反<span class="rd">(はん)</span>する。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Mỗi câu ghi kỳ thi và số câu; bấm link để xem nguyên văn đề trên fe-siken.com.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/01_aki/q26.html" target="_blank" rel="noopener">令和元年秋期 午前 問26</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>26</strong></td>
+</tr>
+<tr>
+<td>Nội dung: bảng điểm (mã sinh viên, môn, điểm). Điền vào chỗ trống sau GROUP BY để lấy mã sinh viên và điểm trung bình của những sinh viên có trung bình từ 80 trở lên.</td>
+<td>内容<span class="rd">(ないよう)</span>：得点表<span class="rd">(とくてんひょう)</span>（学生番号<span class="rd">(がくせいばんごう)</span>、科目<span class="rd">(かもく)</span>、点数<span class="rd">(てんすう)</span>）から、平均点<span class="rd">(へいきんてん)</span>が80点<span class="rd">(てん)</span>以上<span class="rd">(いじょう)</span>の学生<span class="rd">(がくせい)</span>の学生番号<span class="rd">(がくせいばんごう)</span>と平均点<span class="rd">(へいきんてん)</span>を求<span class="rd">(もと)</span>めるSQLの空欄<span class="rd">(くうらん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (学生番号 HAVING AVG(点数) &gt;= 80)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（学生番号<span class="rd">(がくせいばんごう)</span> HAVING AVG(点数<span class="rd">(てんすう)</span>) &gt;= 80）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: muốn trung bình theo từng sinh viên → gom theo mã sinh viên (loại ア gom theo môn). Điều kiện trên giá trị trung bình là điều kiện nhóm → HAVING. Các lựa chọn đặt WHERE sau GROUP BY là sai cú pháp.</td>
+<td>解説<span class="rd">(かいせつ)</span>：学生<span class="rd">(がくせい)</span>ごとの平均<span class="rd">(へいきん)</span>なので学生番号<span class="rd">(がくせいばんごう)</span>でグループ化<span class="rd">(か)</span>（科目<span class="rd">(かもく)</span>でまとめるアは誤<span class="rd">(あやま)</span>り）。平均<span class="rd">(へいきん)</span>に対<span class="rd">(たい)</span>する条件<span class="rd">(じょうけん)</span>はグループの条件<span class="rd">(じょうけん)</span>なのでHAVING。GROUP BYの後<span class="rd">(あと)</span>のWHEREは構文誤<span class="rd">(こうぶんあやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/20_haru/q58.html" target="_blank" rel="noopener">平成20年春期 午前 問58</a></strong> (2008)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>58</strong></td>
+</tr>
+<tr>
+<td>Nội dung: từ bảng nhân viên (mã NV, tên, mã phòng, chức vụ), chọn câu SQL tìm các phòng có ít hơn 5 lập trình viên (kể cả phòng không có lập trình viên nào).</td>
+<td>内容<span class="rd">(ないよう)</span>：社員表<span class="rd">(しゃいんひょう)</span>（社員番号<span class="rd">(しゃいんばんごう)</span>、社員名<span class="rd">(しゃいんめい)</span>、部署<span class="rd">(ぶしょ)</span>コード、職務<span class="rd">(しょくむ)</span>）から、プログラマが5人<span class="rd">(にん)</span>未満<span class="rd">(みまん)</span>の部署<span class="rd">(ぶしょ)</span>を探<span class="rd">(さが)</span>すSQL文<span class="rd">(ぶん)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (truy vấn con tương quan đếm số lập trình viên của từng phòng, so sánh với 5)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（相関副問合<span class="rd">(そうかんふくといあわ)</span>せで部署<span class="rd">(ぶしょ)</span>ごとのプログラマ数<span class="rd">(すう)</span>を数<span class="rd">(かぞ)</span>えて5と比較<span class="rd">(ひかく)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: truy vấn con chạy cho từng dòng ngoài, đếm nhân viên cùng phòng có chức vụ プログラマ; phòng có 0 người vẫn đếm được 0 &lt; 5 nên vẫn ra. Bẫy: dùng <code>HAVING COUNT(*) &lt; 5</code> sẽ đếm toàn bộ nhân viên của phòng, không phải chỉ lập trình viên; lọc WHERE 職務 = 'プログラマ' trước khi gom thì phòng không có lập trình viên biến mất.</td>
+<td>解説<span class="rd">(かいせつ)</span>：外側<span class="rd">(そとがわ)</span>の行<span class="rd">(ぎょう)</span>ごとに、同<span class="rd">(おな)</span>じ部署<span class="rd">(ぶしょ)</span>でプログラマの社員<span class="rd">(しゃいん)</span>を数<span class="rd">(かぞ)</span>える。0人<span class="rd">(にん)</span>の部署<span class="rd">(ぶしょ)</span>も 0 &lt; 5 で抽出<span class="rd">(ちゅうしゅつ)</span>される。<code>HAVING COUNT(*) &lt; 5</code> は部署<span class="rd">(ぶしょ)</span>の全社員数<span class="rd">(ぜんしゃいんすう)</span>を数<span class="rd">(かぞ)</span>えてしまう。先<span class="rd">(さき)</span>にWHEREでプログラマに絞<span class="rd">(しぼ)</span>ると0人<span class="rd">(にん)</span>の部署<span class="rd">(ぶしょ)</span>が消<span class="rd">(き)</span>える。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/24_haru/q33.html" target="_blank" rel="noopener">平成24年春期 午前 問33</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>33</strong></td>
+</tr>
+<tr>
+<td>Nội dung: phát biểu nào về điều khiển truy cập đồng thời (khóa) của DBMS là đúng?</td>
+<td>内容<span class="rd">(ないよう)</span>：DBMSの排他制御<span class="rd">(はいたせいぎょ)</span>に関<span class="rd">(かん)</span>する適切<span class="rd">(てきせつ)</span>な記述<span class="rd">(きじゅつ)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (cần khóa cho dữ liệu mà nhiều người có thể cập nhật cùng lúc)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（複数<span class="rd">(ふくすう)</span>の利用者<span class="rd">(りようしゃ)</span>が同時<span class="rd">(どうじ)</span>に更新<span class="rd">(こうしん)</span>する可能性<span class="rd">(かのうせい)</span>があるデータに必要<span class="rd">(ひつよう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mục đích của khóa là chống mất cập nhật, giữ tính nhất quán. Bẫy: khóa không làm nhanh hơn (còn gây chờ); phạm vi khóa càng lớn càng chờ nhiều; khóa không ngăn deadlock mà chính là nguyên nhân gây deadlock.</td>
+<td>解説<span class="rd">(かいせつ)</span>：排他制御<span class="rd">(はいたせいぎょ)</span>の目的<span class="rd">(もくてき)</span>はロストアップデートを防<span class="rd">(ふせ)</span>ぎ、一貫性<span class="rd">(いっかんせい)</span>を保<span class="rd">(たも)</span>つこと。高速化<span class="rd">(こうそくか)</span>にはならない（待<span class="rd">(ま)</span>ちが発生<span class="rd">(はっせい)</span>）。範囲<span class="rd">(はんい)</span>を大<span class="rd">(おお)</span>きくすると待<span class="rd">(ま)</span>ちが増<span class="rd">(ふ)</span>える。デッドロックを防<span class="rd">(ふせ)</span>ぐどころか、ロックが原因<span class="rd">(げんいん)</span>で起<span class="rd">(お)</span>きる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/25_haru/q30.html" target="_blank" rel="noopener">平成25年春期 午前 問30</a></strong> (2013)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>25年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>30</strong></td>
+</tr>
+<tr>
+<td>Nội dung: khi một giao dịch đang giữ khóa chia sẻ hoặc khóa độc quyền trên một tài nguyên, giao dịch khác có xin được loại khóa nào? Chọn phát biểu đúng.</td>
+<td>内容<span class="rd">(ないよう)</span>：あるトランザクションが資源<span class="rd">(しげん)</span>に共有<span class="rd">(きょうゆう)</span>ロックまたは専有<span class="rd">(せんゆう)</span>ロックをかけているとき、別<span class="rd">(べつ)</span>のトランザクションが獲得<span class="rd">(かくとく)</span>できるロックについて正<span class="rd">(ただ)</span>しい記述<span class="rd">(きじゅつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (đang có khóa chia sẻ thì giao dịch khác vẫn xin được khóa chia sẻ)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（共有<span class="rd">(きょうゆう)</span>ロック中<span class="rd">(ちゅう)</span>なら他<span class="rd">(た)</span>のトランザクションも共有<span class="rd">(きょうゆう)</span>ロックを獲得<span class="rd">(かくとく)</span>できる）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: nhớ bảng tương thích: chỉ có chia sẻ + chia sẻ là cùng tồn tại được (nhiều người cùng đọc). Có khóa độc quyền ở bất kỳ phía nào thì phía kia phải chờ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：両立<span class="rd">(りょうりつ)</span>できるのは「共有<span class="rd">(きょうゆう)</span>＋共有<span class="rd">(きょうゆう)</span>」だけ（同時<span class="rd">(どうじ)</span>に読<span class="rd">(よ)</span>むのは問題<span class="rd">(もんだい)</span>ない）。どちらかが専有<span class="rd">(せんゆう)</span>ロックなら、もう一方<span class="rd">(いっぽう)</span>は待<span class="rd">(ま)</span>ちになる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/01_aki/q29.html" target="_blank" rel="noopener">令和元年秋期 午前 問29</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>29</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hai giao dịch TA, TB chạy song song theo khóa 2 pha; đọc W xin khóa chia sẻ, cập nhật X, Y, Z xin khóa độc quyền. Thứ tự xử lý nào không gây deadlock?</td>
+<td>内容<span class="rd">(ないよう)</span>：TAとTBが2相<span class="rd">(そう)</span>ロックで同時<span class="rd">(どうじ)</span>に実行<span class="rd">(じっこう)</span>される。Wの読込<span class="rd">(よみこみ)</span>は共有<span class="rd">(きょうゆう)</span>ロック、X・Y・Zの更新<span class="rd">(こうしん)</span>は専有<span class="rd">(せんゆう)</span>ロック。デッドロックが発生<span class="rd">(はっせい)</span>しない処理順序<span class="rd">(しょりじゅんじょ)</span>はどれか。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: thứ tự mà TA và TB đều khóa X → Y → Z theo cùng một thứ tự</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：TAとTBが同<span class="rd">(おな)</span>じ順序<span class="rd">(じゅんじょ)</span> X → Y → Z でロックするもの</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: W chỉ là khóa chia sẻ nên hai bên cùng giữ được, không gây chờ. Ở các lựa chọn sai, một bên khóa X rồi chờ Y, bên kia khóa Y rồi chờ X → deadlock. Khi cả hai khóa cùng thứ tự, bên đến sau chỉ chờ ở X, bên kia làm xong và nhả hết khóa. Trang fe-siken để trống ô 正解 nhưng phần giải thích chỉ ra đúng lựa chọn này.</td>
+<td>解説<span class="rd">(かいせつ)</span>：Wは共有<span class="rd">(きょうゆう)</span>ロックなので両方<span class="rd">(りょうほう)</span>が同時<span class="rd">(どうじ)</span>に持<span class="rd">(も)</span>てる。誤<span class="rd">(あやま)</span>りの選択肢<span class="rd">(せんたくし)</span>では、一方<span class="rd">(いっぽう)</span>がXを持<span class="rd">(も)</span>ってYを待<span class="rd">(ま)</span>ち、他方<span class="rd">(たほう)</span>がYを持<span class="rd">(も)</span>ってXを待<span class="rd">(ま)</span>つ。同<span class="rd">(おな)</span>じ順序<span class="rd">(じゅんじょ)</span>でロックすれば、後<span class="rd">(あと)</span>の方<span class="rd">(ほう)</span>はXで待<span class="rd">(ま)</span>つだけで、先<span class="rd">(さき)</span>の方<span class="rd">(ほう)</span>が終了<span class="rd">(しゅうりょう)</span>してロックを解放<span class="rd">(かいほう)</span>する。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/28_aki/q30.html" target="_blank" rel="noopener">平成28年秋期 午前 問30</a></strong> (2016)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>28年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>30</strong></td>
+</tr>
+<tr>
+<td>Nội dung: giao dịch T đã kết thúc sau checkpoint thì hệ thống sập. Dùng checkpoint và log để đưa CSDL về trạng thái ngay sau khi T kết thúc thì gọi là gì?</td>
+<td>内容<span class="rd">(ないよう)</span>：チェックポイント後<span class="rd">(ご)</span>にトランザクションTが終了<span class="rd">(しゅうりょう)</span>し、その後<span class="rd">(ご)</span>システム障害<span class="rd">(しょうがい)</span>が発生<span class="rd">(はっせい)</span>した。チェックポイントとログを用<span class="rd">(もち)</span>いて、T終了直後<span class="rd">(しゅうりょうちょくご)</span>の状態<span class="rd">(じょうたい)</span>に戻<span class="rd">(もど)</span>す手法<span class="rd">(しゅほう)</span>は何<span class="rd">(なに)</span>か。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (ロールフォワード)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（ロールフォワード）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: T đã xong (COMMIT) sau checkpoint → làm lại bằng log sau cập nhật = rollforward. Bẫy: khóa 2 pha là kỹ thuật điều khiển đồng thời, không phải phục hồi; shadow page không dùng log; rollback chỉ dành cho giao dịch dở dang.</td>
+<td>解説<span class="rd">(かいせつ)</span>：チェックポイント後<span class="rd">(ご)</span>にコミットしたTは、更新後<span class="rd">(こうしんご)</span>ログでやり直<span class="rd">(なお)</span>す＝ロールフォワード。2相<span class="rd">(そう)</span>ロックは排他制御<span class="rd">(はいたせいぎょ)</span>の方式<span class="rd">(ほうしき)</span>、シャドウページはログを使<span class="rd">(つか)</span>わない方式<span class="rd">(ほうしき)</span>、ロールバックは途中<span class="rd">(とちゅう)</span>のトランザクションを取<span class="rd">(と)</span>り消<span class="rd">(け)</span>す処理<span class="rd">(しょり)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/31_haru/q57.html" target="_blank" rel="noopener">平成31年春期 午前 問57</a></strong> (2019); trang ghi câu tương tự ở 平成15年春期 問57 (FE) và 応用情報 平成26年秋期 問57</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 平成<span class="rd">(へいせい)</span>31年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>57</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đĩa bị hỏng. Khôi phục dữ liệu từ bản sao lưu toàn bộ, rồi áp dụng log sau cập nhật kể từ lúc sao lưu. Phương pháp này gọi là gì?</td>
+<td>内容<span class="rd">(ないよう)</span>：ディスク障害時<span class="rd">(しょうがいじ)</span>に、フルバックアップから復元<span class="rd">(ふくげん)</span>した後<span class="rd">(あと)</span>、取得時以降<span class="rd">(しゅとくじいこう)</span>の更新後<span class="rd">(こうしんご)</span>ログを反映<span class="rd">(はんえい)</span>して回復<span class="rd">(かいふく)</span>する方法<span class="rd">(ほうほう)</span>は何<span class="rd">(なに)</span>か。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (ロールフォワード)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（ロールフォワード）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: dùng "log sau cập nhật" để đưa CSDL tiến lên trạng thái ngay trước sự cố → rollforward. Bẫy: rollback dùng log trước cập nhật để lùi; khởi động lại từ checkpoint không áp dụng log từ bản sao lưu; reboot chỉ là khởi động lại máy.</td>
+<td>解説<span class="rd">(かいせつ)</span>：「更新後<span class="rd">(こうしんご)</span>ログ」で障害直前<span class="rd">(しょうがいちょくぜん)</span>まで進<span class="rd">(すす)</span>める＝ロールフォワード。ロールバックは更新前<span class="rd">(こうしんまえ)</span>ログで戻<span class="rd">(もど)</span>す処理<span class="rd">(しょり)</span>、チェックポイントリスタートはチェックポイントから再開<span class="rd">(さいかい)</span>する方法<span class="rd">(ほうほう)</span>、リブートは再起動<span class="rd">(さいきどう)</span>にすぎない。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Danh sách liên kết ｜ 連結<span class="rd">(れんけつ)</span>リスト</h2>
+<p>Trong 科目B, danh sách liên kết hầu như luôn được viết bằng lớp <strong>ListElement</strong> có hai thuộc tính val và next. Chìa khóa để giải: <strong>vẽ ô và mũi tên</strong> cho từng nút, rồi đổi mũi tên đúng theo từng dòng lệnh.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Danh sách liên kết đơn:</strong> mỗi phần tử (nút) chứa giá trị và tham chiếu đến phần tử kế tiếp. Phần tử cuối có next là 未定義 (không trỏ đi đâu).</td>
+<td><strong>単方向<span class="rd">(たんほうこう)</span>リスト：</strong>各要素<span class="rd">(かくようそ)</span>が値<span class="rd">(あたい)</span>と次<span class="rd">(つぎ)</span>の要素<span class="rd">(ようそ)</span>への参照<span class="rd">(さんしょう)</span>をもつ。最後<span class="rd">(さいご)</span>の要素<span class="rd">(ようそ)</span>の next は未定義<span class="rd">(みていぎ)</span>。</td>
+</tr>
+<tr>
+<td><strong>Lớp ListElement trong đề mẫu:</strong> thuộc tính val (giá trị) và next (phần tử kế tiếp). Hàm tạo ListElement(c) đặt val ← c, next ← 未定義.</td>
+<td><strong>クラス ListElement：</strong>メンバ変数<span class="rd">(へんすう)</span> val（値<span class="rd">(あたい)</span>）と next（次<span class="rd">(つぎ)</span>の要素<span class="rd">(ようそ)</span>）。コンストラクタ ListElement(c) で val ← c、next ← 未定義<span class="rd">(みていぎ)</span>。</td>
+</tr>
+<tr>
+<td><strong>Biến listHead:</strong> trỏ đến phần tử đầu. Danh sách rỗng khi listHead là 未定義.</td>
+<td><strong>大域変数<span class="rd">(たいいきへんすう)</span> listHead：</strong>先頭要素<span class="rd">(せんとうようそ)</span>を参照<span class="rd">(さんしょう)</span>する。リストが空<span class="rd">(から)</span>のとき listHead は未定義<span class="rd">(みていぎ)</span>。</td>
+</tr>
+<tr>
+<td><strong>Duyệt:</strong> p ← listHead; while (p が 未定義でない) … p ← p.next. Dạng này giống đọc từng dòng trong Talend: lấy dòng hiện tại, xử lý, chuyển sang dòng sau.</td>
+<td><strong>走査<span class="rd">(そうさ)</span>：</strong>p ← listHead；while (p が 未定義<span class="rd">(みていぎ)</span>でない) … p ← p.next。</td>
+</tr>
+<tr>
+<td><strong>Chèn vào sau nút p:</strong> (1) q.next ← p.next (2) p.next ← q. Làm ngược thứ tự sẽ mất phần sau của danh sách.</td>
+<td><strong>p の後<span class="rd">(うし)</span>ろに q を挿入<span class="rd">(そうにゅう)</span>：</strong>(1) q.next ← p.next (2) p.next ← q。順序<span class="rd">(じゅんじょ)</span>を逆<span class="rd">(ぎゃく)</span>にすると後<span class="rd">(うし)</span>ろの要素<span class="rd">(ようそ)</span>がたどれなくなる。</td>
+</tr>
+<tr>
+<td><strong>Xóa nút sau prev:</strong> prev.next ← prev.next.next. Muốn xóa nút thì phải đứng ở <strong>nút đứng trước</strong> nó. Xóa nút đầu: listHead ← listHead.next.</td>
+<td><strong>prev の次<span class="rd">(つぎ)</span>の要素<span class="rd">(ようそ)</span>を削除<span class="rd">(さくじょ)</span>：</strong>prev.next ← prev.next.next。削除<span class="rd">(さくじょ)</span>するには一<span class="rd">(ひと)</span>つ前<span class="rd">(まえ)</span>の要素<span class="rd">(ようそ)</span>が必要<span class="rd">(ひつよう)</span>。先頭<span class="rd">(せんとう)</span>の削除<span class="rd">(さくじょ)</span>：listHead ← listHead.next。</td>
+</tr>
+<tr>
+<td><strong>Thêm vào cuối:</strong> phải đi từ đầu đến nút cuối (nút có next là 未定義), rồi gán next của nó bằng nút mới.</td>
+<td><strong>末尾<span class="rd">(まつび)</span>への追加<span class="rd">(ついか)</span>：</strong>先頭<span class="rd">(せんとう)</span>から next が未定義<span class="rd">(みていぎ)</span>の要素<span class="rd">(ようそ)</span>までたどり、その next に新<span class="rd">(あたら)</span>しい要素<span class="rd">(ようそ)</span>を設定<span class="rd">(せってい)</span>する。</td>
+</tr>
+<tr>
+<td><strong>Danh sách liên kết đôi:</strong> mỗi nút có thêm con trỏ về nút trước (prev). Chèn/xóa phải sửa cả hai chiều.</td>
+<td><strong>双方向<span class="rd">(そうほうこう)</span>リスト：</strong>前<span class="rd">(まえ)</span>の要素<span class="rd">(ようそ)</span>へのポインタももつ。挿入<span class="rd">(そうにゅう)</span>・削除<span class="rd">(さくじょ)</span>では両方向<span class="rd">(りょうほうこう)</span>のポインタを書<span class="rd">(か)</span>き換<span class="rd">(か)</span>える。</td>
+</tr>
+<tr>
+<td><strong>So với mảng:</strong> chèn/xóa chỉ cần đổi vài con trỏ (nhanh, không phải dời phần tử); nhưng truy cập phần tử thứ k phải đi từ đầu (không truy cập ngẫu nhiên được, không tìm kiếm nhị phân được).</td>
+<td><strong>配列<span class="rd">(はいれつ)</span>との比較<span class="rd">(ひかく)</span>：</strong>挿入<span class="rd">(そうにゅう)</span>・削除<span class="rd">(さくじょ)</span>はポインタの付<span class="rd">(つ)</span>け替<span class="rd">(か)</span>えだけで速<span class="rd">(はや)</span>い（要素<span class="rd">(ようそ)</span>の移動<span class="rd">(いどう)</span>が不要<span class="rd">(ふよう)</span>）。k番目<span class="rd">(ばんめ)</span>の参照<span class="rd">(さんしょう)</span>は先頭<span class="rd">(せんとう)</span>からたどる必要<span class="rd">(ひつよう)</span>があり、ランダムアクセスや2分探索<span class="rd">(ぶんたんさく)</span>に向<span class="rd">(む)</span>かない。</td>
+</tr>
+<tr>
+<td><strong>Danh sách bằng mảng:</strong> hai mảng song song val[i] và next[i]; next[i] là <strong>chỉ số</strong> của phần tử kế tiếp, 0 nghĩa là hết.</td>
+<td><strong>配列<span class="rd">(はいれつ)</span>によるリスト：</strong>val[i] と next[i] の対<span class="rd">(つい)</span>で1要素<span class="rd">(ようそ)</span>を表<span class="rd">(あらわ)</span>す。next[i] は次<span class="rd">(つぎ)</span>の要素<span class="rd">(ようそ)</span>の要素番号<span class="rd">(ようそばんごう)</span>、0は終端<span class="rd">(しゅうたん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<p><strong>Câu B1 ｜ 問<span class="rd">(とい)</span>B1</strong></p>
+<pre><code>文字型の配列: val ← {&quot;C&quot;, &quot;A&quot;, &quot;D&quot;, &quot;B&quot;}
+整数型の配列: nxt ← {3, 4, 0, 1}
+整数型: head ← 2
+整数型: p ← head
+文字列型: s ← &quot;&quot;
+while (p ≠ 0)
+  s ← s と val[p] を連結した文字列
+  p ← nxt[p]
+endwhile
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Danh sách được biểu diễn bằng hai mảng. Sau khi chạy, s là gì?</td>
+<td>二<span class="rd">(ふた)</span>つの配列<span class="rd">(はいれつ)</span>でリストを表<span class="rd">(あらわ)</span>している。実行後<span class="rd">(じっこうご)</span>の s はどれか。</td>
+</tr>
+<tr>
+<td>ア "CADB"　イ "ABCD"　ウ "ADBC"　エ "BDAC"</td>
+<td>ア "CADB"　イ "ABCD"　ウ "ADBC"　エ "BDAC"</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ ("ABCD")</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（"ABCD"）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: p = 2 → val[2] = "A", nxt[2] = 4. p = 4 → "B", nxt[4] = 1. p = 1 → "C", nxt[1] = 3. p = 3 → "D", nxt[3] = 0 → dừng. s = "ABCD". Bẫy: ア là đọc mảng theo thứ tự chỉ số 1→4, quên rằng thứ tự danh sách do nxt quyết định.</td>
+<td>解説<span class="rd">(かいせつ)</span>：p = 2 → "A"、nxt[2] = 4。p = 4 → "B"、nxt[4] = 1。p = 1 → "C"、nxt[1] = 3。p = 3 → "D"、nxt[3] = 0 で終了<span class="rd">(しゅうりょう)</span>。s = "ABCD"。アは要素番号順<span class="rd">(ようそばんごうじゅん)</span>に読<span class="rd">(よ)</span>んだだけの誤<span class="rd">(あやま)</span>り。並<span class="rd">(なら)</span>び順<span class="rd">(じゅん)</span>は nxt で決<span class="rd">(き)</span>まる。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B2 ｜ 問<span class="rd">(とい)</span>B2</strong></p>
+<pre><code>○ insertAfter(ListElement: p, 文字型: c)
+  ListElement: q ← ListElement(c)
+  [   a   ]
+  [   b   ]
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thủ tục insertAfter chèn phần tử mới có giá trị c ngay sau phần tử p (p không phải là 未定義). Tổ hợp a, b đúng là gì?</td>
+<td>手続<span class="rd">(てつづ)</span>き insertAfter は、要素<span class="rd">(ようそ)</span> p（未定義<span class="rd">(みていぎ)</span>ではない）の直後<span class="rd">(ちょくご)</span>に値<span class="rd">(あたい)</span> c の新<span class="rd">(あたら)</span>しい要素<span class="rd">(ようそ)</span>を挿入<span class="rd">(そうにゅう)</span>する。a、b に入<span class="rd">(い)</span>れる正<span class="rd">(ただ)</span>しい組合<span class="rd">(くみあ)</span>せはどれか。</td>
+</tr>
+<tr>
+<td>ア a: q.next ← p.next　b: p.next ← q　イ a: p.next ← q　b: q.next ← p.next　ウ a: q.next ← p　b: p.next ← q　エ a: p.next ← q.next　b: q.next ← p</td>
+<td>ア a: q.next ← p.next　b: p.next ← q　イ a: p.next ← q　b: q.next ← p.next　ウ a: q.next ← p　b: p.next ← q　エ a: p.next ← q.next　b: q.next ← p</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thử với A → B, chèn X sau A. ア: X.next ← A.next (= B), rồi A.next ← X → A → X → B, đúng. イ: A.next ← X trước, nên q.next ← p.next = X → X trỏ vào chính nó, B bị mất. ウ: X.next = A, tạo vòng A ⇄ X. エ: A.next ← X.next (= 未定義), danh sách bị cắt sau A.</td>
+<td>解説<span class="rd">(かいせつ)</span>：A → B に、A の後<span class="rd">(うし)</span>ろへ X を挿入<span class="rd">(そうにゅう)</span>する例<span class="rd">(れい)</span>で確<span class="rd">(たし)</span>かめる。ア：X.next ← A.next（= B）、A.next ← X で A → X → B となり正<span class="rd">(ただ)</span>しい。イ：先<span class="rd">(さき)</span>に A.next ← X とするので X.next = X となり、B 以降<span class="rd">(いこう)</span>が失<span class="rd">(うしな)</span>われる。ウ：X.next = A となり A と X が循環<span class="rd">(じゅんかん)</span>する。エ：A.next が未定義<span class="rd">(みていぎ)</span>になり、A の後<span class="rd">(うし)</span>ろが切<span class="rd">(き)</span>れる。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B3 ｜ 問<span class="rd">(とい)</span>B3</strong></p>
+<pre><code>大域: ListElement: listHead   // 最初は A → B → C
+○ reverse()
+  ListElement: prev ← 未定義
+  ListElement: curr ← listHead
+  ListElement: nxt
+  while (curr が 未定義でない)
+    nxt ← curr.next
+    curr.next ← prev
+    prev ← curr
+    curr ← nxt
+  endwhile
+  listHead ← prev
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Danh sách ban đầu là A → B → C. Ngay sau khi vòng while chạy xong <strong>lần thứ 2</strong>, trạng thái nào đúng?</td>
+<td>リストは最初<span class="rd">(さいしょ)</span> A → B → C である。while の繰返<span class="rd">(くりかえ)</span>しを <strong>2回<span class="rd">(かい)</span></strong> 終<span class="rd">(お)</span>えた直後<span class="rd">(ちょくご)</span>の状態<span class="rd">(じょうたい)</span>として正<span class="rd">(ただ)</span>しいものはどれか。</td>
+</tr>
+<tr>
+<td>ア prev là B, curr là C, B.next là A　イ prev là C, curr là 未定義, C.next là B　ウ prev là A, curr là B, A.next là 未定義　エ prev là B, curr là C, B.next là C</td>
+<td>ア prev は B、curr は C、B.next は A　イ prev は C、curr は 未定義<span class="rd">(みていぎ)</span>、C.next は B　ウ prev は A、curr は B、A.next は 未定義<span class="rd">(みていぎ)</span>　エ prev は B、curr は C、B.next は C</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: lần 1: nxt = B, A.next ← 未定義, prev = A, curr = B. Lần 2: nxt = C, B.next ← A, prev = B, curr = C. Vậy ア. Bẫy: ウ là trạng thái sau lần 1; イ là sau lần 3 (lúc đó vòng lặp dừng, listHead ← C, danh sách thành C → B → A); エ là khi quên dòng curr.next ← prev.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1回目<span class="rd">(かいめ)</span>：nxt = B、A.next ← 未定義<span class="rd">(みていぎ)</span>、prev = A、curr = B。2回目<span class="rd">(かいめ)</span>：nxt = C、B.next ← A、prev = B、curr = C。よってア。ウは1回目後<span class="rd">(かいめご)</span>、イは3回目後<span class="rd">(かいめご)</span>（ループ終了<span class="rd">(しゅうりょう)</span>、listHead ← C で C → B → A）、エは curr.next ← prev を忘<span class="rd">(わす)</span>れた場合<span class="rd">(ばあい)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Câu 1–2 là đề 科目B thật dùng ListElement; câu 3–7 là đề 科目A/午前 về danh sách, rất sát với kiến thức cần cho 科目B.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/sample20220425/b3.html" target="_blank" rel="noopener">科目Bサンプル問題 科目B 問3</a></strong> (IPA công bố 4/2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 科目<span class="rd">(かもく)</span>Bサンプル問題<span class="rd">(もんだい)</span> 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thủ tục append thêm một ký tự vào cuối danh sách liên kết đơn ListElement, listHead là 未定義 khi rỗng. Điền điều kiện kiểm tra danh sách rỗng (a) và phần đi đến cuối rồi nối nút mới (b).</td>
+<td>内容<span class="rd">(ないよう)</span>：単方向<span class="rd">(たんほうこう)</span>リストの末尾<span class="rd">(まつび)</span>に文字<span class="rd">(もじ)</span>を追加<span class="rd">(ついか)</span>する手続<span class="rd">(てつづ)</span>き append。空<span class="rd">(から)</span>のとき listHead は未定義<span class="rd">(みていぎ)</span>。a（空<span class="rd">(から)</span>の判定<span class="rd">(はんてい)</span>）と b（末尾<span class="rd">(まつび)</span>までたどって連結<span class="rd">(れんけつ)</span>）の組合<span class="rd">(くみあ)</span>せ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (a: 未定義; b: đi tới khi next là 未定義 rồi gán next của nút cuối bằng nút mới)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（a：未定義<span class="rd">(みていぎ)</span>、b：next が未定義<span class="rd">(みていぎ)</span>になるまで prev を進<span class="rd">(すす)</span>め、prev.next ← curr）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: listHead là 未定義 → danh sách rỗng → nút mới làm đầu luôn. Ngược lại, while (prev.next が 未定義でない) prev ← prev.next để dừng ở nút cuối (không phải dừng ở 未定義), rồi prev.next ← curr. Bẫy: nếu lặp tới khi chính prev là 未定義 thì không còn nút nào để nối.</td>
+<td>解説<span class="rd">(かいせつ)</span>：listHead が未定義<span class="rd">(みていぎ)</span>なら空<span class="rd">(から)</span>なので、新<span class="rd">(あたら)</span>しい要素<span class="rd">(ようそ)</span>を先頭<span class="rd">(せんとう)</span>にする。そうでなければ prev.next が未定義<span class="rd">(みていぎ)</span>でない間<span class="rd">(あいだ)</span>進<span class="rd">(すす)</span>み、最後<span class="rd">(さいご)</span>の要素<span class="rd">(ようそ)</span>で止<span class="rd">(と)</span>まって prev.next ← curr。prev 自体<span class="rd">(じたい)</span>が未定義<span class="rd">(みていぎ)</span>になるまで進<span class="rd">(すす)</span>むと連結先<span class="rd">(れんけつさき)</span>がなくなる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/sample/b10.html" target="_blank" rel="noopener">サンプル問題 科目B 問10</a></strong> (サンプル問題セット, IPA 2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>10</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thủ tục xóa phần tử ở vị trí pos của danh sách liên kết đơn. Điền vế phải của lệnh nối lại con trỏ trong nhánh xóa phần tử không phải đầu.</td>
+<td>内容<span class="rd">(ないよう)</span>：単方向<span class="rd">(たんほうこう)</span>リストの pos 番目<span class="rd">(ばんめ)</span>の要素<span class="rd">(ようそ)</span>を削除<span class="rd">(さくじょ)</span>する手続<span class="rd">(てつづ)</span>き。先頭以外<span class="rd">(せんとういがい)</span>を削除<span class="rd">(さくじょ)</span>する分岐<span class="rd">(ぶんき)</span>で、ポインタを付<span class="rd">(つ)</span>け替<span class="rd">(か)</span>える代入<span class="rd">(だいにゅう)</span>の右辺<span class="rd">(うへん)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: prev.next.next</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：prev.next.next</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: prev được đưa tới nút đứng trước nút cần xóa (pos = 2 thì prev là nút đầu; pos ≥ 3 thì tiến thêm pos − 2 lần). Nút cần xóa là prev.next, nên prev.next ← prev.next.next để bỏ qua nó. Đúng như công thức xóa trong phần lý thuyết.</td>
+<td>解説<span class="rd">(かいせつ)</span>：prev を削除対象<span class="rd">(さくじょたいしょう)</span>の一<span class="rd">(ひと)</span>つ前<span class="rd">(まえ)</span>まで進<span class="rd">(すす)</span>める（pos = 2 なら先頭<span class="rd">(せんとう)</span>、3以上<span class="rd">(いじょう)</span>なら pos − 2 回<span class="rd">(かい)</span>進<span class="rd">(すす)</span>む）。対象<span class="rd">(たいしょう)</span>は prev.next なので、prev.next ← prev.next.next で飛<span class="rd">(と)</span>ばす。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/05_haru/a2.html" target="_blank" rel="noopener">令和5年度 科目A 問2</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: bảng nhân viên dạng danh sách liên kết đôi (A → K → T). Chèn nhân viên G vào giữa A và K. Trong các con trỏ a〜f, những con trỏ nào đổi giá trị?</td>
+<td>内容<span class="rd">(ないよう)</span>：双方向<span class="rd">(そうほうこう)</span>のポインタをもつ社員<span class="rd">(しゃいん)</span>のリスト（A → K → T）。社員<span class="rd">(しゃいん)</span>G を A と K の間<span class="rd">(あいだ)</span>に追加<span class="rd">(ついか)</span>したとき、値<span class="rd">(あたい)</span>が変<span class="rd">(か)</span>わるポインタを全<span class="rd">(すべ)</span>て選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (a, f)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（a、f）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chỉ có hai con trỏ cũ phải sửa: con trỏ "tiếp theo" của A (chuyển sang G) và con trỏ "trước" của K (chuyển sang G). Con trỏ của G là mới tạo, không tính là "đổi"; T không liên quan.</td>
+<td>解説<span class="rd">(かいせつ)</span>：書<span class="rd">(か)</span>き換<span class="rd">(か)</span>わるのは、A の次<span class="rd">(つぎ)</span>ポインタ（G へ）と K の前<span class="rd">(まえ)</span>ポインタ（G へ）の二<span class="rd">(ふた)</span>つだけ。G のポインタは新規<span class="rd">(しんき)</span>設定<span class="rd">(せってい)</span>、T は変<span class="rd">(か)</span>わらない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/24_haru/q7.html" target="_blank" rel="noopener">平成24年春期 午前 問7</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>7</strong></td>
+</tr>
+<tr>
+<td>Nội dung: danh sách liên kết đơn có cả con trỏ đầu và con trỏ cuối. Thao tác nào phải tham chiếu con trỏ nhiều lần nhất?</td>
+<td>内容<span class="rd">(ないよう)</span>：先頭<span class="rd">(せんとう)</span>ポインタと末尾<span class="rd">(まつび)</span>ポインタをもつ単方向<span class="rd">(たんほうこう)</span>リストで、ポインタの参照回数<span class="rd">(さんしょうかいすう)</span>が最<span class="rd">(もっと)</span>も多<span class="rd">(おお)</span>い操作<span class="rd">(そうさ)</span>はどれか。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (xóa phần tử cuối)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（末尾<span class="rd">(まつび)</span>のデータを削除<span class="rd">(さくじょ)</span>する）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: muốn xóa nút cuối phải sửa next của nút áp chót, nhưng danh sách đơn không đi lùi được → phải đi từ đầu, số lần tỷ lệ với độ dài. Chèn đầu, xóa đầu, chèn cuối (đã có con trỏ cuối) chỉ cần vài lần.</td>
+<td>解説<span class="rd">(かいせつ)</span>：末尾<span class="rd">(まつび)</span>を削除<span class="rd">(さくじょ)</span>するには末尾<span class="rd">(まつび)</span>の一<span class="rd">(ひと)</span>つ前<span class="rd">(まえ)</span>の next を変<span class="rd">(か)</span>える必要<span class="rd">(ひつよう)</span>があるが、単方向<span class="rd">(たんほうこう)</span>では戻<span class="rd">(もど)</span>れないので先頭<span class="rd">(せんとう)</span>からたどる。先頭<span class="rd">(せんとう)</span>への挿入<span class="rd">(そうにゅう)</span>・先頭<span class="rd">(せんとう)</span>の削除<span class="rd">(さくじょ)</span>・末尾<span class="rd">(まつび)</span>への挿入<span class="rd">(そうにゅう)</span>は数回<span class="rd">(すうかい)</span>で済<span class="rd">(す)</span>む。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/30_haru/q6.html" target="_blank" rel="noopener">平成30年春期 午前 問6</a></strong> (2018)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>6</strong></td>
+</tr>
+<tr>
+<td>Nội dung: danh sách biểu diễn bằng hai mảng box[i] (giá trị) và next[i] (chỉ số kế tiếp, next[0] trỏ phần tử đầu, 0 là hết). Chèn phần tử giá trị H (đặt ở ô 8) vào giữa phần tử thứ 3 và thứ 4. Hỏi next[8] bằng bao nhiêu?</td>
+<td>内容<span class="rd">(ないよう)</span>：box[i]（値<span class="rd">(あたい)</span>）と next[i]（次<span class="rd">(つぎ)</span>の要素番号<span class="rd">(ようそばんごう)</span>、next[0] が先頭<span class="rd">(せんとう)</span>、0は最後<span class="rd">(さいご)</span>）でリストを表<span class="rd">(あらわ)</span>す。値<span class="rd">(あたい)</span> H の要素<span class="rd">(ようそ)</span>（8番<span class="rd">(ばん)</span>）を3番目<span class="rd">(ばんめ)</span>と4番目<span class="rd">(ばんめ)</span>の間<span class="rd">(あいだ)</span>に挿入<span class="rd">(そうにゅう)</span>したときの next[8] の値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: 7</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：7</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: giống Câu B1 + B2: next của phần tử mới phải trỏ đến phần tử thứ 4 cũ (giá trị G ở ô 7) → next[8] = 7; đồng thời next của phần tử thứ 3 đổi thành 8. Hãy tự dò theo next từ next[0] trên hình ở link để thấy phần tử thứ 4 nằm ở ô 7.</td>
+<td>解説<span class="rd">(かいせつ)</span>：新<span class="rd">(あたら)</span>しい要素<span class="rd">(ようそ)</span>の next は元<span class="rd">(もと)</span>の4番目<span class="rd">(ばんめ)</span>（7番<span class="rd">(ばん)</span>の G）を指<span class="rd">(さ)</span>すので next[8] = 7。3番目<span class="rd">(ばんめ)</span>の要素<span class="rd">(ようそ)</span>の next は 8 に書<span class="rd">(か)</span>き換<span class="rd">(か)</span>える。リンク先<span class="rd">(さき)</span>の図<span class="rd">(ず)</span>で next[0] からたどって確認<span class="rd">(かくにん)</span>しよう。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/27_aki/q5.html" target="_blank" rel="noopener">平成27年秋期 午前 問5</a></strong> (2015)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>27年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đặc điểm nào của danh sách tuyến tính dùng con trỏ là đúng?</td>
+<td>内容<span class="rd">(ないよう)</span>：ポインタを用<span class="rd">(もち)</span>いた線形<span class="rd">(せんけい)</span>リストの特徴<span class="rd">(とくちょう)</span>として適切<span class="rd">(てきせつ)</span>なもの。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: chèn phần tử mới vào sau phần tử do con trỏ chỉ định có chi phí không đổi, không phụ thuộc số phần tử hay vị trí</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ポインタで指定<span class="rd">(してい)</span>された要素<span class="rd">(ようそ)</span>の後<span class="rd">(うし)</span>ろへの追加<span class="rd">(ついか)</span>は、要素<span class="rd">(ようそ)</span>の個数<span class="rd">(こすう)</span>や位置<span class="rd">(いち)</span>によらず一定<span class="rd">(いってい)</span></strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chèn sau nút đã biết chỉ là 2 phép gán (Câu B2) → O(1). Bẫy: "gốc và các nút con" là mô tả cây; tìm kiếm nhị phân không hợp với danh sách liên kết; con trỏ là địa chỉ, không dùng hàm băm.</td>
+<td>解説<span class="rd">(かいせつ)</span>：既知<span class="rd">(きち)</span>の要素<span class="rd">(ようそ)</span>の後<span class="rd">(うし)</span>ろへの挿入<span class="rd">(そうにゅう)</span>は代入<span class="rd">(だいにゅう)</span>2回<span class="rd">(かい)</span>（問<span class="rd">(とい)</span>B2）で一定<span class="rd">(いってい)</span>。根<span class="rd">(ね)</span>と子<span class="rd">(こ)</span>は木構造<span class="rd">(きこうぞう)</span>の説明<span class="rd">(せつめい)</span>、2分探索<span class="rd">(ぶんたんさく)</span>は線形<span class="rd">(せんけい)</span>リストに不向<span class="rd">(ふむ)</span>き、ポインタはアドレスでハッシュ関数<span class="rd">(かんすう)</span>は使<span class="rd">(つか)</span>わない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/21_haru/q6.html" target="_blank" rel="noopener">平成21年春期 午前 問6</a></strong> (2009)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 平成<span class="rd">(へいせい)</span>21年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>6</strong></td>
+</tr>
+<tr>
+<td>Nội dung: so với mảng, phát biểu nào về danh sách liên kết là đúng?</td>
+<td>内容<span class="rd">(ないよう)</span>：配列<span class="rd">(はいれつ)</span>と比較<span class="rd">(ひかく)</span>した連結<span class="rd">(れんけつ)</span>リストの特徴<span class="rd">(とくちょう)</span>として適切<span class="rd">(てきせつ)</span>なもの。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: khi chèn phần tử chỉ cần sửa vài con trỏ nên nhanh</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：挿入<span class="rd">(そうにゅう)</span>は数個<span class="rd">(すうこ)</span>のポインタを書<span class="rd">(か)</span>き換<span class="rd">(か)</span>えるだけなので処理時間<span class="rd">(しょりじかん)</span>が短<span class="rd">(みじか)</span>い</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: bẫy: "xóa phải dời các phần tử phía sau" là đặc điểm của mảng; "truy cập ngẫu nhiên" cũng là của mảng; cập nhật phần tử trong danh sách phải dò từ đầu nên không nhanh hơn mảng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：「後<span class="rd">(うし)</span>ろの要素<span class="rd">(ようそ)</span>を前<span class="rd">(まえ)</span>に移動<span class="rd">(いどう)</span>」「ランダムアクセス」は配列<span class="rd">(はいれつ)</span>の特徴<span class="rd">(とくちょう)</span>。リストの要素<span class="rd">(ようそ)</span>の更新<span class="rd">(こうしん)</span>は先頭<span class="rd">(せんとう)</span>からたどるので速<span class="rd">(はや)</span>くない。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hàm gộp</td>
+<td>集合関数<span class="rd">(しゅうごうかんすう)</span>（集約関数<span class="rd">(しゅうやくかんすう)</span>）</td>
+</tr>
+<tr>
+<td>Gom nhóm / Điều kiện nhóm</td>
+<td>グループ化<span class="rd">(か)</span>（GROUP BY） / HAVING句<span class="rd">(く)</span></td>
+</tr>
+<tr>
+<td>Truy vấn con / Truy vấn con tương quan</td>
+<td>副問合<span class="rd">(ふくといあわ)</span>せ / 相関副問合<span class="rd">(そうかんふくといあわ)</span>せ</td>
+</tr>
+<tr>
+<td>Kết bảng / Kết ngoài</td>
+<td>結合<span class="rd">(けつごう)</span> / 外部結合<span class="rd">(がいぶけつごう)</span></td>
+</tr>
+<tr>
+<td>Cấp quyền / Thu hồi quyền</td>
+<td>権限付与<span class="rd">(けんげんふよ)</span>（GRANT） / 権限取消<span class="rd">(けんげんとりけし)</span>（REVOKE）</td>
+</tr>
+<tr>
+<td>Giao dịch / Xác nhận</td>
+<td>トランザクション / コミット</td>
+</tr>
+<tr>
+<td>Tính nguyên tử / nhất quán / độc lập / bền vững</td>
+<td>原子性<span class="rd">(げんしせい)</span> / 一貫性<span class="rd">(いっかんせい)</span> / 独立性<span class="rd">(どくりつせい)</span> / 耐久性<span class="rd">(たいきゅうせい)</span></td>
+</tr>
+<tr>
+<td>Điều khiển truy cập đồng thời</td>
+<td>排他制御<span class="rd">(はいたせいぎょ)</span></td>
+</tr>
+<tr>
+<td>Khóa chia sẻ / Khóa độc quyền</td>
+<td>共有<span class="rd">(きょうゆう)</span>ロック / 専有<span class="rd">(せんゆう)</span>ロック（排他<span class="rd">(はいた)</span>ロック）</td>
+</tr>
+<tr>
+<td>Độ mịn của khóa</td>
+<td>ロックの粒度<span class="rd">(りゅうど)</span></td>
+</tr>
+<tr>
+<td>Mất cập nhật</td>
+<td>更新<span class="rd">(こうしん)</span>の喪失<span class="rd">(そうしつ)</span>（ロストアップデート）</td>
+</tr>
+<tr>
+<td>Khóa chết</td>
+<td>デッドロック</td>
+</tr>
+<tr>
+<td>Khóa 2 pha</td>
+<td>2相<span class="rd">(そう)</span>ロック</td>
+</tr>
+<tr>
+<td>Log trước / sau cập nhật</td>
+<td>更新前<span class="rd">(こうしんまえ)</span>ログ / 更新後<span class="rd">(こうしんご)</span>ログ</td>
+</tr>
+<tr>
+<td>Điểm kiểm tra</td>
+<td>チェックポイント</td>
+</tr>
+<tr>
+<td>Lùi về / Tiến lên</td>
+<td>ロールバック（後退復帰<span class="rd">(こうたいふっき)</span>） / ロールフォワード（前進復帰<span class="rd">(ぜんしんふっき)</span>）</td>
+</tr>
+<tr>
+<td>Sự cố hệ thống / Sự cố phương tiện lưu trữ</td>
+<td>システム障害<span class="rd">(しょうがい)</span> / 媒体障害<span class="rd">(ばいたいしょうがい)</span></td>
+</tr>
+<tr>
+<td>Sao lưu toàn bộ / vi sai / gia tăng</td>
+<td>フルバックアップ / 差分<span class="rd">(さぶん)</span>バックアップ / 増分<span class="rd">(ぞうぶん)</span>バックアップ</td>
+</tr>
+<tr>
+<td>Danh sách liên kết đơn / đôi / vòng</td>
+<td>単方向<span class="rd">(たんほうこう)</span>リスト / 双方向<span class="rd">(そうほうこう)</span>リスト / 循環<span class="rd">(じゅんかん)</span>リスト</td>
+</tr>
+<tr>
+<td>Phần tử đầu / Phần tử cuối</td>
+<td>先頭要素<span class="rd">(せんとうようそ)</span> / 末尾要素<span class="rd">(まつびようそ)</span></td>
+</tr>
+<tr>
+<td>Con trỏ / Tham chiếu</td>
+<td>ポインタ / 参照<span class="rd">(さんしょう)</span></td>
+</tr>
+<tr>
+<td>Chưa định nghĩa (rỗng)</td>
+<td>未定義<span class="rd">(みていぎ)</span></td>
+</tr>
+<tr>
+<td>Chèn / Xóa / Duyệt</td>
+<td>挿入<span class="rd">(そうにゅう)</span> / 削除<span class="rd">(さくじょ)</span> / 走査<span class="rd">(そうさ)</span></td>
+</tr>
+<tr>
+<td>Thuộc tính / Hàm tạo / Biến toàn cục</td>
+<td>メンバ変数<span class="rd">(へんすう)</span> / コンストラクタ / 大域変数<span class="rd">(たいいきへんすう)</span></td>
+</tr>
+<tr>
+<td>Truy cập ngẫu nhiên</td>
+<td>ランダムアクセス</td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

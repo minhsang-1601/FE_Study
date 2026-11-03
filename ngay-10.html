@@ -1,0 +1,419 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 10 (21/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 10 (21/10): Thiết kế cơ sở dữ liệu (ER, chuẩn hóa, khóa) và stack, queue</h1>
+<p class="meta">Ngày 10 · Thứ Tư 21/10 · 科目A: ER, chuẩn hóa, khóa · 科目B: stack, queue</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Thiết kế CSDL ｜ データベース設計<span class="rd">(せっけい)</span></a></li><li><a href="#muc-3">科目B: Stack và queue ｜ スタックとキュー</a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Bài soạn bù. Dùng như tài liệu ôn phần CSDL và cấu trúc stack, queue.</p>
+<ul class="check">
+<li>Đọc lý thuyết ER và khóa (20 phút)</li>
+<li>2 bài tự luyện + đề cũ 科目A (40 phút)</li>
+<li>Đọc lý thuyết stack, queue, 1 bài tự luyện (20 phút)</li>
+<li>Đề cũ 科目B (40 phút)</li>
+</ul>
+<h2 id="muc-2">科目A: Thiết kế CSDL ｜ データベース設計<span class="rd">(せっけい)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sơ đồ ER:</strong> thực thể (entity) có thuộc tính; quan hệ giữa thực thể là 1:1, 1:N hoặc M:N. Thực thể có thể là vật thật hoặc khái niệm, sự kiện (đơn hàng, doanh thu).</td>
+<td><strong>E-R図<span class="rd">(ず)</span>：</strong>エンティティは属性<span class="rd">(ぞくせい)</span>を持<span class="rd">(も)</span>つ。関連<span class="rd">(かんれん)</span>は1対<span class="rd">(たい)</span>1、1対多<span class="rd">(たいた)</span>、多対多<span class="rd">(たたいた)</span>。概念<span class="rd">(がいねん)</span>や出来事<span class="rd">(できごと)</span>もエンティティになる。</td>
+</tr>
+<tr>
+<td><strong>Quan hệ M:N:</strong> không cài trực tiếp được vào CSDL quan hệ; thêm thực thể liên kết (associative entity) để tách thành 2 quan hệ 1:N.</td>
+<td><strong>多対多<span class="rd">(たたいた)</span>：</strong>連関<span class="rd">(れんかん)</span>エンティティを置<span class="rd">(お)</span>いて1対多<span class="rd">(たいた)</span>2つに分解<span class="rd">(ぶんかい)</span>。</td>
+</tr>
+<tr>
+<td><strong>Khóa:</strong> khóa chính duy nhất và không NULL; khóa ngoại tham chiếu khóa chính bảng khác (ràng buộc tham chiếu); khóa ứng viên là các cột có thể làm khóa chính.</td>
+<td><strong>キー：</strong>主<span class="rd">(しゅ)</span>キーは一意<span class="rd">(いちい)</span>・NOT NULL、外部<span class="rd">(がいぶ)</span>キーは他表<span class="rd">(たひょう)</span>の主<span class="rd">(しゅ)</span>キーを参照<span class="rd">(さんしょう)</span>（参照制約<span class="rd">(さんしょうせいやく)</span>）、候補<span class="rd">(こうほ)</span>キー。</td>
+</tr>
+<tr>
+<td><strong>Chuẩn hóa:</strong> 1NF bỏ nhóm lặp; 2NF bỏ phụ thuộc một phần khóa; 3NF bỏ phụ thuộc bắc cầu.</td>
+<td><strong>正規化<span class="rd">(せいきか)</span>：</strong>第<span class="rd">(だい)</span>1は繰返<span class="rd">(くりかえ)</span>し、第<span class="rd">(だい)</span>2は部分関数従属<span class="rd">(ぶぶんかんすうじゅうぞく)</span>、第<span class="rd">(だい)</span>3は推移関数従属<span class="rd">(すいいかんすうじゅうぞく)</span>を除去<span class="rd">(じょきょ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Bảng ĐƠN_HÀNG(mã đơn, mã khách, tên khách, ngày). Khóa chính là mã đơn; mã khách quyết định tên khách. Bảng đang ở dạng chuẩn nào?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> 注文<span class="rd">(ちゅうもん)</span>(注文番号<span class="rd">(ちゅうもんばんごう)</span>, 顧客番号<span class="rd">(こきゃくばんごう)</span>, 顧客名<span class="rd">(こきゃくめい)</span>, 日付<span class="rd">(ひづけ)</span>)。主<span class="rd">(しゅ)</span>キーは注文番号<span class="rd">(ちゅうもんばんごう)</span>、顧客番号<span class="rd">(こきゃくばんごう)</span>で顧客名<span class="rd">(こきゃくめい)</span>が決<span class="rd">(き)</span>まる。何<span class="rd">(なに)</span>正規形<span class="rd">(せいきけい)</span>か。</td>
+</tr>
+<tr>
+<td>ア chưa chuẩn hóa　イ 1NF (chưa 2NF)　ウ 2NF (chưa 3NF)　エ 3NF</td>
+<td>ア 非正規形<span class="rd">(ひせいきけい)</span>　イ 第<span class="rd">(だい)</span>1　ウ 第<span class="rd">(だい)</span>2　エ 第<span class="rd">(だい)</span>3</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: khóa chính chỉ 1 cột nên không thể có phụ thuộc một phần → đã 2NF. Mã khách → tên khách là bắc cầu → chưa 3NF.</td>
+<td>解説<span class="rd">(かいせつ)</span>：単一<span class="rd">(たんいつ)</span>キーなので第<span class="rd">(だい)</span>2正規形<span class="rd">(せいきけい)</span>。推移従属<span class="rd">(すいいじゅうぞく)</span>が残<span class="rd">(のこ)</span>る。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Sinh viên đăng ký nhiều môn, mỗi môn có nhiều sinh viên. Thiết kế đúng?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> 学生<span class="rd">(がくせい)</span>は複数<span class="rd">(ふくすう)</span>の科目<span class="rd">(かもく)</span>を履修<span class="rd">(りしゅう)</span>し、科目<span class="rd">(かもく)</span>にも複数<span class="rd">(ふくすう)</span>の学生<span class="rd">(がくせい)</span>がいる。正<span class="rd">(ただ)</span>しい設計<span class="rd">(せっけい)</span>は。</td>
+</tr>
+<tr>
+<td>ア thêm cột mã môn vào bảng sinh viên　イ thêm bảng ĐĂNG_KÝ(mã SV, mã môn)　ウ gộp 2 bảng làm một　エ thêm cột mã SV vào bảng môn</td>
+<td>ア 学生表<span class="rd">(がくせいひょう)</span>に科目<span class="rd">(かもく)</span>コード　イ 履修表<span class="rd">(りしゅうひょう)</span>(学生番号<span class="rd">(がくせいばんごう)</span>, 科目<span class="rd">(かもく)</span>コード)を追加<span class="rd">(ついか)</span>　ウ 1つに統合<span class="rd">(とうごう)</span>　エ 科目表<span class="rd">(かもくひょう)</span>に学生番号<span class="rd">(がくせいばんごう)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: M:N cần thực thể liên kết. ア, エ chỉ chứa được 1 giá trị nên phải lặp dòng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：多対多<span class="rd">(たたいた)</span>は連関<span class="rd">(れんかん)</span>エンティティで分解<span class="rd">(ぶんかい)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/24_aki/q26.html" target="_blank" rel="noopener">平成24年秋期 午前 問26</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>26</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mô tả đúng về sơ đồ ER? ア giữa các loại thực thể có quan hệ 1:N, M:N…　イ quan hệ vẽ bằng mũi tên từ bên tham chiếu tới bên bị tham chiếu　ウ thực thể không có thuộc tính, chỉ quan hệ có　エ ghi tên thực thể liên quan bên trong thực thể</td>
+<td>内容<span class="rd">(ないよう)</span>：E-R図<span class="rd">(ず)</span>の説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: quan hệ vẽ bằng đường nối; thực thể có thuộc tính.</td>
+<td>解説<span class="rd">(かいせつ)</span>：関連<span class="rd">(かんれん)</span>は線<span class="rd">(せん)</span>で表<span class="rd">(あらわ)</span>し、属性<span class="rd">(ぞくせい)</span>はエンティティが持<span class="rd">(も)</span>つ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/07_haru/a11.html" target="_blank" rel="noopener">令和7年度 科目A 問11</a></strong> (2025)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>11</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đặc điểm đúng của thực thể trong mô hình ER? ア thực thể và instance tương ứng 1:1　イ chỉ vật tồn tại vật lý mới là thực thể　ウ thực thể có thuộc tính thể hiện đặc tính　エ quan hệ giữa thực thể chủ yếu biểu diễn bằng chuyển trạng thái</td>
+<td>内容<span class="rd">(ないよう)</span>：E-Rモデルのエンティティの説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thực thể (kiểu) và instance là 1:N; khái niệm như đơn hàng cũng là thực thể; ER là mô hình tĩnh.</td>
+<td>解説<span class="rd">(かいせつ)</span>：型<span class="rd">(かた)</span>と実体<span class="rd">(じったい)</span>は1対多<span class="rd">(たいた)</span>、概念<span class="rd">(がいねん)</span>も対象<span class="rd">(たいしょう)</span>、静的<span class="rd">(せいてき)</span>なモデル。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/04_menjo/q27.html" target="_blank" rel="noopener">令和4年度 問27</a></strong> (2022)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>4年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>27</strong></td>
+</tr>
+<tr>
+<td>Nội dung: sổ quản lý tồn kho linh kiện có 3 thực thể "linh kiện", "nhà cung cấp", "tồn kho"; một nhà cung cấp bán nhiều linh kiện và một linh kiện mua từ nhiều nhà cung cấp. Chọn tổ hợp a, b, c đúng trong hình (xem ở link).</td>
+<td>内容<span class="rd">(ないよう)</span>：部品<span class="rd">(ぶひん)</span>・仕入先<span class="rd">(しいれさき)</span>・在庫<span class="rd">(ざいこ)</span>のデータモデルで空欄<span class="rd">(くうらん)</span>a〜cの組合<span class="rd">(くみあ)</span>せ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (b là "tồn kho", đặt giữa hai thực thể)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（bが在庫<span class="rd">(ざいこ)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: linh kiện và nhà cung cấp là M:N, nên "tồn kho" là thực thể liên kết ở giữa, tách thành 2 quan hệ 1:N.</td>
+<td>解説<span class="rd">(かいせつ)</span>：在庫<span class="rd">(ざいこ)</span>が連関<span class="rd">(れんかん)</span>エンティティ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/25_aki/q30.html" target="_blank" rel="noopener">平成25年秋期 午前 問30</a></strong> (2013; cũng có ở ngày 29)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>25年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>30</strong></td>
+</tr>
+<tr>
+<td>Nội dung: ngoài không trùng, khóa chính cần điều kiện gì? ア không NULL　イ chỉ 1 cột　ウ cột đầu tiên　エ trùng khóa ứng viên bảng khác</td>
+<td>内容<span class="rd">(ないよう)</span>：主<span class="rd">(しゅ)</span>キー制約<span class="rd">(せいやく)</span>の条件<span class="rd">(じょうけん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: khóa chính = UNIQUE + NOT NULL.</td>
+<td>解説<span class="rd">(かいせつ)</span>：一意<span class="rd">(いちい)</span> + NOT NULL。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/02_menjo/q27.html" target="_blank" rel="noopener">令和2年度 問27</a></strong> (2020; cũng có ở ngày 29)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>2年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>27</strong></td>
+</tr>
+<tr>
+<td>Nội dung: bảng có "chức vụ → phụ cấp chức vụ" chưa tách. Chuẩn hóa tới đâu? ア 2NF　イ 3NF　ウ 4NF　エ chưa chuẩn hóa</td>
+<td>内容<span class="rd">(ないよう)</span>：どこまで正規化<span class="rd">(せいきか)</span>されているか。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: còn phụ thuộc bắc cầu → 2NF.</td>
+<td>解説<span class="rd">(かいせつ)</span>：推移関数従属<span class="rd">(すいいかんすうじゅうぞく)</span>が残<span class="rd">(のこ)</span>る。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Stack và queue ｜ スタックとキュー</h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stack (LIFO):</strong> push đặt lên đỉnh, pop lấy từ đỉnh. Dùng cho lời gọi hàm, đệ quy, ký pháp Ba Lan ngược, quay lui.</td>
+<td><strong>スタック（LIFO）：</strong>push・popは上<span class="rd">(うえ)</span>から。関数呼出<span class="rd">(かんすうよびだ)</span>し、再帰<span class="rd">(さいき)</span>、逆<span class="rd">(ぎゃく)</span>ポーランド記法<span class="rd">(きほう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Queue (FIFO):</strong> enqueue vào cuối, dequeue lấy từ đầu. Dùng cho hàng đợi in, xử lý theo thứ tự đến, duyệt theo chiều rộng.</td>
+<td><strong>キュー（FIFO）：</strong>後<span class="rd">(うし)</span>ろに追加<span class="rd">(ついか)</span>、前<span class="rd">(まえ)</span>から取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>す。印刷待<span class="rd">(いんさつま)</span>ち、幅優先探索<span class="rd">(はばゆうせんたんさく)</span>。</td>
+</tr>
+<tr>
+<td><strong>Cài bằng mảng:</strong> stack dùng 1 biến chỉ đỉnh; queue dùng 2 biến chỉ đầu và cuối (hàng đợi vòng thì chỉ số quay về 1 khi vượt cuối mảng).</td>
+<td><strong>配列<span class="rd">(はいれつ)</span>での実装<span class="rd">(じっそう)</span>：</strong>スタックは先頭位置<span class="rd">(せんとういち)</span>1つ、キューは先頭<span class="rd">(せんとう)</span>と末尾<span class="rd">(まつび)</span>（リングバッファ）。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu B1</strong> Queue rỗng. enqueue(1), enqueue(2), dequeue(), enqueue(3), enqueue(4), dequeue(). Phần tử ở đầu queue lúc này?</td>
+<td><strong>問<span class="rd">(とい)</span>B1</strong> 空<span class="rd">(から)</span>のキューにenqueue(1)、enqueue(2)、dequeue()、enqueue(3)、enqueue(4)、dequeue()。先頭<span class="rd">(せんとう)</span>の要素<span class="rd">(ようそ)</span>は。</td>
+</tr>
+<tr>
+<td>ア 1　イ 2　ウ 3　エ 4</td>
+<td>ア 1　イ 2　ウ 3　エ 4</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (3)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（3）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: [1, 2] → bỏ 1 → [2] → [2, 3, 4] → bỏ 2 → [3, 4]. Đầu là 3.</td>
+<td>解説<span class="rd">(かいせつ)</span>：[3, 4]の先頭<span class="rd">(せんとう)</span>は3。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/24_aki/q5.html" target="_blank" rel="noopener">平成24年秋期 午前 問5</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: queue có A, B, C, D (A ở đầu), stack rỗng. Chỉ dùng deq_push (lấy từ queue đẩy vào stack) và pop_enq (lấy từ stack đưa vào queue) để queue thành D, C, B, A. Số lần deq_push tối thiểu? Lựa chọn: 2, 3, 4, 5 (xem ký hiệu ở link)</td>
+<td>内容<span class="rd">(ないよう)</span>：キューA, B, C, DをD, C, B, Aに並<span class="rd">(なら)</span>べ替<span class="rd">(か)</span>えるdeq_pushの最小回数<span class="rd">(さいしょうかいすう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: 3 lần</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：3回<span class="rd">(かい)</span></strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đẩy A, B, C vào stack (3 lần), D đã ở đầu queue. Rồi pop_enq 3 lần: C, B, A vào sau D.</td>
+<td>解説<span class="rd">(かいせつ)</span>：A・B・Cをスタックへ、その後<span class="rd">(ご)</span>C・B・Aの順<span class="rd">(じゅん)</span>にキューへ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/01_aki/q8.html" target="_blank" rel="noopener">令和元年秋期 午前 問8</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: nhập lần lượt A, C, K, S, T; muốn xuất S, T, A, C, K. Dùng stack, mỗi lần pop là xuất ngay, không chuyển giữa các stack. Cần tối thiểu mấy stack? ア 1　イ 2　ウ 3　エ 4</td>
+<td>内容<span class="rd">(ないよう)</span>：A, C, K, S, Tを入力<span class="rd">(にゅうりょく)</span>しS, T, A, C, Kの順<span class="rd">(じゅん)</span>に出力<span class="rd">(しゅつりょく)</span>するのに必要<span class="rd">(ひつよう)</span>なスタックの最小個数<span class="rd">(さいしょうこすう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (3)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（3個<span class="rd">(こ)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: A, C, K phải ra theo thứ tự A trước K sau, nên không chồng lên nhau được: mỗi chữ một stack. S, T đặt lên stack của K rồi pop ngay. Với 2 stack thì K sẽ đè lên A hoặc C.</td>
+<td>解説<span class="rd">(かいせつ)</span>：A・C・Kは別々<span class="rd">(べつべつ)</span>のスタックが必要<span class="rd">(ひつよう)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thực thể / thuộc tính / quan hệ</td>
+<td>エンティティ / 属性<span class="rd">(ぞくせい)</span> / リレーションシップ</td>
+</tr>
+<tr>
+<td>Thực thể liên kết / nhiều-nhiều</td>
+<td>連関<span class="rd">(れんかん)</span>エンティティ / 多対多<span class="rd">(たたいた)</span></td>
+</tr>
+<tr>
+<td>Khóa chính / khóa ngoại / ràng buộc tham chiếu</td>
+<td>主<span class="rd">(しゅ)</span>キー / 外部<span class="rd">(がいぶ)</span>キー / 参照制約<span class="rd">(さんしょうせいやく)</span></td>
+</tr>
+<tr>
+<td>Vào sau ra trước / vào trước ra trước</td>
+<td>後入<span class="rd">(あとい)</span>れ先出<span class="rd">(さきだ)</span>し（LIFO） / 先入<span class="rd">(さきい)</span>れ先出<span class="rd">(さきだ)</span>し（FIFO）</td>
+</tr>
+<tr>
+<td>Đẩy vào / lấy ra / thêm vào hàng / lấy khỏi hàng</td>
+<td>プッシュ / ポップ / エンキュー / デキュー</td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

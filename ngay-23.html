@@ -1,0 +1,452 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 23 (03/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 23 (03/11): Luyện đề マネジメント và 4 câu thuật toán</h1>
+<p class="meta">Ngày 23 · Thứ Ba 03/11 · 科目A: luyện đề マネジメント · 科目B: 4 câu thuật toán</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Luyện đề マネジメント ｜ マネジメント系<span class="rd">(けい)</span>の演習<span class="rd">(えんしゅう)</span></a></li><li><a href="#muc-3">科目B: 4 câu thuật toán ｜ アルゴリズム4問<span class="rd">(もん)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Phần マネジメント chiếm khoảng 10/60 câu 科目A. Hôm nay luyện 3 dạng hay ra: tính ngày trên sơ đồ mũi tên, tính công số (人月), và câu chữ về quản lý dịch vụ, kiểm toán.</p>
+<ul class="check">
+<li>Đọc bảng mẹo làm bài (10 phút)</li>
+<li>2 bài tự luyện + 6 câu đề cũ (50 phút)</li>
+<li>科目B: 4 câu đề công khai, bấm giờ 20 phút (40 phút)</li>
+<li>Xem lại câu sai (20 phút)</li>
+</ul>
+<h2 id="muc-2">科目A: Luyện đề マネジメント ｜ マネジメント系<span class="rd">(けい)</span>の演習<span class="rd">(えんしゅう)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sơ đồ mũi tên:</strong> số ngày ngắn nhất để xong dự án = đường dài nhất (đường găng). Liệt kê hết các đường đi, kể cả qua công việc giả (0 ngày).</td>
+<td><strong>アローダイアグラム：</strong>最短所要日数<span class="rd">(さいたんしょようにっすう)</span> = 最長経路<span class="rd">(さいちょうけいろ)</span>（クリティカルパス）。ダミー作業<span class="rd">(さぎょう)</span>（0日<span class="rd">(にち)</span>）を含<span class="rd">(ふく)</span>めすべての経路<span class="rd">(けいろ)</span>を書<span class="rd">(か)</span>き出<span class="rd">(だ)</span>す。</td>
+</tr>
+<tr>
+<td><strong>Công số:</strong> người-tháng = quy mô ÷ năng suất. Nếu có phần trăm quản lý dự án thì cộng sau cùng trên tổng. Số người = người-tháng ÷ số tháng.</td>
+<td><strong>工数<span class="rd">(こうすう)</span>：</strong>人月<span class="rd">(にんげつ)</span> = 規模<span class="rd">(きぼ)</span> ÷ 生産性<span class="rd">(せいさんせい)</span>。管理工数<span class="rd">(かんりこうすう)</span>の%は合計<span class="rd">(ごうけい)</span>に掛<span class="rd">(か)</span>ける。要員数<span class="rd">(よういんすう)</span> = 人月<span class="rd">(にんげつ)</span> ÷ 期間<span class="rd">(きかん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Sự cố (incident) và vấn đề (problem):</strong> quản lý sự cố khôi phục dịch vụ nhanh (tạm thời); quản lý vấn đề tìm nguyên nhân gốc và giải pháp lâu dài, kể cả phòng ngừa trước.</td>
+<td><strong>インシデント管理<span class="rd">(かんり)</span>と問題管理<span class="rd">(もんだいかんり)</span>：</strong>インシデント管理<span class="rd">(かんり)</span>は迅速<span class="rd">(じんそく)</span>な暫定復旧<span class="rd">(ざんていふっきゅう)</span>、問題管理<span class="rd">(もんだいかんり)</span>は根本原因<span class="rd">(こんぽんげんいん)</span>と恒久対策<span class="rd">(こうきゅうたいさく)</span>、予防<span class="rd">(よぼう)</span>（プロアクティブ）も含<span class="rd">(ふく)</span>む。</td>
+</tr>
+<tr>
+<td><strong>Sự cố là gì:</strong> sự gián đoạn hoặc giảm chất lượng dịch vụ ngoài kế hoạch (ví dụ chương trình bị dừng bất thường). Nguyên nhân (lỗi code) là "vấn đề", không phải sự cố.</td>
+<td><strong>インシデントとは：</strong>計画外<span class="rd">(けいかくがい)</span>のサービス中断<span class="rd">(ちゅうだん)</span>や品質低下<span class="rd">(ひんしつていか)</span>（例<span class="rd">(れい)</span>：プログラムの異常終了<span class="rd">(いじょうしゅうりょう)</span>）。原因<span class="rd">(げんいん)</span>の誤<span class="rd">(あやま)</span>りは「問題<span class="rd">(もんだい)</span>」。</td>
+</tr>
+<tr>
+<td><strong>Kiểm toán hệ thống:</strong> đối tượng là kiểm soát nội bộ liên quan tới IT (độ chính xác khi nhập dữ liệu, quyền truy cập…), không phải kế hoạch kinh doanh hay đánh giá nhân sự.</td>
+<td><strong>システム監査<span class="rd">(かんさ)</span>：</strong>対象<span class="rd">(たいしょう)</span>はITに係<span class="rd">(かか)</span>わる内部統制<span class="rd">(ないぶとうせい)</span>（入力<span class="rd">(にゅうりょく)</span>の正確性<span class="rd">(せいかくせい)</span>、アクセス権<span class="rd">(けん)</span>など）。経営計画<span class="rd">(けいえいけいかく)</span>や人事評価<span class="rd">(じんじひょうか)</span>ではない。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Dự án gồm: A (3 ngày) → B (5 ngày) → D (2 ngày); A → C (4 ngày) → D. B và C làm song song sau A; D bắt đầu khi B và C đều xong. Số ngày ngắn nhất?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> A（3日<span class="rd">(にち)</span>）の後<span class="rd">(あと)</span>にB（5日<span class="rd">(にち)</span>）とC（4日<span class="rd">(にち)</span>）を並行<span class="rd">(へいこう)</span>、両方<span class="rd">(りょうほう)</span>終了後<span class="rd">(しゅうりょうご)</span>にD（2日<span class="rd">(にち)</span>）。最短日数<span class="rd">(さいたんにっすう)</span>は。</td>
+</tr>
+<tr>
+<td>ア 9　イ 10　ウ 11　エ 14</td>
+<td>ア 9　イ 10　ウ 11　エ 14</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (10)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（10）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đường A-B-D = 3 + 5 + 2 = 10; A-C-D = 9. Lấy đường dài nhất: 10. エ là cộng tất cả.</td>
+<td>解説<span class="rd">(かいせつ)</span>：A-B-D = 10、A-C-D = 9。長<span class="rd">(なが)</span>い方<span class="rd">(ほう)</span>の10。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Phần mềm 120 FP, năng suất 8 FP/người-tháng, làm trong 3 tháng. Cần bao nhiêu người?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> 120FP、生産性<span class="rd">(せいさんせい)</span>8FP/人月<span class="rd">(にんげつ)</span>、期間<span class="rd">(きかん)</span>3か月<span class="rd">(げつ)</span>。必要<span class="rd">(ひつよう)</span>な要員数<span class="rd">(よういんすう)</span>は。</td>
+</tr>
+<tr>
+<td>ア 3　イ 5　ウ 8　エ 15</td>
+<td>ア 3　イ 5　ウ 8　エ 15</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (5)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（5人<span class="rd">(にん)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 120 ÷ 8 = 15 người-tháng; 15 ÷ 3 = 5 người. エ là người-tháng chứ chưa chia số tháng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：15人月<span class="rd">(にんげつ)</span> ÷ 3か月<span class="rd">(げつ)</span> = 5人<span class="rd">(にん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/29_haru/q51.html" target="_blank" rel="noopener">平成29年春期 午前 問51</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>51</strong></td>
+</tr>
+<tr>
+<td>Nội dung: sơ đồ mũi tên có các công việc A 30, B 5, C 30, D 20, E 40, F 25, G 30, H 30 ngày và 2 công việc giả. Số ngày ngắn nhất để xong? ア 105　イ 115　ウ 120　エ 125. Xem hình ở link.</td>
+<td>内容<span class="rd">(ないよう)</span>：A30・B5・C30・D20・E40・F25・G30・H30日<span class="rd">(にち)</span>とダミー2本<span class="rd">(ほん)</span>のアローダイアグラム。最短<span class="rd">(さいたん)</span>の完了日数<span class="rd">(かんりょうにっすう)</span>。図<span class="rd">(ず)</span>はリンク先<span class="rd">(さき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (120)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（120）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: các đường: A-B-E-H 105; A-C-F-H 115; A-C-(giả)-G-H 120; A-D-G-H 110… Đường dài nhất là A→C→giả→G→H = 30 + 30 + 0 + 30 + 30 = 120.</td>
+<td>解説<span class="rd">(かいせつ)</span>：A→C→ダミー→G→Hが120日<span class="rd">(にち)</span>で最長<span class="rd">(さいちょう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/30_aki/q54.html" target="_blank" rel="noopener">平成30年秋期 午前 問54</a></strong> (2018)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>54</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hệ thống 500 FP, năng suất 10 FP/người-tháng. Ngoài phát triển còn cần 10 người-tháng cho triển khai và đào tạo; quản lý dự án tốn 10% của (phát triển + triển khai, đào tạo). Tổng công số? ア 51　イ 60　ウ 65　エ 66</td>
+<td>内容<span class="rd">(ないよう)</span>：500FP、生産性<span class="rd">(せいさんせい)</span>10FP/人月<span class="rd">(にんげつ)</span>。導入<span class="rd">(どうにゅう)</span>・教育<span class="rd">(きょういく)</span>に10人月<span class="rd">(にんげつ)</span>、管理<span class="rd">(かんり)</span>は合計<span class="rd">(ごうけい)</span>の10%。全工数<span class="rd">(ぜんこうすう)</span>は。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (66)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（66）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: phát triển 500 ÷ 10 = 50; + 10 = 60; quản lý 10% = 6; tổng 66. ウ là chỉ lấy 10% của phần phát triển.</td>
+<td>解説<span class="rd">(かいせつ)</span>：50 + 10 = 60、管理<span class="rd">(かんり)</span>6、合計<span class="rd">(ごうけい)</span>66人月<span class="rd">(にんげつ)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/02_menjo/q55.html" target="_blank" rel="noopener">令和2年度 問55</a></strong> (2020)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>2年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>55</strong></td>
+</tr>
+<tr>
+<td>Nội dung: việc nào thuộc quy trình quản lý vấn đề? ア khôi phục tạm thời dịch vụ sau sự cố　イ tìm nguyên nhân gốc chưa biết, lập giải pháp lâu dài　ウ thiết kế để khôi phục khi có sự cố　エ ghi nhận sự cố, báo cho các bộ phận</td>
+<td>内容<span class="rd">(ないよう)</span>：問題管理<span class="rd">(もんだいかんり)</span>プロセスで実施<span class="rd">(じっし)</span>すること。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア là quản lý sự cố, ウ là quản lý tính liên tục dịch vụ, エ là service desk.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはインシデント管理<span class="rd">(かんり)</span>、ウはサービス継続<span class="rd">(けいぞく)</span>管理<span class="rd">(かんり)</span>、エはサービスデスク。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/30_haru/q55.html" target="_blank" rel="noopener">平成30年春期 午前 問55</a></strong> (2018)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>55</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hoạt động nào của quản lý vấn đề là phòng ngừa trước (proactive)? ア phân tích xu hướng sự cố, đề xuất cách phòng sự cố tương lai　イ phân loại vấn đề, đặt ưu tiên　ウ đánh giá hiệu quả giải pháp　エ theo dõi tái phát sau khi giải quyết</td>
+<td>内容<span class="rd">(ないよう)</span>：問題管理<span class="rd">(もんだいかんり)</span>の事前予防的<span class="rd">(じぜんよぼうてき)</span>な活動<span class="rd">(かつどう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chỉ ア nhìn về sự cố chưa xảy ra. イ, ウ, エ đều làm sau khi vấn đề đã có.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アだけが将来<span class="rd">(しょうらい)</span>の予防<span class="rd">(よぼう)</span>。他<span class="rd">(ほか)</span>は事後<span class="rd">(じご)</span>の活動<span class="rd">(かつどう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/02_menjo/q57.html" target="_blank" rel="noopener">令和2年度 問57</a></strong> (2020)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>2年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>57</strong></td>
+</tr>
+<tr>
+<td>Nội dung: batch đêm in đơn đặt hàng bị dừng bất thường; người bảo trì đến gấp khôi phục dịch vụ, hôm sau sửa lỗi chương trình. Cái nào là "sự cố"? ア việc phát hiện dừng bất thường　イ lỗi chương trình　ウ chương trình dừng bất thường　エ người bảo trì đến gấp</td>
+<td>内容<span class="rd">(ないよう)</span>：夜間<span class="rd">(やかん)</span>バッチの異常終了<span class="rd">(いじょうしゅうりょう)</span>の事例<span class="rd">(じれい)</span>でインシデントに該当<span class="rd">(がいとう)</span>するもの。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: sự cố = gián đoạn dịch vụ ngoài kế hoạch, chính là việc dừng bất thường. イ là nguyên nhân (vấn đề); ア và エ là hành động xử lý.</td>
+<td>解説<span class="rd">(かいせつ)</span>：計画外<span class="rd">(けいかくがい)</span>の中断<span class="rd">(ちゅうだん)</span>＝異常終了<span class="rd">(いじょうしゅうりょう)</span>。イは原因<span class="rd">(げんいん)</span>、ア・エは対応<span class="rd">(たいおう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/27_haru/q59.html" target="_blank" rel="noopener">平成27年春期 午前 問59</a></strong> (2015)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>27年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>59</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đối tượng thích hợp của kiểm toán hệ thống (đánh giá kiểm soát nội bộ về IT)? ア quá trình lập kế hoạch trung hạn　イ kết quả đánh giá nhân viên　ウ tình hình xem lại thiết bị sản xuất　エ cách đảm bảo độ chính xác khi nhập, cập nhật CSDL ở phòng bán hàng</td>
+<td>内容<span class="rd">(ないよう)</span>：ITに係<span class="rd">(かか)</span>わる内部統制<span class="rd">(ないぶとうせい)</span>を評価<span class="rd">(ひょうか)</span>するシステム監査<span class="rd">(かんさ)</span>の対象<span class="rd">(たいしょう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chỉ エ liên quan trực tiếp tới độ tin cậy của hệ thống thông tin.</td>
+<td>解説<span class="rd">(かいせつ)</span>：情報<span class="rd">(じょうほう)</span>システムの信頼性<span class="rd">(しんらいせい)</span>に関<span class="rd">(かか)</span>わるのはエだけ。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: 4 câu thuật toán ｜ アルゴリズム4問<span class="rd">(もん)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu hỏi "in ra theo thứ tự nào":</strong> vẽ ngăn xếp lời gọi: gọi hàm thì đẩy vào, hàm xong thì quay lại đúng chỗ sau lời gọi.</td>
+<td><strong>出力順<span class="rd">(しゅつりょくじゅん)</span>の問題<span class="rd">(もんだい)</span>：</strong>呼<span class="rd">(よ)</span>び出<span class="rd">(だ)</span>しの流<span class="rd">(なが)</span>れを書<span class="rd">(か)</span>く。終<span class="rd">(お)</span>わったら呼<span class="rd">(よ)</span>び出<span class="rd">(だ)</span>し元<span class="rd">(もと)</span>の次<span class="rd">(つぎ)</span>の行<span class="rd">(ぎょう)</span>へ戻<span class="rd">(もど)</span>る。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu hỏi "dòng α chạy mấy lần":</strong> lập bảng giá trị biến sau mỗi vòng lặp (i, j, k…). Đếm khi tới dòng α.</td>
+<td><strong>α行<span class="rd">(ぎょう)</span>の実行回数<span class="rd">(じっこうかいすう)</span>：</strong>ループごとに変数<span class="rd">(へんすう)</span>の表<span class="rd">(ひょう)</span>を作<span class="rd">(つく)</span>り、α行<span class="rd">(ぎょう)</span>に来<span class="rd">(き)</span>たら数<span class="rd">(かぞ)</span>える。</td>
+</tr>
+<tr>
+<td><strong>Đổi nhị phân sang thập phân:</strong> đọc từ trái, mỗi bước "kết quả × 2 + bit".</td>
+<td><strong>2進<span class="rd">(しん)</span>→10進<span class="rd">(しん)</span>：</strong>左<span class="rd">(ひだり)</span>から「結果<span class="rd">(けっか)</span> × 2 + ビット」。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/05_haru/b1.html" target="_blank" rel="noopener">令和5年度 科目B 問1</a></strong> (2023, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm findPrimeNumbers trả về danh sách mọi số nguyên tố ≤ maxNum (maxNum ≥ 2). Vòng ngoài i chạy từ 2 tới [a]; vòng trong chia i cho j (2 tới √i), nếu [b] thì divideFlag ← false.</td>
+<td>内容<span class="rd">(ないよう)</span>：maxNum以下<span class="rd">(いか)</span>の素数<span class="rd">(そすう)</span>を返<span class="rd">(かえ)</span>す関数<span class="rd">(かんすう)</span>findPrimeNumbers。外側<span class="rd">(そとがわ)</span>ループの上限<span class="rd">(じょうげん)</span>aと、divideFlagをfalseにする条件<span class="rd">(じょうけん)</span>b。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (a = maxNum; b = phần dư của i ÷ j bằng 0)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（a：maxNum、b：i ÷ jの余<span class="rd">(あま)</span>りが0と等<span class="rd">(ひと)</span>しい）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: phải xét mọi số tới đúng maxNum (không phải maxNum + 1). Chia hết cho j nào đó thì không phải số nguyên tố. Với maxNum = 10: kết quả {2, 3, 5, 7}.</td>
+<td>解説<span class="rd">(かいせつ)</span>：maxNumまで調<span class="rd">(しら)</span>べる。割<span class="rd">(わ)</span>り切<span class="rd">(き)</span>れたら素数<span class="rd">(そすう)</span>ではない。10なら{2, 3, 5, 7}。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/05_haru/b2.html" target="_blank" rel="noopener">令和5年度 科目B 問2</a></strong> (2023, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 3 thủ tục proc1, proc2, proc3 gọi lẫn nhau và in ký tự. Gọi proc2 thì in ra theo thứ tự nào? Xem code ở link.</td>
+<td>内容<span class="rd">(ないよう)</span>：proc1〜proc3が互<span class="rd">(たが)</span>いに呼<span class="rd">(よ)</span>び出<span class="rd">(だ)</span>して文字<span class="rd">(もじ)</span>を出力<span class="rd">(しゅつりょく)</span>する。proc2を呼<span class="rd">(よ)</span>ぶと出力<span class="rd">(しゅつりょく)</span>される順<span class="rd">(じゅん)</span>は。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ク</strong> ("C", "B", "A", "C")</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ク</strong>（"C", "B", "A", "C"）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: proc2 gọi proc3 (in C), quay về proc2 in B, gọi proc1 (in A), proc1 gọi proc3 (in C).</td>
+<td>解説<span class="rd">(かいせつ)</span>：proc2 → proc3でC、proc2でB、proc1でA、proc1 → proc3でC。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/06_haru/b2.html" target="_blank" rel="noopener">令和6年度 科目B 問2</a></strong> (2024, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm convDecimal nhận chuỗi "0"/"1" và trả về giá trị nhị phân không dấu (ví dụ "10010" → 18). Chọn lệnh trong vòng lặp i = 1 tới length: cộng int(ký tự) có hoặc không nhân 2, đọc từ trái (i) hay từ phải (length − i + 1).</td>
+<td>内容<span class="rd">(ないよう)</span>：2進数<span class="rd">(しんすう)</span>の文字列<span class="rd">(もじれつ)</span>を10進<span class="rd">(しん)</span>に変換<span class="rd">(へんかん)</span>する関数<span class="rd">(かんすう)</span>convDecimal（"10010" → 18）。ループ内<span class="rd">(ない)</span>の代入文<span class="rd">(だいにゅうぶん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (result ← result × 2 + int(binary の i文字目の文字))</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（result ← result × 2 + int(binaryのi文字目<span class="rd">(もじめ)</span>の文字<span class="rd">(もじ)</span>)）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: "10010" từ trái: 1 → 2 → 4 → 9 → 18. Đọc từ phải (ウ) ra 9; không nhân 2 (ア, イ) chỉ đếm số chữ 1 = 2.</td>
+<td>解説<span class="rd">(かいせつ)</span>：左<span class="rd">(ひだり)</span>から1 → 2 → 4 → 9 → 18。ウは9、ア・イは2になる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/06_haru/b4.html" target="_blank" rel="noopener">令和6年度 科目B 問4</a></strong> (2024, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>4</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm merge trộn 2 mảng đã sắp xếp tăng dần thành 1 mảng tăng dần. Gọi merge({2, 3}, {1, 4}) thì dòng α (trong vòng lặp chép phần còn lại của data2) chạy mấy lần?</td>
+<td>内容<span class="rd">(ないよう)</span>：昇順<span class="rd">(しょうじゅん)</span>の2配列<span class="rd">(はいれつ)</span>を併合<span class="rd">(へいごう)</span>する関数<span class="rd">(かんすう)</span>merge。merge({2, 3}, {1, 4})でα行<span class="rd">(ぎょう)</span>は何回<span class="rd">(なんかい)</span>実行<span class="rd">(じっこう)</span>されるか。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: chạy 1 lần</strong> (1回実行される)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：1回<span class="rd">(かい)</span>実行<span class="rd">(じっこう)</span>される</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: vòng 1: so 2 với 1 → lấy 1; 2 với 4 → lấy 2; 3 với 4 → lấy 3; data1 hết. Vòng chép data1 không chạy. Vòng chép data2 chạy cho phần tử 4: α chạy 1 lần. Kết quả {1, 2, 3, 4}.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1、2、3の順<span class="rd">(じゅん)</span>に格納<span class="rd">(かくのう)</span>してdata1が終了<span class="rd">(しゅうりょう)</span>。残<span class="rd">(のこ)</span>りの4をα行<span class="rd">(ぎょう)</span>で1回<span class="rd">(かい)</span>格納<span class="rd">(かくのう)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sơ đồ mũi tên / đường găng / công việc giả</td>
+<td>アローダイアグラム / クリティカルパス / ダミー作業<span class="rd">(さぎょう)</span></td>
+</tr>
+<tr>
+<td>Công số / người-tháng / năng suất</td>
+<td>工数<span class="rd">(こうすう)</span> / 人月<span class="rd">(にんげつ)</span> / 生産性<span class="rd">(せいさんせい)</span></td>
+</tr>
+<tr>
+<td>Quản lý sự cố / quản lý vấn đề</td>
+<td>インシデント管理<span class="rd">(かんり)</span> / 問題管理<span class="rd">(もんだいかんり)</span></td>
+</tr>
+<tr>
+<td>Nguyên nhân gốc / giải pháp lâu dài / khôi phục tạm thời</td>
+<td>根本原因<span class="rd">(こんぽんげんいん)</span> / 恒久対策<span class="rd">(こうきゅうたいさく)</span> / 暫定復旧<span class="rd">(ざんていふっきゅう)</span></td>
+</tr>
+<tr>
+<td>Kiểm soát nội bộ / kiểm toán hệ thống</td>
+<td>内部統制<span class="rd">(ないぶとうせい)</span> / システム監査<span class="rd">(かんさ)</span></td>
+</tr>
+<tr>
+<td>Số nguyên tố / phần dư</td>
+<td>素数<span class="rd">(そすう)</span> / 余<span class="rd">(あま)</span>り</td>
+</tr>
+<tr>
+<td>Trộn (merge) / tăng dần</td>
+<td>併合<span class="rd">(へいごう)</span>（マージ） / 昇順<span class="rd">(しょうじゅん)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

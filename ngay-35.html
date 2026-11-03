@@ -1,0 +1,401 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 35 (15/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 35 (15/11): Nghỉ nhẹ và chuẩn bị ngày thi</h1>
+<p class="meta">Ngày 35 · Chủ Nhật 15/11 · Nghỉ nhẹ, 10 câu khởi động, checklist ngày thi</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: 10 câu khởi động ｜ ウォーミングアップ10問<span class="rd">(もん)</span></a></li><li><a href="#muc-3">科目B: Chuẩn bị tinh thần ｜ 心構<span class="rd">(こころがま)</span>え</a></li><li><a href="#muc-4">Checklist ngày thi ｜ 当日<span class="rd">(とうじつ)</span>のチェックリスト</a></li><li><a href="#muc-5">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Ngày mai thi. Hôm nay KHÔNG học thêm kiến thức mới. Chỉ làm 10 câu khởi động dễ (đều là câu bạn đã gặp), xem lại tờ công thức, chuẩn bị đồ, rồi nghỉ ngơi.</p>
+<ul class="check">
+<li>10 câu khởi động, không bấm giờ (20 phút)</li>
+<li>Đọc lại tờ công thức ngày 31 một lần (15 phút)</li>
+<li>Kiểm tra checklist ngày thi bên dưới (15 phút)</li>
+<li>Xem lại đường đi tới điểm thi và giờ xuất phát (10 phút)</li>
+<li>Ăn tối nhẹ, không thức khuya, ngủ trước 23 giờ</li>
+</ul>
+<h2 id="muc-2">科目A: 10 câu khởi động ｜ ウォーミングアップ10問<span class="rd">(もん)</span></h2>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Mỗi câu đều đã xuất hiện ở các bài trước (ghi ngày ở dòng nguồn). Mục đích là lấy lại cảm giác "mình làm được".</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/05_haru/a1.html" target="_blank" rel="noopener">令和5年度 科目A 問1</a></strong> (2023; đã gặp ngày 27)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 0.C (thập lục phân) bằng bao nhiêu ở hệ thập phân? ア 0.12　イ 0.55　ウ 0.75　エ 0.84</td>
+<td>内容<span class="rd">(ないよう)</span>：16進<span class="rd">(しん)</span>0.Cの10進<span class="rd">(しん)</span>表現<span class="rd">(ひょうげん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (0.75)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（0.75）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 12 ÷ 16 = 0.75.</td>
+<td>解説<span class="rd">(かいせつ)</span>：12 ÷ 16。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/26_haru/q35.html" target="_blank" rel="noopener">平成26年春期 午前 問35</a></strong> (2014; đã gặp ngày 26)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>35</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 192.168.30.32/28 nối được tối đa bao nhiêu host? ア 14　イ 16　ウ 28　エ 30</td>
+<td>内容<span class="rd">(ないよう)</span>：/28のホスト数<span class="rd">(すう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (14)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（14）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 2⁴ − 2 = 14.</td>
+<td>解説<span class="rd">(かいせつ)</span>：2⁴ − 2。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/29_aki/q15.html" target="_blank" rel="noopener">平成29年秋期 午前 問15</a></strong> (2017; đã gặp ngày 31)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>15</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 2 thiết bị MTBF 45, MTTR 5 nối tiếp. Khả dụng? ア 0.81　イ 0.90　ウ 0.95　エ 0.99</td>
+<td>内容<span class="rd">(ないよう)</span>：直列<span class="rd">(ちょくれつ)</span>2台<span class="rd">(だい)</span>の稼働率<span class="rd">(かどうりつ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (0.81)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（0.81）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 0.9 × 0.9.</td>
+<td>解説<span class="rd">(かいせつ)</span>：0.9²。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/05_menjo/q57.html" target="_blank" rel="noopener">令和5年度 問57</a></strong> (2023; đã gặp ngày 24)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>57</strong></td>
+</tr>
+<tr>
+<td>Nội dung: dùng 50 cái/ngày, chờ hàng 5 ngày, tồn kho an toàn 30 (lượng đặt kinh tế 600). Điểm đặt hàng? ア 220　イ 250　ウ 280　エ 300</td>
+<td>内容<span class="rd">(ないよう)</span>：発注点<span class="rd">(はっちゅうてん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (280)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（280）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 50 × 5 + 30.</td>
+<td>解説<span class="rd">(かいせつ)</span>：250 + 30。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/02_menjo/q44.html" target="_blank" rel="noopener">令和2年度 問44</a></strong> (2020; đã gặp ngày 26)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>2年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>44</strong></td>
+</tr>
+<tr>
+<td>Nội dung: WAF là gì? ア phát hiện, chặn tấn công vào ứng dụng web　イ giám sát sửa đổi nội dung trình duyệt trong PC　ウ giám sát đăng nhập trái phép OS　エ giám sát nhiễm mã độc</td>
+<td>内容<span class="rd">(ないよう)</span>：WAFの説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: Web Application Firewall.</td>
+<td>解説<span class="rd">(かいせつ)</span>：Webアプリケーションへの攻撃<span class="rd">(こうげき)</span>を防<span class="rd">(ふせ)</span>ぐ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/06_haru/a8.html" target="_blank" rel="noopener">令和6年度 科目A 問8</a></strong> (2024; đã gặp ngày 27)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thiết bị nối LAN nào mô tả đúng? ウ là "repeater khuếch đại tín hiệu để kéo dài khoảng cách". Các lựa chọn khác gán sai địa chỉ (bridge dùng IP, router dùng MAC…).</td>
+<td>内容<span class="rd">(ないよう)</span>：LAN間接続装置<span class="rd">(かんせつぞくそうち)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: tầng 1 repeater, tầng 2 bridge (MAC), tầng 3 router (IP).</td>
+<td>解説<span class="rd">(かいせつ)</span>：リピータ第<span class="rd">(だい)</span>1層<span class="rd">(そう)</span>、ブリッジMAC、ルータIP。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/22_aki/q69.html" target="_blank" rel="noopener">平成22年秋期 午前 問69</a></strong> (2010; đã gặp ngày 21)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 平成<span class="rd">(へいせい)</span>22年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>69</strong></td>
+</tr>
+<tr>
+<td>Nội dung: BSC: tài chính, học hỏi và phát triển, quy trình nội bộ và góc nhìn nào? ア quản trị　イ khách hàng　ウ điểm mạnh　エ tuân thủ</td>
+<td>内容<span class="rd">(ないよう)</span>：BSCの4つ目<span class="rd">(め)</span>の視点<span class="rd">(してん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (khách hàng)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（顧客<span class="rd">(こきゃく)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 財務, 顧客, 内部ビジネスプロセス, 学習と成長.</td>
+<td>解説<span class="rd">(かいせつ)</span>：顧客<span class="rd">(こきゃく)</span>の視点<span class="rd">(してん)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 8 — <a href="https://www.fe-siken.com/kakomon/25_aki/q30.html" target="_blank" rel="noopener">平成25年秋期 午前 問30</a></strong> (2013; đã gặp ngày 29)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>8 — 平成<span class="rd">(へいせい)</span>25年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>30</strong></td>
+</tr>
+<tr>
+<td>Nội dung: ngoài không trùng, khóa chính cần điều kiện gì? ア không NULL　イ chỉ 1 cột　ウ cột đầu tiên　エ trùng khóa ứng viên bảng khác</td>
+<td>内容<span class="rd">(ないよう)</span>：主<span class="rd">(しゅ)</span>キー制約<span class="rd">(せいやく)</span>の条件<span class="rd">(じょうけん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: UNIQUE + NOT NULL.</td>
+<td>解説<span class="rd">(かいせつ)</span>：NULL不可<span class="rd">(ふか)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 9 — <a href="https://www.fe-siken.com/kakomon/06_haru/a20.html" target="_blank" rel="noopener">令和6年度 科目A 問20</a></strong> (2024; đã gặp ngày 32)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>9 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>20</strong></td>
+</tr>
+<tr>
+<td>Nội dung: 4 quyền "sở hữu công nghiệp"? Chọn tổ hợp không có bản quyền tác giả: ア kiểu dáng, giải pháp hữu ích, nhãn hiệu, sáng chế.</td>
+<td>内容<span class="rd">(ないよう)</span>：産業財産権<span class="rd">(さんぎょうざいさんけん)</span>の4つ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: bản quyền không cần đăng ký nên không thuộc nhóm này.</td>
+<td>解説<span class="rd">(かいせつ)</span>：著作権<span class="rd">(ちょさくけん)</span>は含<span class="rd">(ふく)</span>まない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 10 — <a href="https://www.fe-siken.com/kakomon/07_haru/a8.html" target="_blank" rel="noopener">令和7年度 科目A 問8</a></strong> (2025; đã gặp ngày 27)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>10 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đặc điểm chỉ HTTPS có? ア Cookie　イ ID/mật khẩu　ウ cache　エ xác nhận máy chủ bằng chứng chỉ máy chủ</td>
+<td>内容<span class="rd">(ないよう)</span>：HTTPSだけの特徴<span class="rd">(とくちょう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: nhờ TLS.</td>
+<td>解説<span class="rd">(かいせつ)</span>：TLSのサーバ認証<span class="rd">(にんしょう)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Chuẩn bị tinh thần ｜ 心構<span class="rd">(こころがま)</span>え</h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Thứ tự trong phòng thi:</strong> 科目A 90 phút → nghỉ tối đa 10 phút → 科目B 100 phút, thi liền trong một buổi. Giờ nghỉ bị thu giấy nháp và phát giấy mới cho 科目B. Hết giờ nghỉ, 科目B tự bắt đầu.</td>
+<td><strong>当日<span class="rd">(とうじつ)</span>の流<span class="rd">(なが)</span>れ：</strong>科目<span class="rd">(かもく)</span>A 90分<span class="rd">(ぷん)</span> → 最長<span class="rd">(さいちょう)</span>10分<span class="rd">(ぷん)</span>の休憩<span class="rd">(きゅうけい)</span> → 科目<span class="rd">(かもく)</span>B 100分<span class="rd">(ぷん)</span>。休憩中<span class="rd">(きゅうけいちゅう)</span>にメモ用紙<span class="rd">(ようし)</span>は回収<span class="rd">(かいしゅう)</span>・再配布<span class="rd">(さいはいふ)</span>。休憩後<span class="rd">(きゅうけいご)</span>は自動<span class="rd">(じどう)</span>で科目<span class="rd">(かもく)</span>B開始<span class="rd">(かいし)</span>。</td>
+</tr>
+<tr>
+<td><strong>科目B:</strong> câu đầu khó thì đánh dấu, chọn tạm, làm tiếp. Mỗi câu khoảng 5 phút. Trace bằng bảng trên giấy nháp. Không để trống câu nào.</td>
+<td><strong>科目<span class="rd">(かもく)</span>B：</strong>難<span class="rd">(むずか)</span>しければ印<span class="rd">(しるし)</span>を付<span class="rd">(つ)</span>けて仮<span class="rd">(かり)</span>の解答<span class="rd">(かいとう)</span>。1問<span class="rd">(もん)</span>約<span class="rd">(やく)</span>5分<span class="rd">(ふん)</span>。空欄<span class="rd">(くうらん)</span>にしない。</td>
+</tr>
+<tr>
+<td><strong>Kết quả:</strong> điểm 科目A và 科目B hiện trên màn hình ngay sau khi thi. Đạt khi cả hai phần từ 600 điểm.</td>
+<td><strong>結果<span class="rd">(けっか)</span>：</strong>試験終了後<span class="rd">(しけんしゅうりょうご)</span>に画面<span class="rd">(がめん)</span>で科目評価点<span class="rd">(かもくひょうかてん)</span>を表示<span class="rd">(ひょうじ)</span>。両方<span class="rd">(りょうほう)</span>600点以上<span class="rd">(てんいじょう)</span>で合格<span class="rd">(ごうかく)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Checklist ngày thi ｜ 当日<span class="rd">(とうじつ)</span>のチェックリスト</h2>
+<p>Nguồn: trang thông tin kỳ thi FE của đơn vị tổ chức CBT <a href="https://cbt-s.com/examinee/examination/fe" target="_blank" rel="noopener">CBT-Solutions: 【CBT】基本情報技術者試験（FE）</a> và <a href="https://cbt-s.com/examinee/ipa_cbt-faq/detail/4315.html" target="_blank" rel="noopener">FAQ giấy tờ tùy thân</a>. Kiểm tra lại trang này vào tối nay vì quy định có thể thay đổi.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Giấy tờ tùy thân có ảnh, bản gốc, còn hạn</strong> (bắt buộc). Với người nước ngoài: thẻ cư trú (在留カード), hộ chiếu hoặc bằng lái đều được. Tên phải khớp tên đã đăng ký. Không có giấy tờ hợp lệ thì không được thi.</td>
+<td><strong>顔写真付<span class="rd">(かおじゃしんつ)</span>きの本人確認書類<span class="rd">(ほんにんかくにんしょるい)</span>の原本<span class="rd">(げんぽん)</span></strong>（有効期限内<span class="rd">(ゆうこうきげんない)</span>）。在留<span class="rd">(ざいりゅう)</span>カード・パスポート・運転免許証<span class="rd">(うんてんめんきょしょう)</span>など。登録<span class="rd">(とうろく)</span>した氏名<span class="rd">(しめい)</span>と一致<span class="rd">(いっち)</span>。</td>
+</tr>
+<tr>
+<td><strong>Giờ đến:</strong> mở cửa và nhận hồ sơ từ 30 phút trước giờ thi; giờ tập trung là 15 phút trước. Trễ quá 80 phút sau giờ bắt đầu thì không được thi, và giờ kết thúc không kéo dài.</td>
+<td><strong>来場時刻<span class="rd">(らいじょうじこく)</span>：</strong>開場<span class="rd">(かいじょう)</span>・受付<span class="rd">(うけつけ)</span>は開始<span class="rd">(かいし)</span>30分前<span class="rd">(ぷんまえ)</span>、集合<span class="rd">(しゅうごう)</span>は15分前<span class="rd">(ふんまえ)</span>。80分<span class="rd">(ぷん)</span>を超<span class="rd">(こ)</span>える遅刻<span class="rd">(ちこく)</span>は受験不可<span class="rd">(じゅけんふか)</span>。</td>
+</tr>
+<tr>
+<td><strong>Được để trên bàn:</strong> khăn tay, khăn giấy bỏ túi, thuốc nhỏ mắt, nước lọc (chai nhựa trong suốt, bỏ nhãn, tối đa 1 chai ≤ 1.000 ml). Giấy nháp và bút do điểm thi phát.</td>
+<td><strong>机上<span class="rd">(きじょう)</span>に置<span class="rd">(お)</span>けるもの：</strong>ハンカチ・ポケットティッシュ・目薬<span class="rd">(めぐすり)</span>・水<span class="rd">(みず)</span>（ラベルなし透明<span class="rd">(とうめい)</span>ペットボトル1本<span class="rd">(ぽん)</span>、1000ml以下<span class="rd">(いか)</span>）。メモ用紙<span class="rd">(ようし)</span>とボールペンは会場<span class="rd">(かいじょう)</span>で用意<span class="rd">(ようい)</span>。</td>
+</tr>
+<tr>
+<td><strong>Phải gửi tủ:</strong> điện thoại, áo khoác và mọi thứ khác. Không viết gì lên giấy nháp trước khi bắt đầu.</td>
+<td><strong>ロッカーへ：</strong>携帯電話<span class="rd">(けいたいでんわ)</span>・上着<span class="rd">(うわぎ)</span>など。開始前<span class="rd">(かいしまえ)</span>にメモ用紙<span class="rd">(ようし)</span>へ書<span class="rd">(か)</span>かない。</td>
+</tr>
+<tr>
+<td><strong>Mang theo nên có:</strong> giấy xác nhận dự thi in ra (ghi giờ, địa điểm), tiền hoặc thẻ đi tàu, đồng hồ để canh giờ đi đường (đồng hồ không được mang vào phòng).</td>
+<td><strong>あると安心<span class="rd">(あんしん)</span>：</strong>確認票<span class="rd">(かくにんひょう)</span>の印刷<span class="rd">(いんさつ)</span>、交通系<span class="rd">(こうつうけい)</span>ICカード。時計<span class="rd">(とけい)</span>は試験室<span class="rd">(しけんしつ)</span>に持<span class="rd">(も)</span>ち込<span class="rd">(こ)</span>めない。</td>
+</tr>
+<tr>
+<td><strong>Sáng mai:</strong> ăn sáng vừa đủ, xuất phát sớm hơn dự tính 30 phút, trên tàu chỉ đọc tờ công thức.</td>
+<td><strong>明日<span class="rd">(あした)</span>の朝<span class="rd">(あさ)</span>：</strong>朝食<span class="rd">(ちょうしょく)</span>をとり、30分<span class="rd">(ぷん)</span>早<span class="rd">(はや)</span>めに出発<span class="rd">(しゅっぱつ)</span>。電車<span class="rd">(でんしゃ)</span>では公式<span class="rd">(こうしき)</span>メモだけ見<span class="rd">(み)</span>る。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-5">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Giấy tờ tùy thân / thẻ cư trú</td>
+<td>本人確認書類<span class="rd">(ほんにんかくにんしょるい)</span> / 在留<span class="rd">(ざいりゅう)</span>カード</td>
+</tr>
+<tr>
+<td>Giờ tập trung / giờ bắt đầu thi</td>
+<td>集合時刻<span class="rd">(しゅうごうじこく)</span> / 試験開始時刻<span class="rd">(しけんかいしじこく)</span></td>
+</tr>
+<tr>
+<td>Giấy nháp / tủ đồ</td>
+<td>メモ用紙<span class="rd">(ようし)</span> / ロッカー</td>
+</tr>
+<tr>
+<td>Nghỉ giữa giờ / giám thị</td>
+<td>休憩<span class="rd">(きゅうけい)</span> / 試験監督員<span class="rd">(しけんかんとくいん)</span></td>
+</tr>
+<tr>
+<td>Điểm đánh giá / điểm chuẩn đạt</td>
+<td>科目評価点<span class="rd">(かもくひょうかてん)</span> / 合格基準<span class="rd">(ごうかくきじゅん)</span></td>
+</tr>
+<tr>
+<td>Chúc thi tốt!</td>
+<td>合格<span class="rd">(ごうかく)</span>をお祈<span class="rd">(いの)</span>りしています！</td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

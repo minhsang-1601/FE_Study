@@ -1,0 +1,479 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 30 (10/11)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 30 (10/11): Thi thử A + B (đề trộn số 1)</h1>
+<p class="meta">Ngày 30 · Thứ Ba 10/11 · Thi thử A + B (đề trộn số 1)</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: 11 câu ｜ 科目<span class="rd">(かもく)</span>A 11問<span class="rd">(もん)</span></a></li><li><a href="#muc-3">科目B: 4 câu ｜ 科目<span class="rd">(かもく)</span>B 4問<span class="rd">(もん)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Còn 6 ngày. Hôm nay làm một đề trộn rút gọn, bấm giờ đúng nhịp thi thật: 科目A 1.5 phút/câu, 科目B 5 phút/câu. Làm hết mới mở đáp án.</p>
+<ul class="check">
+<li>科目A: 11 câu, bấm giờ 17 phút</li>
+<li>Chấm 科目A, đọc lời giải câu sai (15 phút)</li>
+<li>科目B: 4 câu, bấm giờ 20 phút (xem code ở link)</li>
+<li>Chấm 科目B, trace lại câu sai (25 phút)</li>
+<li>Ghi số câu đúng vào sổ để so với đề trộn số 2 (ngày 32)</li>
+</ul>
+<p>Mục tiêu tuần 5: đúng từ 70% trở lên (A: 8/11; B: 3/4).</p>
+<h2 id="muc-2">科目A: 11 câu ｜ 科目<span class="rd">(かもく)</span>A 11問<span class="rd">(もん)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu thuật ngữ mới:</strong> đề gần đây hay hỏi công nghệ mới (edge computing, cloud lai, AI tạo sinh, scrum, blockchain). Nắm ý chính "làm ở đâu, để làm gì" là đủ.</td>
+<td><strong>新<span class="rd">(あたら)</span>しい用語<span class="rd">(ようご)</span>：</strong>エッジコンピューティング、ハイブリッドクラウド、生成<span class="rd">(せいせい)</span>AI、スクラム、ブロックチェーン。「どこで・何<span class="rd">(なん)</span>のために」を押<span class="rd">(お)</span>さえる。</td>
+</tr>
+<tr>
+<td><strong>Loại trừ bằng cặp đôi:</strong> nhiều câu có 3 lựa chọn là định nghĩa của 3 thuật ngữ khác (ví dụ CRM / SFA / ERP / SCM). Nhận ra 3 cái sai cũng ra đáp án.</td>
+<td><strong>消去法<span class="rd">(しょうきょほう)</span>：</strong>選択肢<span class="rd">(せんたくし)</span>の多<span class="rd">(おお)</span>くは他<span class="rd">(ほか)</span>の用語<span class="rd">(ようご)</span>の説明<span class="rd">(せつめい)</span>。3つを特定<span class="rd">(とくてい)</span>すれば正解<span class="rd">(せいかい)</span>が分<span class="rd">(わ)</span>かる。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/05_haru/a4.html" target="_blank" rel="noopener">令和5年度 科目A 問4</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>4</strong></td>
+</tr>
+<tr>
+<td>Nội dung: edge computing là gì? ア xử lý màn hình, dữ liệu ở phía client để tăng trải nghiệm web　イ chỉ bật máy chủ khi có dữ liệu đến, xong thì tắt　ウ ảo hóa nhiều máy thành một máy mạnh xử lý song song　エ xử lý sơ bộ dữ liệu ở máy chủ gần nguồn dữ liệu (cảm biến) để tăng tính thời gian thực</td>
+<td>内容<span class="rd">(ないよう)</span>：エッジコンピューティングの説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア rich client, イ serverless, ウ grid computing.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはリッチクライアント、イはサーバレス、ウはグリッドコンピューティング。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/05_haru/a8.html" target="_blank" rel="noopener">令和5年度 科目A 問8</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong mạng IPv4, cái nào dùng để kiểm tra thông mạng? ア BOOTP　イ DHCP　ウ MIB　エ ping</td>
+<td>内容<span class="rd">(ないよう)</span>：ネットワークの疎通確認<span class="rd">(そつうかくにん)</span>に使<span class="rd">(つか)</span>われるもの。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ (ping)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ（ping）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ping gửi ICMP echo request và chờ echo reply. BOOTP, DHCP cấp địa chỉ IP; MIB là thông tin trạng thái thiết bị cho SNMP.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ICMPのecho request/reply。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/05_haru/a15.html" target="_blank" rel="noopener">令和5年度 科目A 問15</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>15</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hybrid cloud là gì? ア sửa một phần chức năng cloud cho riêng công ty　イ cung cấp cho cả người tiêu dùng và doanh nghiệp　ウ chia dịch vụ có phí và miễn phí　エ môi trường liên kết, vận hành tương hỗ dữ liệu và ứng dụng giữa cloud riêng và cloud công cộng</td>
+<td>内容<span class="rd">(ないよう)</span>：ハイブリッドクラウドの説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: hybrid = kết hợp nhiều môi trường (public, private, on-premise) thành một hệ thống.</td>
+<td>解説<span class="rd">(かいせつ)</span>：異<span class="rd">(こと)</span>なる環境<span class="rd">(かんきょう)</span>を組<span class="rd">(く)</span>み合<span class="rd">(あ)</span>わせて連携<span class="rd">(れんけい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/06_haru/a6.html" target="_blank" rel="noopener">令和6年度 科目A 問6</a></strong> (2024)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>6</strong></td>
+</tr>
+<tr>
+<td>Nội dung: kỹ thuật làm đường chéo trên màn hình hiển thị mượt (bớt răng cưa)? ア anti-aliasing　イ shading　ウ texture mapping　エ bump mapping</td>
+<td>内容<span class="rd">(ないよう)</span>：斜<span class="rd">(なな)</span>めの境界<span class="rd">(きょうかい)</span>を滑<span class="rd">(なめ)</span>らかに表示<span class="rd">(ひょうじ)</span>する手法<span class="rd">(しゅほう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: shading tạo bóng; texture mapping dán hoa văn; bump mapping tạo cảm giác lồi lõm.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アンチエイリアシングはジャギーを目立<span class="rd">(めだ)</span>たなくする。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/29_aki/q12.html" target="_blank" rel="noopener">平成29年秋期 午前 問12</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>12</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mô tả đúng về RAID5? ア ghi theo byte, parity dồn vào 1 đĩa　イ ghi theo bit, mã ECC trên nhiều đĩa　ウ ghi theo khối, parity cũng phân tán trên nhiều đĩa　エ ghi giống nhau lên 2 đĩa</td>
+<td>内容<span class="rd">(ないよう)</span>：RAID5の記録方式<span class="rd">(きろくほうしき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア RAID3, イ RAID2, エ RAID1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはRAID3、イはRAID2、エはRAID1。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/06_haru/a12.html" target="_blank" rel="noopener">令和6年度 科目A 問12</a></strong> (2024; câu gần giống ở <a href="https://www.fe-siken.com/kakomon/05_haru/a12.html" target="_blank" rel="noopener">令和5年度 科目A 問12</a>)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>12</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong scrum, sự kiện nào tổ chức mỗi ngày cùng giờ, cả nhóm chia sẻ tiến độ và kế hoạch? ア sprint planning　イ sprint retrospective　ウ sprint review　エ daily scrum</td>
+<td>内容<span class="rd">(ないよう)</span>：スプリント中<span class="rd">(ちゅう)</span>に毎日<span class="rd">(まいにち)</span>行<span class="rd">(おこな)</span>い進捗<span class="rd">(しんちょく)</span>を共有<span class="rd">(きょうゆう)</span>するイベント。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: planning ở đầu sprint, review và retrospective ở cuối sprint.</td>
+<td>解説<span class="rd">(かいせつ)</span>：他<span class="rd">(ほか)</span>はスプリントの開始時<span class="rd">(かいしじ)</span>・終了時<span class="rd">(しゅうりょうじ)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/05_haru/a9.html" target="_blank" rel="noopener">令和5年度 科目A 問9</a></strong> (2023)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>9</strong></td>
+</tr>
+<tr>
+<td>Nội dung: tấn công drive-by download là gì? ア trộm ổ cứng rồi đăng dữ liệu lên web　イ mở file đính kèm làm mã hóa file, đòi tiền chuộc　ウ xem trang web độc hại, lỗ hổng trình duyệt bị lợi dụng để nhiễm mã độc　エ trộn chương trình xấu vào phần mềm miễn phí</td>
+<td>内容<span class="rd">(ないよう)</span>：ドライブバイダウンロード攻撃<span class="rd">(こうげき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: イ ransomware, エ trojan.</td>
+<td>解説<span class="rd">(かいせつ)</span>：イはランサムウェア、エはトロイの木馬<span class="rd">(もくば)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 8 — <a href="https://www.fe-siken.com/kakomon/26_aki/q36.html" target="_blank" rel="noopener">平成26年秋期 午前 問36</a></strong> (2014)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>8 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>36</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thủ đoạn nào là social engineering? ア xâm nhập qua backdoor do virus tạo　イ giả làm quản trị viên hỏi người dùng để lấy mật khẩu　ウ dùng công cụ dò mật khẩu vét cạn　エ lợi dụng buffer overflow</td>
+<td>内容<span class="rd">(ないよう)</span>：ソーシャルエンジニアリングに分類<span class="rd">(ぶんるい)</span>される手口<span class="rd">(てぐち)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: social engineering lợi dụng tâm lý con người, không dùng kỹ thuật. ア, ウ, エ đều là kỹ thuật.</td>
+<td>解説<span class="rd">(かいせつ)</span>：人<span class="rd">(ひと)</span>の心理<span class="rd">(しんり)</span>の隙<span class="rd">(すき)</span>を突<span class="rd">(つ)</span>く。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 9 — <a href="https://www.fe-siken.com/kakomon/25_aki/q21.html" target="_blank" rel="noopener">平成25年秋期 午前 問21</a></strong> (2013)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>9 — 平成<span class="rd">(へいせい)</span>25年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>21</strong></td>
+</tr>
+<tr>
+<td>Nội dung: dùng OSS theo GPL, trường hợp nào không công khai mã nguồn là vi phạm? ア phát triển phần kết nối OSS với ứng dụng rồi bán　イ nhờ công ty khác sửa OSS, chỉ dùng nội bộ　ウ tự lấy, sửa và bán OSS　エ dùng OSS để test hiệu năng, bán phần mềm tự phát triển</td>
+<td>内容<span class="rd">(ないよう)</span>：GPLのOSSでソースコードを公開<span class="rd">(こうかい)</span>しないとライセンス違反<span class="rd">(いはん)</span>になるもの。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: GPL: phân phối (bán) bản đã sửa thì phải kèm mã nguồn. Dùng nội bộ hoặc không sửa OSS thì không bị buộc công khai.</td>
+<td>解説<span class="rd">(かいせつ)</span>：改変<span class="rd">(かいへん)</span>したOSSを頒布<span class="rd">(はんぷ)</span>するならソースも頒布<span class="rd">(はんぷ)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 10 — <a href="https://www.fe-siken.com/kakomon/26_haru/q66.html" target="_blank" rel="noopener">平成26年春期 午前 問66</a></strong> (2014)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>10 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>66</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mục đích của SCM? ア quản lý tập trung thông tin khách hàng, khiếu nại để xây quan hệ khách hàng　イ quản lý tình trạng đàm phán để tăng hiệu quả bán hàng　ウ quản lý tích hợp mọi nghiệp vụ lõi (sản xuất, bán hàng, kế toán)　エ quản lý tích hợp thông tin từ thu mua tới bán hàng xuyên nhiều công ty để giảm chi phí, rút ngắn thời gian giao</td>
+<td>内容<span class="rd">(ないよう)</span>：SCMの目的<span class="rd">(もくてき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア CRM, イ SFA, ウ ERP.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはCRM、イはSFA、ウはERP。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 11 — <a href="https://www.fe-siken.com/kakomon/01_aki/q71.html" target="_blank" rel="noopener">令和元年秋期 午前 問71</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>11 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>71</strong></td>
+</tr>
+<tr>
+<td>Nội dung: "đào" tiền ảo (mining) trên blockchain là gì? ア tham gia tính toán xác nhận, ghi giao dịch và nhận thưởng bằng tiền ảo　イ mua bán kiếm chênh lệch　ウ chuyển tiền bằng tiền ảo　エ thanh toán ở cửa hàng</td>
+<td>内容<span class="rd">(ないよう)</span>：仮想通貨<span class="rd">(かそうつうか)</span>マイニングの説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mining = tìm nonce thỏa điều kiện hash để tạo khối mới, ai tìm ra trước được thưởng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ハッシュ値<span class="rd">(ち)</span>の条件<span class="rd">(じょうけん)</span>を満<span class="rd">(み)</span>たすナンスを探<span class="rd">(さが)</span>す計算<span class="rd">(けいさん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: 4 câu ｜ 科目<span class="rd">(かもく)</span>B 4問<span class="rd">(もん)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hash với hàm dự phòng:</strong> tính vị trí bằng hàm 1; nếu ô đã có thì dùng hàm 2. Ghi trạng thái mảng sau mỗi lần thêm.</td>
+<td><strong>2つのハッシュ関数<span class="rd">(かんすう)</span>：</strong>1つ目<span class="rd">(め)</span>で衝突<span class="rd">(しょうとつ)</span>したら2つ目<span class="rd">(め)</span>。追加<span class="rd">(ついか)</span>ごとに配列<span class="rd">(はいれつ)</span>を書<span class="rd">(か)</span>く。</td>
+</tr>
+<tr>
+<td><strong>Điều kiện vòng lặp có bằng 0 không:</strong> thử với dữ liệu làm biến về đúng 0 (ví dụ n = 20 yên) để phân biệt <code>≧ 0</code> và <code>&gt; 0</code>.</td>
+<td><strong>ループ条件<span class="rd">(じょうけん)</span>：</strong>ちょうど0になる例<span class="rd">(れい)</span>で ≧ 0 と &gt; 0 を区別<span class="rd">(くべつ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/05_haru/b4.html" target="_blank" rel="noopener">令和5年度 科目B 問4</a></strong> (2023, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>5年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>4</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mảng hashArray 5 phần tử, ban đầu toàn −1. Hàm add dùng calcHash1(v) = (v mod 5) + 1; nếu ô đã có thì dùng calcHash2(v) = ((v + 3) mod 5) + 1. Thủ tục test thêm lần lượt 3, 18, 11. Nội dung mảng sau đó? ア {−1, 3, −1, 18, 11}　イ {−1, 11, −1, 3, −1}　ウ {−1, 11, −1, 18, −1}　エ {−1, 18, −1, 3, 11}　オ {−1, 18, 11, 3, −1}</td>
+<td>内容<span class="rd">(ないよう)</span>：2つのハッシュ関数<span class="rd">(かんすう)</span>で3, 18, 11を格納<span class="rd">(かくのう)</span>した後<span class="rd">(あと)</span>のhashArray。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 3 → ô 4. 18 → ô 4 bận → hàm 2: (21 mod 5) + 1 = 2 → ô 2. 11 → ô 2 bận → hàm 2: (14 mod 5) + 1 = 5 → ô 5. Kết quả {−1, 18, −1, 3, 11}.</td>
+<td>解説<span class="rd">(かいせつ)</span>：3は4、18は2、11は5に格納<span class="rd">(かくのう)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/07_haru/b2.html" target="_blank" rel="noopener">令和7年度 科目B 問2</a></strong> (2025, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>7年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm đếm số cách trả n yên bằng xu 1, 5, 10 yên. Vòng lặp: count ← count + (rest ÷ 5 lấy thương) + 1; rest ← rest − 10. Chọn điều kiện while: rest ≧ 0 / rest ≧ 5 / rest ≧ 10 / rest &gt; 0 / rest &gt; 5 / rest &gt; 10</td>
+<td>内容<span class="rd">(ないよう)</span>：1円<span class="rd">(えん)</span>・5円<span class="rd">(えん)</span>・10円<span class="rd">(えん)</span>硬貨<span class="rd">(こうか)</span>の組合<span class="rd">(くみあ)</span>せ数<span class="rd">(すう)</span>を返<span class="rd">(かえ)</span>す関数<span class="rd">(かんすう)</span>のwhile条件<span class="rd">(じょうけん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (rest ≧ 0)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（rest ≧ 0）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: n = 12 (đáp án 4): cần chạy cả khi rest = 2, loại các ngưỡng 5, 10. n = 20 (đáp án 9): 5 → 8 → khi rest = 0 vẫn phải chạy thêm (+1 cách chỉ dùng xu 10 yên) → 9. Nên phải là ≧ 0.</td>
+<td>解説<span class="rd">(かいせつ)</span>：rest = 0（10円<span class="rd">(えん)</span>だけで払<span class="rd">(はら)</span>う場合<span class="rd">(ばあい)</span>）も数<span class="rd">(かぞ)</span>える必要<span class="rd">(ひつよう)</span>がある。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/06_haru/b5.html" target="_blank" rel="noopener">令和6年度 科目B 問5</a></strong> (2024, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thủ tục putRelatedItem tính độ liên quan Lxy = (Mxy × tổng số đơn) ÷ (Kx × Ky), với Mxy số đơn mua cả x và y, Kx, Ky số đơn có x, có y. Code: valueL ← (arrayM[i] × [c]) ÷ (itemCount × arrayK[i]); trong vòng lặp có 2 bộ đếm [a], [b]. Chọn a, b, c.</td>
+<td>内容<span class="rd">(ないよう)</span>：関連度<span class="rd">(かんれんど)</span>Lxyを求<span class="rd">(もと)</span>める手続<span class="rd">(てつづ)</span>きputRelatedItemの空欄<span class="rd">(くうらん)</span>a・b・c。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: オ</strong> (đơn có cả otherItems[i] và item → tăng arrayM[i]; đơn có otherItems[i] → tăng arrayK[i]; c = số phần tử của orders)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：オ</strong>（a：arrayM[i]、b：arrayK[i]、c：ordersの要素数<span class="rd">(ようそすう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ghép từng biến với công thức: Mxy ↔ arrayM[i], Ky ↔ arrayK[i], Kx ↔ itemCount, tổng số đơn ↔ số phần tử orders. Ví dụ A, B: (2 × 6) ÷ (4 × 3) = 1.0.</td>
+<td>解説<span class="rd">(かいせつ)</span>：式<span class="rd">(しき)</span>の記号<span class="rd">(きごう)</span>と変数<span class="rd">(へんすう)</span>を対応<span class="rd">(たいおう)</span>させる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/sample/b3.html" target="_blank" rel="noopener">サンプル問題 科目B 問3</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm makeNewArray nhận mảng số nguyên, tạo mảng mới: phần tử đầu = in[1], mỗi phần tử sau = phần tử cuối hiện tại + in[i]. Gọi makeNewArray({3, 2, 1, 6, 5, 4}): phần tử thứ 5 của kết quả? ア 5　イ 6　ウ 9　エ 11　オ 12　カ 17　キ 21</td>
+<td>内容<span class="rd">(ないよう)</span>：makeNewArray({3, 2, 1, 6, 5, 4})の戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>の要素番号<span class="rd">(ようそばんごう)</span>5の値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: カ (17)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：カ（17）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đây là tổng tích lũy: {3, 5, 6, 12, 17, 21}. Phần tử 5 = 3 + 2 + 1 + 6 + 5 = 17.</td>
+<td>解説<span class="rd">(かいせつ)</span>：累積和<span class="rd">(るいせきわ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Điện toán biên / đám mây lai / không máy chủ</td>
+<td>エッジコンピューティング / ハイブリッドクラウド / サーバレス</td>
+</tr>
+<tr>
+<td>Kiểm tra thông mạng</td>
+<td>疎通確認<span class="rd">(そつうかくにん)</span></td>
+</tr>
+<tr>
+<td>Khử răng cưa / đổ bóng</td>
+<td>アンチエイリアシング / シェーディング</td>
+</tr>
+<tr>
+<td>Phân tán dữ liệu (striping) / chẵn lẻ (parity)</td>
+<td>ストライピング / パリティ</td>
+</tr>
+<tr>
+<td>Tấn công phi kỹ thuật / mã độc tống tiền</td>
+<td>ソーシャルエンジニアリング / ランサムウェア</td>
+</tr>
+<tr>
+<td>Quản lý chuỗi cung ứng / quan hệ khách hàng / hỗ trợ bán hàng / hoạch định nguồn lực</td>
+<td>SCM / CRM / SFA / ERP</td>
+</tr>
+<tr>
+<td>Đào (tiền ảo)</td>
+<td>マイニング</td>
+</tr>
+<tr>
+<td>Tổng tích lũy / độ liên quan</td>
+<td>累積和<span class="rd">(るいせきわ)</span> / 関連度<span class="rd">(かんれんど)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

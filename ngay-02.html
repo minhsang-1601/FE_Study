@@ -1,0 +1,672 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 2 (13/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 2 (13/10): Phép toán logic và mã giả cơ bản</h1>
+<p class="meta">Ngày 2 · Thứ Ba 13/10 · 科目A: phép toán logic · 科目B: mã giả và mảng</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Phép toán logic ｜ 論理演算<span class="rd">(ろんりえんざん)</span></a></li><li><a href="#muc-3">科目B: Mã giả cơ bản và mảng ｜ 擬似言語<span class="rd">(ぎじげんご)</span>と配列<span class="rd">(はいれつ)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Tổng khoảng 2 tiếng: 1 tiếng 科目A, 1 tiếng 科目B.</p>
+<ul class="check">
+<li>Đọc lý thuyết phép toán logic (20 phút)</li>
+<li>Làm bài tập 科目A, tự giải trước rồi mới xem đáp án (25 phút)</li>
+<li>Làm các câu đề cũ phần 論理演算 bên dưới (15 phút)</li>
+<li>Đọc cú pháp mã giả và mảng (20 phút)</li>
+<li>Trace 3 bài 科目B trên giấy, kẻ bảng biến (40 phút)</li>
+<li>Ôn bảng từ vựng cuối bài</li>
+</ul>
+<h2 id="muc-2">科目A: Phép toán logic ｜ 論理演算<span class="rd">(ろんりえんざん)</span></h2>
+<p>Sáu phép toán cơ bản và cách dùng mặt nạ bit là đủ để giải hầu hết câu hỏi phần này.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AND (hội):</strong> kết quả là 1 chỉ khi cả hai đều là 1.</td>
+<td><strong>論理積<span class="rd">(ろんりせき)</span>（AND）：</strong>両方<span class="rd">(りょうほう)</span>が1のときだけ1になる。</td>
+</tr>
+<tr>
+<td><strong>OR (tuyển):</strong> kết quả là 1 khi ít nhất một bên là 1.</td>
+<td><strong>論理和<span class="rd">(ろんりわ)</span>（OR）：</strong>少<span class="rd">(すく)</span>なくとも一方<span class="rd">(いっぽう)</span>が1なら1になる。</td>
+</tr>
+<tr>
+<td><strong>NOT (phủ định):</strong> đảo 0 thành 1, 1 thành 0.</td>
+<td><strong>否定<span class="rd">(ひてい)</span>（NOT）：</strong>0と1を反転<span class="rd">(はんてん)</span>する。</td>
+</tr>
+<tr>
+<td><strong>XOR (tuyển loại trừ):</strong> kết quả là 1 khi hai bên khác nhau.</td>
+<td><strong>排他的論理和<span class="rd">(はいたてきろんりわ)</span>（XOR）：</strong>両方<span class="rd">(りょうほう)</span>が異<span class="rd">(こと)</span>なるとき1になる。</td>
+</tr>
+<tr>
+<td><strong>NAND:</strong> NOT của AND.</td>
+<td><strong>否定論理積<span class="rd">(ひていろんりせき)</span>（NAND）：</strong>ANDの結果<span class="rd">(けっか)</span>を否定<span class="rd">(ひてい)</span>する。</td>
+</tr>
+<tr>
+<td><strong>NOR:</strong> NOT của OR.</td>
+<td><strong>否定論理和<span class="rd">(ひていろんりわ)</span>（NOR）：</strong>ORの結果<span class="rd">(けっか)</span>を否定<span class="rd">(ひてい)</span>する。</td>
+</tr>
+<tr>
+<td><strong>Mặt nạ bit:</strong> AND với 0 để xóa bit về 0; OR với 1 để đặt bit thành 1; XOR với 1 để đảo bit.</td>
+<td><strong>マスク演算<span class="rd">(えんざん)</span>：</strong>0とのANDでビットを0にする；1とのORでビットを1にする；1とのXORでビットを反転<span class="rd">(はんてん)</span>する。</td>
+</tr>
+<tr>
+<td><strong>Định luật De Morgan:</strong> NOT(A AND B) = NOT A OR NOT B; NOT(A OR B) = NOT A AND NOT B</td>
+<td><strong>ド・モルガンの法則<span class="rd">(ほうそく)</span>：</strong>NOT(A AND B) = NOT A OR NOT B；NOT(A OR B) = NOT A AND NOT B</td>
+</tr>
+<tr>
+<td><strong>Tính chất XOR:</strong> A XOR A = 0; A XOR 0 = A; XOR hai lần cùng một số thì trở về giá trị ban đầu.</td>
+<td><strong>XORの性質<span class="rd">(せいしつ)</span>：</strong>A XOR A = 0；A XOR 0 = A；同<span class="rd">(おな)</span>じ値<span class="rd">(あたい)</span>で2回<span class="rd">(かい)</span>XORすると元<span class="rd">(もと)</span>に戻<span class="rd">(もど)</span>る。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Bảng chân trị ｜ 真理値表<span class="rd">(しんりちひょう)</span></strong></p>
+<div class="tbl"><table class="plain">
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>AND</th>
+<th>OR</th>
+<th>XOR</th>
+<th>NAND</th>
+<th>NOR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Kết quả AND của hai dãy 8 bit 10110110 và 00001111 là gì?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> 8ビットの 10110110 と 00001111 の論理積<span class="rd">(ろんりせき)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 00000110　イ 10111111　ウ 10111001　エ 01001001</td>
+<td>ア 00000110　イ 10111111　ウ 10111001　エ 01001001</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (00000110)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（00000110）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 4 bit cao AND với 0 nên thành 0000; 4 bit thấp AND với 1 nên giữ nguyên 0110. Các lựa chọn khác là bẫy: イ là OR, ウ là XOR, エ là NOT của số đầu.</td>
+<td>解説<span class="rd">(かいせつ)</span>：上位<span class="rd">(じょうい)</span>4ビットは0とのANDで 0000、下位<span class="rd">(かい)</span>4ビットは1とのANDでそのまま 0110。イはOR、ウはXOR、エは最初<span class="rd">(さいしょ)</span>の数<span class="rd">(かず)</span>のNOTの結果<span class="rd">(けっか)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Muốn đảo 4 bit thấp và giữ nguyên 4 bit cao của một dãy 8 bit. Dùng phép toán và mặt nạ nào?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> 8ビットのデータの上位<span class="rd">(じょうい)</span>4ビットはそのままで、下位<span class="rd">(かい)</span>4ビットを反転<span class="rd">(はんてん)</span>したい。適切<span class="rd">(てきせつ)</span>な演算<span class="rd">(えんざん)</span>とマスクはどれか。</td>
+</tr>
+<tr>
+<td>ア AND 00001111　イ OR 00001111　ウ XOR 00001111　エ XOR 11110000</td>
+<td>ア AND 00001111　イ OR 00001111　ウ XOR 00001111　エ XOR 11110000</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: XOR với 1 thì đảo bit, XOR với 0 thì giữ nguyên. Vậy mặt nạ có 1 ở 4 bit thấp: 00001111. エ sẽ đảo nhầm 4 bit cao.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1とのXORで反転<span class="rd">(はんてん)</span>、0とのXORでそのまま。下位<span class="rd">(かい)</span>4ビットが1のマスク 00001111 を使<span class="rd">(つか)</span>う。エは上位<span class="rd">(じょうい)</span>4ビットを反転<span class="rd">(はんてん)</span>してしまう。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A3</strong> Biểu thức nào bằng NOT(A AND B)?</td>
+<td><strong>問<span class="rd">(とい)</span>A3</strong> NOT(A AND B) と等<span class="rd">(ひと)</span>しい論理式<span class="rd">(ろんりしき)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア NOT A AND NOT B　イ NOT A OR NOT B　ウ A OR B　エ NOT A OR B</td>
+<td>ア NOT A AND NOT B　イ NOT A OR NOT B　ウ A OR B　エ NOT A OR B</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: định luật De Morgan: đưa NOT vào trong thì AND đổi thành OR. Kiểm tra bằng A = 1, B = 1: vế trái = 0, イ = 0 OR 0 = 0, khớp.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ド・モルガンの法則<span class="rd">(ほうそく)</span>。NOTを中<span class="rd">(なか)</span>に入<span class="rd">(い)</span>れるとANDがORに変<span class="rd">(か)</span>わる。A = 1、B = 1 で確認<span class="rd">(かくにん)</span>：左辺<span class="rd">(さへん)</span> = 0、イ = 0 OR 0 = 0 で一致<span class="rd">(いっち)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A4</strong> A XOR B XOR B bằng gì?</td>
+<td><strong>問<span class="rd">(とい)</span>A4</strong> A XOR B XOR B と等<span class="rd">(ひと)</span>しいものはどれか。</td>
+</tr>
+<tr>
+<td>ア 0　イ 1　ウ A　エ B</td>
+<td>ア 0　イ 1　ウ A　エ B</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (A)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（A）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: B XOR B = 0, và A XOR 0 = A. Tính chất này được dùng trong mã hóa đơn giản: mã hóa bằng XOR với khóa, giải mã bằng XOR lại lần nữa.</td>
+<td>解説<span class="rd">(かいせつ)</span>：B XOR B = 0、A XOR 0 = A。この性質<span class="rd">(せいしつ)</span>は簡単<span class="rd">(かんたん)</span>な暗号<span class="rd">(あんごう)</span>に使<span class="rd">(つか)</span>われる：鍵<span class="rd">(かぎ)</span>とXORして暗号化<span class="rd">(あんごうか)</span>し、もう一度<span class="rd">(いちど)</span>XORして復号<span class="rd">(ふくごう)</span>する。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Mỗi câu ghi kỳ thi và số câu; bấm link để xem nguyên văn đề trên fe-siken.com.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/01_aki/q2.html" target="_blank" rel="noopener">令和元年秋期 午前 問2</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: phép toán nào đảo tất cả các bit của giá trị 8 bit?</td>
+<td>内容<span class="rd">(ないよう)</span>：8ビットの値<span class="rd">(あたい)</span>の全<span class="rd">(すべ)</span>てのビットを反転<span class="rd">(はんてん)</span>する操作<span class="rd">(そうさ)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (XOR với FF)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（FFとの排他的論理和<span class="rd">(はいたてきろんりわ)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: XOR với 1 thì đảo, nên mặt nạ toàn 1 = FF. XOR/OR với 00 giữ nguyên; OR với FF biến tất cả thành 1.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1とのXORで反転<span class="rd">(はんてん)</span>するので、全部<span class="rd">(ぜんぶ)</span>1のマスク FF を使<span class="rd">(つか)</span>う。00とのXOR・ORはそのまま、FFとのORは全<span class="rd">(すべ)</span>て1になる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/16_aki/q8.html" target="_blank" rel="noopener">平成16年秋期 午前 問8</a></strong> (2004)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>16年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>8</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đảo 6 bit cao và giữ nguyên 2 bit thấp của dữ liệu 8 bit (cùng dạng Câu A2).</td>
+<td>内容<span class="rd">(ないよう)</span>：8ビットのデータの上位<span class="rd">(じょうい)</span>6ビットを反転<span class="rd">(はんてん)</span>し、下位<span class="rd">(かい)</span>2ビットはそのままにする演算<span class="rd">(えんざん)</span>（問<span class="rd">(とい)</span>A2と同<span class="rd">(おな)</span>じ形式<span class="rd">(けいしき)</span>）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (XOR với FC)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（FCとの排他的論理和<span class="rd">(はいたてきろんりわ)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mặt nạ có 1 ở 6 bit cao, 0 ở 2 bit thấp = 1111 1100 = FC.</td>
+<td>解説<span class="rd">(かいせつ)</span>：上位<span class="rd">(じょうい)</span>6ビットが1、下位<span class="rd">(かい)</span>2ビットが0のマスク＝1111 1100＝FC。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/31_haru/q2.html" target="_blank" rel="noopener">平成31年春期 午前 問2</a></strong> (2019); cùng đề mục còn có ở <a href="https://www.fe-siken.com/kakomon/26_haru/q2.html" target="_blank" rel="noopener">平成26年春期 問2</a>, <a href="https://www.fe-siken.com/kakomon/18_haru/q6.html" target="_blank" rel="noopener">平成18年春期 問6</a></td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>31年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mã 8 bit có bit cao nhất là bit chẵn lẻ. Phép toán nào lấy được 7 bit thấp?</td>
+<td>内容<span class="rd">(ないよう)</span>：最上位<span class="rd">(さいじょうい)</span>ビットがパリティビットの8ビットコードから、下位<span class="rd">(かい)</span>7ビットを取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>す演算<span class="rd">(えんざん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (AND với 7F)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（7Fとの論理積<span class="rd">(ろんりせき)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: muốn lấy ra một phần thì dùng AND. Mặt nạ 0111 1111 = 7F: bit cao bị xóa về 0, 7 bit thấp giữ nguyên.</td>
+<td>解説<span class="rd">(かいせつ)</span>：取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>すときはAND。マスク 0111 1111＝7F で、最上位<span class="rd">(さいじょうい)</span>は0になり、下位<span class="rd">(かい)</span>7ビットはそのまま。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/28_aki/q1.html" target="_blank" rel="noopener">平成28年秋期 午前 問1</a></strong> (2016)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>28年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: phép toán nào với 0F (hex) giữ nguyên 4 bit thấp của dãy 8 bit?</td>
+<td>内容<span class="rd">(ないよう)</span>：16進数<span class="rd">(しんすう)</span> 0F との演算<span class="rd">(えんざん)</span>で、8ビットの下位<span class="rd">(かい)</span>4ビットが変<span class="rd">(か)</span>わらないものを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: AND với 0F</strong> (xem ký hiệu ア〜エ ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：0Fとの論理積<span class="rd">(ろんりせき)</span></strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thử với 10101010: AND 0F → 00001010 (4 bit thấp vẫn 1010). XOR, NAND, OR đều làm thay đổi 4 bit thấp.</td>
+<td>解説<span class="rd">(かいせつ)</span>：10101010 で試<span class="rd">(ため)</span>すと、AND 0F → 00001010（下位<span class="rd">(かい)</span>4ビットは1010のまま）。XOR・NAND・ORは下位<span class="rd">(かい)</span>4ビットが変<span class="rd">(か)</span>わる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/03_menjo/q1.html" target="_blank" rel="noopener">令和3年度 問1</a></strong> (2021)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>3年度<span class="rd">(ねんど)</span> 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: X = L1 OR L2, Y = NOT(L1 AND L2), L3 = X AND Y. L3 giống kết quả của phép toán nào giữa L1 và L2?</td>
+<td>内容<span class="rd">(ないよう)</span>：X = L1 OR L2、Y = NOT(L1 AND L2)、L3 = X AND Y のとき、L3はどの論理演算<span class="rd">(ろんりえんざん)</span>の結果<span class="rd">(けっか)</span>と同<span class="rd">(おな)</span>じか。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (XOR)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（排他的論理和<span class="rd">(はいたてきろんりわ)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: X = 1 khi ít nhất một bên là 1; Y loại bỏ trường hợp cả hai là 1. AND lại → 1 khi đúng một bên là 1 = XOR.</td>
+<td>解説<span class="rd">(かいせつ)</span>：Xはどちらかが1なら1、Yは両方<span class="rd">(りょうほう)</span>1の場合<span class="rd">(ばあい)</span>を除<span class="rd">(のぞ)</span>く。ANDすると「片方<span class="rd">(かたほう)</span>だけ1」＝XOR。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/29_haru/q3.html" target="_blank" rel="noopener">平成29年春期 午前 問3</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: X NAND Y = NOT(X AND Y). Biểu diễn X OR Y chỉ bằng NAND.</td>
+<td>内容<span class="rd">(ないよう)</span>：X NAND Y = NOT(X AND Y) のとき、X OR Y をNANDだけで表<span class="rd">(あらわ)</span>す式<span class="rd">(しき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (X NAND X) NAND (Y NAND Y)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（X NAND X）NAND（Y NAND Y）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: X NAND X = NOT X. Nên イ = NOT(NOT X AND NOT Y) = X OR Y (De Morgan). Mẹo thi: thử X = 0, Y = 0 (phải ra 0) và X = 1, Y = 0 (phải ra 1) để loại nhanh.</td>
+<td>解説<span class="rd">(かいせつ)</span>：X NAND X = NOT X。よってイ = NOT(NOT X AND NOT Y) = X OR Y（ド・モルガン）。コツ：X=0, Y=0（結果0）と X=1, Y=0（結果1）を代入<span class="rd">(だいにゅう)</span>して絞<span class="rd">(しぼ)</span>る。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Mã giả cơ bản và mảng ｜ 擬似言語<span class="rd">(ぎじげんご)</span>と配列<span class="rd">(はいれつ)</span></h2>
+<p>Mã giả của FE giống Java/Python nhưng <strong>mảng đánh số từ 1</strong>, đây là bẫy hay gặp nhất với người đã biết lập trình.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kiểu dữ liệu:</strong> số nguyên, số thực, chuỗi, logic (true/false).</td>
+<td><strong>データ型<span class="rd">(がた)</span>：</strong>整数型<span class="rd">(せいすうがた)</span>、実数型<span class="rd">(じっすうがた)</span>、文字列型<span class="rd">(もじれつがた)</span>、論理型<span class="rd">(ろんりがた)</span>。</td>
+</tr>
+<tr>
+<td><strong>Gán giá trị:</strong> dùng mũi tên ←. Ví dụ x ← 5</td>
+<td><strong>代入<span class="rd">(だいにゅう)</span>：</strong>← を使<span class="rd">(つか)</span>う。例<span class="rd">(れい)</span>：x ← 5</td>
+</tr>
+<tr>
+<td><strong>Khai báo mảng:</strong> 整数型の配列: a ← {3, 8, 2}. Phần tử đầu tiên là a[1], không phải a[0].</td>
+<td><strong>配列<span class="rd">(はいれつ)</span>の宣言<span class="rd">(せんげん)</span>：</strong>整数型<span class="rd">(せいすうがた)</span>の配列<span class="rd">(はいれつ)</span>: a ← {3, 8, 2}。要素番号<span class="rd">(ようそばんごう)</span>は1から始<span class="rd">(はじ)</span>まる（a[1]が先頭<span class="rd">(せんとう)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Rẽ nhánh:</strong> if (điều kiện) … elseif … else … endif</td>
+<td><strong>選択処理<span class="rd">(せんたくしょり)</span>：</strong>if (条件式<span class="rd">(じょうけんしき)</span>) … elseif … else … endif</td>
+</tr>
+<tr>
+<td><strong>Vòng lặp for:</strong> for (i を 1 から n まで 1 ずつ増やす) … endfor</td>
+<td><strong>繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>し処理<span class="rd">(しょり)</span>：</strong>for (i を 1 から n まで 1 ずつ増<span class="rd">(ふ)</span>やす) … endfor</td>
+</tr>
+<tr>
+<td><strong>Vòng lặp while:</strong> kiểm tra điều kiện trước. do … while: chạy ít nhất một lần rồi mới kiểm tra.</td>
+<td><strong>while：</strong>前判定<span class="rd">(まえはんてい)</span>。<strong>do … while：</strong>後判定<span class="rd">(あとはんてい)</span>で、少<span class="rd">(すく)</span>なくとも1回<span class="rd">(かい)</span>は実行<span class="rd">(じっこう)</span>される。</td>
+</tr>
+<tr>
+<td><strong>Chia lấy nguyên và chia lấy dư:</strong> 7 ÷ 2 = 3; 7 mod 2 = 1</td>
+<td><strong>商<span class="rd">(しょう)</span>と余<span class="rd">(あま)</span>り：</strong>7 ÷ 2 = 3；7 mod 2 = 1</td>
+</tr>
+<tr>
+<td><strong>Toán tử logic:</strong> and, or, not. So sánh: =, ≠, &lt;, ≤, &gt;, ≥</td>
+<td><strong>論理演算子<span class="rd">(ろんりえんざんし)</span>：</strong>and、or、not。<strong>比較演算子<span class="rd">(ひかくえんざんし)</span>：</strong>=、≠、&lt;、≦、&gt;、≧</td>
+</tr>
+<tr>
+<td><strong>Hàm:</strong> ○整数型: f(整数型: x) … return giá trị.</td>
+<td><strong>関数<span class="rd">(かんすう)</span>：</strong>○整数型<span class="rd">(せいすうがた)</span>: f(整数型<span class="rd">(せいすうがた)</span>: x) … return 戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>。</td>
+</tr>
+<tr>
+<td><strong>Cách trace:</strong> kẻ bảng, mỗi biến một cột, mỗi vòng một dòng.</td>
+<td><strong>トレースの方法<span class="rd">(ほうほう)</span>：</strong>変数<span class="rd">(へんすう)</span>ごとに列<span class="rd">(れつ)</span>を作<span class="rd">(つく)</span>り、1回<span class="rd">(かい)</span>の繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>しを1行<span class="rd">(ぎょう)</span>に書<span class="rd">(か)</span>く。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<p><strong>Câu B1 ｜ 問<span class="rd">(とい)</span>B1</strong></p>
+<pre><code>整数型の配列: a ← {3, 8, 2, 7, 5}
+整数型: s ← 0
+整数型: i
+for (i を 1 から aの要素数 まで 1 ずつ増やす)
+  if (a[i] &gt; 4)
+    s ← s + a[i]
+  endif
+endfor
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sau khi chạy chương trình, giá trị của s là bao nhiêu?</td>
+<td>プログラムを実行<span class="rd">(じっこう)</span>した後<span class="rd">(あと)</span>の s の値<span class="rd">(あたい)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 12　イ 15　ウ 20　エ 25</td>
+<td>ア 12　イ 15　ウ 20　エ 25</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (20)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（20）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: chỉ cộng phần tử lớn hơn 4. a[2] = 8, a[4] = 7, a[5] = 5 → s = 8 + 7 + 5 = 20.</td>
+<td>解説<span class="rd">(かいせつ)</span>：4より大<span class="rd">(おお)</span>きい要素<span class="rd">(ようそ)</span>だけを加<span class="rd">(くわ)</span>える。a[2] = 8、a[4] = 7、a[5] = 5 → s = 8 + 7 + 5 = 20。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B2 ｜ 問<span class="rd">(とい)</span>B2</strong></p>
+<pre><code>整数型の配列: a ← {4, 9, 1, 9, 6}
+整数型: m ← a[1]
+整数型: p ← 1
+整数型: i
+for (i を 2 から 5 まで 1 ずつ増やす)
+  if (a[i] &gt; m)
+    m ← a[i]
+    p ← i
+  endif
+endfor
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sau khi chạy, giá trị của p là bao nhiêu?</td>
+<td>実行後<span class="rd">(じっこうご)</span>の p の値<span class="rd">(あたい)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 1　イ 2　ウ 4　エ 5</td>
+<td>ア 1　イ 2　ウ 4　エ 5</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (2)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（2）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: i = 2: 9 &gt; 4 → m = 9, p = 2. i = 3: 1 &gt; 9 sai. i = 4: 9 &gt; 9 sai (bằng nhau không cập nhật). i = 5: 6 &gt; 9 sai. Vậy p = 2. Nếu điều kiện là ≥ thì p = 4: đề thi rất hay hỏi chỗ khác biệt này.</td>
+<td>解説<span class="rd">(かいせつ)</span>：i = 2：9 &gt; 4 → m = 9、p = 2。i = 3：1 &gt; 9 は偽<span class="rd">(ぎ)</span>。i = 4：9 &gt; 9 は偽<span class="rd">(ぎ)</span>（等<span class="rd">(ひと)</span>しいときは更新<span class="rd">(こうしん)</span>しない）。i = 5：6 &gt; 9 は偽<span class="rd">(ぎ)</span>。よって p = 2。条件<span class="rd">(じょうけん)</span>が ≧ なら p = 4 になる。この違<span class="rd">(ちが)</span>いはよく問<span class="rd">(と)</span>われる。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B3 ｜ 問<span class="rd">(とい)</span>B3</strong></p>
+<pre><code>○ reverse(整数型の配列: a, 整数型: n)
+  整数型: i, tmp
+  for (i を 1 から n ÷ 2 まで 1 ずつ増やす)
+    tmp ← a[i]
+    a[i] ← a[  空欄  ]
+    a[  空欄  ] ← tmp
+  endfor
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thủ tục reverse đảo ngược thứ tự n phần tử của mảng a. Điền gì vào chỗ trống?</td>
+<td>手続<span class="rd">(てつづ)</span>き reverse は、配列<span class="rd">(はいれつ)</span> a の n 個<span class="rd">(こ)</span>の要素<span class="rd">(ようそ)</span>の並<span class="rd">(なら)</span>びを逆<span class="rd">(ぎゃく)</span>にする。空欄<span class="rd">(くうらん)</span>に入<span class="rd">(い)</span>れる正<span class="rd">(ただ)</span>しい答<span class="rd">(こた)</span>えはどれか。</td>
+</tr>
+<tr>
+<td>ア n − i　イ n − i + 1　ウ n + i − 1　エ i + 1</td>
+<td>ア n − i　イ n − i + 1　ウ n + i − 1　エ i + 1</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (n − i + 1)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（n − i + 1）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thử n = 5. Khi i = 1 phải đổi với a[5]: 5 − 1 + 1 = 5, đúng. Khi i = 2 đổi với a[4]: 5 − 2 + 1 = 4, đúng. ア cho ra a[4] khi i = 1, sai vì mảng đánh số từ 1. Mẹo: với câu điền chỗ trống, luôn thử bằng số cụ thể nhỏ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：n = 5 で確<span class="rd">(たし)</span>かめる。i = 1 のとき a[5] と交換<span class="rd">(こうかん)</span>：5 − 1 + 1 = 5 で正<span class="rd">(ただ)</span>しい。i = 2 のとき a[4]：5 − 2 + 1 = 4 で正<span class="rd">(ただ)</span>しい。アは i = 1 で a[4] になり、要素番号<span class="rd">(ようそばんごう)</span>が1からなので誤<span class="rd">(あやま)</span>り。コツ：空欄問題<span class="rd">(くうらんもんだい)</span>は小<span class="rd">(ちい)</span>さな具体的<span class="rd">(ぐたいてき)</span>な数<span class="rd">(かず)</span>で確<span class="rd">(たし)</span>かめる。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phép toán logic</td>
+<td>論理演算<span class="rd">(ろんりえんざん)</span></td>
+</tr>
+<tr>
+<td>AND / OR / NOT / XOR</td>
+<td>論理積<span class="rd">(ろんりせき)</span> / 論理和<span class="rd">(ろんりわ)</span> / 否定<span class="rd">(ひてい)</span> / 排他的論理和<span class="rd">(はいたてきろんりわ)</span></td>
+</tr>
+<tr>
+<td>NAND / NOR</td>
+<td>否定論理積<span class="rd">(ひていろんりせき)</span> / 否定論理和<span class="rd">(ひていろんりわ)</span></td>
+</tr>
+<tr>
+<td>Bảng chân trị</td>
+<td>真理値表<span class="rd">(しんりちひょう)</span></td>
+</tr>
+<tr>
+<td>Đúng / Sai</td>
+<td>真<span class="rd">(しん)</span> / 偽<span class="rd">(ぎ)</span></td>
+</tr>
+<tr>
+<td>Biểu thức logic</td>
+<td>論理式<span class="rd">(ろんりしき)</span></td>
+</tr>
+<tr>
+<td>Định luật De Morgan</td>
+<td>ド・モルガンの法則<span class="rd">(ほうそく)</span></td>
+</tr>
+<tr>
+<td>Mặt nạ bit</td>
+<td>マスク / マスク演算<span class="rd">(えんざん)</span></td>
+</tr>
+<tr>
+<td>Bit cao / Bit thấp</td>
+<td>上位<span class="rd">(じょうい)</span>ビット / 下位<span class="rd">(かい)</span>ビット</td>
+</tr>
+<tr>
+<td>Mã giả</td>
+<td>擬似言語<span class="rd">(ぎじげんご)</span></td>
+</tr>
+<tr>
+<td>Biến / Hằng</td>
+<td>変数<span class="rd">(へんすう)</span> / 定数<span class="rd">(ていすう)</span></td>
+</tr>
+<tr>
+<td>Kiểu số nguyên / số thực / chuỗi / logic</td>
+<td>整数型<span class="rd">(せいすうがた)</span> / 実数型<span class="rd">(じっすうがた)</span> / 文字列型<span class="rd">(もじれつがた)</span> / 論理型<span class="rd">(ろんりがた)</span></td>
+</tr>
+<tr>
+<td>Mảng / Phần tử / Chỉ số phần tử / Số phần tử</td>
+<td>配列<span class="rd">(はいれつ)</span> / 要素<span class="rd">(ようそ)</span> / 要素番号<span class="rd">(ようそばんごう)</span> / 要素数<span class="rd">(ようそすう)</span></td>
+</tr>
+<tr>
+<td>Gán giá trị</td>
+<td>代入<span class="rd">(だいにゅう)</span></td>
+</tr>
+<tr>
+<td>Rẽ nhánh / Vòng lặp</td>
+<td>選択処理<span class="rd">(せんたくしょり)</span> / 繰<span class="rd">(く)</span>り返<span class="rd">(かえ)</span>し処理<span class="rd">(しょり)</span></td>
+</tr>
+<tr>
+<td>Kiểm tra trước / Kiểm tra sau</td>
+<td>前判定<span class="rd">(まえはんてい)</span> / 後判定<span class="rd">(あとはんてい)</span></td>
+</tr>
+<tr>
+<td>Thương / Số dư</td>
+<td>商<span class="rd">(しょう)</span> / 余<span class="rd">(あま)</span>り</td>
+</tr>
+<tr>
+<td>Hàm / Thủ tục / Giá trị trả về / Đối số</td>
+<td>関数<span class="rd">(かんすう)</span> / 手続<span class="rd">(てつづ)</span>き / 戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span> / 引数<span class="rd">(ひきすう)</span></td>
+</tr>
+<tr>
+<td>Hoán đổi</td>
+<td>交換<span class="rd">(こうかん)</span></td>
+</tr>
+<tr>
+<td>Chỗ trống (cần điền)</td>
+<td>空欄<span class="rd">(くうらん)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

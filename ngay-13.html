@@ -1,0 +1,464 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>FE Ngày 13 (24/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 13 (24/10): Bảo mật 2: các kiểu tấn công, phòng chống và cây nhị phân</h1>
+<p class="meta">Ngày 13 · Thứ Bảy 24/10 · 科目A: tấn công, phòng chống · 科目B: cây nhị phân</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Tấn công và phòng chống ｜ 攻撃手法<span class="rd">(こうげきしゅほう)</span>と対策<span class="rd">(たいさく)</span></a></li><li><a href="#muc-3">科目B: Cây và cây tìm kiếm nhị phân ｜ 木<span class="rd">(き)</span>・2分探索木<span class="rd">(ぶんたんさくぎ)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Bài soạn bù. Dùng như tài liệu ôn tên các kiểu tấn công (rất hay ra dạng "mô tả nào là X") và cây tìm kiếm nhị phân.</p>
+<ul class="check">
+<li>Đọc bảng các kiểu tấn công và biện pháp (20 phút)</li>
+<li>8 câu đề cũ 科目A (35 phút)</li>
+<li>Đọc lý thuyết cây, 1 bài tự luyện (20 phút)</li>
+<li>4 câu đề cũ về cây (45 phút)</li>
+</ul>
+<h2 id="muc-2">科目A: Tấn công và phòng chống ｜ 攻撃手法<span class="rd">(こうげきしゅほう)</span>と対策<span class="rd">(たいさく)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SQL injection:</strong> nhập chuỗi trở thành một phần câu SQL. Chống: placeholder (bind), escape ký tự đặc biệt.</td>
+<td><strong>SQLインジェクション：</strong>入力<span class="rd">(にゅうりょく)</span>がSQL文<span class="rd">(ぶん)</span>の一部<span class="rd">(いちぶ)</span>として実行<span class="rd">(じっこう)</span>される。対策<span class="rd">(たいさく)</span>：プレースホルダ、エスケープ。</td>
+</tr>
+<tr>
+<td><strong>XSS:</strong> chèn script vào trang, chạy trên trình duyệt nạn nhân. Chống: escape khi xuất HTML.</td>
+<td><strong>クロスサイトスクリプティング：</strong>利用者<span class="rd">(りようしゃ)</span>のブラウザでスクリプトを実行<span class="rd">(じっこう)</span>。対策<span class="rd">(たいさく)</span>：HTML出力時<span class="rd">(しゅつりょくじ)</span>のエスケープ。</td>
+</tr>
+<tr>
+<td><strong>Directory traversal:</strong> dùng "../" trong đường dẫn để đọc file ngoài ý muốn. Chống: không cho tham số ngoài chỉ định trực tiếp tên file.</td>
+<td><strong>ディレクトリトラバーサル：</strong>パス名<span class="rd">(めい)</span>で意図<span class="rd">(いと)</span>しないファイルを閲覧<span class="rd">(えつらん)</span>。対策<span class="rd">(たいさく)</span>：外部<span class="rd">(がいぶ)</span>パラメータでファイル名<span class="rd">(めい)</span>を直接指定<span class="rd">(ちょくせつしてい)</span>させない。</td>
+</tr>
+<tr>
+<td><strong>Drive-by download:</strong> chỉ xem trang web độc là bị cài mã độc qua lỗ hổng trình duyệt. <strong>Ransomware:</strong> mã hóa file đòi tiền chuộc. <strong>C&amp;C server:</strong> máy chủ ra lệnh cho máy bị chiếm (botnet).</td>
+<td><strong>ドライブバイダウンロード：</strong>閲覧<span class="rd">(えつらん)</span>だけで感染<span class="rd">(かんせん)</span>。<strong>ランサムウェア：</strong>暗号化<span class="rd">(あんごうか)</span>して身代金<span class="rd">(みのしろきん)</span>。<strong>C&amp;Cサーバ：</strong>ボットへ命令<span class="rd">(めいれい)</span>。</td>
+</tr>
+<tr>
+<td><strong>Thiết bị phòng thủ:</strong> IDS phát hiện và báo; IPS phát hiện và chặn; WAF bảo vệ ứng dụng web; SIEM phân tích tổng hợp log; sandbox chạy thử file trong môi trường cách ly.</td>
+<td><strong>防御<span class="rd">(ぼうぎょ)</span>：</strong>IDSは検知<span class="rd">(けんち)</span>・通知<span class="rd">(つうち)</span>、IPSは遮断<span class="rd">(しゃだん)</span>、WAFはWebアプリ、SIEMはログ統合分析<span class="rd">(とうごうぶんせき)</span>、サンドボックスは隔離環境<span class="rd">(かくりかんきょう)</span>で実行<span class="rd">(じっこう)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/28_haru/q37.html" target="_blank" rel="noopener">平成28年春期 午前 問37</a></strong> (2016)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>28年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>37</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mô tả nào là SQL injection? ア lợi dụng cách gọi SQL sai của ứng dụng web, nhập chuỗi độc để lấy, sửa, xóa dữ liệu　イ gửi lượng lớn gói qua site khác làm dừng dịch vụ　ウ đọc ghi vượt vùng nhớ　エ dụ bấm link, script độc bị nhúng vào phản hồi của server có lỗ hổng</td>
+<td>内容<span class="rd">(ないよう)</span>：SQLインジェクション攻撃<span class="rd">(こうげき)</span>の説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: イ DoS/DDoS, ウ buffer overflow, エ XSS.</td>
+<td>解説<span class="rd">(かいせつ)</span>：イはDoS、ウはバッファオーバーフロー、エはXSS。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/06_haru/a10.html" target="_blank" rel="noopener">令和6年度 科目A 問10</a></strong> (2024)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>10</strong></td>
+</tr>
+<tr>
+<td>Nội dung: biện pháp chống SQL injection? ア chỉ cho URL bắt đầu bằng http:// hoặc https://　イ không cho tham số ngoài chỉ định trực tiếp tên file　ウ không cho nạp stylesheet từ site bất kỳ　エ dùng placeholder để ghép câu lệnh</td>
+<td>内容<span class="rd">(ないよう)</span>：SQLインジェクションの対策<span class="rd">(たいさく)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア chống XSS, イ chống directory traversal, ウ chống CSS injection.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはXSS、イはディレクトリトラバーサル、ウはCSSインジェクション対策<span class="rd">(たいさく)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/sample/a36.html" target="_blank" rel="noopener">サンプル問題 科目A 問36</a></strong> (đề mẫu dạng mới)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — サンプル問題<span class="rd">(もんだい)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>36</strong></td>
+</tr>
+<tr>
+<td>Nội dung: cách chống SQL injection? ア xử lý để ký tự nhập không có nghĩa đặc biệt trong truy vấn　イ thay thẻ HTML thành chuỗi khác　ウ không nhận chuỗi chứa "../"　エ không nhận đầu vào quá dài</td>
+<td>内容<span class="rd">(ないよう)</span>：SQLインジェクションを防<span class="rd">(ふせ)</span>ぐ方法<span class="rd">(ほうほう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: イ chống XSS, ウ chống directory traversal, エ chống buffer overflow.</td>
+<td>解説<span class="rd">(かいせつ)</span>：イはXSS、ウはディレクトリトラバーサル、エはバッファオーバーフロー。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/29_haru/q37.html" target="_blank" rel="noopener">平成29年春期 午前 問37</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>37</strong></td>
+</tr>
+<tr>
+<td>Nội dung: tấn công dùng đường dẫn để đọc file trái ý quản trị viên là? ア nhập câu lệnh CSDL　イ chỉ định file bằng đường dẫn, xem file ngoài ý muốn　ウ lợi dụng lỗi escape HTML chạy script　エ lấy cắp session ID để mạo danh</td>
+<td>内容<span class="rd">(ないよう)</span>：ディレクトリトラバーサル攻撃<span class="rd">(こうげき)</span>の説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア SQL injection, ウ XSS, エ session hijacking.</td>
+<td>解説<span class="rd">(かいせつ)</span>：エはセッションハイジャック。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/30_haru/q36.html" target="_blank" rel="noopener">平成30年春期 午前 問36</a></strong> (2018; câu tương tự ở <a href="https://www.fe-siken.com/kakomon/05_haru/a9.html" target="_blank" rel="noopener">令和5年度 科目A 問9</a>)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>36</strong></td>
+</tr>
+<tr>
+<td>Nội dung: drive-by download là gì? ア điều khiển mã độc từ xa mã hóa cả ổ cứng　イ lợi dụng lỗi cấu hình tường lửa cài rootkit　ウ nhập script vào form để tải dữ liệu CSDL　エ khi xem trang web công khai, máy bị tải và nhiễm mã độc ngoài ý muốn</td>
+<td>内容<span class="rd">(ないよう)</span>：ドライブバイダウンロード攻撃<span class="rd">(こうげき)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア ransomware, ウ SQL injection.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはランサムウェア、ウはSQLインジェクション。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/30_aki/q41.html" target="_blank" rel="noopener">平成30年秋期 午前 問41</a></strong> (2018)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>41</strong></td>
+</tr>
+<tr>
+<td>Nội dung: vai trò của máy chủ C&amp;C trong botnet? ア cache nội dung web thay máy chủ gốc　イ dùng CHAP chống nghe lén mật khẩu　ウ dùng OTP challenge-response　エ ra lệnh và nhận phản hồi từ máy bị chiếm để tấn công máy khác</td>
+<td>内容<span class="rd">(ないよう)</span>：C&amp;Cサーバの役割<span class="rd">(やくわり)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア là CDN; イ, ウ là phương thức xác thực.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはCDN、イ・ウは認証方式<span class="rd">(にんしょうほうしき)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/30_aki/q42.html" target="_blank" rel="noopener">平成30年秋期 午前 問42</a></strong> (2018)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>42</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chức năng của IDS? ア kiểm tra phần mềm trên PC có bản mới nhất chưa　イ gửi dữ liệu test tìm lỗ hổng sản phẩm　ウ giám sát máy chủ, mạng, phát hiện xâm nhập thì báo quản trị viên　エ tự đánh giá mức độ an toàn của tổ chức</td>
+<td>内容<span class="rd">(ないよう)</span>：IDSの機能<span class="rd">(きのう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: イ là fuzzing. IDS chỉ báo, không chặn (chặn là IPS).</td>
+<td>解説<span class="rd">(かいせつ)</span>：イはファジング。IDSは通知<span class="rd">(つうち)</span>中心<span class="rd">(ちゅうしん)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 8 — <a href="https://www.fe-siken.com/kakomon/01_aki/q43.html" target="_blank" rel="noopener">令和元年秋期 午前 問43</a></strong> (2019)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>8 — 令和<span class="rd">(れいわ)</span>元年<span class="rd">(がんねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>43</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chức năng SIEM? ア chạy file trong môi trường ảo cách ly để theo dõi hành vi　イ phân tích tổng hợp log từ nhiều thiết bị, hỗ trợ quản trị viên　ウ điều khiển tập trung thiết bị mạng　エ nhận diện ứng dụng để điều khiển truyền thông</td>
+<td>内容<span class="rd">(ないよう)</span>：SIEMの機能<span class="rd">(きのう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ア sandbox, ウ SDN, エ IPS/WAF.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アはサンドボックス、ウはSDN。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Cây và cây tìm kiếm nhị phân ｜ 木<span class="rd">(き)</span>・2分探索木<span class="rd">(ぶんたんさくぎ)</span></h2>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cây tìm kiếm nhị phân:</strong> mọi nút trong cây con trái nhỏ hơn nút, mọi nút cây con phải lớn hơn. Chèn: so từ gốc, nhỏ đi trái, lớn đi phải.</td>
+<td><strong>2分探索木<span class="rd">(ぶんたんさくぎ)</span>：</strong>左部分木<span class="rd">(ひだりぶぶんぎ)</span> &lt; 節<span class="rd">(せつ)</span> &lt; 右部分木<span class="rd">(みぎぶぶんぎ)</span>。根<span class="rd">(ね)</span>から比較<span class="rd">(ひかく)</span>して挿入<span class="rd">(そうにゅう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Số lần so sánh tối đa khi tìm:</strong> bằng số tầng của cây. Cây đầy đủ 15 nút có 4 tầng.</td>
+<td><strong>最大比較回数<span class="rd">(さいだいひかくかいすう)</span>：</strong>木<span class="rd">(き)</span>の段数<span class="rd">(だんすう)</span>。15節<span class="rd">(せつ)</span>の完全<span class="rd">(かんぜん)</span>な木<span class="rd">(き)</span>は4段<span class="rd">(だん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Duyệt:</strong> trước (nút → trái → phải), giữa (trái → nút → phải, cho dãy tăng dần), sau (trái → phải → nút).</td>
+<td><strong>走査<span class="rd">(そうさ)</span>：</strong>先行順<span class="rd">(せんこうじゅん)</span>・中間順<span class="rd">(ちゅうかんじゅん)</span>・後行順<span class="rd">(こうこうじゅん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu B1</strong> Chèn lần lượt 40, 20, 60, 10, 30, 50 vào cây tìm kiếm nhị phân rỗng. Duyệt sau (post-order) cho dãy nào?</td>
+<td><strong>問<span class="rd">(とい)</span>B1</strong> 40, 20, 60, 10, 30, 50の順<span class="rd">(じゅん)</span>に挿入<span class="rd">(そうにゅう)</span>した2分探索木<span class="rd">(ぶんたんさくぎ)</span>の後行順<span class="rd">(こうこうじゅん)</span>は。</td>
+</tr>
+<tr>
+<td>ア 10 20 30 40 50 60　イ 40 20 10 30 60 50　ウ 10 30 20 50 60 40　エ 40 20 60 10 30 50</td>
+<td>ア 10 20 30 40 50 60　イ 40 20 10 30 60 50　ウ 10 30 20 50 60 40　エ 40 20 60 10 30 50</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cây: 40; trái 20 (10, 30); phải 60 (trái 50). Post-order: 10, 30, 20, 50, 60, 40. ア in-order, イ pre-order, エ theo tầng.</td>
+<td>解説<span class="rd">(かいせつ)</span>：アは中間順<span class="rd">(ちゅうかんじゅん)</span>、イは先行順<span class="rd">(せんこうじゅん)</span>、エは幅優先<span class="rd">(はばゆうせん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/23_toku/q5.html" target="_blank" rel="noopener">平成23年特別 午前 問5</a></strong> (2011)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>23年<span class="rd">(ねん)</span>特別<span class="rd">(とくべつ)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chèn lần lượt 8, 12, 5, 3, 10, 7, 6 vào cây tìm kiếm nhị phân rỗng. Chọn hình cây kết quả (xem hình ở link).</td>
+<td>内容<span class="rd">(ないよう)</span>：8, 12, 5, 3, 10, 7, 6の順<span class="rd">(じゅん)</span>に挿入<span class="rd">(そうにゅう)</span>した2分探索木<span class="rd">(ぶんたんさくぎ)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: gốc 8; trái 5 (con 3 và 7; 7 có con trái 6); phải 12 (con trái 10).</td>
+<td>解説<span class="rd">(かいせつ)</span>：根<span class="rd">(ね)</span>8、左<span class="rd">(ひだり)</span>5（3、7（左<span class="rd">(ひだり)</span>6））、右<span class="rd">(みぎ)</span>12（左<span class="rd">(ひだり)</span>10）。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/20_haru/q12.html" target="_blank" rel="noopener">平成20年春期 午前 問12</a></strong> (2008)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>20年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>12</strong></td>
+</tr>
+<tr>
+<td>Nội dung: cây tìm kiếm nhị phân 15 nút, mọi nút trừ tầng cuối đều có 2 con. Tìm một giá trị (có thể không có trong cây), số nút phải so tối đa? ア 3　イ 4　ウ 7　エ 15</td>
+<td>内容<span class="rd">(ないよう)</span>：15節<span class="rd">(せつ)</span>の2分探索木<span class="rd">(ぶんたんさくぎ)</span>で探索時<span class="rd">(たんさくじ)</span>に比較<span class="rd">(ひかく)</span>する節<span class="rd">(せつ)</span>の最大数<span class="rd">(さいだいすう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (4)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（4）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: 1 + 2 + 4 + 8 = 15 → 4 tầng; mỗi tầng so 1 lần.</td>
+<td>解説<span class="rd">(かいせつ)</span>：4段<span class="rd">(だん)</span>なので最大<span class="rd">(さいだい)</span>4回<span class="rd">(かい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/28_haru/q5.html" target="_blank" rel="noopener">平成28年春期 午前 問5</a></strong> (2016)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>28年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: cây nhị phân 10 nút, gán giá trị 1–10 không trùng sao cho con trái &lt; cha &lt; con phải. Giá trị của nút a và b (xem hình)? ア a=6, b=7　イ a=6, b=8　ウ a=7, b=8　エ a=7, b=9</td>
+<td>内容<span class="rd">(ないよう)</span>：1〜10を2分探索木<span class="rd">(ぶんたんさくぎ)</span>の条件<span class="rd">(じょうけん)</span>で割<span class="rd">(わ)</span>り振<span class="rd">(ふ)</span>ったときの節<span class="rd">(せつ)</span>a・bの値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: nút trái nhất nhỏ nhất. Các ô trống bên trái 4 nhận 1, 2, 3; a là giá trị nhỏ nhất còn lại lớn hơn 5 → 6; b → 7.</td>
+<td>解説<span class="rd">(かいせつ)</span>：残<span class="rd">(のこ)</span>りの最小値<span class="rd">(さいしょうち)</span>から順<span class="rd">(じゅん)</span>に入<span class="rd">(はい)</span>る。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/15_aki/q12.html" target="_blank" rel="noopener">平成15年秋期 午前 問12</a></strong> (2003)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>15年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>12</strong></td>
+</tr>
+<tr>
+<td>Nội dung: cây nhị phân gốc a (con b, e; b có c, d; c có h, i; e có f, g; f có j; g có k). Kết quả duyệt trước (pre-order)? ア abchidefjgk　イ abechidfjgk　ウ hcibdajfegk　エ hicdbjfkgea</td>
+<td>内容<span class="rd">(ないよう)</span>：2分木<span class="rd">(ぶんぎ)</span>の先行順走査<span class="rd">(せんこうじゅんそうさ)</span>の結果<span class="rd">(けっか)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: a, rồi toàn bộ cây trái (b c h i d), rồi cây phải (e f j g k). ウ là in-order, エ là post-order.</td>
+<td>解説<span class="rd">(かいせつ)</span>：ウは中間順<span class="rd">(ちゅうかんじゅん)</span>、エは後行順<span class="rd">(こうこうじゅん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tiêm SQL / chèn script chéo trang / duyệt thư mục</td>
+<td>SQLインジェクション / クロスサイトスクリプティング / ディレクトリトラバーサル</td>
+</tr>
+<tr>
+<td>Tấn công từ chối dịch vụ / tràn bộ đệm</td>
+<td>DoS攻撃<span class="rd">(こうげき)</span> / バッファオーバーフロー</td>
+</tr>
+<tr>
+<td>Chiếm phiên / mã độc tống tiền</td>
+<td>セッションハイジャック / ランサムウェア</td>
+</tr>
+<tr>
+<td>Phát hiện xâm nhập / ngăn chặn / phân tích log</td>
+<td>IDS / IPS / SIEM</td>
+</tr>
+<tr>
+<td>Biến giữ chỗ (placeholder) / thoát ký tự</td>
+<td>プレースホルダ / エスケープ</td>
+</tr>
+<tr>
+<td>Cây con trái / phải / tầng</td>
+<td>左部分木<span class="rd">(ひだりぶぶんぎ)</span> / 右部分木<span class="rd">(みぎぶぶんぎ)</span> / 段<span class="rd">(だん)</span>（レベル）</td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>

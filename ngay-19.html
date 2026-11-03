@@ -1,0 +1,836 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>FE Ngày 19 (30/10)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Sans+JP:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root {
+  --bg: #f5f7f9; --surface: #ffffff; --ink: #16202a; --muted: #5a6876; --line: #dce3ea;
+  --accent: #1d5f7a; --accent-soft: #e3eff4; --ans: #1f6b46; --ans-soft: #e6f3ec; --code-bg: #eef2f5;
+  --f-body: "Be Vietnam Pro", "Noto Sans JP", system-ui, sans-serif;
+  --f-jp: "Noto Sans JP", "Be Vietnam Pro", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+    --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e6ecf1; --muted: #9aa8b5; --line: #2a3642;
+  --accent: #6fb4d1; --accent-soft: #1d3340; --ans: #7fd3a6; --ans-soft: #17302a; --code-bg: #1f2a34;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; }
+.top { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: baseline; justify-content: space-between; font-size: 13.5px; color: var(--muted); }
+.top a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.top a:hover { text-decoration: underline; }
+h1 { font-size: 26px; line-height: 1.25; margin: 10px 0 4px; text-wrap: balance; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+.lock { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-weight: 600; margin-left: 6px; }
+nav.toc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 24px; font-size: 14px; }
+nav.toc ol { margin: 4px 0 0; padding-left: 20px; display: grid; gap: 2px; }
+nav.toc a { color: var(--accent); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+.doc h2 { font-size: 20px; line-height: 1.3; margin: 36px 0 10px; padding-top: 12px; border-top: 2px solid var(--line); text-wrap: balance; scroll-margin-top: 12px; }
+.doc h3 { font-size: 16px; margin: 22px 0 8px; color: var(--accent); }
+.doc p { margin: 8px 0; max-width: 72ch; }
+.doc a { color: var(--accent); }
+.doc strong { font-weight: 650; }
+.rd { font-size: .72em; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+.doc ul { padding-left: 22px; }
+.doc ul.check { list-style: none; padding-left: 4px; display: grid; gap: 4px; }
+.doc ul.check li::before { content: "☐"; margin-right: 8px; color: var(--accent); }
+.tbl { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.doc table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.doc th, .doc td { border-bottom: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+.doc tr:last-child td { border-bottom: 0; }
+.doc th { background: var(--accent-soft); font-size: 12.5px; letter-spacing: .04em; color: var(--accent); }
+.doc td { min-width: 0; }
+table.plain td, table.plain th { text-align: center; font-family: var(--f-mono); }
+table.bi td:nth-child(1) { width: 50%; border-right: 1px solid var(--line); }
+table.bi td:nth-child(2) { font-family: var(--f-jp); }
+table.bi tr.ans td { background: var(--ans-soft); color: var(--ans); }
+table.bi tr.q td { border-top: 2px solid var(--line); }
+pre { background: var(--code-bg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; font-family: var(--f-mono), var(--f-jp); font-size: 13.5px; line-height: 1.55; margin: 10px 0; }
+code { font-family: var(--f-mono), var(--f-jp); }
+@media (max-width: 640px) {
+  table.bi thead { display: none; }
+  table.bi, table.bi tbody, table.bi tr, table.bi td { display: block; width: auto !important; }
+  table.bi tr { border-bottom: 1px solid var(--line); padding: 8px 12px; }
+  table.bi tr:last-child { border-bottom: 0; }
+  table.bi td { border: 0 !important; padding: 2px 0; }
+  table.bi td:nth-child(2) { color: var(--muted); }
+  table.bi tr.ans td:nth-child(2) { color: var(--ans); }
+  table.bi td::before { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--accent); margin-right: 6px; }
+  table.bi td:nth-child(1)::before { content: "VI"; }
+  table.bi td:nth-child(2)::before { content: "JA"; }
+  table.bi tr.ans { background: var(--ans-soft); }
+  h1 { font-size: 22px; }
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+table.bi tr.reveal td { padding: 6px 12px; background: var(--surface); }
+table.bi tr.reveal td::before { content: none !important; }
+.show-ans { font: inherit; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border: 1px solid transparent; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.show-ans[aria-expanded="true"] { background: transparent; border-color: var(--line); color: var(--muted); }
+.all-ans { font: inherit; font-size: 13px; color: var(--accent); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; }
+</style>
+<div class="wrap">
+<div class="top"><a href="lo-trinh.html" target="_blank" rel="noopener">← Lộ trình FE</a><span><button type="button" class="all-ans" id="all-ans" hidden>Hiện tất cả đáp án</button><span class="lock">Chỉ đọc</span></span></div>
+<h1>FE Ngày 19 (30/10): Chiến lược kinh doanh, marketing và bài tổng hợp 科目B</h1>
+<p class="meta">Ngày 19 · Thứ Sáu 30/10 · 科目A: 経営戦略・マーケティング · 科目B: 総合問題</p>
+<nav class="toc" aria-label="Mục lục"><strong>Mục lục</strong><ol><li><a href="#muc-1">Lịch học hôm nay</a></li><li><a href="#muc-2">科目A: Chiến lược kinh doanh và marketing ｜ 経営戦略<span class="rd">(けいえいせんりゃく)</span>・マーケティング</a></li><li><a href="#muc-3">科目B: Bài tổng hợp ｜ 総合問題<span class="rd">(そうごうもんだい)</span></a></li><li><a href="#muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></a></li></ol></nav>
+<article class="doc">
+<h2 id="muc-1">Lịch học hôm nay</h2>
+<p>Tổng khoảng 2 tiếng: 1 tiếng 科目A, 1 tiếng 科目B.</p>
+<ul class="check">
+<li>Đọc lý thuyết SWOT, PPM, BSC, ma trận Ansoff, vòng đời sản phẩm, 4P/4C (25 phút)</li>
+<li>Làm 4 câu bài tập 科目A, tự giải trước rồi mới xem đáp án (10 phút)</li>
+<li>Làm 10 câu đề cũ phần 経営戦略・マーケティング (25 phút)</li>
+<li>Đọc các mẹo làm bài tổng hợp 科目B (10 phút)</li>
+<li>Trace 3 bài 科目B trên giấy, kẻ bảng biến (25 phút)</li>
+<li>Làm 5 câu đề cũ 科目B 令和6年度 (25 phút)</li>
+<li>Ôn bảng từ vựng cuối bài</li>
+</ul>
+<h2 id="muc-2">科目A: Chiến lược kinh doanh và marketing ｜ 経営戦略<span class="rd">(けいえいせんりゃく)</span>・マーケティング</h2>
+<p>Phần ストラテジ ra đều mỗi kỳ, chủ yếu là câu hỏi "cái nào là định nghĩa đúng". Học theo cặp "tên công cụ ↔ hai trục / bốn ô" là làm được gần hết.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SWOT:</strong> Strength (điểm mạnh), Weakness (điểm yếu) là yếu tố <strong>bên trong</strong> công ty; Opportunity (cơ hội), Threat (thách thức) là yếu tố <strong>bên ngoài</strong> (thị trường, đối thủ, luật, kinh tế).</td>
+<td><strong>SWOT分析<span class="rd">(ぶんせき)</span>：</strong>強<span class="rd">(つよ)</span>み・弱<span class="rd">(よわ)</span>みは<strong>内部要因<span class="rd">(ないぶよういん)</span></strong>、機会<span class="rd">(きかい)</span>・脅威<span class="rd">(きょうい)</span>は<strong>外部要因<span class="rd">(がいぶよういん)</span></strong>（市場<span class="rd">(しじょう)</span>・競合<span class="rd">(きょうごう)</span>・法律<span class="rd">(ほうりつ)</span>・経済<span class="rd">(けいざい)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Mẹo SWOT:</strong> câu nói về "của mình" (công nghệ, thị phần, năng suất của công ty) → S/W. Câu nói về "môi trường" (đối thủ mới vào, thị trường tăng trưởng, luật thay đổi) → O/T.</td>
+<td><strong>コツ：</strong>自社<span class="rd">(じしゃ)</span>のこと（技術力<span class="rd">(ぎじゅつりょく)</span>・シェア・生産効率<span class="rd">(せいさんこうりつ)</span>）→ S/W。環境<span class="rd">(かんきょう)</span>のこと（新規参入<span class="rd">(しんきさんにゅう)</span>・市場成長<span class="rd">(しじょうせいちょう)</span>・法改正<span class="rd">(ほうかいせい)</span>）→ O/T。</td>
+</tr>
+<tr>
+<td><strong>PPM:</strong> hai trục là <strong>tốc độ tăng trưởng thị trường</strong> và <strong>thị phần</strong>. Mục đích: phân bổ nguồn lực (tiền) giữa các mảng kinh doanh.</td>
+<td><strong>PPM（プロダクトポートフォリオマネジメント）：</strong>軸<span class="rd">(じく)</span>は<strong>市場成長率<span class="rd">(しじょうせいちょうりつ)</span></strong>と<strong>市場占有率<span class="rd">(しじょうせんゆうりつ)</span></strong>。目的<span class="rd">(もくてき)</span>は事業間<span class="rd">(じぎょうかん)</span>の経営資源<span class="rd">(けいえいしげん)</span>の配分<span class="rd">(はいぶん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Ngôi sao:</strong> tăng trưởng cao, thị phần cao. Thu nhiều tiền nhưng cũng phải đầu tư nhiều để giữ vị trí.</td>
+<td><strong>花形<span class="rd">(はながた)</span>：</strong>成長率<span class="rd">(せいちょうりつ)</span>高<span class="rd">(たか)</span>い・占有率<span class="rd">(せんゆうりつ)</span>高<span class="rd">(たか)</span>い。資金流入<span class="rd">(しきんりゅうにゅう)</span>は大<span class="rd">(おお)</span>きいが投資<span class="rd">(とうし)</span>も多<span class="rd">(おお)</span>い。</td>
+</tr>
+<tr>
+<td><strong>Bò sữa:</strong> tăng trưởng thấp, thị phần cao. Ít cần đầu tư, là nguồn tiền chính của công ty.</td>
+<td><strong>金<span class="rd">(かね)</span>のなる木<span class="rd">(き)</span>：</strong>成長率<span class="rd">(せいちょうりつ)</span>低<span class="rd">(ひく)</span>い・占有率<span class="rd">(せんゆうりつ)</span>高<span class="rd">(たか)</span>い。投資<span class="rd">(とうし)</span>が少<span class="rd">(すく)</span>なく、資金源<span class="rd">(しきんげん)</span>になる。</td>
+</tr>
+<tr>
+<td><strong>Dấu hỏi (đứa trẻ có vấn đề):</strong> tăng trưởng cao, thị phần thấp. Cần đầu tư lớn để thành ngôi sao, hoặc rút lui.</td>
+<td><strong>問題児<span class="rd">(もんだいじ)</span>：</strong>成長率<span class="rd">(せいちょうりつ)</span>高<span class="rd">(たか)</span>い・占有率<span class="rd">(せんゆうりつ)</span>低<span class="rd">(ひく)</span>い。花形<span class="rd">(はながた)</span>にするには多額<span class="rd">(たがく)</span>の投資<span class="rd">(とうし)</span>が必要<span class="rd">(ひつよう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Chó (kẻ thua cuộc):</strong> tăng trưởng thấp, thị phần thấp. Nên cân nhắc rút lui.</td>
+<td><strong>負<span class="rd">(ま)</span>け犬<span class="rd">(いぬ)</span>：</strong>成長率<span class="rd">(せいちょうりつ)</span>・占有率<span class="rd">(せんゆうりつ)</span>とも低<span class="rd">(ひく)</span>い。撤退<span class="rd">(てったい)</span>を検討<span class="rd">(けんとう)</span>する。</td>
+</tr>
+<tr>
+<td><strong>Thẻ điểm cân bằng (BSC):</strong> đánh giá từ 4 góc nhìn: <strong>tài chính, khách hàng, quy trình nghiệp vụ nội bộ, học tập và phát triển</strong>. Không chỉ nhìn vào lợi nhuận.</td>
+<td><strong>バランススコアカード（BSC）：</strong>4つの視点<span class="rd">(してん)</span>：<strong>財務<span class="rd">(ざいむ)</span>、顧客<span class="rd">(こきゃく)</span>、内部<span class="rd">(ないぶ)</span>ビジネスプロセス(業務<span class="rd">(ぎょうむ)</span>プロセス)、学習<span class="rd">(がくしゅう)</span>と成長<span class="rd">(せいちょう)</span></strong>。</td>
+</tr>
+<tr>
+<td><strong>Phân loại KPI theo BSC:</strong> đào tạo nhân viên → học tập và phát triển; cải tiến quy trình, tăng số đề xuất → quy trình nội bộ; mức hài lòng → khách hàng; doanh thu, lợi nhuận → tài chính.</td>
+<td><strong>KPIの分類<span class="rd">(ぶんるい)</span>：</strong>社員育成<span class="rd">(しゃいんいくせい)</span>→学習<span class="rd">(がくしゅう)</span>と成長<span class="rd">(せいちょう)</span>；業務改善<span class="rd">(ぎょうむかいぜん)</span>・提案数<span class="rd">(ていあんすう)</span>→業務<span class="rd">(ぎょうむ)</span>プロセス；満足度<span class="rd">(まんぞくど)</span>→顧客<span class="rd">(こきゃく)</span>；売上<span class="rd">(うりあげ)</span>・利益<span class="rd">(りえき)</span>→財務<span class="rd">(ざいむ)</span>。</td>
+</tr>
+<tr>
+<td><strong>Bản đồ chiến lược:</strong> sơ đồ thể hiện quan hệ nhân quả giữa 4 góc nhìn BSC (học tập → quy trình → khách hàng → tài chính).</td>
+<td><strong>戦略<span class="rd">(せんりゃく)</span>マップ：</strong>BSCの4つの視点<span class="rd">(してん)</span>の因果関係<span class="rd">(いんがかんけい)</span>を図<span class="rd">(ず)</span>で表<span class="rd">(あらわ)</span>したもの。</td>
+</tr>
+<tr>
+<td><strong>KGI / KPI / CSF:</strong> KGI là mục tiêu cuối cùng; KPI là chỉ số đo tiến độ; CSF là yếu tố then chốt để thành công.</td>
+<td><strong>KGI（重要目標達成指標<span class="rd">(じゅうようもくひょうたっせいしひょう)</span>）／KPI（重要業績評価指標<span class="rd">(じゅうようぎょうせきひょうかしひょう)</span>）／CSF（重要成功要因<span class="rd">(じゅうようせいこうよういん)</span>）</strong></td>
+</tr>
+<tr>
+<td><strong>Ma trận Ansoff:</strong> sản phẩm hiện có × thị trường hiện có = thâm nhập thị trường; sản phẩm hiện có × thị trường mới = phát triển thị trường; sản phẩm mới × thị trường hiện có = phát triển sản phẩm; sản phẩm mới × thị trường mới = đa dạng hóa.</td>
+<td><strong>アンゾフの成長<span class="rd">(せいちょう)</span>マトリクス：</strong>既存製品<span class="rd">(きそんせいひん)</span>×既存市場<span class="rd">(きそんしじょう)</span>＝市場浸透<span class="rd">(しじょうしんとう)</span>；既存製品<span class="rd">(きそんせいひん)</span>×新市場<span class="rd">(しんしじょう)</span>＝市場開拓<span class="rd">(しじょうかいたく)</span>；新製品<span class="rd">(しんせいひん)</span>×既存市場<span class="rd">(きそんしじょう)</span>＝製品開発<span class="rd">(せいひんかいはつ)</span>；新製品<span class="rd">(しんせいひん)</span>×新市場<span class="rd">(しんしじょう)</span>＝多角化<span class="rd">(たかくか)</span>。</td>
+</tr>
+<tr>
+<td><strong>Vòng đời sản phẩm:</strong> giới thiệu (làm cho biết đến) → tăng trưởng (doanh thu tăng, cần đầu tư, mở rộng kênh) → bão hòa (cạnh tranh gay gắt, khác biệt hóa, giảm chi phí) → suy thoái (rút lui hoặc tìm thị trường thay thế).</td>
+<td><strong>プロダクトライフサイクル：</strong>導入期<span class="rd">(どうにゅうき)</span>（認知<span class="rd">(にんち)</span>）→成長期<span class="rd">(せいちょうき)</span>（売上増<span class="rd">(うりあげぞう)</span>・投資<span class="rd">(とうし)</span>）→成熟期<span class="rd">(せいじゅくき)</span>（競争激化<span class="rd">(きょうそうげきか)</span>・差別化<span class="rd">(さべつか)</span>・コストダウン）→衰退期<span class="rd">(すいたいき)</span>（撤退<span class="rd">(てったい)</span>・代替市場<span class="rd">(だいたいしじょう)</span>）。</td>
+</tr>
+<tr>
+<td><strong>4P (phía người bán):</strong> Product, Price, Place, Promotion. <strong>4C (phía người mua):</strong> Customer Value ↔ Product, Cost ↔ Price, Convenience ↔ Place, Communication ↔ Promotion.</td>
+<td><strong>4P（売<span class="rd">(う)</span>り手<span class="rd">(て)</span>）：</strong>製品<span class="rd">(せいひん)</span>・価格<span class="rd">(かかく)</span>・流通<span class="rd">(りゅうつう)</span>・販売促進<span class="rd">(はんばいそくしん)</span>。<strong>4C（買<span class="rd">(か)</span>い手<span class="rd">(て)</span>）：</strong>顧客価値<span class="rd">(こきゃくかち)</span>↔製品<span class="rd">(せいひん)</span>、顧客<span class="rd">(こきゃく)</span>の負担<span class="rd">(ふたん)</span>↔価格<span class="rd">(かかく)</span>、利便性<span class="rd">(りべんせい)</span>↔流通<span class="rd">(りゅうつう)</span>、対話<span class="rd">(たいわ)</span>↔販売促進<span class="rd">(はんばいそくしん)</span>。</td>
+</tr>
+<tr>
+<td><strong>Năng lực cốt lõi:</strong> nguồn lực và năng lực riêng của công ty mà đối thủ khó bắt chước, là nguồn gốc lợi thế cạnh tranh.</td>
+<td><strong>コアコンピタンス：</strong>他社<span class="rd">(たしゃ)</span>が真似<span class="rd">(まね)</span>しにくい、競争優位<span class="rd">(きょうそうゆうい)</span>の源泉<span class="rd">(げんせん)</span>となる経営資源<span class="rd">(けいえいしげん)</span>・能力<span class="rd">(のうりょく)</span>。</td>
+</tr>
+<tr>
+<td><strong>Chiến lược cạnh tranh của Porter:</strong> dẫn đầu về chi phí, khác biệt hóa, tập trung (vào phân khúc hẹp).</td>
+<td><strong>ポーターの競争戦略<span class="rd">(きょうそうせんりゃく)</span>：</strong>コストリーダーシップ、差別化<span class="rd">(さべつか)</span>、集中<span class="rd">(しゅうちゅう)</span>。</td>
+</tr>
+<tr>
+<td><strong>Vị thế cạnh tranh (Kotler):</strong> dẫn đầu, thách thức, theo sau, ngách.</td>
+<td><strong>競争地位<span class="rd">(きょうそうちい)</span>：</strong>リーダー、チャレンジャー、フォロワー、ニッチャー。</td>
+</tr>
+<tr>
+<td><strong>Các công cụ khác hay làm bẫy:</strong> bản đồ định vị (2 trục, vị trí so với đối thủ); business screen (độ hấp dẫn thị trường × ưu thế của công ty); benchmarking (so với công ty giỏi nhất).</td>
+<td><strong>紛<span class="rd">(まぎ)</span>らわしい手法<span class="rd">(しゅほう)</span>：</strong>ポジショニングマップ（2軸<span class="rd">(じく)</span>で自社<span class="rd">(じしゃ)</span>の位置<span class="rd">(いち)</span>）；ビジネススクリーン（市場<span class="rd">(しじょう)</span>の魅力度<span class="rd">(みりょくど)</span>×自社<span class="rd">(じしゃ)</span>の優位性<span class="rd">(ゆういせい)</span>）；ベンチマーキング（優良企業<span class="rd">(ゆうりょうきぎょう)</span>と比較<span class="rd">(ひかく)</span>）。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Bảng PPM ｜ PPMの4象限<span class="rd">(しょうげん)</span></strong></p>
+<div class="tbl"><table class="plain">
+<thead>
+<tr>
+<th></th>
+<th>Thị phần cao (占有率高)</th>
+<th>Thị phần thấp (占有率低)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tăng trưởng cao (成長率高)</td>
+<td>花形 (ngôi sao)</td>
+<td>問題児 (dấu hỏi)</td>
+</tr>
+<tr>
+<td>Tăng trưởng thấp (成長率低)</td>
+<td>金のなる木 (bò sữa)</td>
+<td>負け犬 (chó)</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Câu A1</strong> Trong phân tích SWOT của một công ty phần mềm, yếu tố nào là "cơ hội"?</td>
+<td><strong>問<span class="rd">(とい)</span>A1</strong> ソフトウェア会社<span class="rd">(がいしゃ)</span>のSWOT分析<span class="rd">(ぶんせき)</span>で「機会<span class="rd">(きかい)</span>」に当<span class="rd">(あ)</span>たるものはどれか。</td>
+</tr>
+<tr>
+<td>ア Đội ngũ kỹ sư có trình độ cao　イ Nới lỏng quy định giúp thị trường mở rộng　ウ Đối thủ lớn giảm giá mạnh　エ Mạng lưới bán hàng yếu</td>
+<td>ア 技術者<span class="rd">(ぎじゅつしゃ)</span>のレベルが高<span class="rd">(たか)</span>い　イ 規制緩和<span class="rd">(きせいかんわ)</span>による市場<span class="rd">(しじょう)</span>の拡大<span class="rd">(かくだい)</span>　ウ 大手競合<span class="rd">(おおてきょうごう)</span>の大幅値下<span class="rd">(おおはばねさ)</span>げ　エ 販売網<span class="rd">(はんばいもう)</span>が弱<span class="rd">(よわ)</span>い</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: cơ hội là yếu tố bên ngoài và có lợi. イ là thay đổi của môi trường và có lợi → O. ア là điểm mạnh nội bộ (S); ウ là bên ngoài nhưng bất lợi (T); エ là điểm yếu nội bộ (W). Bẫy hay gặp: thấy "đối thủ" là chọn ngay, nhưng phải xem có lợi hay bất lợi.</td>
+<td>解説<span class="rd">(かいせつ)</span>：機会<span class="rd">(きかい)</span>は外部<span class="rd">(がいぶ)</span>かつ好影響<span class="rd">(こうえいきょう)</span>。イは環境<span class="rd">(かんきょう)</span>の変化<span class="rd">(へんか)</span>で有利<span class="rd">(ゆうり)</span>→O。アは内部<span class="rd">(ないぶ)</span>の強<span class="rd">(つよ)</span>み(S)、ウは外部<span class="rd">(がいぶ)</span>だが不利<span class="rd">(ふり)</span>(T)、エは内部<span class="rd">(ないぶ)</span>の弱<span class="rd">(よわ)</span>み(W)。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A2</strong> Trong PPM, mảng kinh doanh có tốc độ tăng trưởng thị trường cao nhưng thị phần thấp được gọi là gì?</td>
+<td><strong>問<span class="rd">(とい)</span>A2</strong> PPMで、市場成長率<span class="rd">(しじょうせいちょうりつ)</span>は高<span class="rd">(たか)</span>いが市場占有率<span class="rd">(しじょうせんゆうりつ)</span>が低<span class="rd">(ひく)</span>い事業<span class="rd">(じぎょう)</span>はどれか。</td>
+</tr>
+<tr>
+<td>ア 花形　イ 金のなる木　ウ 問題児　エ 負け犬</td>
+<td>ア 花形<span class="rd">(はながた)</span>　イ 金<span class="rd">(かね)</span>のなる木<span class="rd">(き)</span>　ウ 問題児<span class="rd">(もんだいじ)</span>　エ 負<span class="rd">(ま)</span>け犬<span class="rd">(いぬ)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ (問題児)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ（問題児<span class="rd">(もんだいじ)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: nhớ theo bảng 2×2 ở trên: hàng "tăng trưởng cao", cột "thị phần thấp" là 問題児. 花形 là cao-cao; 金のなる木 là tăng trưởng thấp, thị phần cao; 負け犬 là thấp-thấp. Bẫy: đảo trục, nhầm 問題児 với 金のなる木.</td>
+<td>解説<span class="rd">(かいせつ)</span>：2×2の表<span class="rd">(ひょう)</span>で「成長率<span class="rd">(せいちょうりつ)</span>高<span class="rd">(たか)</span>」×「占有率<span class="rd">(せんゆうりつ)</span>低<span class="rd">(てい)</span>」は問題児<span class="rd">(もんだいじ)</span>。花形<span class="rd">(はながた)</span>は高<span class="rd">(こう)</span>・高<span class="rd">(こう)</span>、金<span class="rd">(かね)</span>のなる木<span class="rd">(き)</span>は成長率<span class="rd">(せいちょうりつ)</span>低<span class="rd">(てい)</span>・占有率<span class="rd">(せんゆうりつ)</span>高<span class="rd">(こう)</span>、負<span class="rd">(ま)</span>け犬<span class="rd">(いぬ)</span>は低<span class="rd">(てい)</span>・低<span class="rd">(てい)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A3</strong> Mục tiêu "mỗi nhân viên được đào tạo 40 giờ/năm và 10 người đạt chứng chỉ cao cấp" thuộc góc nhìn nào của BSC?</td>
+<td><strong>問<span class="rd">(とい)</span>A3</strong> 「社員<span class="rd">(しゃいん)</span>1人<span class="rd">(ひとり)</span>当<span class="rd">(あ)</span>たり年間<span class="rd">(ねんかん)</span>40時間<span class="rd">(じかん)</span>の研修<span class="rd">(けんしゅう)</span>、高度資格<span class="rd">(こうどしかく)</span>取得者<span class="rd">(しゅとくしゃ)</span>10名<span class="rd">(めい)</span>」という目標<span class="rd">(もくひょう)</span>は、BSCのどの視点<span class="rd">(してん)</span>か。</td>
+</tr>
+<tr>
+<td>ア Tài chính　イ Khách hàng　ウ Quy trình nghiệp vụ nội bộ　エ Học tập và phát triển</td>
+<td>ア 財務<span class="rd">(ざいむ)</span>　イ 顧客<span class="rd">(こきゃく)</span>　ウ 内部<span class="rd">(ないぶ)</span>ビジネスプロセス　エ 学習<span class="rd">(がくしゅう)</span>と成長<span class="rd">(せいちょう)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đào tạo, nâng cao năng lực con người và tổ chức → học tập và phát triển. Bẫy ウ: đào tạo diễn ra trong công ty nên dễ nghĩ là "nội bộ", nhưng góc nhìn quy trình là về cải tiến cách làm việc (thời gian xử lý, tỉ lệ lỗi).</td>
+<td>解説<span class="rd">(かいせつ)</span>：人材育成<span class="rd">(じんざいいくせい)</span>・能力向上<span class="rd">(のうりょくこうじょう)</span>は学習<span class="rd">(がくしゅう)</span>と成長<span class="rd">(せいちょう)</span>。ウは業務<span class="rd">(ぎょうむ)</span>のやり方<span class="rd">(かた)</span>（処理時間<span class="rd">(しょりじかん)</span>・不良率<span class="rd">(ふりょうりつ)</span>）の改善<span class="rd">(かいぜん)</span>なので誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Câu A4</strong> Một công ty bán phần mềm kế toán ở Nhật quyết định bán nguyên sản phẩm đó sang thị trường Việt Nam. Theo ma trận Ansoff, đây là chiến lược gì?</td>
+<td><strong>問<span class="rd">(とい)</span>A4</strong> 国内<span class="rd">(こくない)</span>で会計<span class="rd">(かいけい)</span>ソフトを販売<span class="rd">(はんばい)</span>している企業<span class="rd">(きぎょう)</span>が、同<span class="rd">(おな)</span>じ製品<span class="rd">(せいひん)</span>をベトナム市場<span class="rd">(しじょう)</span>で販売<span class="rd">(はんばい)</span>する。アンゾフの成長<span class="rd">(せいちょう)</span>マトリクスではどれか。</td>
+</tr>
+<tr>
+<td>ア Thâm nhập thị trường　イ Phát triển thị trường　ウ Phát triển sản phẩm　エ Đa dạng hóa</td>
+<td>ア 市場浸透<span class="rd">(しじょうしんとう)</span>　イ 市場開拓<span class="rd">(しじょうかいたく)</span>　ウ 製品開発<span class="rd">(せいひんかいはつ)</span>　エ 多角化<span class="rd">(たかくか)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (市場開拓)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（市場開拓<span class="rd">(しじょうかいたく)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: sản phẩm hiện có × thị trường mới = phát triển thị trường. ア là sản phẩm cũ bán nhiều hơn ở thị trường cũ; ウ là sản phẩm mới cho khách cũ; エ là cả hai đều mới.</td>
+<td>解説<span class="rd">(かいせつ)</span>：既存製品<span class="rd">(きそんせいひん)</span>×新市場<span class="rd">(しんしじょう)</span>＝市場開拓<span class="rd">(しじょうかいたく)</span>。アは既存<span class="rd">(きそん)</span>×既存<span class="rd">(きそん)</span>、ウは新製品<span class="rd">(しんせいひん)</span>×既存市場<span class="rd">(きそんしじょう)</span>、エは新<span class="rd">(しん)</span>×新<span class="rd">(しん)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Mỗi câu ghi kỳ thi và số câu; bấm link để xem nguyên văn đề trên fe-siken.com.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/29_aki/q67.html" target="_blank" rel="noopener">平成29年秋期 午前 問67</a></strong> (2017)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 平成<span class="rd">(へいせい)</span>29年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>67</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong SWOT, yếu tố nào thường được xếp vào "thách thức"? Các lựa chọn: năng suất cao hơn đối thủ, lĩnh vực kinh doanh tăng trưởng nhanh, công ty mạnh gia nhập thị trường, thị phần thấp.</td>
+<td>内容<span class="rd">(ないよう)</span>：SWOT分析<span class="rd">(ぶんせき)</span>で一般<span class="rd">(いっぱん)</span>に脅威<span class="rd">(きょうい)</span>に当<span class="rd">(あ)</span>たるものを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (công ty mạnh gia nhập thị trường)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（強力<span class="rd">(きょうりょく)</span>な企業<span class="rd">(きぎょう)</span>の市場参入<span class="rd">(しじょうさんにゅう)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thách thức = bên ngoài + bất lợi. Năng suất cao là S, lĩnh vực tăng trưởng là O, thị phần thấp là W.</td>
+<td>解説<span class="rd">(かいせつ)</span>：脅威<span class="rd">(きょうい)</span>＝外部<span class="rd">(がいぶ)</span>＋不利<span class="rd">(ふり)</span>。高<span class="rd">(たか)</span>い生産効率<span class="rd">(せいさんこうりつ)</span>はS、事業<span class="rd">(じぎょう)</span>ドメインの高成長<span class="rd">(こうせいちょう)</span>はO、低<span class="rd">(ひく)</span>いシェアはW。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/27_haru/q67.html" target="_blank" rel="noopener">平成27年春期 午前 問67</a></strong> (2015)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 平成<span class="rd">(へいせい)</span>27年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>67</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong SWOT về sản phẩm của công ty, đâu là yếu tố bên ngoài? Ba lựa chọn còn lại là điểm mạnh/yếu về bán hàng, chức năng, chất lượng.</td>
+<td>内容<span class="rd">(ないよう)</span>：自社製品<span class="rd">(じしゃせいひん)</span>のSWOT分析<span class="rd">(ぶんせき)</span>で外部要因<span class="rd">(がいぶよういん)</span>はどれか。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: "mối đe dọa từ đối thủ mới gia nhập"</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：新規参入<span class="rd">(しんきさんにゅう)</span>による脅威<span class="rd">(きょうい)</span></strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: điểm mạnh và điểm yếu luôn là nội bộ, nên chỉ còn "thách thức" là bên ngoài. Cùng dạng với Đề cũ 1, gặp là chọn trong 10 giây.</td>
+<td>解説<span class="rd">(かいせつ)</span>：強<span class="rd">(つよ)</span>み・弱<span class="rd">(よわ)</span>みは内部要因<span class="rd">(ないぶよういん)</span>なので、外部<span class="rd">(がいぶ)</span>は脅威<span class="rd">(きょうい)</span>だけ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/25_haru/q67.html" target="_blank" rel="noopener">平成25年春期 午前 問67</a></strong> (2013)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 平成<span class="rd">(へいせい)</span>25年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>67</strong></td>
+</tr>
+<tr>
+<td>Nội dung: chọn câu mô tả đúng PPM. Bốn lựa chọn lần lượt mô tả SWOT, ma trận Ansoff, PPM và vòng đời sản phẩm.</td>
+<td>内容<span class="rd">(ないよう)</span>：PPMを説明<span class="rd">(せつめい)</span>したものを選<span class="rd">(えら)</span>ぶ。選択肢<span class="rd">(せんたくし)</span>はSWOT、アンゾフ、PPM、プロダクトライフサイクルの説明<span class="rd">(せつめい)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (dựa vào thị phần và tốc độ tăng trưởng để phân bổ nguồn lực)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（市場占有率<span class="rd">(しじょうせんゆうりつ)</span>と市場成長率<span class="rd">(しじょうせいちょうりつ)</span>から経営資源<span class="rd">(けいえいしげん)</span>を配分<span class="rd">(はいぶん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: từ khóa PPM = "thị phần + tăng trưởng + phân bổ nguồn lực". Câu này rất hay: một lần học được cách nhận ra cả 4 công cụ.</td>
+<td>解説<span class="rd">(かいせつ)</span>：PPMのキーワードは「占有率<span class="rd">(せんゆうりつ)</span>・成長率<span class="rd">(せいちょうりつ)</span>・資源配分<span class="rd">(しげんはいぶん)</span>」。4つの手法<span class="rd">(しゅほう)</span>を一度<span class="rd">(いちど)</span>に見分<span class="rd">(みわ)</span>けられる良問<span class="rd">(りょうもん)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/24_haru/q67.html" target="_blank" rel="noopener">平成24年春期 午前 問67</a></strong> (2012)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 平成<span class="rd">(へいせい)</span>24年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>67</strong></td>
+</tr>
+<tr>
+<td>Nội dung: trong PPM, "花形" là sản phẩm như thế nào?</td>
+<td>内容<span class="rd">(ないよう)</span>：PPMにおける「花形<span class="rd">(はながた)</span>」の説明<span class="rd">(せつめい)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア</strong> (tăng trưởng và thị phần đều cao)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア</strong>（市場成長率<span class="rd">(しじょうせいちょうりつ)</span>・市場占有率<span class="rd">(しじょうせんゆうりつ)</span>ともに高<span class="rd">(たか)</span>い）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: イ là 負け犬, ウ là 問題児, エ là 金のなる木. Lưu ý: 花形 chưa chắc tạo nhiều tiền mặt vì phải đầu tư nhiều; nguồn tiền chính là 金のなる木.</td>
+<td>解説<span class="rd">(かいせつ)</span>：イは負<span class="rd">(ま)</span>け犬<span class="rd">(いぬ)</span>、ウは問題児<span class="rd">(もんだいじ)</span>、エは金<span class="rd">(かね)</span>のなる木<span class="rd">(き)</span>。花形<span class="rd">(はながた)</span>は投資<span class="rd">(とうし)</span>も大<span class="rd">(おお)</span>きいので資金源<span class="rd">(しきんげん)</span>とは限<span class="rd">(かぎ)</span>らない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/22_aki/q69.html" target="_blank" rel="noopener">平成22年秋期 午前 問69</a></strong> (2010)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 平成<span class="rd">(へいせい)</span>22年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>69</strong></td>
+</tr>
+<tr>
+<td>Nội dung: BSC có 4 góc nhìn: tài chính, học tập và phát triển, quy trình nội bộ, và góc nhìn thứ tư là gì?</td>
+<td>内容<span class="rd">(ないよう)</span>：BSCの4つの視点<span class="rd">(してん)</span>のうち、財務<span class="rd">(ざいむ)</span>・学習<span class="rd">(がくしゅう)</span>と成長<span class="rd">(せいちょう)</span>・内部<span class="rd">(ないぶ)</span>ビジネスプロセス以外<span class="rd">(いがい)</span>の1つ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (khách hàng)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（顧客<span class="rd">(こきゃく)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thuộc lòng 4 góc nhìn "財・顧・業・学". Quản trị, tuân thủ pháp luật, điểm mạnh không phải góc nhìn của BSC.</td>
+<td>解説<span class="rd">(かいせつ)</span>：「財務<span class="rd">(ざいむ)</span>・顧客<span class="rd">(こきゃく)</span>・業務<span class="rd">(ぎょうむ)</span>プロセス・学習<span class="rd">(がくしゅう)</span>と成長<span class="rd">(せいちょう)</span>」を暗記<span class="rd">(あんき)</span>。ガバナンス・遵法<span class="rd">(じゅんぽう)</span>・強<span class="rd">(つよ)</span>みは視点<span class="rd">(してん)</span>ではない。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 6 — <a href="https://www.fe-siken.com/kakomon/27_haru/q65.html" target="_blank" rel="noopener">平成27年春期 午前 問65</a></strong> (2015)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>6 — 平成<span class="rd">(へいせい)</span>27年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>65</strong></td>
+</tr>
+<tr>
+<td>Nội dung: một IT vendor dùng BSC cho mảng kinh doanh giải pháp. Đâu là ví dụ KPI cho góc nhìn "học tập và phát triển"?</td>
+<td>内容<span class="rd">(ないよう)</span>：ITベンダーのソリューションビジネスのBSCで、「学習<span class="rd">(がくしゅう)</span>と成長<span class="rd">(せいちょう)</span>」のKPI目標例<span class="rd">(もくひょうれい)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ウ</strong> (đào tạo 30 nhân viên thành chuyên gia IT)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ウ</strong>（社内要員<span class="rd">(しゃないよういん)</span>30名<span class="rd">(めい)</span>をITプロフェッショナルとして育成<span class="rd">(いくせい)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: mức hài lòng ≥ 3.5 là khách hàng; tăng số đề xuất nhờ tái sử dụng tài liệu là quy trình nội bộ; tỉ lệ doanh thu tư vấn ≥ 15% là tài chính. Giống hệt Câu A3.</td>
+<td>解説<span class="rd">(かいせつ)</span>：満足度<span class="rd">(まんぞくど)</span>は顧客<span class="rd">(こきゃく)</span>、再利用<span class="rd">(さいりよう)</span>による提案数増加<span class="rd">(ていあんすうぞうか)</span>は内部<span class="rd">(ないぶ)</span>ビジネスプロセス、受注金額<span class="rd">(じゅちゅうきんがく)</span>の比率<span class="rd">(ひりつ)</span>は財務<span class="rd">(ざいむ)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 7 — <a href="https://www.fe-siken.com/kakomon/26_aki/q71.html" target="_blank" rel="noopener">平成26年秋期 午前 問71</a></strong> (2014)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>7 — 平成<span class="rd">(へいせい)</span>26年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>71</strong></td>
+</tr>
+<tr>
+<td>Nội dung: mô tả nào đúng với "bản đồ chiến lược" dùng trong BSC?</td>
+<td>内容<span class="rd">(ないよう)</span>：BSCで使<span class="rd">(つか)</span>われる戦略<span class="rd">(せんりゃく)</span>マップの説明<span class="rd">(せつめい)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (thể hiện quan hệ nhân quả giữa vấn đề, biện pháp, mục tiêu theo 4 góc nhìn)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（4つの視点<span class="rd">(してん)</span>で課題<span class="rd">(かだい)</span>・施策<span class="rd">(しさく)</span>・目標<span class="rd">(もくひょう)</span>の因果関係<span class="rd">(いんがかんけい)</span>を表<span class="rd">(あらわ)</span>す）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: thấy "4 góc nhìn" + "quan hệ nhân quả" là chọn. Các bẫy: ア là bản đồ định vị, ウ là business screen, エ là business model canvas.</td>
+<td>解説<span class="rd">(かいせつ)</span>：「4つの視点<span class="rd">(してん)</span>」と「因果関係<span class="rd">(いんがかんけい)</span>」が決<span class="rd">(き)</span>め手<span class="rd">(て)</span>。アはポジショニングマップ、ウはビジネススクリーン、エはビジネスモデルキャンバス。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 8 — <a href="https://www.fe-siken.com/kakomon/30_haru/q68.html" target="_blank" rel="noopener">平成30年春期 午前 問68</a></strong> (2018); cùng đề còn có ở 平成25年秋期 問70</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>8 — 平成<span class="rd">(へいせい)</span>30年<span class="rd">(ねん)</span>春期<span class="rd">(しゅんき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>68</strong></td>
+</tr>
+<tr>
+<td>Nội dung: đặc điểm của giai đoạn bão hòa trong vòng đời sản phẩm là gì? Bốn lựa chọn mô tả 4 giai đoạn.</td>
+<td>内容<span class="rd">(ないよう)</span>：プロダクトライフサイクルの成熟期<span class="rd">(せいじゅくき)</span>の特徴<span class="rd">(とくちょう)</span>を選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: "nhu cầu lớn, khác biệt hóa và phân khúc rõ ràng, cạnh tranh gay gắt, cần thêm dòng sản phẩm và giảm chi phí"</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：需要<span class="rd">(じゅよう)</span>が大<span class="rd">(おお)</span>きく、差別化<span class="rd">(さべつか)</span>・細分化<span class="rd">(さいぶんか)</span>が明確<span class="rd">(めいかく)</span>、競争激化<span class="rd">(きょうそうげきか)</span>、新品種<span class="rd">(しんひんしゅ)</span>の追加<span class="rd">(ついか)</span>やコストダウンが重要<span class="rd">(じゅうよう)</span></strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: "thị trường bắt đầu hiểu giá trị, doanh thu tăng nhưng cần đầu tư" là tăng trưởng; "nhu cầu giảm, có công ty rút lui" là suy thoái; "nhu cầu còn ít, phải khai phá" là giới thiệu.</td>
+<td>解説<span class="rd">(かいせつ)</span>：「価値<span class="rd">(かち)</span>を理解<span class="rd">(りかい)</span>し始<span class="rd">(はじ)</span>め、投資<span class="rd">(とうし)</span>も必要<span class="rd">(ひつよう)</span>」は成長期<span class="rd">(せいちょうき)</span>、「需要減<span class="rd">(じゅようげん)</span>・撤退<span class="rd">(てったい)</span>」は衰退期<span class="rd">(すいたいき)</span>、「新規需要開拓<span class="rd">(しんきじゅようかいたく)</span>」は導入期<span class="rd">(どうにゅうき)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 9 — <a href="https://www.fe-siken.com/kakomon/06_haru/a16.html" target="_blank" rel="noopener">令和6年度 科目A 問16</a></strong> (2024, đề công khai)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>9 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>A 問<span class="rd">(とい)</span>16</strong></td>
+</tr>
+<tr>
+<td>Nội dung: câu nào mô tả "năng lực cốt lõi"? Các lựa chọn: tinh thần và nguyên tắc hành động; mục tiêu cần đạt khi thực hiện chiến lược; cơ hội và thách thức bên ngoài; nguồn lực/năng lực là nguồn gốc lợi thế cạnh tranh.</td>
+<td>内容<span class="rd">(ないよう)</span>：コアコンピタンスを説明<span class="rd">(せつめい)</span>したものを選<span class="rd">(えら)</span>ぶ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: "nguồn lực và năng lực là nguồn gốc lợi thế cạnh tranh so với đối thủ"</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：他社<span class="rd">(たしゃ)</span>との競争優位<span class="rd">(きょうそうゆうい)</span>の源泉<span class="rd">(げんせん)</span>となる経営資源<span class="rd">(けいえいしげん)</span>及<span class="rd">(およ)</span>び企業能力<span class="rd">(きぎょうのうりょく)</span></strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: các lựa chọn sai lần lượt là triết lý kinh doanh, mục tiêu chiến lược, yếu tố O/T của SWOT. Ví dụ năng lực cốt lõi: công nghệ động cơ của Honda, hệ thống sản xuất của Toyota. Chủ đề này ra cả ở サンプル問題 và 令和6年度 免除試験.</td>
+<td>解説<span class="rd">(かいせつ)</span>：誤答<span class="rd">(ごとう)</span>は経営理念<span class="rd">(けいえいりねん)</span>、戦略目標<span class="rd">(せんりゃくもくひょう)</span>、SWOTの機会<span class="rd">(きかい)</span>・脅威<span class="rd">(きょうい)</span>。例<span class="rd">(れい)</span>：ホンダのエンジン技術<span class="rd">(ぎじゅつ)</span>、トヨタの生産方式<span class="rd">(せいさんほうしき)</span>。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 10 — <a href="https://www.fe-siken.com/kakomon/28_aki/q68.html" target="_blank" rel="noopener">平成28年秋期 午前 問68</a></strong> (2016)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>10 — 平成<span class="rd">(へいせい)</span>28年<span class="rd">(ねん)</span>秋期<span class="rd">(しゅうき)</span> 午前<span class="rd">(ごぜん)</span> 問<span class="rd">(とい)</span>68</strong></td>
+</tr>
+<tr>
+<td>Nội dung: sơ đồ đối ứng 4P của người bán với 4C của người mua. Ô "a" (ứng với Product) là gì trong 4C?</td>
+<td>内容<span class="rd">(ないよう)</span>：売<span class="rd">(う)</span>り手<span class="rd">(て)</span>の4Pと買<span class="rd">(か)</span>い手<span class="rd">(て)</span>の4Cの対応<span class="rd">(たいおう)</span>。Productに対応<span class="rd">(たいおう)</span>する a はどれか。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (Customer Value, giá trị đối với khách hàng)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（顧客<span class="rd">(こきゃく)</span>にとっての価値<span class="rd">(かち)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: Product ↔ Customer Value, Price ↔ Cost, Place ↔ Convenience, Promotion ↔ Communication.</td>
+<td>解説<span class="rd">(かいせつ)</span>：Product↔顧客価値<span class="rd">(こきゃくかち)</span>、Price↔顧客<span class="rd">(こきゃく)</span>の負担<span class="rd">(ふたん)</span>、Place↔利便性<span class="rd">(りべんせい)</span>、Promotion↔対話<span class="rd">(たいわ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-3">科目B: Bài tổng hợp ｜ 総合問題<span class="rd">(そうごうもんだい)</span></h2>
+<p>Hôm nay luyện bộ đề công khai 令和6年度: mỗi câu là một kiểu khác nhau (điều kiện, chuyển đổi cơ số, ma trận kề, đếm số lần chạy, xử lý dữ liệu). Mục tiêu: mỗi câu ≤ 8 phút.</p>
+<h3>Lý thuyết ｜ 理論<span class="rd">(りろん)</span></h3>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bước 1: đọc đặc tả trước code.</strong> Gạch chân input, output và ví dụ đề cho (ví dụ "10010" → 18). Ví dụ trong đề chính là dữ liệu test miễn phí.</td>
+<td><strong>手順<span class="rd">(てじゅん)</span>1：プログラムより先<span class="rd">(さき)</span>に説明<span class="rd">(せつめい)</span>を読<span class="rd">(よ)</span>む。</strong>入力<span class="rd">(にゅうりょく)</span>・出力<span class="rd">(しゅつりょく)</span>・例<span class="rd">(れい)</span>に下線<span class="rd">(かせん)</span>。例<span class="rd">(れい)</span>はそのままテストデータになる。</td>
+</tr>
+<tr>
+<td><strong>Bước 2: thử lựa chọn bằng ví dụ nhỏ.</strong> Với câu điền chỗ trống, thế từng lựa chọn vào và trace với ví dụ của đề, loại dần.</td>
+<td><strong>手順<span class="rd">(てじゅん)</span>2：小<span class="rd">(ちい)</span>さな例<span class="rd">(れい)</span>で選択肢<span class="rd">(せんたくし)</span>を試<span class="rd">(ため)</span>す。</strong>空欄<span class="rd">(くうらん)</span>に各選択肢<span class="rd">(かくせんたくし)</span>を入<span class="rd">(い)</span>れてトレースし、消去法<span class="rd">(しょうきょほう)</span>で絞<span class="rd">(しぼ)</span>る。</td>
+</tr>
+<tr>
+<td><strong>Bước 3: kiểm tra biên.</strong> Phần tử đầu/cuối, mảng rỗng, giá trị bằng nhau (&gt; hay ≥), vòng lặp chạy 0 lần.</td>
+<td><strong>手順<span class="rd">(てじゅん)</span>3：境界<span class="rd">(きょうかい)</span>を確認<span class="rd">(かくにん)</span>。</strong>先頭<span class="rd">(せんとう)</span>・末尾<span class="rd">(まつび)</span>、空<span class="rd">(から)</span>の配列<span class="rd">(はいれつ)</span>、等<span class="rd">(ひと)</span>しい値<span class="rd">(あたい)</span>（&gt; と ≧）、0回<span class="rd">(かい)</span>のループ。</td>
+</tr>
+<tr>
+<td><strong>Mẫu "lớn nhất trong 3 số":</strong> x lớn nhất khi x &gt; y <strong>và</strong> x &gt; z. Chỉ so với một số là sai.</td>
+<td><strong>3数<span class="rd">(すう)</span>の最大値<span class="rd">(さいだいち)</span>：</strong>x &gt; y <strong>and</strong> x &gt; z のときxが最大<span class="rd">(さいだい)</span>。</td>
+</tr>
+<tr>
+<td><strong>Mẫu đổi chuỗi nhị phân → thập phân (Horner):</strong> đọc từ trái sang phải, result ← result × 2 + chữ số. Thập phân thì × 10.</td>
+<td><strong>2進<span class="rd">(しん)</span>文字列<span class="rd">(もじれつ)</span>→10進<span class="rd">(しん)</span>：</strong>左<span class="rd">(ひだり)</span>から読<span class="rd">(よ)</span>み、result ← result × 2 + 桁<span class="rd">(けた)</span>の値<span class="rd">(あたい)</span>。</td>
+</tr>
+<tr>
+<td><strong>Mẫu ma trận kề của đồ thị vô hướng:</strong> mỗi cạnh {u, v} gán cả m[u, v] và m[v, u] bằng 1 (ma trận đối xứng).</td>
+<td><strong>無向<span class="rd">(むこう)</span>グラフの隣接行列<span class="rd">(りんせつぎょうれつ)</span>：</strong>辺<span class="rd">(へん)</span>{u, v}ごとに m[u, v] と m[v, u] を1にする（対称<span class="rd">(たいしょう)</span>）。</td>
+</tr>
+<tr>
+<td><strong>Mẫu "đếm số lần một dòng chạy":</strong> trace hết, đếm lần dòng đó chạy, không đếm số vòng lặp ngoài.</td>
+<td><strong>実行回数<span class="rd">(じっこうかいすう)</span>：</strong>最後<span class="rd">(さいご)</span>までトレースし、その行<span class="rd">(ぎょう)</span>が実行<span class="rd">(じっこう)</span>された回数<span class="rd">(かいすう)</span>だけ数<span class="rd">(かぞ)</span>える。</td>
+</tr>
+<tr>
+<td><strong>Mẫu "công thức → code":</strong> đối ứng từng ký hiệu trong công thức với biến trong code, rồi mới xem chỗ trống.</td>
+<td><strong>数式<span class="rd">(すうしき)</span>→プログラム：</strong>式<span class="rd">(しき)</span>の記号<span class="rd">(きごう)</span>と変数<span class="rd">(へんすう)</span>を1つずつ対応<span class="rd">(たいおう)</span>させてから空欄<span class="rd">(くうらん)</span>を考<span class="rd">(かんが)</span>える。</td>
+</tr>
+<tr>
+<td><strong>Quản lý thời gian:</strong> 20 câu trong 100 phút = 5 phút/câu. Câu nào quá 8 phút thì đánh dấu, làm câu khác rồi quay lại.</td>
+<td><strong>時間配分<span class="rd">(じかんはいぶん)</span>：</strong>20問<span class="rd">(もん)</span>100分<span class="rd">(ぷん)</span>＝1問<span class="rd">(もん)</span>5分<span class="rd">(ふん)</span>。8分<span class="rd">(ふん)</span>を超<span class="rd">(こ)</span>えたら印<span class="rd">(しるし)</span>をつけて後回<span class="rd">(あとまわ)</span>し。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bài tập ｜ 練習問題<span class="rd">(れんしゅうもんだい)</span></h3>
+<p><strong>Câu B1 ｜ 問<span class="rd">(とい)</span>B1</strong></p>
+<pre><code>○整数型: f(整数型: n)
+  整数型: s ← 0
+  while (n &gt; 0)
+    s ← s × 10 + (n mod 10)
+    n ← n ÷ 10
+  endwhile
+  return s
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>f(1203) trả về giá trị nào? (÷ là chia lấy phần nguyên)</td>
+<td>f(1203) の戻<span class="rd">(もど)</span>り値<span class="rd">(ち)</span>はどれか。ここで ÷ は商<span class="rd">(しょう)</span>の整数部分<span class="rd">(せいすうぶぶん)</span>を求<span class="rd">(もと)</span>める。</td>
+</tr>
+<tr>
+<td>ア 3021　イ 321　ウ 1203　エ 6</td>
+<td>ア 3021　イ 321　ウ 1203　エ 6</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: ア (3021)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：ア（3021）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: n = 1203: s = 0×10 + 3 = 3, n = 120. n = 120: s = 30 + 0 = 30, n = 12. n = 12: s = 300 + 2 = 302, n = 1. n = 1: s = 3020 + 1 = 3021, n = 0 → dừng. Hàm đảo ngược chữ số. Bẫy イ: tưởng chữ số 0 bị mất, nhưng 0 vẫn làm s nhân 10. Bẫy エ: tổng chữ số (cần s ← s + (n mod 10)).</td>
+<td>解説<span class="rd">(かいせつ)</span>：n=1203→s=3, n=120；s=30, n=12；s=302, n=1；s=3021, n=0で終了<span class="rd">(しゅうりょう)</span>。桁<span class="rd">(けた)</span>を逆順<span class="rd">(ぎゃくじゅん)</span>にする関数<span class="rd">(かんすう)</span>。イは0が消<span class="rd">(き)</span>えると誤解<span class="rd">(ごかい)</span>した場合<span class="rd">(ばあい)</span>、エは各桁<span class="rd">(かくけた)</span>の和<span class="rd">(わ)</span>。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B2 ｜ 問<span class="rd">(とい)</span>B2</strong></p>
+<pre><code>整数型の配列: a ← {5, 2, 8, 1, 9, 3}
+整数型: cnt ← 0
+整数型: i, j
+for (i を 1 から aの要素数 − 1 まで 1 ずつ増やす)
+  for (j を i + 1 から aの要素数 まで 1 ずつ増やす)
+    if (a[i] &gt; a[j])
+      cnt ← cnt + 1    /*** α ***/
+    endif
+  endfor
+endfor
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dòng α được thực hiện bao nhiêu lần?</td>
+<td>α の行<span class="rd">(ぎょう)</span>は何回<span class="rd">(なんかい)</span>実行<span class="rd">(じっこう)</span>されるか。</td>
+</tr>
+<tr>
+<td>ア 6 lần　イ 7 lần　ウ 8 lần　エ 15 lần</td>
+<td>ア 6回<span class="rd">(かい)</span>　イ 7回<span class="rd">(かい)</span>　ウ 8回<span class="rd">(かい)</span>　エ 15回<span class="rd">(かい)</span></td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (7 lần)</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（7回<span class="rd">(かい)</span>）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đếm các cặp (i &lt; j) mà a[i] &gt; a[j]. i = 1 (5): lớn hơn 2, 1, 3 → 3. i = 2 (2): lớn hơn 1 → 1. i = 3 (8): lớn hơn 1, 3 → 2. i = 4 (1): 0. i = 5 (9): lớn hơn 3 → 1. Tổng 3 + 1 + 2 + 0 + 1 = 7. Bẫy エ: 15 = 6 × 5 ÷ 2 là số lần <strong>so sánh</strong> (dòng if), không phải số lần dòng α chạy.</td>
+<td>解説<span class="rd">(かいせつ)</span>：i<j かつ a[i]>a[j] の組<span class="rd">(くみ)</span>を数<span class="rd">(かぞ)</span>える。i=1:3、i=2:1、i=3:2、i=4:0、i=5:1、合計<span class="rd">(ごうけい)</span>7。エの15はif文<span class="rd">(ぶん)</span>の比較回数<span class="rd">(ひかくかいすう)</span>（6×5÷2）で、αの実行回数<span class="rd">(じっこうかいすう)</span>ではない。</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Câu B3 ｜ 問<span class="rd">(とい)</span>B3</strong></p>
+<pre><code>○整数型の配列: degree(整数型の二次元配列: m, 整数型: n)
+  整数型の配列: d ← {n個の0}
+  整数型: i, j
+  for (i を 1 から n まで 1 ずつ増やす)
+    for (j を 1 から n まで 1 ずつ増やす)
+      d[i] ← d[i] + [  空欄  ]
+    endfor
+  endfor
+  return d
+</code></pre>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>m là ma trận kề n × n của đồ thị vô hướng (m[i, j] = 1 nếu đỉnh i và j nối nhau, đường chéo là 0). Hàm degree trả về mảng d, với d[i] là số cạnh nối vào đỉnh i (bậc). Điền gì vào chỗ trống?</td>
+<td>m は無向<span class="rd">(むこう)</span>グラフの n×n の隣接行列<span class="rd">(りんせつぎょうれつ)</span>（頂点<span class="rd">(ちょうてん)</span>iとjが辺<span class="rd">(へん)</span>で結<span class="rd">(むす)</span>ばれていれば m[i, j] = 1、対角<span class="rd">(たいかく)</span>は0）。関数<span class="rd">(かんすう)</span> degree は、頂点<span class="rd">(ちょうてん)</span>iの次数<span class="rd">(じすう)</span>を d[i] に格納<span class="rd">(かくのう)</span>した配列<span class="rd">(はいれつ)</span>を返<span class="rd">(かえ)</span>す。空欄<span class="rd">(くうらん)</span>に入<span class="rd">(い)</span>れる正<span class="rd">(ただ)</span>しい答<span class="rd">(こた)</span>えはどれか。</td>
+</tr>
+<tr>
+<td>ア m[i, i]　イ m[i, j]　ウ m[j, j]　エ 1</td>
+<td>ア m[i, i]　イ m[i, j]　ウ m[j, j]　エ 1</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ (m[i, j])</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ（m[i, j]）</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: bậc của đỉnh i = tổng hàng i của ma trận kề. Thử với 4 đỉnh, cạnh {1,2}, {1,3}, {2,3}, {3,4}: hàng 1 = 0 1 1 0 → 2; hàng 2 = 1 0 1 0 → 2; hàng 3 = 1 1 0 1 → 3; hàng 4 = 0 0 1 0 → 1. d = {2, 2, 3, 1}, tổng = 8 = 2 × số cạnh (đúng tính chất). ア và ウ là đường chéo, luôn bằng 0 → d toàn 0. エ cho d[i] = n với mọi i.</td>
+<td>解説<span class="rd">(かいせつ)</span>：次数<span class="rd">(じすう)</span>は隣接行列<span class="rd">(りんせつぎょうれつ)</span>のi行目<span class="rd">(ぎょうめ)</span>の和<span class="rd">(わ)</span>。4頂点<span class="rd">(ちょうてん)</span>、辺<span class="rd">(へん)</span>{1,2},{1,3},{2,3},{3,4}で試<span class="rd">(ため)</span>すと d = {2, 2, 3, 1}、合計<span class="rd">(ごうけい)</span>8＝辺<span class="rd">(へん)</span>の数<span class="rd">(かず)</span>×2。ア・ウは対角<span class="rd">(たいかく)</span>で常<span class="rd">(つね)</span>に0、エは全<span class="rd">(すべ)</span>て n になる。</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Đề cũ ｜ 過去問題<span class="rd">(かこもんだい)</span></h3>
+<p>Đây là 5 câu thuật toán của bộ đề công khai 令和6年度 (câu 6 là bảo mật, không thuộc chủ đề hôm nay). Nên mở link, tự giải trước khi đọc phần cách giải.</p>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr class="q">
+<td><strong>Đề cũ 1 — <a href="https://www.fe-siken.com/kakomon/06_haru/b1.html" target="_blank" rel="noopener">令和6年度 科目B 問1</a></strong> (2024)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>1 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>1</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm maximum nhận 3 số nguyên khác nhau x, y, z và trả về số lớn nhất. Điền điều kiện của lệnh if trả về x. Có 6 lựa chọn ア〜カ.</td>
+<td>内容<span class="rd">(ないよう)</span>：異<span class="rd">(こと)</span>なる3つの整数<span class="rd">(せいすう)</span>の最大値<span class="rd">(さいだいち)</span>を返<span class="rd">(かえ)</span>す関数<span class="rd">(かんすう)</span> maximum で、x を返<span class="rd">(かえ)</span>す if文<span class="rd">(ぶん)</span>の条件<span class="rd">(じょうけん)</span>を選<span class="rd">(えら)</span>ぶ（ア〜カの6択<span class="rd">(たく)</span>）。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: イ</strong> (x &gt; y and x &gt; z)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：イ</strong>（x &gt; y and x &gt; z）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: x chỉ là lớn nhất khi lớn hơn cả y lẫn z. Chỉ so với một số (x &gt; y hoặc x &gt; z) sẽ trả sai khi số còn lại lớn hơn. Thử nhanh x=5, y=1, z=9: x &gt; y đúng nhưng 5 không phải lớn nhất.</td>
+<td>解説<span class="rd">(かいせつ)</span>：xが最大<span class="rd">(さいだい)</span>なのはyとzの両方<span class="rd">(りょうほう)</span>より大<span class="rd">(おお)</span>きいとき。片方<span class="rd">(かたほう)</span>だけの比較<span class="rd">(ひかく)</span>では、x=5, y=1, z=9 のように誤<span class="rd">(あやま)</span>ってxを返<span class="rd">(かえ)</span>す。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 2 — <a href="https://www.fe-siken.com/kakomon/06_haru/b2.html" target="_blank" rel="noopener">令和6年度 科目B 問2</a></strong> (2024)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>2 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>2</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm convDecimal đổi chuỗi "0"/"1" (số nhị phân không dấu) sang số nguyên, ví dụ "10010" → 18. Chọn dòng cập nhật result trong vòng lặp i = 1 đến độ dài chuỗi.</td>
+<td>内容<span class="rd">(ないよう)</span>："0"と"1"の文字列<span class="rd">(もじれつ)</span>を符号<span class="rd">(ふごう)</span>なし2進数<span class="rd">(しんすう)</span>として整数<span class="rd">(せいすう)</span>に変換<span class="rd">(へんかん)</span>する関数<span class="rd">(かんすう)</span> convDecimal（例<span class="rd">(れい)</span>："10010"→18）の空欄<span class="rd">(くうらん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (result ← result × 2 + int(ký tự thứ i))</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（result ← result × 2 + int(binary の i文字目<span class="rd">(もじめ)</span>の文字<span class="rd">(もじ)</span>)）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: trace "10010": 0→1→2→4→9→18, đúng. Hai lựa chọn chỉ cộng mà không × 2 cho ra 2 (đếm số chữ 1). Lựa chọn × 2 nhưng đọc từ cuối (ký tự length − i + 1) cho ra 9 vì đọc ngược "01001". Giống mẫu Horner ở Câu B1.</td>
+<td>解説<span class="rd">(かいせつ)</span>："10010"で 0→1→2→4→9→18。×2のない選択肢<span class="rd">(せんたくし)</span>は2（1の個数<span class="rd">(こすう)</span>）、末尾<span class="rd">(まつび)</span>から読<span class="rd">(よ)</span>む選択肢<span class="rd">(せんたくし)</span>は"01001"として9になる。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 3 — <a href="https://www.fe-siken.com/kakomon/06_haru/b3.html" target="_blank" rel="noopener">令和6年度 科目B 問3</a></strong> (2024)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>3 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>3</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm edgesToMatrix đổi danh sách cạnh của đồ thị vô hướng (mỗi cạnh là mảng 2 phần tử {u, v}) thành ma trận kề. Chọn lệnh gán trong vòng lặp duyệt từng cạnh.</td>
+<td>内容<span class="rd">(ないよう)</span>：無向<span class="rd">(むこう)</span>グラフの辺<span class="rd">(へん)</span>のリストを隣接行列<span class="rd">(りんせつぎょうれつ)</span>に変換<span class="rd">(へんかん)</span>する関数<span class="rd">(かんすう)</span> edgesToMatrix の空欄<span class="rd">(くうらん)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: エ</strong> (gán cả adjMatrix[u, v] ← 1 và adjMatrix[v, u] ← 1)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：エ</strong>（adjMatrix[u, v] ← 1 と adjMatrix[v, u] ← 1）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: đồ thị vô hướng nên cạnh {1, 3} phải đặt 1 ở cả [1, 3] và [3, 1]. Lựa chọn chỉ gán một chiều sẽ ra ma trận không đối xứng; gán [u, u] hay [v, v] thì sai vì đường chéo phải là 0. Xem thêm Câu B3 (bậc = tổng hàng).</td>
+<td>解説<span class="rd">(かいせつ)</span>：無向<span class="rd">(むこう)</span>なので[1,3]と[3,1]の両方<span class="rd">(りょうほう)</span>を1にする。片方<span class="rd">(かたほう)</span>だけでは非対称<span class="rd">(ひたいしょう)</span>、[u,u]・[v,v]は対角<span class="rd">(たいかく)</span>なので誤<span class="rd">(あやま)</span>り。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 4 — <a href="https://www.fe-siken.com/kakomon/06_haru/b4.html" target="_blank" rel="noopener">令和6年度 科目B 問4</a></strong> (2024)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>4 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>4</strong></td>
+</tr>
+<tr>
+<td>Nội dung: hàm merge trộn hai mảng đã sắp xếp tăng dần thành một mảng tăng dần (một vòng while trộn chính, hai vòng while chép phần còn lại). Hỏi khi gọi merge({2, 3}, {1, 4}) thì dòng α (chép phần còn lại của mảng thứ hai) chạy bao nhiêu lần.</td>
+<td>内容<span class="rd">(ないよう)</span>：昇順<span class="rd">(しょうじゅん)</span>の2つの配列<span class="rd">(はいれつ)</span>を併合<span class="rd">(へいごう)</span>する関数<span class="rd">(かんすう)</span> merge で、merge({2, 3}, {1, 4}) を呼<span class="rd">(よ)</span>んだときに α の行<span class="rd">(ぎょう)</span>が実行<span class="rd">(じっこう)</span>される回数<span class="rd">(かいすう)</span>。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: 1 lần</strong> (xem ký hiệu ở link)</td>
+<td><strong>正解<span class="rd">(せいかい)</span>：1回<span class="rd">(かい)</span>実行<span class="rd">(じっこう)</span>される</strong>（記号<span class="rd">(きごう)</span>はリンク先<span class="rd">(さき)</span>で確認<span class="rd">(かくにん)</span>）</td>
+</tr>
+<tr class="sol">
+<td>Cách giải: vòng chính: so 2 với 1 → lấy 1; so 2 với 4 → lấy 2; so 3 với 4 → lấy 3; mảng thứ nhất hết. Mảng thứ nhất không còn gì nên vòng thứ hai không chạy; mảng thứ hai còn 4 nên α chạy đúng 1 lần. Kết quả {1, 2, 3, 4}. Lưu ý: lời giải trên trang có một lỗi đánh máy chỉ số ở bước 2 (ghi data2[2]=1, đúng ra là data2[1]=1), không ảnh hưởng kết luận.</td>
+<td>解説<span class="rd">(かいせつ)</span>：1→2→3と取<span class="rd">(と)</span>り出<span class="rd">(だ)</span>した時点<span class="rd">(じてん)</span>で1つ目<span class="rd">(め)</span>の配列<span class="rd">(はいれつ)</span>が尽<span class="rd">(つ)</span>き、2つ目<span class="rd">(め)</span>の残<span class="rd">(のこ)</span>り4をコピーするαが1回<span class="rd">(かい)</span>だけ実行<span class="rd">(じっこう)</span>される。サイトの解説<span class="rd">(かいせつ)</span>には添字<span class="rd">(そえじ)</span>の誤記<span class="rd">(ごき)</span>（data2[2]=1→正<span class="rd">(ただ)</span>しくはdata2[1]=1）があるが結論<span class="rd">(けつろん)</span>は同<span class="rd">(おな)</span>じ。</td>
+</tr>
+<tr class="q">
+<td><strong>Đề cũ 5 — <a href="https://www.fe-siken.com/kakomon/06_haru/b5.html" target="_blank" rel="noopener">令和6年度 科目B 問5</a></strong> (2024)</td>
+<td><strong>過去問<span class="rd">(かこもん)</span>5 — 令和<span class="rd">(れいわ)</span>6年度<span class="rd">(ねんど)</span> 科目<span class="rd">(かもく)</span>B 問<span class="rd">(とい)</span>5</strong></td>
+</tr>
+<tr>
+<td>Nội dung: thủ tục putRelatedItem tìm sản phẩm liên quan nhất đến một sản phẩm cho trước, theo độ liên quan L = (số đơn có cả hai × tổng số đơn) ÷ (số đơn có x × số đơn có y). Chọn tổ hợp đúng cho chỗ trống a và c.</td>
+<td>内容<span class="rd">(ないよう)</span>：注文<span class="rd">(ちゅうもん)</span>データから関連度<span class="rd">(かんれんど)</span> L = (M × 全注文数<span class="rd">(ぜんちゅうもんすう)</span>) ÷ (Kx × Ky) を計算<span class="rd">(けいさん)</span>し、最<span class="rd">(もっと)</span>も関連<span class="rd">(かんれん)</span>の強<span class="rd">(つよ)</span>い商品<span class="rd">(しょうひん)</span>を出力<span class="rd">(しゅつりょく)</span>する手続<span class="rd">(てつづ)</span>きの空欄<span class="rd">(くうらん)</span>a、cの組合<span class="rd">(くみあ)</span>せ。</td>
+</tr>
+<tr class="ans">
+<td><strong>Đáp án: オ</strong></td>
+<td><strong>正解<span class="rd">(せいかい)</span>：オ</strong></td>
+</tr>
+<tr class="sol">
+<td>Cách giải: ghép công thức với code: valueL ↔ L, arrayM[i] ↔ số đơn có cả hai, itemCount ↔ số đơn có sản phẩm cho trước, arrayK[i] ↔ số đơn có sản phẩm kia, c ↔ tổng số đơn (= số phần tử của orders). Chỗ a là điều kiện "đơn chứa cả hai sản phẩm" để tăng arrayM[i]. Ví dụ kiểm tra: M = 2, tổng 6 đơn, Kx = 4, Ky = 3 → L = 12 ÷ 12 = 1.0.</td>
+<td>解説<span class="rd">(かいせつ)</span>：式<span class="rd">(しき)</span>と変数<span class="rd">(へんすう)</span>を対応<span class="rd">(たいおう)</span>させる。c＝ordersの要素数<span class="rd">(ようそすう)</span>（全注文数<span class="rd">(ぜんちゅうもんすう)</span>）、aは両方<span class="rd">(りょうほう)</span>の商品<span class="rd">(しょうひん)</span>を含<span class="rd">(ふく)</span>む注文<span class="rd">(ちゅうもん)</span>のときに arrayM[i] を増<span class="rd">(ふ)</span>やす条件<span class="rd">(じょうけん)</span>。例<span class="rd">(れい)</span>：(2×6)÷(4×3)＝1.0。</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="muc-4">Từ vựng hôm nay ｜ 用語集<span class="rd">(ようごしゅう)</span></h2>
+<div class="tbl"><table class="bi">
+<thead>
+<tr>
+<th>Tiếng Việt</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chiến lược kinh doanh</td>
+<td>経営戦略<span class="rd">(けいえいせんりゃく)</span></td>
+</tr>
+<tr>
+<td>Điểm mạnh / Điểm yếu / Cơ hội / Thách thức</td>
+<td>強<span class="rd">(つよ)</span>み / 弱<span class="rd">(よわ)</span>み / 機会<span class="rd">(きかい)</span> / 脅威<span class="rd">(きょうい)</span></td>
+</tr>
+<tr>
+<td>Yếu tố bên trong / bên ngoài</td>
+<td>内部要因<span class="rd">(ないぶよういん)</span> / 外部要因<span class="rd">(がいぶよういん)</span></td>
+</tr>
+<tr>
+<td>Tốc độ tăng trưởng thị trường / Thị phần</td>
+<td>市場成長率<span class="rd">(しじょうせいちょうりつ)</span> / 市場占有率<span class="rd">(しじょうせんゆうりつ)</span>（シェア）</td>
+</tr>
+<tr>
+<td>Ngôi sao / Bò sữa / Dấu hỏi / Chó</td>
+<td>花形<span class="rd">(はながた)</span> / 金<span class="rd">(かね)</span>のなる木<span class="rd">(き)</span> / 問題児<span class="rd">(もんだいじ)</span> / 負<span class="rd">(ま)</span>け犬<span class="rd">(いぬ)</span></td>
+</tr>
+<tr>
+<td>Nguồn lực kinh doanh / Phân bổ</td>
+<td>経営資源<span class="rd">(けいえいしげん)</span> / 配分<span class="rd">(はいぶん)</span></td>
+</tr>
+<tr>
+<td>Rút lui / Gia nhập mới</td>
+<td>撤退<span class="rd">(てったい)</span> / 新規参入<span class="rd">(しんきさんにゅう)</span></td>
+</tr>
+<tr>
+<td>Thẻ điểm cân bằng / Góc nhìn</td>
+<td>バランススコアカード / 視点<span class="rd">(してん)</span></td>
+</tr>
+<tr>
+<td>Tài chính / Khách hàng / Quy trình nghiệp vụ / Học tập và phát triển</td>
+<td>財務<span class="rd">(ざいむ)</span> / 顧客<span class="rd">(こきゃく)</span> / 業務<span class="rd">(ぎょうむ)</span>プロセス / 学習<span class="rd">(がくしゅう)</span>と成長<span class="rd">(せいちょう)</span></td>
+</tr>
+<tr>
+<td>Bản đồ chiến lược / Quan hệ nhân quả</td>
+<td>戦略<span class="rd">(せんりゃく)</span>マップ / 因果関係<span class="rd">(いんがかんけい)</span></td>
+</tr>
+<tr>
+<td>Thâm nhập thị trường / Phát triển thị trường / Phát triển sản phẩm / Đa dạng hóa</td>
+<td>市場浸透<span class="rd">(しじょうしんとう)</span> / 市場開拓<span class="rd">(しじょうかいたく)</span> / 製品開発<span class="rd">(せいひんかいはつ)</span> / 多角化<span class="rd">(たかくか)</span></td>
+</tr>
+<tr>
+<td>Giới thiệu / Tăng trưởng / Bão hòa / Suy thoái</td>
+<td>導入期<span class="rd">(どうにゅうき)</span> / 成長期<span class="rd">(せいちょうき)</span> / 成熟期<span class="rd">(せいじゅくき)</span> / 衰退期<span class="rd">(すいたいき)</span></td>
+</tr>
+<tr>
+<td>Khác biệt hóa / Phân khúc thị trường</td>
+<td>差別化<span class="rd">(さべつか)</span> / 市場細分化<span class="rd">(しじょうさいぶんか)</span>（セグメンテーション）</td>
+</tr>
+<tr>
+<td>Marketing mix / Xúc tiến bán hàng / Kênh phân phối</td>
+<td>マーケティングミックス / 販売促進<span class="rd">(はんばいそくしん)</span> / 流通<span class="rd">(りゅうつう)</span></td>
+</tr>
+<tr>
+<td>Năng lực cốt lõi / Lợi thế cạnh tranh</td>
+<td>コアコンピタンス / 競争優位<span class="rd">(きょうそうゆうい)</span></td>
+</tr>
+<tr>
+<td>Triết lý kinh doanh</td>
+<td>経営理念<span class="rd">(けいえいりねん)</span></td>
+</tr>
+<tr>
+<td>Ma trận kề / Đỉnh / Cạnh / Bậc</td>
+<td>隣接行列<span class="rd">(りんせつぎょうれつ)</span> / 頂点<span class="rd">(ちょうてん)</span> / 辺<span class="rd">(へん)</span> / 次数<span class="rd">(じすう)</span></td>
+</tr>
+<tr>
+<td>Đồ thị vô hướng / có hướng</td>
+<td>無向<span class="rd">(むこう)</span>グラフ / 有向<span class="rd">(ゆうこう)</span>グラフ</td>
+</tr>
+<tr>
+<td>Trộn (merge) / Tăng dần</td>
+<td>併合<span class="rd">(へいごう)</span>（マージ） / 昇順<span class="rd">(しょうじゅん)</span></td>
+</tr>
+<tr>
+<td>Số lần thực hiện</td>
+<td>実行回数<span class="rd">(じっこうかいすう)</span></td>
+</tr>
+<tr>
+<td>Độ liên quan</td>
+<td>関連度<span class="rd">(かんれんど)</span></td>
+</tr>
+</tbody>
+</table></div>
+</article>
+</div>
+<script>
+(function () {
+  var groups = [];
+  document.querySelectorAll("table.bi tr.ans").forEach(function (ans) {
+    var rows = [ans], n = ans.nextElementSibling;
+    while (n && !n.classList.contains("q") && !n.classList.contains("ans")) { rows.push(n); n = n.nextElementSibling; }
+    var tr = document.createElement("tr");
+    tr.className = "reveal";
+    var td = document.createElement("td");
+    td.colSpan = 2;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "show-ans"; b.setAttribute("aria-expanded", "false");
+    b.textContent = "Xem đáp án ｜ 正解を見る";
+    td.appendChild(b); tr.appendChild(td);
+    ans.parentNode.insertBefore(tr, ans);
+    function set(open) {
+      rows.forEach(function (r) { r.hidden = !open; });
+      b.setAttribute("aria-expanded", open ? "true" : "false");
+      b.textContent = open ? "Ẩn đáp án ｜ 隠す" : "Xem đáp án ｜ 正解を見る";
+    }
+    set(false);
+    b.addEventListener("click", function () { set(b.getAttribute("aria-expanded") !== "true"); });
+    groups.push(set);
+  });
+  var all = document.getElementById("all-ans");
+  if (all && groups.length) {
+    all.hidden = false;
+    var open = false;
+    all.addEventListener("click", function () {
+      open = !open;
+      groups.forEach(function (s) { s(open); });
+      all.textContent = open ? "Ẩn tất cả đáp án" : "Hiện tất cả đáp án";
+    });
+  }
+})();
+</script>
+
+</body></html>
